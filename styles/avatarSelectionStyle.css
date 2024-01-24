@@ -1,0 +1,29 @@
+.avatar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.avatarSelect {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.avatarImage {
+  border-radius: 50%;
+  filter: grayscale(80%);
+  cursor: pointer;
+}
+
+.avatarImage:hover {
+  filter: grayscale(0%);
+}
+
+.avatarImage.selected {
+  filter: grayscale(0%); /* Remove greying out for the selected image */
+}
+
+.avatarImage.hover {
+  filter: grayscale(0%); /* Remove greying out on hover even if selected */
+}

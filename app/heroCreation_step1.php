@@ -1,47 +1,40 @@
 <?php
 //_step1 of character creation handles naming of the player hero, gender selection and avatar choice.
 require __DIR__ . "/../vendor/autoload.php";
-
-use App\Hero;
-use App\Monster;
-use App\Weapon;
-use App\Skill;
-
-$player = new Hero("Des", "Female");
-$player->addSkill(new Skill("Swords", 15));
-
-$starterSword = new Weapon("Short Sword", "Swords", 2, 4);
-$starterAxe = new Weapon("Hand Axe", "Axe", 2, 5);
-$starterSpear = new Weapon("Short Spear", "Spear", 1, 6);
-
-$weapons = [$starterSword, $starterAxe, $starterSpear];
-
+require __DIR__ . "/../functions/avatarArray.php";
 require __DIR__ . "/../nav/header.php";
 ?>
 
 <main>
     <h2>Character Creation</h2>
-    <form>
-        <div class="baseStats">
-        </div>
-        <div class="Weapon Select">
-            <h3>Select a new weapon</h3>
-            <select name="weapon">
-                <?php
-                $weaponIndex = 0;
-                foreach ($weapons as $weapon) : ?>
-                    <option value="<?= $weaponIndex; ?>">
-                        <h4><?= $weapon->name ?></h4>
-                        <p><?= " - (" . $weapon->minDamage . "-" . $weapon->maxDamage . ")" ?></p>
-                    </option>
-                <?php
-                    $weaponIndex++;
-                endforeach; ?>
+    <div class="characterCreation">
+        <form class="characterCreate" method="post" action="/../app/heroCreation_step2.php">
+            <label for="heroName">Name your hero:</label>
+            <input class="heroNameInput" id="heroName" type="text" required name="heroName">
+            <label for="heroGender">Select gender:</label>
+            <select id="heroGender" name="heroGender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
             </select>
-        </div>
-        <button>Create Hero</button>
-    </form>
+            <label>Choose avatar:</label>
+            <div class="avatarSelect">
+                <input type="hidden" value="" id="selectedAvatar" name="heroAvatar" required>
+                <?php
+                $avatarIndex = 0;
+                foreach ($avatars as $avatar) : ?>
+                    <div class="avatar">
+                        <img class="avatarImage" data-avatar-id="<?= $avatarIndex; ?>" src="<?= $avatar['url']; ?>">
+                    </div>
+                <?php
+                    $avatarIndex++;
+                endforeach; ?>
+            </div>
+            <button type="submit" name="createHero">Create</button>
+        </form>
+    </div>
 </main>
+<script src="/styles/avatarSelection.js"></script>
 
 <?php
 require __DIR__ . "/../nav/footer.html";
