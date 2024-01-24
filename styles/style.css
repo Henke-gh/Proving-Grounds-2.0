@@ -1,0 +1,10 @@
+body {
+  background-color: slategrey;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
