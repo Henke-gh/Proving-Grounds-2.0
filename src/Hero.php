@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
-//use App\Weapon;
-
+//Player hero class
 class Hero
 {
     //base values upon Character Creation.
@@ -18,18 +17,23 @@ class Hero
     private int $hitpoints = 0;
     private int $currentHitpoints = 0;
     private int $grit = 100;
-    private int $currentGrit = 100;
+    private int $currentGrit = 0;
     //fatigue is the number of combat turns the player hero can fight before giving up (due to fatigue)
     private int $fatigue = 0;
     private int $xp = 0;
+    private int $gold = 0;
     public Weapon $weapon;
     //array containing player skills and their values.
     private array $skills = [];
+    private array $inventory = []; //Not implemented!
 
+    //Construct and initialize a new player hero with some base values.
     public function __construct(public string $name, public string $gender)
     {
         $this->setCurrentHP($this->getHP());
+        $this->setCurrentGrit($this->getGrit());
         $this->setFatigue();
+        $this->setStartingGold(125);
         $this->weapon = new Weapon("Fists", "Unarmed", 1, 2);
     }
 
@@ -65,6 +69,10 @@ class Hero
         return $this->currentGrit;
     }
 
+    public function setCurrentGrit(int $value): void
+    {
+        $this->currentGrit += $value;
+    }
 
     public function updateCurrentGrit(int $gritSpent): int
     {
@@ -80,6 +88,16 @@ class Hero
     public function getFatigue(): int
     {
         return $this->fatigue;
+    }
+
+    public function setStartingGold(int $value): void
+    {
+        $this->gold = $value;
+    }
+
+    public function getGold(): int
+    {
+        return $this->gold;
     }
 
     public function getXP(): int
