@@ -10,9 +10,9 @@ class Hero
     //base values upon Character Creation.
 
     //base stats
-    private int $strength = 10;
-    private int $speed = 10;
-    private int $vitality = 10;
+    private int $strength = 5;
+    private int $speed = 5;
+    private int $vitality = 5;
     //base derived stats
     private int $hitpoints = 0;
     private int $currentHitpoints = 0;
@@ -119,5 +119,18 @@ class Hero
     public function getSkills(): array
     {
         return $this->skills;
+    }
+
+    public function getStrength(): int
+    {
+        return $this->strength;
+    }
+    public function getSpeed(): int
+    {
+        return $this->speed;
+    }
+    public function getVitality(): int
+    {
+        return $this->vitality;
     }
 }
