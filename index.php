@@ -9,26 +9,26 @@ use App\Skill;
 $player = new Hero("Des", "Female");
 $player->addSkill(new Skill("Swords", 15));
 
-$starterSword = new Weapon("Short Sword", "Swords", 2, 4);
-$starterAxe = new Weapon("Hand Axe", "Axe", 2, 5);
-$starterSpear = new Weapon("Short Spear", "Spear", 1, 6);
-
-$weapons = [$starterSword, $starterAxe, $starterSpear];
+require __DIR__ . "/app/weaponLibrary.php";
 
 $goblin = new Monster(
     "Goblin",
     2,
     8,
     15,
-    new Weapon("Hatchet", "Axe", 1, 3)
+    new Weapon("Hatchet", "Axe", 1, 3, 666)
 );
 
 $player->updateCurrentHP(5);
 $player->setXP(10);
 
+//the POST contains a serialized array which in turn contains the two values weapon type and the weapon item's
+//relative index.
 if (isset($_POST['weapon'])) {
-    $weaponIndex = $_POST['weapon'];
-    $player->weapon = $weapons[$weaponIndex];
+    $selectedWeapon = unserialize($_POST["weapon"]);
+    $weaponType = $selectedWeapon['type'];
+    $weaponIndex = $selectedWeapon['index'];
+    $player->weapon = $weapons[$weaponType][$weaponIndex];
 }
 require __DIR__ . "/nav/header.php";
 ?>
@@ -71,14 +71,18 @@ require __DIR__ . "/nav/header.php";
         <form method="post" action="">
             <select name="weapon">
                 <?php
-                $weaponIndex = 0;
-                foreach ($weapons as $weapon) : ?>
-                    <option value="<?= $weaponIndex; ?>">
-                        <h4><?= $weapon->name ?></h4>
-                        <p><?= " - (" . $weapon->minDamage . "-" . $weapon->maxDamage . ")" ?></p>
-                    </option>
+                foreach ($weapons as $weaponType => $weaponGroup) :
+                    $weaponIndex = 0;
+                    //The Option value needs to contain both the weapon type (ie. "Swords") and the items Index relative to the ype
+                    //This is why the option value is a serialized array. Weird fix, but it works.
+                    foreach ($weaponGroup as $weapon) : ?>
+                        <option value="<?= htmlentities(serialize(array('type' => $weaponType, 'index' => $weaponIndex))); ?>">
+                            <h4><?= $weapon->name ?></h4>
+                            <p><?= " - (" . $weapon->minDamage . "-" . $weapon->maxDamage . ")" ?></p>
+                        </option>
                 <?php
-                    $weaponIndex++;
+                        $weaponIndex++;
+                    endforeach;
                 endforeach; ?>
             </select>
             <button type="submit">Select</button>

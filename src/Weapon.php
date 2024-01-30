@@ -10,12 +10,14 @@ class Weapon
     private int $evasion = 0;
     private int $initiative = 0;
     private int $block = 0;
+    private string $description = "So sharp, so shiny..";
 
     public function __construct(
         public string $name,
         public string $type,
         public int $minDamage,
-        public int $maxDamage
+        public int $maxDamage,
+        public int $cost
     ) {
     }
 
@@ -48,5 +50,15 @@ class Weapon
     public function getBlockBonus(): int
     {
         return $this->block;
+    }
+
+    public function setItemDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getItemDescription(): string
+    {
+        return $this->description;
     }
 }

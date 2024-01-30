@@ -65,19 +65,3 @@ require __DIR__ . "/../nav/header.php";
 
 <?php
 require __DIR__ . "/../nav/footer.html";
-
-/* <div class="Weapon Select">
-<h3>Select a new weapon</h3>
-<select name="weapon">
-<?php
-$weaponIndex = 0;
-foreach ($weapons as $weapon) : ?>
-    <option value="<?= $weaponIndex; ?>">
-    <h4><?= $weapon->name ?></h4>
-    <p><?= " - (" . $weapon->minDamage . "-" . $weapon->maxDamage . ")" ?></p>
-    </option>
-    <?php
-    $weaponIndex++;
-endforeach; ?>
-</select>
-</div> */

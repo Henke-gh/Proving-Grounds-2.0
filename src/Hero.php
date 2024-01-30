@@ -10,9 +10,9 @@ class Hero
     //base values upon Character Creation.
 
     //base stats
-    private int $strength = 5;
-    private int $speed = 5;
-    private int $vitality = 5;
+    private int $strength = 0;
+    private int $speed = 0;
+    private int $vitality = 0;
     //base derived stats
     private int $hitpoints = 0;
     private int $currentHitpoints = 0;
@@ -42,7 +42,8 @@ class Hero
         $this->addSkill(new Skill("Evasion", 0));
         $this->addSkill(new Skill("Initiative", 0));
         $this->addSkill(new Skill("Block", 0));
-        $this->weapon = new Weapon("Fists", "Unarmed", 1, 2);
+        $this->weapon = new Weapon("Fists", "Unarmed", 1, 2, 0);
+        $this->weapon->setItemDescription("They're your flesh mittens, champ. Might wanna invest in something for them to swing.");
     }
 
     //get player Max Hitpoints
@@ -149,6 +150,26 @@ class Hero
         }
     }
 
+    public function getEvasion(): int
+    {
+        foreach ($this->skills as $skill) {
+            if ($skill->name === "Evasion") {
+                $evasion = $skill->value + $this->speedBonus();
+            }
+        }
+        return $evasion;
+    }
+
+    public function getInitiative(): int
+    {
+        foreach ($this->skills as $skill) {
+            if ($skill->name === "Initiative") {
+                $initiative = $skill->value + $this->speedBonus();
+            }
+        }
+        return $initiative;
+    }
+
     public function getStrength(): int
     {
         return $this->strength;
@@ -167,6 +188,13 @@ class Hero
     public function setSpeed(int $value): void
     {
         $this->speed += $value;
+    }
+
+    //Speed also affects Initiative and Evasion at 20% of its value. Here we apply that bonus.
+    public function speedBonus(): int
+    {
+        $speedbonus = (int) floor($this->getSpeed() * 0.2);
+        return $speedbonus;
     }
 
     public function getVitality(): int
@@ -238,9 +266,12 @@ class Hero
 
     //+++ Combat +++
 
+    //initial damage calculation
     public function doDamage(): int
     {
-        $damage = rand($this->weapon->minDamage, $this->weapon->maxDamage);
+        $strengthBonus = (int) floor($this->getStrength() * 0.2);
+        $weaponDamage = rand($this->weapon->minDamage, $this->weapon->maxDamage);
+        $damage = $weaponDamage + $strengthBonus;
         return $damage;
     }
 }
