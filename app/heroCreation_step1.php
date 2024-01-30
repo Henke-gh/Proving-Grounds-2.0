@@ -1,6 +1,7 @@
 <?php
 //_step1 of character creation handles naming of the player hero, gender selection and avatar choice.
 require __DIR__ . "/../vendor/autoload.php";
+session_start();
 require __DIR__ . "/../functions/avatarArray.php";
 require __DIR__ . "/../nav/header.php";
 ?>

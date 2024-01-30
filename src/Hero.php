@@ -33,7 +33,15 @@ class Hero
         $this->setCurrentHP($this->getHP());
         $this->setCurrentGrit($this->getGrit());
         $this->setFatigue();
-        $this->setStartingGold(125);
+        $this->setGold(125);
+        $this->addSkill(new Skill("Swords", 0));
+        $this->addSkill(new Skill("Axes", 0));
+        $this->addSkill(new Skill("Spears", 0));
+        $this->addSkill(new Skill("Hammers", 0));
+        $this->addSkill(new Skill("Daggers", 0));
+        $this->addSkill(new Skill("Evasion", 0));
+        $this->addSkill(new Skill("Initiative", 0));
+        $this->addSkill(new Skill("Block", 0));
         $this->weapon = new Weapon("Fists", "Unarmed", 1, 2);
     }
 
@@ -46,7 +54,11 @@ class Hero
 
     public function setCurrentHP(int $value): void
     {
-        $this->currentHitpoints += $value;
+        if ($this->currentHitpoints + $value > $this->getHP()) {
+            $this->currentHitpoints = $this->getHP();
+        } else {
+            $this->currentHitpoints += $value;
+        }
     }
 
     public function getCurrentHP(): int
@@ -71,12 +83,20 @@ class Hero
 
     public function setCurrentGrit(int $value): void
     {
-        $this->currentGrit += $value;
+        if ($this->currentGrit + $value > 100) {
+            $this->currentGrit = 100;
+        } else {
+            $this->currentGrit += $value;
+        }
     }
 
     public function updateCurrentGrit(int $gritSpent): int
     {
-        $this->currentGrit -= $gritSpent;
+        if ($this->currentGrit - $gritSpent < 0) {
+            $this->currentGrit = 0;
+        } else {
+            $this->currentGrit -= $gritSpent;
+        }
         return $this->currentGrit;
     }
 
@@ -90,7 +110,7 @@ class Hero
         return $this->fatigue;
     }
 
-    public function setStartingGold(int $value): void
+    public function setGold(int $value): void
     {
         $this->gold = $value;
     }
@@ -105,10 +125,9 @@ class Hero
         return $this->xp;
     }
 
-    public function updateXP(int $xpValue): int
+    public function setXP(int $xpValue): void
     {
         $this->xp += $xpValue;
-        return $this->xp;
     }
 
     public function addSkill(Skill $skill): void
@@ -121,16 +140,107 @@ class Hero
         return $this->skills;
     }
 
+    public function setSkill(string $name, int $value): void
+    {
+        foreach ($this->skills as $skill) {
+            if ($skill->name === $name) {
+                $skill->value += $value;
+            }
+        }
+    }
+
     public function getStrength(): int
     {
         return $this->strength;
     }
+
+    public function setStrength(int $value): void
+    {
+        $this->strength += $value;
+    }
+
     public function getSpeed(): int
     {
         return $this->speed;
     }
+
+    public function setSpeed(int $value): void
+    {
+        $this->speed += $value;
+    }
+
     public function getVitality(): int
     {
         return $this->vitality;
+    }
+
+    public function setVitality(int $value): void
+    {
+        $this->vitality += $value;
+    }
+
+    //++++ Methods related to saving/ loading player data +++++
+
+    //this is used to store player data in a $_SESSION-variable. Used for saving player progress between pages and
+    //saving player progress to database.
+    public function saveHeroState(): array
+    {
+        $heroSaveState = [
+            'name' => $this->name,
+            'gender' => $this->gender,
+            'hitpoints' => $this->getHP(),
+            'currentHitpoints' => $this->getCurrentHP(),
+            'grit' => $this->getGrit(),
+            'currentGrit' => $this->getCurrentGrit(),
+            'fatigue' => $this->getFatigue(),
+            'gold' => $this->getGold(),
+            'xp' => $this->getXP(),
+            'strength' => $this->getStrength(),
+            'speed' => $this->getSpeed(),
+            'vitality' => $this->getVitality(),
+            'weapon' => $this->weapon,
+            'skills' => $this->getSkills(),
+            //add inventory here!
+        ];
+
+        return $heroSaveState;
+    }
+
+    //Run this to "repopulate" a Hero instance with saved player data.
+    public function loadHeroState(array $player): void
+    {
+        $this->setStrength($player['strength']);
+        $this->setSpeed($player['speed']);
+        $this->setVitality($player['vitality']);
+        $this->getHP();
+        $this->getGrit();
+        $this->setFatigue();
+        $this->setCurrentHP($player['currentHitpoints']);
+        $this->setCurrentGrit($player['currentGrit']);
+        $this->setGold($player['gold']);
+        $this->weapon = $player['weapon'];
+
+        foreach ($player['skills'] as $skill) {
+            $this->setSkill($skill->name, $skill->value);
+        }
+    }
+
+    //Should be used after a player has increased any stats from which other stat values are derived.
+    //For example after a level up or hero creation.
+    //These include Strength, Speed and Vitality.
+    //Potential problem with setting currentHP and Grit to Max if player increases Base attributes outside of this context.
+    public function updateDerivedStats(): void
+    {
+        $this->setCurrentHP($this->getHP());
+        $this->setCurrentGrit($this->getGrit());
+        $this->setFatigue();
+    }
+
+    //+++ Combat +++
+
+    public function doDamage(): int
+    {
+        $damage = rand($this->weapon->minDamage, $this->weapon->maxDamage);
+        return $damage;
     }
 }

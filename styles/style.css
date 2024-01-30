@@ -8,3 +8,7 @@ body {
   flex-direction: row;
   gap: 25px;
 }
+
+.errorMsg {
+  background-color: red;
+}

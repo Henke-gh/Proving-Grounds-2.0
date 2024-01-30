@@ -3,28 +3,51 @@
 require __DIR__ . "/../vendor/autoload.php";
 session_start();
 
-$player = $_SESSION['player'];
-
-echo '<pre>';
-var_dump($player);
-
 use App\Hero;
 use App\Skill;
 
+$playerSaveState = $_SESSION['player'];
+$player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
+$player->loadHeroState($playerSaveState);
+
 if (isset($_POST['create'])) {
     $pointsSpent = 0;
+    $skillUps = [];
     foreach ($_POST as $stat => $value) {
         if ($stat !== 'create' && $value > 0) {
             $pointsSpent += $value;
-            echo "Key: $stat, Value: $value <br>";
+            $skillUps[$stat] = $value;
         }
     }
     if ($pointsSpent > 25) {
-        echo "Not enough skill points!";
+        $_SESSION['heroCreation'] = 2;
+        $_SESSION['error'] = "Not enough skill points!";
+        header('Location: /../app/heroCreation_step2.php');
+        exit();
     } else if ($pointsSpent < 25) {
-        echo "Make sure to spend all your skill points!";
+        $_SESSION['heroCreation'] = 2;
+        $_SESSION['error'] = "Make sure to spend all your skill points!";
+        header('Location: /../app/heroCreation_step2.php');
+        exit();
     } else {
-        echo $pointsSpent . " points spent!";
+        foreach ($skillUps as $skill => $value) {
+            switch ($skill) {
+                case 'strength':
+                    $player->setStrength($value);
+                    break;
+                case 'speed':
+                    $player->setSpeed($value);
+                    break;
+                case 'vitality':
+                    $player->setVitality($value);
+                    break;
+
+                default:
+                    $player->setSkill($skill, $value);
+                    break;
+            }
+        }
+        $player->updateDerivedStats();
     }
 }
 
@@ -34,6 +57,26 @@ require __DIR__ . "/../nav/header.php";
 <main>
     <h2>Final Char Creation Screen</h2>
     <p><?= $player->name; ?></p>
+    <p><?= $player->gender; ?></p>
+    <p><?= "HP: " . $player->getCurrentHP() . "/" . $player->getHP(); ?></p>
+    <p><?= "Grit: " . $player->getCurrentGrit() . "/" . $player->getGrit(); ?></p>
+    <p><?= "Fatigue: " . $player->getFatigue(); ?></p>
+    <h3>Base Attributes</h3>
+    <div class="statContainer">
+        <p>Strength: <?= $player->getStrength(); ?></p>
+    </div>
+    <div class="statContainer">
+        <p>Speed: <?= $player->getSpeed(); ?></p>
+    </div>
+    <div class="statContainer">
+        <p>Vitality: <?= $player->getVitality(); ?></p>
+    </div>
+    <h3>Skills</h3>
+    <?php foreach ($player->getSkills() as $skill) :
+        if ($skill->value > 0) : ?>
+            <p><?= ucfirst($skill->name) . ": " . $skill->value; ?></p>
+    <?php endif;
+    endforeach; ?>
 </main>
 <?php
 require __DIR__ . "/../nav/footer.html";

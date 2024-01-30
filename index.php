@@ -24,7 +24,7 @@ $goblin = new Monster(
 );
 
 $player->updateCurrentHP(5);
-$player->updateXP(10);
+$player->setXP(10);
 
 if (isset($_POST['weapon'])) {
     $weaponIndex = $_POST['weapon'];

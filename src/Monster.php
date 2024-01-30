@@ -12,7 +12,7 @@ class Monster
         public string $name,
         public int $level,
         public int $hitpoints,
-        public int $xp,
+        public int $xpReward,
         public Weapon $weapon
     ) {
     }
@@ -31,5 +31,11 @@ class Monster
     {
         $this->currentHitpoints -= $damageTaken;
         return $this->currentHitpoints;
+    }
+
+    public function doDamage(): int
+    {
+        $damage = rand($this->weapon->minDamage, $this->weapon->maxDamage);
+        return $damage;
     }
 }

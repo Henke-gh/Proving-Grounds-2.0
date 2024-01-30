@@ -10,16 +10,13 @@ if (isset($_POST['createHero'])) {
     $name = trim(htmlspecialchars($_POST['heroName'], ENT_QUOTES));
     $gender = ucfirst($_POST['heroGender']);
     $player = new Hero($name, $gender);
-    $player->addSkill(new Skill("Swords", 0));
-    $player->addSkill(new Skill("Axes", 0));
-    $player->addSkill(new Skill("Spears", 0));
-    $player->addSkill(new Skill("Hammers", 0));
-    $player->addSkill(new Skill("Daggers", 0));
-    $player->addSkill(new Skill("Evasion", 0));
-    $player->addSkill(new Skill("Initiative", 0));
-    $player->addSkill(new Skill("Block", 0));
 
-    $_SESSION['player'] = $player;
+    $_SESSION['player'] = $player->saveHeroState();
+} elseif (isset($_SESSION['heroCreation'])) {
+    $playerSaveState = $_SESSION['player'];
+    $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
+
+    $_SESSION['player'] = $player->saveHeroState();
 } else {
     header('Location: /../app/heroCreation_step1.php');
     exit();
@@ -29,6 +26,13 @@ require __DIR__ . "/../nav/header.php";
 ?>
 
 <main>
+    <?php if (isset($_SESSION['error'])) : ?>
+        <div class="errorMsg">
+            <h3><?= $_SESSION['error']; ?></h3>
+        </div>
+    <?php
+        unset($_SESSION['error']);
+    endif; ?>
     <h2>Character Creation</h2>
     <div class="heroSummary">
         <h3><?= $player->name; ?></h3>
