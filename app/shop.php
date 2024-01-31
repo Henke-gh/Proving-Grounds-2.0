@@ -10,6 +10,13 @@ $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
 
+if (isset($_POST['purchase'])) {
+    var_dump($_POST['item']);
+    $weaponType = $_POST['item'][0];
+    $weaponIndex = $_POST['item'][1];
+    $player->weapon = $weapons[$weaponType][$weaponIndex];
+}
+
 require __DIR__ . "/../nav/header.php";
 ?>
 <main>
@@ -21,38 +28,37 @@ require __DIR__ . "/../nav/header.php";
 
     <div class="shopContainer">
         <h3>Mr Weapon Vendor</h3>
-        <form method="post" action="">
-            <?php $itemIndex = 0;
-            foreach ($weapons as $weaponType => $weaponGroup) : ?>
-                <div class="shopCategory">
-                    <h4><?= $weaponType; ?></h4>
-                    <?php $weaponIndex = 0;
-                    //The Option value needs to contain both the weapon type (ie. "Swords") and the items Index relative to the ype
-                    //This is why the option value is a serialized array. Weird fix, but it works.
-                    foreach ($weaponGroup as $weapon) : ?>
-                        <div class="shopItem" onclick="showDetails(<?= $itemIndex++; ?>, 
+        <?php $itemIndex = 0;
+        foreach ($weapons as $weaponType => $weaponGroup) : ?>
+            <div class="shopCategory">
+                <h4><?= $weaponType; ?></h4>
+                <?php $weaponIndex = 0;
+                //Here we include all relevant Weapon-properties to be show in the Shop-modulo
+                foreach ($weaponGroup as $weapon) : ?>
+                    <div class="shopItem" onclick="showDetails(<?= $itemIndex++; ?>, 
                     '<?= $weapon->name; ?>', 
                     '<?= $weapon->cost; ?>',
                     '<?= $weapon->minDamage; ?>',
                     '<?= $weapon->maxDamage; ?>',
-                    '<?= $weapon->getItemDescription(); ?>')">
-                            <h5>[<?= $weapon->name ?>]</h5>
-                            <h5>Cost: <?= $weapon->cost; ?>g</h5>
-                            <input type="checkbox" value="<?= htmlentities(serialize(array('type' => $weaponType, 'index' => $weaponIndex))); ?>">
-                        </div>
-                    <?php
-                        $weaponIndex++;
-                    endforeach; ?>
-                </div>
-            <?php endforeach; ?>
-            <button type="submit">Buy</button>
-        </form>
+                    '<?= $weapon->getItemDescription(); ?>',
+                    '<?= $weaponType; ?>',
+                    '<?= $weaponIndex; ?>')">
+                        <h5>[<?= $weapon->name ?>]</h5>
+                        <h5>Cost: <?= $weapon->cost; ?>g</h5>
+                    </div>
+                <?php
+                    $weaponIndex++;
+                endforeach; ?>
+            </div>
+        <?php endforeach; ?>
     </div>
 
     <!-- Trying out the modulo game, item information goes here -->
     <div class="overlay" id="overlay">
         <div class="details" id="details">
-            <!-- JS puts item deets here. See div "shopItem" for information about what gets sent here. -->
+            <!-- JS puts item deets here. See div "shopItem" for information about what gets sent here.
+        Form field and Buy-button is also added through JS, along with two hidden input elements containing
+    weaponType (eg "Swords") and weaponIndex-->
         </div>
     </div>
 
