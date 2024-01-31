@@ -23,6 +23,18 @@ body {
   font-style: italic;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.underlineHover:hover {
+  text-decoration: underline;
+}
+
 /* Shop Styling */
 
 .shopItem {

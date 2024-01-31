@@ -11,6 +11,7 @@ class Monster
 {
     private int $currentHitpoints;
     private array $skills = [];
+    private string $description;
 
     public function __construct(
         public string $name,
@@ -23,6 +24,7 @@ class Monster
         $this->addSkill(new Skill("Evasion", 0));
         $this->addSkill(new Skill("Initiative", 0));
         $this->addSkill(new Skill("Block", 0));
+        $this->setCurrentHP($this->getHP());
     }
 
     public function getHP(): int
@@ -33,6 +35,11 @@ class Monster
     public function getCurrentHP(): int
     {
         return $this->currentHitpoints;
+    }
+
+    public function setCurrentHP(int $value): void
+    {
+        $this->currentHitpoints = $value;
     }
 
     public function updateCurrentHP(int $damageTaken): int
@@ -58,6 +65,16 @@ class Monster
                 $skill->value += $value;
             }
         }
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 
     //+++ Combat +++

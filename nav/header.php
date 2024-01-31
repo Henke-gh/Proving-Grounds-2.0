@@ -14,4 +14,6 @@
 <body>
     <header>
         <h1>The New Proving Grounds</h1>
+        <a href="/../app/shop.php">Shop</a>
+        <a href="/../app/combat.php">Combat</a>
     </header>

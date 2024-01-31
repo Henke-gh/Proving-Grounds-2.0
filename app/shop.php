@@ -43,14 +43,14 @@ require __DIR__ . "/../nav/header.php";
 
     <div class="shopContainer">
         <h3>Mr Weapon Vendor</h3>
-        <?php $itemIndex = 0;
+        <?php $itemID = 0;
         foreach ($weapons as $weaponType => $weaponGroup) : ?>
             <div class="shopCategory">
                 <h4><?= $weaponType; ?></h4>
                 <?php $weaponIndex = 0;
                 //Here we include all relevant Weapon-properties to be show in the Shop-modulo
                 foreach ($weaponGroup as $weapon) : ?>
-                    <div class="shopItem" onclick="showDetails(<?= $itemIndex++; ?>, 
+                    <div class="shopItem pointer" onclick="showDetails(<?= $itemID++; ?>, 
                     '<?= $weapon->name; ?>', 
                     '<?= $weapon->cost; ?>',
                     '<?= $weapon->minDamage; ?>',
@@ -58,7 +58,7 @@ require __DIR__ . "/../nav/header.php";
                     '<?= $weapon->getItemDescription(); ?>',
                     '<?= $weaponType; ?>',
                     '<?= $weaponIndex; ?>')">
-                        <h5>[<?= $weapon->name ?>]</h5>
+                        <h5 class="underlineHover">[<?= $weapon->name ?>]</h5>
                         <h5>Cost: <?= $weapon->cost; ?>g</h5>
                     </div>
                 <?php
