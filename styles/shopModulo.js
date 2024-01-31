@@ -2,7 +2,7 @@ function showDetails(itemID, itemName, cost, minDmg, maxDmg, itemDescription, it
   var overlay = document.getElementById("overlay");
   var details = document.getElementById("details");
   details.innerHTML =
-    "<form method=post action=#>" +
+    "<form method=post action=/../app/shopCheckout.php>" +
     "<h3>" +
     itemName +
     "</h3><p>Damage: " +

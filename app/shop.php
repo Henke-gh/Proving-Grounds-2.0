@@ -10,21 +10,36 @@ $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
 
-if (isset($_POST['purchase'])) {
-    var_dump($_POST['item']);
-    $weaponType = $_POST['item'][0];
-    $weaponIndex = $_POST['item'][1];
-    $player->weapon = $weapons[$weaponType][$weaponIndex];
-}
-
 require __DIR__ . "/../nav/header.php";
 ?>
 <main>
     <h2>The Shop</h2>
     <h3>Welcome to the Shop, <?= $player->name; ?></h3>
-    <p>Current Equipment</p>
+    <h4>Current Equipment</h4>
     <p>Weapon: <?= $player->weapon->name; ?></p>
+    <?php if (count($player->getInventory()) > 0) : ?>
+        <h4>Inventory</h4>
+        <?php foreach ($player->getInventory() as $item) : ?>
+            <p><?= $item->name; ?></p>
+    <?php endforeach;
+    endif; ?>
     <p>Gold: <?= $player->getGold(); ?></p>
+
+    <?php if (isset($_SESSION['error'])) : ?>
+        <div class="errorMsg">
+            <h3><?= $_SESSION['error']; ?></h3>
+        </div>
+    <?php
+        unset($_SESSION['error']);
+    endif; ?>
+
+    <?php if (isset($_SESSION['itemBought'])) : ?>
+        <div class="successMsg">
+            <h3><?= $_SESSION['itemBought']; ?></h3>
+        </div>
+    <?php
+        unset($_SESSION['itemBought']);
+    endif; ?>
 
     <div class="shopContainer">
         <h3>Mr Weapon Vendor</h3>

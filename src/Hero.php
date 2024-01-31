@@ -150,6 +150,23 @@ class Hero
         }
     }
 
+    public function getInventory(): array
+    {
+        return $this->inventory;
+    }
+
+    public function addInventoryWeapon(Weapon $item): void
+    {
+        $this->inventory[] = $item;
+    }
+
+    public function removeInventoryWeapon(Weapon $item): void
+    {
+        if (in_array($item, $this->getInventory())) {
+            unset($item);
+        }
+    }
+
     public function getEvasion(): int
     {
         foreach ($this->skills as $skill) {
@@ -190,7 +207,8 @@ class Hero
         $this->speed += $value;
     }
 
-    //Speed also affects Initiative and Evasion at 20% of its value. Here we apply that bonus.
+    //Speed also affects Initiative and Evasion at 20% of its value. This is kept separate from the skills base value.
+    //The reason being to make sure it's not applied twice by mistake.
     public function speedBonus(): int
     {
         $speedbonus = (int) floor($this->getSpeed() * 0.2);
@@ -228,7 +246,7 @@ class Hero
             'vitality' => $this->getVitality(),
             'weapon' => $this->weapon,
             'skills' => $this->getSkills(),
-            //add inventory here!
+            'inventory' => $this->getInventory()
         ];
 
         return $heroSaveState;
@@ -250,6 +268,10 @@ class Hero
 
         foreach ($player['skills'] as $skill) {
             $this->setSkill($skill->name, $skill->value);
+        }
+
+        foreach ($player['inventory'] as $item) {
+            $this->addInventoryWeapon($item);
         }
     }
 
