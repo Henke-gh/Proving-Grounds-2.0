@@ -13,7 +13,7 @@ $goblin->setSkill("Accuracy", 15);
 $goblin->setSkill("Evasion", 5);
 $goblin->setDescription("The foul smelling little shits are everywhere..");
 
-$cowardlyCultist = new Monster("Cowardly Cultist", 1, 12, 15, new Weapon("Cane", "Accuracy", 1, 5, 5));
+$cowardlyCultist = new Monster("Cowardly Cultist", 1, 12, 15, new Weapon("Iron Cane", "Accuracy", 1, 5, 5));
 $cowardlyCultist->setSkill("Accuracy", 12);
 $cowardlyCultist->setSkill("Evasion", 8);
 $cowardlyCultist->setDescription("He won\'t even look you in the eyes.");

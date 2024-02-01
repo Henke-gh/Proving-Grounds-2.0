@@ -9,6 +9,7 @@ use App\Weapon;
 $weapons = [
     'Swords' => [
         $shortsword = new Weapon("Short Sword", "Swords", 2, 4, 50),
+        $scimitar = new Weapon("Scimitar", "Swords", 2, 7, 150),
     ],
     'Axes' => [
         $handaxe = new Weapon("Hand Axe", "Axe", 2, 5, 50),
@@ -20,7 +21,8 @@ $weapons = [
         $club = new Weapon("Club", "Hammers", 1, 7, 50),
     ],
     'Daggers' => [
-        $twindaggers = new Weapon("Twin Daggers", "Daggers", 3, 7, 50),
+        $huntingknife = new Weapon("Hunting Knife", "Daggers", 1, 4, 35),
+        $twindaggers = new Weapon("Twin Daggers", "Daggers", 3, 7, 200),
     ],
 
 ];
