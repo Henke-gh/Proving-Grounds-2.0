@@ -49,6 +49,7 @@ if (isset($_POST['create'])) {
             }
         }
         $player->updateDerivedStats();
+        $_SESSION['player'] = $player->saveHeroState();
     }
 }
 

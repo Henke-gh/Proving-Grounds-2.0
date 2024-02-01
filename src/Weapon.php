@@ -15,6 +15,7 @@ class Weapon
     public function __construct(
         public string $name,
         public string $type,
+        public int $skillRequirement,
         public int $minDamage,
         public int $maxDamage,
         public int $cost

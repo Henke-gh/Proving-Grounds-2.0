@@ -42,7 +42,7 @@ class Hero
         $this->addSkill(new Skill("Evasion", 0));
         $this->addSkill(new Skill("Initiative", 0));
         $this->addSkill(new Skill("Block", 0));
-        $this->weapon = new Weapon("Fists", "Unarmed", 1, 2, 0);
+        $this->weapon = new Weapon("Fists", "Unarmed", 0, 1, 2, 0);
         $this->weapon->setItemDescription("They're your flesh mittens, champ. Might wanna invest in something for them to swing.");
     }
 
@@ -295,5 +295,22 @@ class Hero
         $weaponDamage = rand($this->weapon->minDamage, $this->weapon->maxDamage);
         $damage = $weaponDamage + $strengthBonus;
         return $damage;
+    }
+
+    public function sufferDamage(int $damage): void
+    {
+        $this->currentHitpoints -= $damage;
+    }
+
+    //Gets the skill value that matches equipped Weapon type.
+    public function toHitChance(): int
+    {
+        foreach ($this->skills as $skill) {
+            if ($skill->name === $this->weapon->type) {
+                return $skill->value;
+            } else {
+                return 0;
+            }
+        }
     }
 }

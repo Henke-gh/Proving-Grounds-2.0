@@ -53,6 +53,7 @@ require __DIR__ . "/../nav/header.php";
                     <div class="shopItem pointer" onclick="showDetails(<?= $itemID++; ?>, 
                     '<?= $weapon->name; ?>', 
                     '<?= $weapon->cost; ?>',
+                    '<?= $weapon->skillRequirement; ?>',
                     '<?= $weapon->minDamage; ?>',
                     '<?= $weapon->maxDamage; ?>',
                     '<?= $weapon->getItemDescription(); ?>',
@@ -70,10 +71,12 @@ require __DIR__ . "/../nav/header.php";
 
     <!-- Trying out the modulo game, item information goes here -->
     <div class="overlay" id="overlay">
-        <div class="details" id="details">
-            <!-- JS puts item deets here. See div "shopItem" for information about what gets sent here.
+        <div class="overlayContent" id="overlayContent">
+            <div class="details" id="details">
+                <!-- JS puts item deets here. See div "shopItem" for information about what gets sent here.
         Form field and Buy-button is also added through JS, along with two hidden input elements containing
     weaponType (eg "Swords") and weaponIndex-->
+            </div>
         </div>
     </div>
 

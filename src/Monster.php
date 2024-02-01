@@ -67,6 +67,26 @@ class Monster
         }
     }
 
+    public function getEvasion(): int
+    {
+        foreach ($this->skills as $skill) {
+            if ($skill->name === "Evasion") {
+                $evasion = $skill->value;
+            }
+        }
+        return $evasion;
+    }
+
+    public function getInitiative(): int
+    {
+        foreach ($this->skills as $skill) {
+            if ($skill->name === "Initiative") {
+                $initiative = $skill->value;
+            }
+        }
+        return $initiative;
+    }
+
     public function setDescription(string $description): void
     {
         $this->description = $description;
@@ -92,6 +112,11 @@ class Monster
                 return $skill->value;
             }
         }
+    }
+
+    public function sufferDamage(int $damage): void
+    {
+        $this->currentHitpoints -= $damage;
     }
     //Gold reward should perhaps not be as random but instead weighted based on performance.
     //Could take a modifier value based on player hits dealt vs. hits taken.

@@ -1,4 +1,4 @@
-function showDetails(itemID, itemName, cost, minDmg, maxDmg, itemDescription, itemType, itemIndex) {
+function showDetails(itemID, itemName, cost, skillReq, minDmg, maxDmg, itemDescription, itemType, itemIndex) {
   var overlay = document.getElementById("overlay");
   var details = document.getElementById("details");
   details.innerHTML =
@@ -9,7 +9,11 @@ function showDetails(itemID, itemName, cost, minDmg, maxDmg, itemDescription, it
     minDmg +
     "-" +
     maxDmg +
-    "</p><p>Cost: " +
+    "</p><p>Requires: (" +
+    skillReq +
+    ") in " +
+    itemType +
+    ".</p><p>Cost: " +
     cost +
     " gold</p>" +
     "<p class=cursive>" +

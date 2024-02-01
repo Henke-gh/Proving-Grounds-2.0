@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . "/../vendor/autoload.php";
 require __DIR__ . "/../app/monsterLibrary.php";
+require __DIR__ . "/../functions/combatLogic.php";
 session_start();
 
 use App\Hero;
@@ -12,7 +13,9 @@ $player->loadHeroState($playerSaveState);
 if (isset($_POST['fight'])) {
     $selectedMonsterID = $_POST['fight'];
     $stance = $_POST['combatStance'];
-    $retreat = $_POST['retreatValue'];
+    $retreat = (int) $_POST['retreatValue'];
+    $combatLog = doBattle($player, $monsters[$selectedMonsterID], $retreat);
+    $_SESSION['player'] = $player->saveHeroState();
 }
 
 if (isset($_POST['back'])) {
@@ -56,6 +59,9 @@ require __DIR__ . "/../nav/header.php";
             <p><?= $monsters[$selectedMonsterID]->name . " vs " . $player->name; ?></p>
             <p><?= "Stance: " . ucfirst($stance); ?></p>
             <p><?= "Retreat value: " . $retreat . "% HP"; ?></p>
+            <?php foreach ($combatLog as $line) : ?>
+                <p class="cursive"><?= $line; ?></p>
+            <?php endforeach; ?>
             <form method="post">
                 <button type="submit" name="back">Back</button>
             </form>
