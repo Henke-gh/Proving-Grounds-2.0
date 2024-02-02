@@ -12,10 +12,10 @@ $weapons = [
         $scimitar = new Weapon("Scimitar", "Swords", 25, 2, 7, 150),
     ],
     'Axes' => [
-        $handaxe = new Weapon("Hand Axe", "Axe", 10, 2, 5, 50),
+        $handaxe = new Weapon("Hand Axe", "Axes", 10, 2, 5, 50),
     ],
     'Spears' => [
-        $shortspear = new Weapon("Short Spear", "Spear", 10, 1, 6, 50),
+        $shortspear = new Weapon("Short Spear", "Spears", 10, 1, 6, 50),
     ],
     'Hammers' => [
         $club = new Weapon("Club", "Hammers", 10, 1, 7, 50),

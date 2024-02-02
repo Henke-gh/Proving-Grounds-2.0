@@ -9,6 +9,12 @@ use App\Hero;
 $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
+echo '<pre>';
+var_dump($player->toHitChance());
+var_dump($player->weapon->name);
+var_dump($player->weapon->type);
+var_dump($player->getSkills());
+echo '</pre>';
 
 if (isset($_POST['fight'])) {
     $selectedMonsterID = $_POST['fight'];

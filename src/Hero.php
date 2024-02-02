@@ -39,6 +39,7 @@ class Hero
         $this->addSkill(new Skill("Spears", 0));
         $this->addSkill(new Skill("Hammers", 0));
         $this->addSkill(new Skill("Daggers", 0));
+        $this->addSkill(new Skill("Unarmed", 0));
         $this->addSkill(new Skill("Evasion", 0));
         $this->addSkill(new Skill("Initiative", 0));
         $this->addSkill(new Skill("Block", 0));
@@ -302,14 +303,12 @@ class Hero
         $this->currentHitpoints -= $damage;
     }
 
-    //Gets the skill value that matches equipped Weapon type.
+    //Gets the skill value that matches equipped Weapon type. Otherwise uses Strength value instead of weapon skill.
     public function toHitChance(): int
     {
         foreach ($this->skills as $skill) {
             if ($skill->name === $this->weapon->type) {
                 return $skill->value;
-            } else {
-                return 0;
             }
         }
     }

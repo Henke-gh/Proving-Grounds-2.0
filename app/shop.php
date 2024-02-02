@@ -10,6 +10,20 @@ $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
 
+if (isset($_POST['equip'])) {
+    $itemToEquip = $_POST['equip'];
+
+    foreach ($weapons as $weaponType => $weaponGroup) {
+        foreach ($weaponGroup as $weapon) {
+            if ($weapon->name === $itemToEquip) {
+                $player->weapon = $weapon;
+
+                $_SESSION['player'] = $player->saveHeroState();
+            }
+        }
+    }
+}
+
 require __DIR__ . "/../nav/header.php";
 ?>
 <main>
@@ -19,10 +33,15 @@ require __DIR__ . "/../nav/header.php";
     <p>Weapon: <?= $player->weapon->name; ?></p>
     <?php if (count($player->getInventory()) > 0) : ?>
         <h4>Inventory</h4>
-        <?php foreach ($player->getInventory() as $item) : ?>
-            <p><?= $item->name; ?></p>
-    <?php endforeach;
-    endif; ?>
+        <form method="post" action="">
+            <?php foreach ($player->getInventory() as $item) : ?>
+                <div class="inventoryItem">
+                    <p><?= $item->name; ?></p>
+                    <button type="submit" name="equip" value="<?= $item->name; ?>">Equip</button>
+                </div>
+            <?php endforeach; ?>
+        </form>
+    <?php endif; ?>
     <p>Gold: <?= $player->getGold(); ?></p>
 
     <?php if (isset($_SESSION['error'])) : ?>
