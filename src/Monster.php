@@ -114,9 +114,10 @@ class Monster
         }
     }
 
-    public function sufferDamage(int $damage): void
+    public function sufferDamage(int $damage): int
     {
         $this->currentHitpoints -= $damage;
+        return $damage;
     }
     //Gold reward should perhaps not be as random but instead weighted based on performance.
     //Could take a modifier value based on player hits dealt vs. hits taken.

@@ -5,22 +5,19 @@ require __DIR__ . "/../functions/combatLogic.php";
 session_start();
 
 use App\Hero;
+use App\Monster;
+use App\MonsterCollection;
 
 $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
-echo '<pre>';
-var_dump($player->toHitChance());
-var_dump($player->weapon->name);
-var_dump($player->weapon->type);
-var_dump($player->getSkills());
-echo '</pre>';
 
 if (isset($_POST['fight'])) {
-    $selectedMonsterID = $_POST['fight'];
     $stance = $_POST['combatStance'];
     $retreat = (int) $_POST['retreatValue'];
-    $combatLog = doBattle($player, $monsters[$selectedMonsterID], $retreat);
+    $selectedMonsterID = $_POST['fight'];
+    $selectedMonster = $monsterLibrary->getMonster($selectedMonsterID);
+    $combatLog = doBattle($player, $selectedMonster, $retreat);
     $_SESSION['player'] = $player->saveHeroState();
 }
 
@@ -34,17 +31,23 @@ require __DIR__ . "/../nav/header.php";
 <main>
     <h2>Enter the Arena</h2>
     <?php if (!isset($_POST['fight'])) : ?>
+        <div class="heroInfo">
+            <p><?= $player->name; ?></p>
+            <p><?= $player->getCurrentHP() . "/" . $player->getHP(); ?></p>
+            <p><?= $player->weapon->name; ?></p>
+        </div>
         <div class="monsterSelect">
             <h3>Monster Rooster</h3>
             <p class="cursive">(Click on a monster for more information)</p>
             <?php $monsterID = 0;
-            foreach ($monsters as $monster) : ?>
+            foreach ($monsterLibrary->getAllMonsters() as $monster) : ?>
                 <div class="monster pointer underlineHover" onclick="showDetails(<?= $monsterID++; ?>,
                 '<?= $monster->name; ?>',
                 '<?= $monster->level; ?>',
                 '<?= $monster->weapon->name; ?>',
                 '<?= $monster->getDescription(); ?>')">
                     <p>Level: <?= $monster->level; ?> [<?= $monster->name; ?>]</p>
+                    <p><?= $monster->getCurrentHP() . "/" . $monster->getHP(); ?>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -62,7 +65,7 @@ require __DIR__ . "/../nav/header.php";
 
     <?php elseif (isset($_POST['fight'])) : ?>
         <div class="combatlog">
-            <p><?= $monsters[$selectedMonsterID]->name . " vs " . $player->name; ?></p>
+            <p><?= $selectedMonster->name . " vs " . $player->name; ?></p>
             <p><?= "Stance: " . ucfirst($stance); ?></p>
             <p><?= "Retreat value: " . $retreat . "% HP"; ?></p>
             <?php foreach ($combatLog as $line) : ?>

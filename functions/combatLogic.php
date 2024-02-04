@@ -59,17 +59,14 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
     $retreatValue = $retreatValue / 100 * $player->getHP();
 
     while ($player->getCurrentHP() > $retreatValue) {
-        array_push($combatLog, "Turn" . $turn . ".");
+        array_push($combatLog, "Turn: " . $turn . ".");
+        //if returns true, player goes first else monster goes first.
         if (determineInitiative($player->getInitiative(), $monster->getInitiative())) {
-            $monster->sufferDamage($player->doDamage());
-            array_push($combatLog, "Monster gets hit.");
-            $player->sufferDamage($monster->doDamage());
-            array_push($combatLog, "Player gets hit.");
+            array_push($combatLog, "Monster gets hit for " . $monster->sufferDamage($player->doDamage()) . ".");
+            array_push($combatLog, "Player gets hit for " . $player->sufferDamage($monster->doDamage()) . ".");
         } else {
-            $player->sufferDamage($monster->doDamage());
-            array_push($combatLog, "Player gets hit.");
-            $monster->sufferDamage($player->doDamage());
-            array_push($combatLog, "Monster gets hit.");
+            array_push($combatLog, "Player gets hit for " . $player->sufferDamage($monster->doDamage()) . ".");
+            array_push($combatLog, "Monster gets hit for " . $monster->sufferDamage($player->doDamage()) . ".");
         }
         $turn++;
     }
