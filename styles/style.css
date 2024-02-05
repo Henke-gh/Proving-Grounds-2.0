@@ -1,8 +1,22 @@
+:root {
+  --bloodrise: #eb4036;
+  --gore: #863935;
+  --orange: #eb8c4b;
+  --gold: #eba543;
+  --paleYellow: #eddec9;
+  --warmNight: #210e08;
+}
 /* General Styling */
 
 body {
-  background-color: slategrey;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--paleYellow);
+  color: var(--warmNight);
+}
+
+main {
+  padding: 2%;
 }
 
 .container {
@@ -35,6 +49,78 @@ body {
   text-decoration: underline;
 }
 
+/* Header Styling */
+header {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  text-align: center;
+  background-color: var(--gore);
+}
+/* Footer Styling */
+
+/* Hero Creation - step 1 */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.characterCreate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.characterCreate button {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: var(--gold);
+  cursor: pointer;
+}
+
+.characterCreate input,
+.characterCreate button,
+.characterCreate select,
+.characterCreate option {
+  width: fit-content;
+}
+
+/* Hero Creation - step 2 */
+.heroStatForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heroStatForm button {
+  width: fit-content;
+  margin-top: 20px;
+  font-size: 1.5rem;
+}
+
+.statContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+
+.baseStats h3,
+.skills h3 {
+  text-align: center;
+}
+
+.stat {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.stat input {
+  width: 2.5rem;
+}
 /* Shop Styling */
 
 .shopItem {

@@ -1,60 +1,14 @@
 <?php
-//_step3 is cosmetic. A short summary of the player Hero's stats and a welcome screen with hints.
 require __DIR__ . "/../vendor/autoload.php";
 session_start();
 
 use App\Hero;
-use App\Skill;
-use App\Weapon;
 
 $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
 
-if (isset($_POST['create'])) {
-    $pointsSpent = 0;
-    $skillUps = [];
-    foreach ($_POST as $stat => $value) {
-        if ($stat !== 'create' && $value > 0) {
-            $pointsSpent += $value;
-            $skillUps[$stat] = $value;
-        }
-    }
-    if ($pointsSpent > 50) {
-        $_SESSION['heroCreation'] = 2;
-        $_SESSION['error'] = "Not enough skill points!";
-        header('Location: /../app/heroCreation_step2.php');
-        exit();
-    } else if ($pointsSpent < 50) {
-        $_SESSION['heroCreation'] = 2;
-        $_SESSION['error'] = "Make sure to spend all your skill points!";
-        header('Location: /../app/heroCreation_step2.php');
-        exit();
-    } else {
-        foreach ($skillUps as $skill => $value) {
-            switch ($skill) {
-                case 'strength':
-                    $player->setStrength($value);
-                    break;
-                case 'speed':
-                    $player->setSpeed($value);
-                    break;
-                case 'vitality':
-                    $player->setVitality($value);
-                    break;
-
-                default:
-                    $player->setSkill($skill, $value);
-                    break;
-            }
-        }
-        $player->updateDerivedStats();
-        $_SESSION['player'] = $player->saveHeroState();
-    }
-}
-
 require __DIR__ . "/../nav/header.php";
-
 ?>
 <main>
     <h2>Final Char Creation Screen</h2>

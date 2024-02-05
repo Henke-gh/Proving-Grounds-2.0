@@ -35,32 +35,38 @@ require __DIR__ . "/../nav/header.php";
     endif; ?>
     <h2>Character Creation</h2>
     <div class="heroSummary">
-        <h3><?= $player->name; ?></h3>
-        <p><?= $player->gender; ?></p>
+        <h3>Name: <?= $player->name; ?></h3>
+        <p>Gender: <?= $player->gender; ?></p>
     </div>
-    <form method="post" action="/../app/heroCreation_step3.php">
+    <form method="post" action="/../app/heroCreation_finalize.php" class="heroStatForm">
         <h4>Spend 50 points on attributes and skills</h4>
-        <div class="baseStats">
-            <h3>Base Attributes</h3>
-            <div class="statContainer">
-                <p>Strength: <?= $player->getStrength(); ?></p>
-                <input type="number" name="strength">
+        <div class="statContainer">
+            <div class="baseStats">
+                <h3>Base Attributes</h3>
+                <div class="stat">
+                    <label for="strength">Strength:</label>
+                    <input type="number" name="strength" id="strength">
+                </div>
+                <div class="stat">
+                    <label for="speed">Speed:</label>
+                    <input type="number" name="speed" id="speed">
+                </div>
+                <div class="stat">
+                    <label for="vitality">Vitality:</label>
+                    <input type="number" name="vitality" id="vitality">
+                </div>
             </div>
-            <div class="statContainer">
-                <p>Speed: <?= $player->getSpeed(); ?></p>
-                <input type="number" name="speed">
+            <div class="skills">
+                <h3>Hero Skills</h3>
+                <?php foreach ($player->getSkills() as $skill) : ?>
+                    <div class="stat">
+                        <label for="<?= $skill->name; ?>"><?= ucfirst($skill->name) . ":"; ?></label>
+                        <input type="number" name="<?= $skill->name; ?>" id="<?= $skill->name; ?>">
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <div class="statContainer">
-                <p>Vitality: <?= $player->getVitality(); ?></p>
-                <input type="number" name="vitality">
-            </div>
-            <h3>Skills</h3>
-            <?php foreach ($player->getSkills() as $skill) : ?>
-                <p><?= ucfirst($skill->name) . ": " . $skill->value; ?></p>
-                <input type="number" name="<?= $skill->name; ?>">
-            <?php endforeach; ?>
-            <button type="submit" name="create">Create Hero</button>
         </div>
+        <button type="submit" name="create">Create Hero</button>
     </form>
 </main>
 
