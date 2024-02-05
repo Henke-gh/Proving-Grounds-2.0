@@ -39,6 +39,7 @@ require __DIR__ . "/../nav/header.php";
         <p><?= $player->gender; ?></p>
     </div>
     <form method="post" action="/../app/heroCreation_step3.php">
+        <h4>Spend 50 points on attributes and skills</h4>
         <div class="baseStats">
             <h3>Base Attributes</h3>
             <div class="statContainer">

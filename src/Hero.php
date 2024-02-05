@@ -67,11 +67,6 @@ class Hero
         return $this->currentHitpoints;
     }
 
-    public function updateCurrentHP(int $damageTaken): void
-    {
-        $this->currentHitpoints -= $damageTaken;
-    }
-
     public function getGrit(): int
     {
         return $this->grit;
@@ -87,7 +82,7 @@ class Hero
         if ($this->currentGrit + $value > 100) {
             $this->currentGrit = 100;
         } else {
-            $this->currentGrit += $value;
+            $this->currentGrit = $value;
         }
     }
 
@@ -128,7 +123,7 @@ class Hero
 
     public function setXP(int $xpValue): void
     {
-        $this->xp += $xpValue;
+        $this->xp = $xpValue;
     }
 
     public function addSkill(Skill $skill): void
@@ -264,6 +259,7 @@ class Hero
         $this->setCurrentHP($player['currentHitpoints']);
         $this->setCurrentGrit($player['currentGrit']);
         $this->setGold($player['gold']);
+        $this->setXP($player['xp']);
         $this->weapon = $player['weapon'];
 
         foreach ($player['skills'] as $skill) {
@@ -306,14 +302,12 @@ class Hero
     //Gets the skill value that matches equipped Weapon type. Otherwise uses Strength + Speed value instead of weapon skill.
     public function toHitChance(): int
     {
+        $unarmed = $this->getStrength() + $this->getSpeed();
         foreach ($this->skills as $skill) {
             if ($skill->name === $this->weapon->type) {
                 return $skill->value;
-                break;
-            } else {
-                $unarmed = $this->getStrength() + $this->getSpeed();
-                return $unarmed;
             }
         }
+        return $unarmed;
     }
 }

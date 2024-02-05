@@ -11,7 +11,9 @@ use App\Monster;
 //decide who acts first each round of combat. If returns true, player goes first, otherwise monster goes first.
 function determineInitiative(int $playerIni, int $monsterIni): bool
 {
-    if ($playerIni > $monsterIni) {
+    $playerIni = rand(0, $playerIni);
+    $monsterIni = rand(0, $monsterIni);
+    if ($playerIni >= $monsterIni) {
         return true;
     } else {
         return false;
@@ -21,12 +23,7 @@ function determineInitiative(int $playerIni, int $monsterIni): bool
 //calculate final damage, inc potential crit dmg. Takes the attackers damage value aswell as the armour value of the defender.
 function determineDamage(int $attackerDamage, int $defenderArmour): int
 {
-    $critChance = rand(1, 10);
-    if ($critChance === 10) {
-        $damage = (int) floor(($attackerDamage * 1.5)) - $defenderArmour;
-    } else {
-        $damage = $attackerDamage - $defenderArmour;
-    }
+    $damage = $attackerDamage - $defenderArmour;
 
     if ($damage < 0) {
         $damage = 0;
@@ -34,41 +31,153 @@ function determineDamage(int $attackerDamage, int $defenderArmour): int
     return $damage;
 }
 
+function critChance(): bool
+{
+    $critChance = rand(1, 10);
+    if ($critChance === 10) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function critDamage($attackDamage): int
+{
+    $damage = (int) floor($attackDamage * 1.5);
+    return $damage;
+}
+
 //Takes three argument, determines if an attack hits or not. WIP!!!!
 function chanceToHit(int $attackerWeaponSkill, int $attackerWeaponReq, int $defenderEvasionSkill): bool
 {
     if ($attackerWeaponReq > $attackerWeaponSkill) {
-        $baseHitChance = (int) floor(($attackerWeaponSkill * 0.5) - $defenderEvasionSkill);
+        $baseHitChance = (int) floor(($attackerWeaponSkill * 0.5) - $defenderEvasionSkill / 2);
     } else {
-        $baseHitChance = $attackerWeaponSkill - $defenderEvasionSkill;
+        $baseHitChance = $attackerWeaponSkill - $defenderEvasionSkill / 2;
     }
 
-    $baseHitChance = min(max($baseHitChance, 0), 100);
-
-    if ($baseHitChance < rand(0, 100)) {
+    if ($baseHitChance < rand(0, 10) + $defenderEvasionSkill) {
         return false;
     } else {
-        (int) $baseEvadeChance = max($defenderEvasionSkill - $attackerWeaponSkill / 2, 0);
-    } //NOT COMPLETE
+        $targetEvasion = rand(0, $defenderEvasionSkill);
+        $targetAttack = rand(0, $attackerWeaponSkill);
+        if ($targetAttack < $targetEvasion) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+}
+
+function playerAttack(Hero $player, Monster $monster): array
+{
+    $log = [];
+    if (critChance() === true) {
+        $damage = critDamage($player->doDamage());
+        array_push($log, $player->name . " strikes a furious blow to " . $monster->name . " for " . $monster->sufferDamage($damage)) . "!";
+    } else {
+        $damage = $player->doDamage();
+        if (chanceToHit($player->toHitChance(), $player->weapon->skillRequirement, $monster->toHitChance()) === true) {
+            array_push($log, $monster->name . " gets hit for " . $monster->sufferDamage($damage) . ".");
+        } else {
+            array_push($log, $player->name . " misses..");
+        }
+    }
+
+    return $log;
+}
+
+function monsterAttack(Monster $monster, Hero $player): array
+{
+    $log = [];
+    if (critChance() === true) {
+        $damage = critDamage($monster->doDamage());
+        array_push($log, $monster->name . " strikes a murderous blow to " . $player->name . " for " . $player->sufferDamage($damage)) . "!";
+    } else {
+        $damage = $monster->doDamage();
+        if (chanceToHit($monster->toHitChance(), $monster->weapon->skillRequirement, $player->getEvasion()) === true) {
+            array_push($log, $player->name . " gets hit for " . $player->sufferDamage($damage));
+        } else {
+            array_push($log, $monster->name . " misses..");
+        }
+    }
+
+    return $log;
+}
+
+function fightReward(Monster $monster, Hero $player)
+{
+    $player->setGold($player->getGold() + $monster->dropGold());
+    $xp = $monster->xpReward;
+    $player->setXP($player->getXP() + $xp);
 }
 
 function doBattle(Hero $player, Monster $monster, int $retreatValue): array
 {
     $combatLog = [];
     $turn = 1;
-    $retreatValue = $retreatValue / 100 * $player->getHP();
+    //calculate player HP value at which player gives up and combat ends.
+    $retreatValue = (int) floor($retreatValue / 100 * $player->getHP());
 
     while ($player->getCurrentHP() > $retreatValue) {
-        array_push($combatLog, "Turn: " . $turn . ".");
+        array_push($combatLog, "Turn: " . $turn);
         //if returns true, player goes first else monster goes first.
         if (determineInitiative($player->getInitiative(), $monster->getInitiative())) {
-            array_push($combatLog, "Monster gets hit for " . $monster->sufferDamage($player->doDamage()) . ".");
-            array_push($combatLog, "Player gets hit for " . $player->sufferDamage($monster->doDamage()) . ".");
+            $lines = playerAttack($player, $monster);
+            foreach ($lines as $line) {
+                array_push($combatLog, $line);
+            }
+
+            if ($monster->getCurrentHP() <= 0) {
+                array_push($combatLog, $monster->name . " is defeated!");
+                array_push($combatLog, "You gain " . $monster->xpReward . " xp and " . $monster->dropGold() . " gold.");
+                fightReward($monster, $player);
+                $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
+                break;
+            }
+
+            $lines = monsterAttack($monster, $player);
+            foreach ($lines as $line) {
+                array_push($combatLog, $line);
+            }
+
+            if ($player->getCurrentHP() <= $retreatValue) {
+                array_push($combatLog, $player->name . " is defeated!");
+                $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
+                break;
+            }
         } else {
-            array_push($combatLog, "Player gets hit for " . $player->sufferDamage($monster->doDamage()) . ".");
-            array_push($combatLog, "Monster gets hit for " . $monster->sufferDamage($player->doDamage()) . ".");
+            $lines = monsterAttack($monster, $player);
+            foreach ($lines as $line) {
+                array_push($combatLog, $line);
+            }
+
+            if ($player->getCurrentHP() <= $retreatValue) {
+                array_push($combatLog, $player->name . " is defeated!");
+                $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
+                break;
+            }
+
+            $lines = playerAttack($player, $monster);
+            foreach ($lines as $line) {
+                array_push($combatLog, $line);
+            }
+
+            if ($monster->getCurrentHP() <= 0) {
+                array_push($combatLog, $monster->name . " is defeated!");
+                array_push($combatLog, "You gain " . $monster->xpReward . " xp and " . $monster->dropGold() . " gold.");
+                fightReward($monster, $player);
+                $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
+                break;
+            }
         }
         $turn++;
+
+        if ($player->getFatigue() < $turn) {
+            array_push($combatLog, $player->name . " collapses due to fatigue.");
+            $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
+        }
     }
+    $_SESSION['player'] = $player->saveHeroState();
     return $combatLog;
 }

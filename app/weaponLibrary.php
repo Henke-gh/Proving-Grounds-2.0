@@ -16,6 +16,7 @@ $weapons = [
     ],
     'Spears' => [
         $shortspear = new Weapon("Short Spear", "Spears", 10, 1, 6, 50),
+        $testSpear = new Weapon("Boar Lance (test)", "Spears", 5, 5, 20, 25)
     ],
     'Hammers' => [
         $club = new Weapon("Club", "Hammers", 10, 1, 7, 50),
@@ -26,6 +27,3 @@ $weapons = [
     ],
 
 ];
-
-//Monster weapons should probably be generated on a per monster-instance basis when the monster instance is created.
-$monsterWeapons = [];

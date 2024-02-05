@@ -5,8 +5,6 @@ require __DIR__ . "/../functions/combatLogic.php";
 session_start();
 
 use App\Hero;
-use App\Monster;
-use App\MonsterCollection;
 
 $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
@@ -25,6 +23,11 @@ if (isset($_POST['back'])) {
     unset($_POST['fight']);
 }
 
+if (isset($_POST['heal'])) {
+    $player->setCurrentHP($player->getHP() * 2);
+    $_SESSION['player'] = $player->saveHeroState();
+}
+
 require __DIR__ . "/../nav/header.php";
 ?>
 
@@ -33,8 +36,14 @@ require __DIR__ . "/../nav/header.php";
     <?php if (!isset($_POST['fight'])) : ?>
         <div class="heroInfo">
             <p><?= $player->name; ?></p>
-            <p><?= $player->getCurrentHP() . "/" . $player->getHP(); ?></p>
+            <p><?= "HP: " . $player->getCurrentHP() . "/" . $player->getHP(); ?></p>
+            <p><?= "Grit: " . $player->getCurrentGrit() . "/" . $player->getGrit(); ?></p>
+            <p><?= "Gold: " . $player->getGold(); ?></p>
             <p><?= $player->weapon->name; ?></p>
+            <p><?= "XP: " . $player->getXP(); ?></p>
+            <form method="post">
+                <button type="submi" name="heal">Get Full HP</button>
+            </form>
         </div>
         <div class="monsterSelect">
             <h3>Monster Rooster</h3>

@@ -20,12 +20,12 @@ if (isset($_POST['create'])) {
             $skillUps[$stat] = $value;
         }
     }
-    if ($pointsSpent > 25) {
+    if ($pointsSpent > 50) {
         $_SESSION['heroCreation'] = 2;
         $_SESSION['error'] = "Not enough skill points!";
         header('Location: /../app/heroCreation_step2.php');
         exit();
-    } else if ($pointsSpent < 25) {
+    } else if ($pointsSpent < 50) {
         $_SESSION['heroCreation'] = 2;
         $_SESSION['error'] = "Make sure to spend all your skill points!";
         header('Location: /../app/heroCreation_step2.php');

@@ -16,7 +16,7 @@ $goblin = new Monster(
     2,
     8,
     15,
-    new Weapon("Hatchet", "Axe", 1, 3, 666)
+    new Weapon("Hatchet", "Axe", 10, 1, 3, 666)
 );
 
 $player->updateCurrentHP(5);
