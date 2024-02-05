@@ -37,6 +37,10 @@ main {
   font-style: italic;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -121,12 +125,26 @@ main {
 .stat input {
   width: 2.5rem;
 }
-/* Shop Styling */
-
-.shopItem {
+/* playerHero Summary Page */
+.heroGeneralContainer {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 35px;
+}
+
+.heroStats {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.heroGear h4 {
+  margin-top: 16px;
+}
+
+.heroGear h5 {
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
 }
 
 .inventoryItem {
@@ -138,6 +156,13 @@ main {
 .inventoryItem button {
   height: fit-content;
   align-self: center;
+}
+/* Shop Styling */
+
+.shopItem {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
 /* Shop Item Display Modulo */

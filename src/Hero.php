@@ -20,6 +20,7 @@ class Hero
     private int $currentGrit = 0;
     //fatigue is the number of combat turns the player hero can fight before giving up (due to fatigue)
     private int $fatigue = 0;
+    private int $level = 1;
     private int $xp = 0;
     private int $gold = 0;
     public Weapon $weapon;
@@ -114,6 +115,16 @@ class Hero
     public function getGold(): int
     {
         return $this->gold;
+    }
+
+    public function getLevel(): int
+    {
+        return $this->level;
+    }
+
+    public function setLevel(int $newlevel): void
+    {
+        $this->level = $newlevel;
     }
 
     public function getXP(): int
