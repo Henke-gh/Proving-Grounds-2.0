@@ -33,7 +33,7 @@ require __DIR__ . "/../nav/header.php";
             <div class="heroGeneralStats">
                 <p><span class="bold">HP: </span><?= $player->getCurrentHP() . "/" . $player->getHP(); ?></p>
                 <p><span class="bold">Grit: </span><?= $player->getCurrentGrit() . "/" . $player->getGrit(); ?></p>
-                <p><span class="bold">XP: </span><?= $player->getXP(); ?></p>
+                <p><span class="bold">XP: </span><?= $player->getXP() . "/" . $player->getXPtoNext(); ?></p>
                 <p><span class="bold">Gold: </span><?= $player->getGold(); ?></p>
             </div>
             <div class="heroGear">
@@ -73,6 +73,10 @@ require __DIR__ . "/../nav/header.php";
                                 break;
                             case 'Initiative': ?>
                                 <p><?= ucfirst($skill->name) . ": " . $player->getInitiative(); ?></p>
+                            <?php
+                                break;
+                            case 'Block': ?>
+                                <p><?= ucfirst($skill->name) . ": " . $player->getBlock(); ?></p>
                                 <?php
                                 break;
 

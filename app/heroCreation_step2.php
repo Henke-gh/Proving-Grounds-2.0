@@ -22,6 +22,8 @@ if (isset($_POST['createHero'])) {
     exit();
 }
 
+$skillPoints = 50;
+
 require __DIR__ . "/../nav/header.php";
 ?>
 
@@ -39,7 +41,7 @@ require __DIR__ . "/../nav/header.php";
         <p>Gender: <?= $player->gender; ?></p>
     </div>
     <form method="post" action="/../app/heroCreation_finalize.php" class="heroStatForm">
-        <h4>Spend 50 points on attributes and skills</h4>
+        <h4>Spend <?= $skillPoints; ?> points on Attributes and Skills</h4>
         <div class="statContainer">
             <div class="baseStats">
                 <h3>Base Attributes</h3>

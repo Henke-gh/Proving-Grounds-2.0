@@ -1,6 +1,6 @@
 <?php
-//_step3 finalizes hero creation and verifies the player has spent the correct number of skill points.
 require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/../functions/levelUpFunctions.php";
 session_start();
 
 use App\Hero;
@@ -9,9 +9,9 @@ $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
 
-$skillPoints = 50;
+$skillPoints = 20;
 
-if (isset($_POST['create'])) {
+if (isset($_POST['confirm']) && $_SESSION['levelUp'] === true) {
     $pointsSpent = 0;
     $skillUps = [];
     foreach ($_POST as $stat => $value) {
@@ -21,14 +21,12 @@ if (isset($_POST['create'])) {
         }
     }
     if ($pointsSpent > $skillPoints) {
-        $_SESSION['heroCreation'] = 2;
         $_SESSION['error'] = "Not enough skill points!";
-        header('Location: /../app/heroCreation_step2.php');
+        header('Location: /../app/levelUp.php');
         exit();
     } else if ($pointsSpent < $skillPoints) {
-        $_SESSION['heroCreation'] = 2;
         $_SESSION['error'] = "Make sure to spend all your skill points!";
-        header('Location: /../app/heroCreation_step2.php');
+        header('Location: /../app/levelUp.php');
         exit();
     } else {
         foreach ($skillUps as $skill => $value) {
@@ -49,7 +47,9 @@ if (isset($_POST['create'])) {
             }
         }
         $player->updateDerivedStats();
+        getNextLevelXp($player, $levels);
         $_SESSION['player'] = $player->saveHeroState();
+        unset($_SESSION['levelUp']);
         header('Location: /../app/playerHero.php');
         exit();
     }

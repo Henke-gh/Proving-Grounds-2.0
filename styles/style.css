@@ -2,6 +2,7 @@
   --bloodrise: #eb4036;
   --gore: #863935;
   --orange: #eb8c4b;
+  --lightBrown: #756650;
   --gold: #eba543;
   --paleYellow: #eddec9;
   --warmNight: #210e08;
@@ -58,7 +59,7 @@ header {
   padding-top: 5px;
   padding-bottom: 10px;
   text-align: center;
-  background-color: var(--gore);
+  background-color: var(--lightBrown);
 }
 /* Footer Styling */
 
@@ -117,7 +118,7 @@ main {
 
 .stat {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   gap: 10px;
   margin-bottom: 5px;
 }

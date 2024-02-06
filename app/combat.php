@@ -2,6 +2,7 @@
 require __DIR__ . "/../vendor/autoload.php";
 require __DIR__ . "/../app/monsterLibrary.php";
 require __DIR__ . "/../functions/combatLogic.php";
+require __DIR__ . "/../functions/levelUpFunctions.php";
 session_start();
 
 use App\Hero;
@@ -9,6 +10,8 @@ use App\Hero;
 $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
+
+levelUp($player);
 
 if (isset($_POST['fight'])) {
     $stance = $_POST['combatStance'];
@@ -20,6 +23,7 @@ if (isset($_POST['fight'])) {
 }
 
 if (isset($_POST['back'])) {
+    levelUp($player);
     unset($_POST['fight']);
 }
 
@@ -33,14 +37,15 @@ require __DIR__ . "/../nav/header.php";
 
 <main>
     <h2>Enter the Arena</h2>
-    <?php if (!isset($_POST['fight'])) : ?>
+    <?php require __DIR__ . "/../app/levelUpMessage.php";
+    if (!isset($_POST['fight'])) : ?>
         <div class="heroInfo">
             <p><?= $player->name; ?></p>
             <p><?= "HP: " . $player->getCurrentHP() . "/" . $player->getHP(); ?></p>
             <p><?= "Grit: " . $player->getCurrentGrit() . "/" . $player->getGrit(); ?></p>
             <p><?= "Gold: " . $player->getGold(); ?></p>
             <p><?= $player->weapon->name; ?></p>
-            <p><?= "XP: " . $player->getXP(); ?></p>
+            <p><?= "XP: " . $player->getXP() . "/" . $player->getXPtoNext(); ?></p>
             <form method="post">
                 <button type="submi" name="heal">Get Full HP</button>
             </form>

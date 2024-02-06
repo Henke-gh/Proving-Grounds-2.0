@@ -17,7 +17,7 @@ $goblin->setDescription("The foul smelling little shits are everywhere..");
 $monsterLibrary->addMonster($goblin);
 
 
-$cowardlyCultist = new Monster("Cowardly Cultist", 1, 12, 15, new Weapon("Iron Cane", "Accuracy", 10, 1, 5, 5));
+$cowardlyCultist = new Monster("Cowardly Cultist", 1, 12, 200, new Weapon("Iron Cane", "Accuracy", 10, 1, 5, 5));
 $cowardlyCultist->setSkill("Accuracy", 12);
 $cowardlyCultist->setSkill("Evasion", 8);
 $cowardlyCultist->setDescription("He won\'t even look you in the eyes.");

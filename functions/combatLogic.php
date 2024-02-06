@@ -31,6 +31,7 @@ function determineDamage(int $attackerDamage, int $defenderArmour): int
     return $damage;
 }
 
+//Currently quite simple. Needs a rework. Base val(5 or 10 maybe) + (WeaponSkill/10) >= rand(1,100) = crit?
 function critChance(): bool
 {
     $critChance = rand(1, 10);
@@ -105,10 +106,10 @@ function monsterAttack(Monster $monster, Hero $player): array
     return $log;
 }
 
-function fightReward(Monster $monster, Hero $player)
+function fightReward(Hero $player, int $gold, int $xpReward): void
 {
-    $player->setGold($player->getGold() + $monster->dropGold());
-    $xp = $monster->xpReward;
+    $player->setGold($player->getGold() + $gold);
+    $xp = $xpReward;
     $player->setXP($player->getXP() + $xp);
 }
 
@@ -118,6 +119,9 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
     $turn = 1;
     //calculate player HP value at which player gives up and combat ends.
     $retreatValue = (int) floor($retreatValue / 100 * $player->getHP());
+
+    $goldDrop = $monster->dropGold();
+    $xpReward = $monster->xpReward;
 
     while ($player->getCurrentHP() > $retreatValue) {
         array_push($combatLog, "Turn: " . $turn);
@@ -130,8 +134,8 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
 
             if ($monster->getCurrentHP() <= 0) {
                 array_push($combatLog, $monster->name . " is defeated!");
-                array_push($combatLog, "You gain " . $monster->xpReward . " xp and " . $monster->dropGold() . " gold.");
-                fightReward($monster, $player);
+                array_push($combatLog, "You gain " . $xpReward . " xp and " . $goldDrop . " gold.");
+                fightReward($player, $goldDrop, $xpReward);
                 $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
                 break;
             }
@@ -165,8 +169,8 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
 
             if ($monster->getCurrentHP() <= 0) {
                 array_push($combatLog, $monster->name . " is defeated!");
-                array_push($combatLog, "You gain " . $monster->xpReward . " xp and " . $monster->dropGold() . " gold.");
-                fightReward($monster, $player);
+                array_push($combatLog, "You gain " . $xpReward . " xp and " . $goldDrop . " gold.");
+                fightReward($player, $goldDrop, $xpReward);
                 $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
                 break;
             }

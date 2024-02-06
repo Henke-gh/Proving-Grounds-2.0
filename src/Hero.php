@@ -22,6 +22,7 @@ class Hero
     private int $fatigue = 0;
     private int $level = 1;
     private int $xp = 0;
+    private int $xpToNextLvl = 200;
     private int $gold = 0;
     public Weapon $weapon;
     //array containing player skills and their values.
@@ -59,7 +60,7 @@ class Hero
         if ($this->currentHitpoints + $value > $this->getHP()) {
             $this->currentHitpoints = $this->getHP();
         } else {
-            $this->currentHitpoints += $value;
+            $this->currentHitpoints = $value;
         }
     }
 
@@ -137,6 +138,16 @@ class Hero
         $this->xp = $xpValue;
     }
 
+    public function getXPtoNext(): int
+    {
+        return $this->xpToNextLvl;
+    }
+
+    public function setXPtoNext(int $xpReq): void
+    {
+        $this->xpToNextLvl = $xpReq;
+    }
+
     public function addSkill(Skill $skill): void
     {
         $this->skills[] = $skill;
@@ -193,6 +204,16 @@ class Hero
         return $initiative;
     }
 
+    public function getBlock(): int
+    {
+        foreach ($this->skills as $skill) {
+            if ($skill->name === "Block") {
+                $initiative = $skill->value + $this->speedBonus();
+            }
+        }
+        return $initiative;
+    }
+
     public function getStrength(): int
     {
         return $this->strength;
@@ -240,6 +261,7 @@ class Hero
         $heroSaveState = [
             'name' => $this->name,
             'gender' => $this->gender,
+            'level' => $this->getLevel(),
             'hitpoints' => $this->getHP(),
             'currentHitpoints' => $this->getCurrentHP(),
             'grit' => $this->getGrit(),
@@ -247,6 +269,7 @@ class Hero
             'fatigue' => $this->getFatigue(),
             'gold' => $this->getGold(),
             'xp' => $this->getXP(),
+            'xpToNext' => $this->getXPtoNext(),
             'strength' => $this->getStrength(),
             'speed' => $this->getSpeed(),
             'vitality' => $this->getVitality(),
@@ -271,6 +294,8 @@ class Hero
         $this->setCurrentGrit($player['currentGrit']);
         $this->setGold($player['gold']);
         $this->setXP($player['xp']);
+        $this->setXPtoNext($player['xpToNext']);
+        $this->setLevel($player['level']);
         $this->weapon = $player['weapon'];
 
         foreach ($player['skills'] as $skill) {
