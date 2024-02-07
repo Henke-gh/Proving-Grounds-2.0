@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . "/../vendor/autoload.php";
-require __DIR__ . "/../app/weaponLibrary.php";
+require __DIR__ . "/../functions/armory.php";
 session_start();
 
 use App\Hero;

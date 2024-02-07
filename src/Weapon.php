@@ -4,62 +4,17 @@ declare(strict_types=1);
 
 namespace App;
 
-class Weapon
+class Weapon extends Item
 {
-    //Special item properties. Not all weapons use these.
-    private int $evasion = 0;
-    private int $initiative = 0;
-    private int $block = 0;
-    private string $description = "So sharp, so shiny..";
-
     public function __construct(
-        public string $name,
-        public string $type,
-        public int $skillRequirement,
+        string $name,
+        string $type,
+        int $cost,
+        int $skillRequirement,
         public int $minDamage,
         public int $maxDamage,
-        public int $cost
+        int $weight
     ) {
-    }
-
-    //Use the set-functions to apply corresponding bonus to weapon item.
-    public function setEvasionBonus(int $value): void
-    {
-        $this->evasion = $value;
-    }
-
-    public function setInitiativeBonus(int $value): void
-    {
-        $this->initiative = $value;
-    }
-
-    public function setBlockBonus(int $value): void
-    {
-        $this->block = $value;
-    }
-
-    public function getEvasionBonus(): int
-    {
-        return $this->evasion;
-    }
-
-    public function getInitiativeBonus(): int
-    {
-        return $this->initiative;
-    }
-
-    public function getBlockBonus(): int
-    {
-        return $this->block;
-    }
-
-    public function setItemDescription(string $description): void
-    {
-        $this->description = $description;
-    }
-
-    public function getItemDescription(): string
-    {
-        return $this->description;
+        parent::__construct($name, $type, $cost, $skillRequirement, $weight);
     }
 }

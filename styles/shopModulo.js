@@ -1,4 +1,14 @@
-function showDetails(itemID, itemName, cost, skillReq, minDmg, maxDmg, itemDescription, itemType, itemIndex) {
+function showWeaponDetails(
+  itemID,
+  itemName,
+  cost,
+  skillReq,
+  minDmg,
+  maxDmg,
+  itemDescription,
+  itemType,
+  itemIndex
+) {
   var overlay = document.getElementById("overlay");
   var details = document.getElementById("details");
   details.innerHTML =

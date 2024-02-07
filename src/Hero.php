@@ -45,7 +45,7 @@ class Hero
         $this->addSkill(new Skill("Evasion", 0));
         $this->addSkill(new Skill("Initiative", 0));
         $this->addSkill(new Skill("Block", 0));
-        $this->weapon = new Weapon("Fists", "Unarmed", 0, 1, 2, 0);
+        $this->weapon = new Weapon("Fists", "Unarmed", 0, 0, 1, 2, 0);
         $this->weapon->setItemDescription("They're your flesh mittens, champ. Might wanna invest in something for them to swing.");
     }
 

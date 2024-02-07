@@ -11,8 +11,13 @@ class Item
     private int $block = 0;
     private string $description = "None available.";
 
-    public function __construct(public string $name, string $type, int $cost)
-    {
+    public function __construct(
+        public string $name,
+        public string $type,
+        public int $cost,
+        public int $skillRequirement,
+        public int $weight
+    ) {
     }
 
     //Use the set-functions to apply corresponding bonus to item.
@@ -54,5 +59,10 @@ class Item
     public function getItemDescription(): string
     {
         return $this->description;
+    }
+
+    public function addToArmory(array &$itemType): void
+    {
+        $itemType[] = $this;
     }
 }

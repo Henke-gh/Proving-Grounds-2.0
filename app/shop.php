@@ -1,7 +1,6 @@
 <?php
 require __DIR__ . "/../vendor/autoload.php";
-require __DIR__ . "/../app/weaponLibrary.php";
-require __DIR__ . "/../app/shieldLibrary.php";
+require __DIR__ . "/../functions/armory.php";
 session_start();
 
 use App\Hero;
@@ -80,7 +79,7 @@ require __DIR__ . "/../nav/header.php";
                     <?php $weaponIndex = 0;
                     //Here we include all relevant Weapon-properties to be show in the Shop-modulo
                     foreach ($weaponGroup as $weapon) : ?>
-                        <div class="shopItem pointer shopWeapon" onclick="showDetails(<?= $itemID++; ?>, 
+                        <div class="shopItem pointer shopWeapon" onclick="showWeaponDetails(<?= $itemID; ?>, 
                     '<?= $weapon->name; ?>', 
                     '<?= $weapon->cost; ?>',
                     '<?= $weapon->skillRequirement; ?>',
@@ -92,6 +91,7 @@ require __DIR__ . "/../nav/header.php";
                             <h5 class="underlineHover">[<?= $weapon->name; ?>]</h5>
                         </div>
                     <?php
+                        $itemID++;
                         $weaponIndex++;
                     endforeach; ?>
                 </div>
