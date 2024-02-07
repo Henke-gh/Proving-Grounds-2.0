@@ -309,7 +309,7 @@ class Hero
         $this->setXPtoNext($player['xpToNext']);
         $this->setLevel($player['level']);
         $this->weapon = $player['weapon'];
-        $this->getAvatar($player['avatar']);
+        $this->setAvatar($player['avatar']);
 
         foreach ($player['skills'] as $skill) {
             $this->setSkill($skill->name, $skill->value);

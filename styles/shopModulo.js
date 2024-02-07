@@ -32,7 +32,7 @@ function showWeaponDetails(
     itemType +
     "><input type=hidden name=item[] value=" +
     itemIndex +
-    "><button type=submit name=purchase>Purchase</button></form>";
+    "><button type=submit name=purchaseWeapon>Purchase</button></form>";
   /* This form post contains an array, ['item'] containing the values [0]itemType and [1]itemIndex. These are used to
 get the correct weapon/item information when processing the item bought. */
   overlay.style.display = "block";

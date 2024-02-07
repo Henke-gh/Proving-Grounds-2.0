@@ -36,20 +36,11 @@ require __DIR__ . "/../nav/header.php";
 ?>
 
 <main>
-    <h2>Enter the Arena</h2>
     <?php require __DIR__ . "/../app/levelUpMessage.php";
-    if (!isset($_POST['fight'])) : ?>
-        <div class="heroInfo">
-            <p><?= $player->name; ?></p>
-            <p><?= "HP: " . $player->getCurrentHP() . "/" . $player->getHP(); ?></p>
-            <p><?= "Grit: " . $player->getCurrentGrit() . "/" . $player->getGrit(); ?></p>
-            <p><?= "Gold: " . $player->getGold(); ?></p>
-            <p><?= $player->weapon->name; ?></p>
-            <p><?= "XP: " . $player->getXP() . "/" . $player->getXPtoNext(); ?></p>
-            <form method="post">
-                <button type="submi" name="heal">Get Full HP</button>
-            </form>
-        </div>
+    if (!isset($_POST['fight'])) :
+        require __DIR__ . "/../nav/ingameNavbar.php";
+        require __DIR__ . "/../app/playerSummary.php";
+    ?>
         <div class="monsterSelect">
             <h3>Monster Rooster</h3>
             <p class="cursive">(Click on a monster for more information)</p>

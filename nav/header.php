@@ -14,8 +14,5 @@
 <body>
     <header>
         <h1>The New Proving Grounds</h1>
-        <a href="/../app/playerHero.php">Hero</a>
-        <a href="/../app/shop.php">Shop</a>
-        <a href="/../app/combat.php">Combat</a>
-        <a href="/../index.php">Start</a>
+        <a href="/../index.php">Start / New Char</a>
     </header>

@@ -2,7 +2,7 @@
 
 require __DIR__ . "/../vendor/autoload.php";
 require __DIR__ . "/../functions/levelUpFunctions.php";
-require __DIR__ . "/../app/weaponLibrary.php";
+require __DIR__ . "/../functions/armory.php";
 session_start();
 
 if (!isset($_SESSION['levelUp']) || !$_SESSION['levelUp'] === true) {

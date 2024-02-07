@@ -4,7 +4,9 @@
   --orange: #eb8c4b;
   --lightBrown: #756650;
   --gold: #eba543;
+  --sandstone: #d0b38b;
   --paleYellow: #eddec9;
+  --paleYellowHover: #d5c7b4;
   --warmNight: #210e08;
 }
 /* General Styling */
@@ -12,7 +14,7 @@
 body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--paleYellow);
+  background-color: var(--sandstone);
   color: var(--warmNight);
 }
 
@@ -54,12 +56,36 @@ main {
   text-decoration: underline;
 }
 
+.circularImg {
+  border-radius: 50%;
+}
+
 /* Header Styling */
 header {
   padding-top: 5px;
   padding-bottom: 10px;
   text-align: center;
   background-color: var(--lightBrown);
+}
+
+/* Game Nav Styling */
+.gameNav {
+  margin-bottom: 15px;
+}
+
+.gameNav a {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--warmNight);
+  background-color: var(--paleYellow);
+  padding: 10px;
+  border: 2px solid var(--lightBrown);
+  border-radius: 5px;
+}
+
+.gameNav a:hover {
+  background-color: var(--paleYellowHover);
 }
 /* Footer Styling */
 
@@ -127,15 +153,35 @@ main {
   width: 2.5rem;
 }
 /* playerHero Summary Page */
+.summaryContainer {
+  background-color: var(--paleYellow);
+  width: 80%;
+  padding: 2%;
+}
+
 .heroGeneralContainer {
   display: flex;
   flex-direction: row;
   gap: 35px;
+  padding-bottom: 2%;
+  border-bottom: 2px solid var(--gold);
+}
+
+.heroGeneralStats,
+.heroBaseAttributes {
+  padding-right: 5%;
+  border-right: 2px solid var(--gold);
+}
+
+.playerAvatar {
+  width: 12rem;
+  height: 12rem;
 }
 
 .heroStats {
   display: flex;
   flex-direction: row;
+  padding-top: 2%;
   gap: 25px;
 }
 
@@ -151,6 +197,7 @@ main {
 .inventoryItem {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   gap: 10px;
 }
 
@@ -160,17 +207,18 @@ main {
 }
 /* Shop Styling */
 
-.heroShopInfo {
-  display: flex;
-  flex-direction: row;
-  align-self: flex-end;
-  gap: 25px;
+.weaponContainer h3 {
+  margin-bottom: 0;
 }
 
 .weaponCategory {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.weaponCategory h4 {
+  margin-bottom: 0px;
 }
 
 .shopItem h5 {

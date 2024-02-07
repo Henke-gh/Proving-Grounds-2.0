@@ -10,6 +10,9 @@ require __DIR__ . "/nav/header.php";
     <form method="post" action="/app/heroCreation_step1.php">
         <button type="submit" name="createNew">Create New Hero</button>
     </form>
+    <div>
+        <a href="/app/playerHero.php">RESUME</a>
+    </div>
 </main>
 <?php
 require __DIR__ . "/nav/footer.html";

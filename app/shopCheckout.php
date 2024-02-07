@@ -12,7 +12,7 @@ $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
 
-if (isset($_POST['purchase'])) {
+if (isset($_POST['purchaseWeapon'])) {
     $weaponType = $_POST['item'][0];
     $weaponIndex = $_POST['item'][1];
     //Get weapon from the weapons array
