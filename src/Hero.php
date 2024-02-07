@@ -27,7 +27,8 @@ class Hero
     public Weapon $weapon;
     //array containing player skills and their values.
     private array $skills = [];
-    private array $inventory = []; //Not implemented!
+    private array $inventory = [];
+    private string $avatarURL = "none";
 
     //Construct and initialize a new player hero with some base values.
     public function __construct(public string $name, public string $gender)
@@ -46,6 +47,16 @@ class Hero
         $this->addSkill(new Skill("Block", 0));
         $this->weapon = new Weapon("Fists", "Unarmed", 0, 1, 2, 0);
         $this->weapon->setItemDescription("They're your flesh mittens, champ. Might wanna invest in something for them to swing.");
+    }
+
+    public function setAvatar(string $url): void
+    {
+        $this->avatarURL = $url;
+    }
+
+    public function getAvatar(): string
+    {
+        return $this->avatarURL;
     }
 
     //get player Max Hitpoints
@@ -275,7 +286,8 @@ class Hero
             'vitality' => $this->getVitality(),
             'weapon' => $this->weapon,
             'skills' => $this->getSkills(),
-            'inventory' => $this->getInventory()
+            'inventory' => $this->getInventory(),
+            'avatar' => $this->getAvatar()
         ];
 
         return $heroSaveState;
@@ -297,6 +309,7 @@ class Hero
         $this->setXPtoNext($player['xpToNext']);
         $this->setLevel($player['level']);
         $this->weapon = $player['weapon'];
+        $this->getAvatar($player['avatar']);
 
         foreach ($player['skills'] as $skill) {
             $this->setSkill($skill->name, $skill->value);

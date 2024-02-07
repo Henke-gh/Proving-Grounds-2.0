@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . "/../vendor/autoload.php";
 require __DIR__ . "/../app/weaponLibrary.php";
+require __DIR__ . "/../app/shieldLibrary.php";
 session_start();
 
 use App\Hero;
@@ -28,21 +29,30 @@ require __DIR__ . "/../nav/header.php";
 ?>
 <main>
     <h2>The Shop</h2>
-    <h3>Welcome to the Shop, <?= $player->name; ?></h3>
-    <h4>Current Equipment</h4>
-    <p>Weapon: <?= $player->weapon->name; ?></p>
-    <?php if (count($player->getInventory()) > 0) : ?>
-        <h4>Inventory</h4>
-        <form method="post" action="">
-            <?php foreach ($player->getInventory() as $item) : ?>
-                <div class="inventoryItem">
-                    <p><?= $item->name; ?></p>
-                    <button type="submit" name="equip" value="<?= $item->name; ?>">Equip</button>
-                </div>
-            <?php endforeach; ?>
-        </form>
-    <?php endif; ?>
-    <p>Gold: <?= $player->getGold(); ?></p>
+    <div class="heroShopInfo">
+        <h4><?= $player->name; ?></h4>
+        <div class="heroGeneralStats">
+            <p><span class="bold">HP: </span><?= $player->getCurrentHP() . "/" . $player->getHP(); ?></p>
+            <p><span class="bold">Grit: </span><?= $player->getCurrentGrit() . "/" . $player->getGrit(); ?></p>
+            <p><span class="bold">XP: </span><?= $player->getXP() . "/" . $player->getXPtoNext(); ?></p>
+            <p><span class="bold">Gold: </span><?= $player->getGold(); ?></p>
+        </div>
+        <div class="heroGear">
+            <h4>Equipped Items</h4>
+            <h5 class="bold">Weapon: <?= $player->weapon->name; ?></h5>
+            <h4>Inventory</h4>
+            <?php if (count($player->getInventory()) > 0) : ?>
+                <form method="post" action="">
+                    <?php foreach ($player->getInventory() as $item) : ?>
+                        <div class="inventoryItem">
+                            <h5 class="bold"><?= $item->name; ?></h5>
+                            <button type="submit" name="equip" value="<?= $item->name; ?>">Equip</button>
+                        </div>
+                    <?php endforeach; ?>
+                </form>
+            <?php endif; ?>
+        </div>
+    </div>
 
     <?php if (isset($_SESSION['error'])) : ?>
         <div class="errorMsg">
@@ -61,15 +71,16 @@ require __DIR__ . "/../nav/header.php";
     endif; ?>
 
     <div class="shopContainer">
-        <h3>Mr Weapon Vendor</h3>
-        <?php $itemID = 0;
-        foreach ($weapons as $weaponType => $weaponGroup) : ?>
-            <div class="shopCategory">
-                <h4><?= $weaponType; ?></h4>
-                <?php $weaponIndex = 0;
-                //Here we include all relevant Weapon-properties to be show in the Shop-modulo
-                foreach ($weaponGroup as $weapon) : ?>
-                    <div class="shopItem pointer" onclick="showDetails(<?= $itemID++; ?>, 
+        <div class="weaponContainer">
+            <h3>Weapons</h3>
+            <?php $itemID = 0;
+            foreach ($weapons as $weaponType => $weaponGroup) : ?>
+                <div class="weaponCategory">
+                    <h4><?= $weaponType; ?></h4>
+                    <?php $weaponIndex = 0;
+                    //Here we include all relevant Weapon-properties to be show in the Shop-modulo
+                    foreach ($weaponGroup as $weapon) : ?>
+                        <div class="shopItem pointer shopWeapon" onclick="showDetails(<?= $itemID++; ?>, 
                     '<?= $weapon->name; ?>', 
                     '<?= $weapon->cost; ?>',
                     '<?= $weapon->skillRequirement; ?>',
@@ -78,14 +89,22 @@ require __DIR__ . "/../nav/header.php";
                     '<?= $weapon->getItemDescription(); ?>',
                     '<?= $weaponType; ?>',
                     '<?= $weaponIndex; ?>')">
-                        <h5 class="underlineHover">[<?= $weapon->name ?>]</h5>
-                        <h5>Cost: <?= $weapon->cost; ?>g</h5>
-                    </div>
-                <?php
-                    $weaponIndex++;
-                endforeach; ?>
-            </div>
-        <?php endforeach; ?>
+                            <h5 class="underlineHover">[<?= $weapon->name; ?>]</h5>
+                        </div>
+                    <?php
+                        $weaponIndex++;
+                    endforeach; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="shieldContainer">
+            <h3>Shields</h3>
+            <?php foreach ($shields as $shield) : ?>
+                <div class="shopItem pointer">
+                    <h5 class="underlineHover">[<?= $shield->name; ?>]</h5>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
 
     <!-- Trying out the modulo game, item information goes here -->

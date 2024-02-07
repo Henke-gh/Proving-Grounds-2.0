@@ -61,7 +61,6 @@ require __DIR__ . "/../nav/header.php";
                 '<?= $monster->weapon->name; ?>',
                 '<?= $monster->getDescription(); ?>')">
                     <p>Level: <?= $monster->level; ?> [<?= $monster->name; ?>]</p>
-                    <p><?= $monster->getCurrentHP() . "/" . $monster->getHP(); ?>
                 </div>
             <?php endforeach; ?>
         </div>

@@ -1,15 +1,18 @@
 <?php
 //_step2 of character creation initializes the Hero-class instance and handles distribution of starting stats.
 require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/../functions/avatarArray.php";
 session_start();
 
 use App\Hero;
-use App\Skill;
 
 if (isset($_POST['createHero'])) {
     $name = trim(htmlspecialchars($_POST['heroName'], ENT_QUOTES));
     $gender = ucfirst($_POST['heroGender']);
+    $avatarID = $_POST['heroAvatar'];
+    $avatarURL = $avatars[$avatarID]['url'];
     $player = new Hero($name, $gender);
+    $player->setAvatar($avatarURL);
 
     $_SESSION['player'] = $player->saveHeroState();
 } elseif (isset($_SESSION['heroCreation'])) {

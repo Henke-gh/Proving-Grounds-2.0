@@ -30,6 +30,7 @@ require __DIR__ . "/../nav/header.php";
     <h4 class="title cursive">Player Title</h4>
     <div class="summaryContainer">
         <div class="heroGeneralContainer">
+            <img src="<?= $player->getAvatar(); ?>">
             <div class="heroGeneralStats">
                 <p><span class="bold">HP: </span><?= $player->getCurrentHP() . "/" . $player->getHP(); ?></p>
                 <p><span class="bold">Grit: </span><?= $player->getCurrentGrit() . "/" . $player->getGrit(); ?></p>

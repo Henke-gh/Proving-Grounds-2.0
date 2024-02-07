@@ -160,10 +160,28 @@ main {
 }
 /* Shop Styling */
 
-.shopItem {
+.heroShopInfo {
   display: flex;
   flex-direction: row;
+  align-self: flex-end;
+  gap: 25px;
+}
+
+.weaponCategory {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
+}
+
+.shopItem h5 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.shopContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
 }
 
 /* Shop Item Display Modulo */
