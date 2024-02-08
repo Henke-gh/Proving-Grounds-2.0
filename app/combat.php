@@ -27,11 +27,6 @@ if (isset($_POST['back'])) {
     unset($_POST['fight']);
 }
 
-if (isset($_POST['heal'])) {
-    $player->setCurrentHP($player->getHP() * 2);
-    $_SESSION['player'] = $player->saveHeroState();
-}
-
 require __DIR__ . "/../nav/header.php";
 ?>
 

@@ -183,5 +183,6 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
         }
     }
     $_SESSION['player'] = $player->saveHeroState();
+    var_dump($turn);
     return $combatLog;
 }

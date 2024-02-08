@@ -14,7 +14,7 @@ $levels = [
     'level 5' => 700
 ];
 
-function levelUp(Hero $player)
+function levelUp(Hero $player): void
 {
     if ($player->getXP() >= $player->getXPtoNext()) {
         $_SESSION['levelUp'] = true;
@@ -26,6 +26,7 @@ function getNextLevelXp(Hero $player, array $levels): void
 {
     $player->setLevel($player->getLevel() + 1);
 
+    //index starts at 1 as player level can never be 0
     $levelIndex = 1;
     foreach ($levels as $xpReq) {
         if ($player->getLevel() === $levelIndex) {

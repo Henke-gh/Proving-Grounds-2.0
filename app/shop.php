@@ -10,6 +10,7 @@ $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
 
+//relates to playerSummary.php - should probably be required via a separate file.
 if (isset($_POST['equip'])) {
     $itemToEquip = $_POST['equip'];
 
@@ -48,7 +49,16 @@ require __DIR__ . "/../nav/header.php";
     endif; ?>
 
     <div class="shopContainer">
-        <div class="weaponContainer">
+        <div class="categorySelector">
+            <button class="shopSelector weapons" id="weaponBtn">Weapons</button>
+            <button class="shopSelector armour" id="armourBtn">Armour</button>
+            <button class="shopSelector shields" id="shieldBtn">Shields</button>
+            <button class="shopSelector trinkets" id="trinketBtn">Trinkets</button>
+        </div>
+        <div class="shopDefault" id="shopDefault">
+            <p>Welcome to the Shop, please choose a category to browse.</p>
+        </div>
+        <div class="weaponContainer hidden shopDisplay" id="weaponContainer">
             <h3>Weapons</h3>
             <?php $itemID = 0;
             foreach ($weapons as $weaponType => $weaponGroup) : ?>
@@ -75,13 +85,29 @@ require __DIR__ . "/../nav/header.php";
                 </div>
             <?php endforeach; ?>
         </div>
-        <div class="shieldContainer">
+        <div class="armourContainer hidden shopDisplay" id="armourContainer">
+            <h3>Armour</h3>
+            <?php foreach ($armours as $armour) : ?>
+                <div class="shopItem pointer">
+                    <h5 class="underlineHover">[<?= $armour->name; ?>]</h5>
+                </div>
+            <?php endforeach ?>
+        </div>
+        <div class="shieldContainer hidden shopDisplay" id="shieldContainer">
             <h3>Shields</h3>
             <?php foreach ($shields as $shield) : ?>
                 <div class="shopItem pointer">
                     <h5 class="underlineHover">[<?= $shield->name; ?>]</h5>
                 </div>
             <?php endforeach; ?>
+        </div>
+        <div class="trinketContainer hidden shopDisplay" id="trinketContainer">
+            <h3>Trinkets</h3>
+            <?php foreach ($trinkets as $trinket) : ?>
+                <div class="shopItem pointer">
+                    <h5 class="underlineHover">[<?= $trinket->name; ?>]</h5>
+                </div>
+            <?php endforeach ?>
         </div>
     </div>
 
@@ -97,5 +123,6 @@ require __DIR__ . "/../nav/header.php";
     </div>
 
 </main>
+<script src="/styles/shopDisplay.js"></script>
 <script src="/styles/shopModulo.js"></script>
 <?php require __DIR__ . "/../nav/footer.html";

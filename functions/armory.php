@@ -3,8 +3,10 @@
 declare(strict_types=1);
 //Instantiates all item objects and sorts them into category specific arrays for easier access.
 
+use App\Armour;
 use App\Weapon;
 use App\Shield;
+use App\Trinket;
 
 $weapons = [
     'Swords' => [],
@@ -16,7 +18,7 @@ $weapons = [
 
 $shields = [];
 
-$armour = [];
+$armours = [];
 
 $trinkets = [];
 
@@ -55,10 +57,24 @@ $twisteddagger->setItemDescription("A wicked little thing.");
 $twisteddagger->addToArmory($weapons['Daggers']);
 
 //Shields
-$buckler = new Shield("Buckler", "Shield", 30, 5, 1, 0);
+$buckler = new Shield("Buckler", "Shield", 35, 5, 0);
+$buckler->setDmgReduction(1);
 $buckler->setItemDescription("It\'s basically a platter.");
 $buckler->addToArmory($shields);
 
 //Armour
+$tunic = new Armour("Tunic", "Armour", 0, 0, 0);
+$tunic->setItemDescription("The merchant said it\s a nice tunic. Looks more like rags to you.");
+$tunic->addToArmory($armours);
+
+$gladleather = new Armour("Gladiator Leathers", "Armour", 50, 0, 5);
+$gladleather->setEvasionBonus(2);
+$gladleather->setDmgReduction(1);
+$gladleather->setItemDescription("A set of light leather plates and straps");
+$gladleather->addToArmory($armours);
 
 //Trinkets
+$zehirStone = new Trinket("Stone of Zehir", "Trinket", 450, 0, 0);
+$zehirStone->setInitiativeBonus(10);
+$zehirStone->setItemDescription("Time slows down..");
+$zehirStone->addToArmory($trinkets);

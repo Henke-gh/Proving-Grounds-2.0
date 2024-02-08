@@ -40,6 +40,10 @@ main {
   font-style: italic;
 }
 
+.hidden {
+  display: none;
+}
+
 .bold {
   font-weight: bold;
 }
@@ -151,6 +155,12 @@ main {
 
 .stat input {
   width: 2.5rem;
+}
+
+/* Level Up Message Box */
+.levelUpMsg {
+  background-color: var(--gold);
+  margin-bottom: 2%;
 }
 /* playerHero Summary Page */
 .summaryContainer {

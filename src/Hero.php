@@ -92,10 +92,10 @@ class Hero
 
     public function setCurrentGrit(int $value): void
     {
-        if ($this->currentGrit + $value > 100) {
+        $this->currentGrit = $value;
+
+        if ($this->currentGrit > 100) {
             $this->currentGrit = 100;
-        } else {
-            $this->currentGrit = $value;
         }
     }
 

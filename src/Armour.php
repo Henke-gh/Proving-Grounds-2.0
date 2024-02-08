@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
-class Shield extends Item
+class Armour extends Item
 {
     private int $damageReduction;
 
@@ -13,7 +13,7 @@ class Shield extends Item
         string $type,
         int $cost,
         int $skillRequirement,
-        int $weight,
+        int $weight
     ) {
         parent::__construct($name, $type, $cost, $skillRequirement, $weight);
     }
