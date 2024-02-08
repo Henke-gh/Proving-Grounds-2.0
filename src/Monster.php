@@ -11,6 +11,7 @@ class Monster
 {
     private int $currentHitpoints;
     private array $skills = [];
+    private int $damageReduction;
     private string $description;
 
     public function __construct(
@@ -85,6 +86,16 @@ class Monster
             }
         }
         return $initiative;
+    }
+
+    public function setDmgReduction(int $value): void
+    {
+        $this->damageReduction = $value;
+    }
+
+    public function getDmgReduction(): int
+    {
+        return $this->damageReduction;
     }
 
     public function setDescription(string $description): void

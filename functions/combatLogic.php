@@ -20,7 +20,7 @@ function determineInitiative(int $playerIni, int $monsterIni): bool
     }
 }
 
-//calculate final damage, inc potential crit dmg. Takes the attackers damage value aswell as the armour value of the defender.
+//calculate final damage, if not a Crit.
 function determineDamage(int $attackerDamage, int $defenderArmour): int
 {
     $damage = $attackerDamage - $defenderArmour;
@@ -31,11 +31,11 @@ function determineDamage(int $attackerDamage, int $defenderArmour): int
     return $damage;
 }
 
-//Currently quite simple. Needs a rework. Base val(5 or 10 maybe) + (WeaponSkill/10) >= rand(1,100) = crit?
-function critChance(): bool
+//Might get out of hand at higher skill levels, needs testing!
+function critChance($weaponSkillLevel): bool
 {
-    $critChance = rand(1, 10);
-    if ($critChance === 10) {
+    $critChance = 5 + $weaponSkillLevel / 10;
+    if ($critChance >= rand(0, 100)) {
         return true;
     } else {
         return false;
@@ -54,34 +54,68 @@ function chanceToHit(int $attackerWeaponSkill, int $attackerWeaponReq, int $defe
     if ($attackerWeaponReq > $attackerWeaponSkill) {
         $baseHitChance = (int) floor(($attackerWeaponSkill * 0.5) - $defenderEvasionSkill / 2);
     } else {
-        $baseHitChance = $attackerWeaponSkill - $defenderEvasionSkill / 2;
+        $baseHitChance = $attackerWeaponSkill - $defenderEvasionSkill / 10;
     }
 
-    if ($baseHitChance < rand(0, 10) + $defenderEvasionSkill) {
+    if ($baseHitChance < rand(0, 10) + $defenderEvasionSkill / 5) {
         return false;
     } else {
-        $targetEvasion = rand(0, $defenderEvasionSkill);
-        $targetAttack = rand(0, $attackerWeaponSkill);
-        if ($targetAttack < $targetEvasion) {
-            return false;
-        } else {
-            return true;
-        }
+        return true;
+    }
+}
+
+//returns True if evasion is successful
+function tryEvasion(int $attackerWeaponSkill, int $attackerWeaponReq, int $defenderEvasionSkill): bool
+{
+    $targetEvasion = rand(0, $defenderEvasionSkill) + $defenderEvasionSkill / 10;
+    $targetAttack = rand(0, $attackerWeaponSkill) + $attackerWeaponSkill / 10;
+    if ($attackerWeaponSkill < $attackerWeaponReq) {
+        $targetAttack /= 2;
+    }
+    if ($targetAttack > $targetEvasion) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+//returns true if block is successful - NOT IMPLEMENTED
+function tryBlock(int $attackerWeaponSkill, int $attackerWeaponReq, int $defenderBlockSkill, int $defenderBlockReq): bool
+{
+    $targetBlock = rand(0, $defenderBlockSkill) + $defenderBlockSkill / 5;
+    $targetAttack = rand(0, $attackerWeaponSkill) + $attackerWeaponSkill / 10;
+    if ($attackerWeaponSkill < $attackerWeaponReq) {
+        $targetAttack /= 2;
+    }
+    if ($defenderBlockSkill < $defenderBlockReq) {
+        $targetBlock /= 2;
+    }
+
+    if ($targetAttack > $targetBlock) {
+        return false;
+    } else {
+        return true;
     }
 }
 
 function playerAttack(Hero $player, Monster $monster): array
 {
     $log = [];
-    if (critChance() === true) {
+    if (critChance($player->toHitChance()) === true) {
         $damage = critDamage($player->doDamage());
-        array_push($log, $player->name . " strikes a furious blow to " . $monster->name . " for " . $monster->sufferDamage($damage)) . "!";
+        array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
+        array_push($log, $player->name . " strikes a <span class=bold>furious</span> blow to " . $monster->name . " for " . $monster->sufferDamage($damage)) . "!";
     } else {
-        $damage = $player->doDamage();
-        if (chanceToHit($player->toHitChance(), $player->weapon->skillRequirement, $monster->toHitChance()) === true) {
-            array_push($log, $monster->name . " gets hit for " . $monster->sufferDamage($damage) . ".");
-        } else {
+        $damage = determineDamage($player->doDamage(), $monster->getDmgReduction());
+        if (chanceToHit($player->toHitChance(), $player->weapon->skillRequirement, $monster->toHitChance()) === false) {
             array_push($log, $player->name . " misses..");
+        } elseif (tryEvasion($player->toHitChance(), $player->weapon->skillRequirement, $monster->getEvasion()) === true) {
+            array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
+            array_push($log, $monster->name . " dodges the blow!");
+        } else {
+            //add tryBlock logic here
+            array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
+            array_push($log, $monster->name . " gets hit for " . $monster->sufferDamage($damage) . ".");
         }
     }
 
@@ -91,15 +125,22 @@ function playerAttack(Hero $player, Monster $monster): array
 function monsterAttack(Monster $monster, Hero $player): array
 {
     $log = [];
-    if (critChance() === true) {
+    if (critChance($monster->toHitChance()) === true) {
         $damage = critDamage($monster->doDamage());
-        array_push($log, $monster->name . " strikes a murderous blow to " . $player->name . " for " . $player->sufferDamage($damage)) . "!";
+        array_push($log, $monster->name . " charges forward with " . $monster->weapon->name . ".. ");
+        array_push($log, $monster->name . " strikes a <span class=bold>murderous</span> blow to " . $player->name . " for " . $player->sufferDamage($damage)) . "!";
     } else {
-        $damage = $monster->doDamage();
-        if (chanceToHit($monster->toHitChance(), $monster->weapon->skillRequirement, $player->getEvasion()) === true) {
-            array_push($log, $player->name . " gets hit for " . $player->sufferDamage($damage));
-        } else {
+        $damage = determineDamage($monster->doDamage(), $player->getDmgReduction());
+        if (chanceToHit($monster->toHitChance(), $monster->weapon->skillRequirement, $player->getEvasion()) === false) {
+            array_push($log, $monster->name . " charges forward with " . $monster->weapon->name . ".. ");
             array_push($log, $monster->name . " misses..");
+        } elseif (tryEvasion($monster->toHitChance(), $monster->weapon->skillRequirement, $player->getEvasion())) {
+            array_push($log, $monster->name . " charges forward with " . $monster->weapon->name . ".. ");
+            array_push($log, $monster->name . " dodges away at the last moment!");
+        } else {
+            //add tryBlock logic here
+            array_push($log, $monster->name . " charges forward with " . $monster->weapon->name . ".. ");
+            array_push($log, $player->name . " gets hit for " . $player->sufferDamage($damage));
         }
     }
 
@@ -120,6 +161,7 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
     //calculate player HP value at which player gives up and combat ends.
     $retreatValue = (int) floor($retreatValue / 100 * $player->getHP());
 
+    //since monster gold drop is a random value it has to be set prior as the variable is used twice.
     $goldDrop = $monster->dropGold();
     $xpReward = $monster->xpReward;
 
@@ -134,7 +176,7 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
 
             if ($monster->getCurrentHP() <= 0) {
                 array_push($combatLog, $monster->name . " is defeated!");
-                array_push($combatLog, "You gain " . $xpReward . " xp and " . $goldDrop . " gold.");
+                array_push($combatLog, "You gain <span class=bold>" . $xpReward . " xp</span> and <span class=bold" . $goldDrop . " gold.</span>");
                 fightReward($player, $goldDrop, $xpReward);
                 $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
                 break;
@@ -180,9 +222,9 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
         if ($player->getFatigue() < $turn) {
             array_push($combatLog, $player->name . " collapses due to fatigue.");
             $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
+            break;
         }
     }
     $_SESSION['player'] = $player->saveHeroState();
-    var_dump($turn);
     return $combatLog;
 }

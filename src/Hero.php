@@ -25,6 +25,7 @@ class Hero
     private int $xpToNextLvl = 200;
     private int $gold = 0;
     public Weapon $weapon;
+    private int $damageReduction;
     //array containing player skills and their values.
     private array $skills = [];
     private array $inventory = [];
@@ -261,6 +262,16 @@ class Hero
     public function setVitality(int $value): void
     {
         $this->vitality += $value;
+    }
+
+    public function setDmgReduction(int $value): void
+    {
+        $this->damageReduction = $value;
+    }
+
+    public function getDmgReduction(): int
+    {
+        return $this->damageReduction;
     }
 
     //++++ Methods related to saving/ loading player data +++++
