@@ -25,7 +25,7 @@ class Hero
     private int $xpToNextLvl = 200;
     private int $gold = 0;
     public Weapon $weapon;
-    private int $damageReduction;
+    private int $damageReduction = 0;
     //array containing player skills and their values.
     private array $skills = [];
     private array $inventory = [];
@@ -347,7 +347,7 @@ class Hero
     //initial damage calculation
     public function doDamage(): int
     {
-        $strengthBonus = (int) floor($this->getStrength() * 0.2);
+        $strengthBonus = (int) floor($this->getStrength() / 10);
         $weaponDamage = rand($this->weapon->minDamage, $this->weapon->maxDamage);
         $damage = $weaponDamage + $strengthBonus;
         return $damage;

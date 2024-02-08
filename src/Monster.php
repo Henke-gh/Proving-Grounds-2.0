@@ -11,7 +11,7 @@ class Monster
 {
     private int $currentHitpoints;
     private array $skills = [];
-    private int $damageReduction;
+    private int $damageReduction = 0;
     private string $description;
 
     public function __construct(
