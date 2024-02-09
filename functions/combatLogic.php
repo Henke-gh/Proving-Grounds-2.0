@@ -117,8 +117,8 @@ function playerAttack(Hero $player, Monster $monster): array
         } else {
             if ($monster->canBlock() && tryBlock($player->toHitChance(), $player->weapon->skillRequirement, $monster->getBlock(), $monster->shield->skillRequirement)) {
                 array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
-                array_push($log, $monster->name . " deftly blocks with " . $monster->shield->name);
-                //dmg needs to be adjuset on successful block!
+                array_push($log, $monster->name . " deftly blocks with " . $monster->shield->name . ".");
+                $damage -= $monster->shield->getDmgReduction();
                 array_push($log, $monster->name . " gets hit for " . $monster->sufferDamage($damage) . " damage.");
             } else {
                 array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
@@ -148,8 +148,8 @@ function monsterAttack(Monster $monster, Hero $player): array
         } else {
             if ($player->canBlock() && tryBlock($monster->toHitChance(), $monster->weapon->skillRequirement, $player->getBlock(), $player->shield->skillRequirement)) {
                 array_push($log, $monster->name . " swings " . $monster->weapon->name . ".. ");
-                array_push($log, $player->name . " deftly blocks with " . $player->shield->name);
-                //dmg needs to be adjuset on successful block!
+                array_push($log, $player->name . " deftly blocks with " . $player->shield->name . ".");
+                $damage -= $player->shield->getDmgReduction();
                 array_push($log, $player->name . " gets hit for " . $player->sufferDamage($damage) . " damage.");
             } else {
                 array_push($log, $monster->name . " delivers a confident blow with " . $monster->weapon->name . ".. ");
@@ -181,7 +181,7 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
     $xpReward = $monster->xpReward;
 
     while ($player->getCurrentHP() > $retreatValue) {
-        array_push($combatLog, "Turn: " . $turn);
+        array_push($combatLog, "<span class=bold>Turn: " . $turn . "</span>");
         //if returns true, player goes first else monster goes first.
         if (determineInitiative($player->getInitiative(), $monster->getInitiative())) {
             array_push($combatLog, $player->name . " charges, quick as lightning!");

@@ -28,10 +28,17 @@ class Hero
     private int $losses = 0;
     public Weapon $weapon;
     public Shield $shield;
+    public Armour $armour;
+    public Trinket $trinket;
     private int $damageReduction = 0;
     //array containing player skills and their values.
     private array $skills = [];
-    private array $inventory = [];
+    private array $inventory = [
+        'weapons' => [],
+        'shields' => [],
+        'armours' => [],
+        'trinkets' => []
+    ];
     private string $avatarURL = "none";
 
     //Construct and initialize a new player hero with some base values.
@@ -51,8 +58,10 @@ class Hero
         $this->addSkill(new Skill("Block", 0));
         $this->weapon = new Weapon("Fists", "Unarmed", 0, 0, 1, 2, 0);
         $this->weapon->setItemDescription("They're your flesh mittens, champ. Might wanna invest in something for them to swing.");
-        $this->shield = new Shield("None", "Unarmed", 0, 100, 0);
+        $this->shield = new Shield("None", "Shield", 0, 100, 0);
         $this->shield->setItemDescription("It's really not ideal but you could probably deflect a blow or two with your elbow.");
+        $this->armour = new Armour("Tunic", "Armour", 0, 0, 0);
+        $this->armour->setItemDescription("The merchant said it\s a nice tunic. Looks more like rags to you.");
     }
 
     public function setAvatar(string $url): void
@@ -191,7 +200,12 @@ class Hero
 
     public function addInventoryWeapon(Weapon $item): void
     {
-        $this->inventory[] = $item;
+        $this->inventory['weapons'][] = $item;
+    }
+
+    public function addInventoryShield(Shield $item): void
+    {
+        $this->inventory['shields'][] = $item;
     }
 
     public function removeInventoryWeapon(Weapon $item): void
@@ -301,6 +315,8 @@ class Hero
             'speed' => $this->getSpeed(),
             'vitality' => $this->getVitality(),
             'weapon' => $this->weapon,
+            'shield' => $this->shield,
+            'armour' => $this->armour,
             'skills' => $this->getSkills(),
             'inventory' => $this->getInventory(),
             'avatar' => $this->getAvatar(),
@@ -327,6 +343,8 @@ class Hero
         $this->setXPtoNext($player['xpToNext']);
         $this->setLevel($player['level']);
         $this->weapon = $player['weapon'];
+        $this->shield = $player['shield'];
+        $this->armour = $player['armour'];
         $this->setAvatar($player['avatar']);
         $this->setWins($player['wins']);
         $this->setLosses($player['losses']);
@@ -335,8 +353,24 @@ class Hero
             $this->setSkill($skill->name, $skill->value);
         }
 
-        foreach ($player['inventory'] as $item) {
-            $this->addInventoryWeapon($item);
+        foreach ($player['inventory'] as $category => $items) {
+            foreach ($items as $item) {
+                switch ($item->type) {
+                    case 'Shield':
+                        $this->addInventoryShield($item);
+                        break;
+                    case 'Armour':
+                        # code...
+                        break;
+                    case 'Trinket':
+                        # code...
+                        break;
+
+                    default:
+                        $this->addInventoryWeapon($item);
+                        break;
+                }
+            }
         }
     }
 
@@ -420,7 +454,7 @@ class Hero
         $totalFights = $this->getWins() + $this->getLosses();
 
         if ($totalFights <= 0) {
-            return 0;
+            return "0";
         }
 
         $percentageWins = $this->getWins() / $totalFights * 100;

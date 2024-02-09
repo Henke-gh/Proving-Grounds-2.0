@@ -41,9 +41,6 @@ require __DIR__ . "/../nav/header.php";
         <div class="heroSkills">
             <h3>Skills</h3>
             <?php foreach ($player->getSkills() as $skill) :
-                //Entierly fucked up. Because Evasion and Initiative derive 20% of their total values from the Speed attribute, this is what we get.
-                //Since we check if natural skill value > 0 this modified value won't show unless the player has put points into the corresponding skill stat.
-                //This could be solved by adding EVEN MORE loops. Or we just treat it like a hidden stat. The Mystery.. Game Mechanics.
                 if ($skill->value > 0) :
                     switch ($skill->name):
                         case 'Evasion': ?>

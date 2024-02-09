@@ -65,7 +65,6 @@ $buckler->addToArmory($shields);
 //Armour
 $tunic = new Armour("Tunic", "Armour", 0, 0, 0);
 $tunic->setItemDescription("The merchant said it\s a nice tunic. Looks more like rags to you.");
-$tunic->addToArmory($armours);
 
 $gladleather = new Armour("Gladiator Leathers", "Armour", 50, 0, 5);
 $gladleather->setEvasionBonus(2);

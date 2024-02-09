@@ -33,3 +33,23 @@ if (isset($_POST['purchaseWeapon'])) {
         exit();
     }
 }
+
+if (isset($_POST['purchaseShield'])) {
+    $itemType = $_POST['item'][0];
+    $shieldIndex = $_POST['item'][1];
+
+    $shieldToBuy = $shields[$shieldIndex];
+    if ($player->getGold() >= $shieldToBuy->cost) {
+        $playerGold = $player->getGold() - $shieldToBuy->cost;
+        $player->setGold($playerGold);
+        $player->addInventoryShield($shieldToBuy);
+        $_SESSION['player'] = $player->saveHeroState();
+        $_SESSION['itemBought'] = "You bought a " . $shieldToBuy->name . ".";
+        header('Location: /../app/shop.php');
+        exit();
+    } else {
+        $_SESSION['error'] = "Not enough funds.";
+        header('Location: /../app/shop.php');
+        exit();
+    }
+}
