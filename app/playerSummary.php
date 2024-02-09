@@ -12,6 +12,7 @@
         <div class="heroGear">
             <h4>Equipped Items</h4>
             <h5 class="bold">Weapon: <?= $player->weapon->name; ?></h5>
+            <h5 class="bold">Shield: <?= $player->shield->name; ?></h5>
             <h4>Inventory</h4>
             <?php if (count($player->getInventory()) > 0) : ?>
                 <form method="post" action="">

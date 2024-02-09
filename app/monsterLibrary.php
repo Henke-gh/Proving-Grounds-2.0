@@ -8,6 +8,8 @@ use App\Weapon;
 use App\Monster;
 use App\MonsterCollection;
 
+require __DIR__ . "/../functions/armory.php";
+
 $monsterLibrary = new MonsterCollection;
 
 $goblin = new Monster("Goblin", 1, 15, 20, new Weapon("Crooked Blade", "Accuracy", 0, 5, 1, 4, 0));

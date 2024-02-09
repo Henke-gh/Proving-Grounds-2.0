@@ -78,7 +78,7 @@ function tryEvasion(int $attackerWeaponSkill, int $attackerWeaponReq, int $defen
         return true;
     }
 }
-
+//should only run if player/monster canBlock returns TRUE
 //returns true if block is successful - NOT IMPLEMENTED
 function tryBlock(int $attackerWeaponSkill, int $attackerWeaponReq, int $defenderBlockSkill, int $defenderBlockReq): bool
 {
@@ -102,6 +102,7 @@ function tryBlock(int $attackerWeaponSkill, int $attackerWeaponReq, int $defende
 function playerAttack(Hero $player, Monster $monster): array
 {
     $log = [];
+    //If critChance = true, deals Crit dmg and bypasses all other checks.
     if (critChance($player->toHitChance()) === true) {
         $damage = critDamage($player->doDamage());
         array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
@@ -114,9 +115,15 @@ function playerAttack(Hero $player, Monster $monster): array
             array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
             array_push($log, $monster->name . " dodges the blow!");
         } else {
-            //add tryBlock logic here
-            array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
-            array_push($log, $monster->name . " gets hit for " . $monster->sufferDamage($damage) . " damage.");
+            if ($monster->canBlock() && tryBlock($player->toHitChance(), $player->weapon->skillRequirement, $monster->getBlock(), $monster->shield->skillRequirement)) {
+                array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
+                array_push($log, $monster->name . " deftly blocks with " . $monster->shield->name);
+                //dmg needs to be adjuset on successful block!
+                array_push($log, $monster->name . " gets hit for " . $monster->sufferDamage($damage) . " damage.");
+            } else {
+                array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
+                array_push($log, $monster->name . " gets hit for " . $monster->sufferDamage($damage) . " damage.");
+            }
         }
     }
 
@@ -139,9 +146,15 @@ function monsterAttack(Monster $monster, Hero $player): array
             array_push($log, $monster->name . " moves to strike with " . $monster->weapon->name . ".. ");
             array_push($log, $player->name . " dodges away at the last moment!");
         } else {
-            //add tryBlock logic here
-            array_push($log, $monster->name . " delivers a confident blow with " . $monster->weapon->name . ".. ");
-            array_push($log, $player->name . " gets hit for " . $player->sufferDamage($damage)) . " damage.";
+            if ($player->canBlock() && tryBlock($monster->toHitChance(), $monster->weapon->skillRequirement, $player->getBlock(), $player->shield->skillRequirement)) {
+                array_push($log, $monster->name . " swings " . $monster->weapon->name . ".. ");
+                array_push($log, $player->name . " deftly blocks with " . $player->shield->name);
+                //dmg needs to be adjuset on successful block!
+                array_push($log, $player->name . " gets hit for " . $player->sufferDamage($damage) . " damage.");
+            } else {
+                array_push($log, $monster->name . " delivers a confident blow with " . $monster->weapon->name . ".. ");
+                array_push($log, $player->name . " gets hit for " . $player->sufferDamage($damage)) . " damage.";
+            }
         }
     }
 
@@ -153,6 +166,7 @@ function fightReward(Hero $player, int $gold, int $xpReward): void
     $player->setGold($player->getGold() + $gold);
     $xp = $xpReward;
     $player->setXP($player->getXP() + $xp);
+    $player->setWins(1);
 }
 
 function doBattle(Hero $player, Monster $monster, int $retreatValue): array
@@ -191,6 +205,7 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
 
             if ($player->getCurrentHP() <= $retreatValue) {
                 array_push($combatLog, $player->name . " is defeated!");
+                $player->setLosses(1);
                 $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
                 break;
             }
@@ -203,6 +218,7 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
 
             if ($player->getCurrentHP() <= $retreatValue) {
                 array_push($combatLog, $player->name . " is defeated!");
+                $player->setLosses(1);
                 $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
                 break;
             }
@@ -224,6 +240,7 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
 
         if ($player->getFatigue() < $turn) {
             array_push($combatLog, $player->name . " collapses due to fatigue.");
+            $player->setLosses(1);
             $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
             break;
         }

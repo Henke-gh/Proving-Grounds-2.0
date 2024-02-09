@@ -13,13 +13,14 @@ class Monster
     private array $skills = [];
     private int $damageReduction = 0;
     private string $description;
+    public Shield $shield;
 
     public function __construct(
         public string $name,
         public int $level,
         public int $hitpoints,
         public int $xpReward,
-        public Weapon $weapon
+        public Weapon $weapon,
     ) {
         $this->addSkill(new Skill("Accuracy", 0));
         $this->addSkill(new Skill("Evasion", 0));
@@ -88,6 +89,16 @@ class Monster
         return $initiative;
     }
 
+    public function getBlock(): int
+    {
+        foreach ($this->skills as $skill) {
+            if ($skill->name === "Block") {
+                $block = $skill->value;
+            }
+        }
+        return $block;
+    }
+
     public function setDmgReduction(int $value): void
     {
         $this->damageReduction = $value;
@@ -122,6 +133,15 @@ class Monster
             if ($skill->name === "Accuracy") {
                 return $skill->value;
             }
+        }
+    }
+
+    public function canBlock(): bool
+    {
+        if (isset($this->shield) && $this->shield !== "None") {
+            return true;
+        } else {
+            return false;
         }
     }
 

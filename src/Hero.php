@@ -24,7 +24,10 @@ class Hero
     private int $xp = 0;
     private int $xpToNextLvl = 200;
     private int $gold = 0;
+    private int $wins = 0;
+    private int $losses = 0;
     public Weapon $weapon;
+    public Shield $shield;
     private int $damageReduction = 0;
     //array containing player skills and their values.
     private array $skills = [];
@@ -48,6 +51,8 @@ class Hero
         $this->addSkill(new Skill("Block", 0));
         $this->weapon = new Weapon("Fists", "Unarmed", 0, 0, 1, 2, 0);
         $this->weapon->setItemDescription("They're your flesh mittens, champ. Might wanna invest in something for them to swing.");
+        $this->shield = new Shield("None", "Unarmed", 0, 100, 0);
+        $this->shield->setItemDescription("It's really not ideal but you could probably deflect a blow or two with your elbow.");
     }
 
     public function setAvatar(string $url): void
@@ -220,10 +225,10 @@ class Hero
     {
         foreach ($this->skills as $skill) {
             if ($skill->name === "Block") {
-                $initiative = $skill->value + $this->speedBonus();
+                $block = $skill->value + $this->speedBonus();
             }
         }
-        return $initiative;
+        return $block;
     }
 
     public function getStrength(): int
@@ -298,7 +303,9 @@ class Hero
             'weapon' => $this->weapon,
             'skills' => $this->getSkills(),
             'inventory' => $this->getInventory(),
-            'avatar' => $this->getAvatar()
+            'avatar' => $this->getAvatar(),
+            'wins' => $this->getWins(),
+            'losses' => $this->getLosses()
         ];
 
         return $heroSaveState;
@@ -321,6 +328,8 @@ class Hero
         $this->setLevel($player['level']);
         $this->weapon = $player['weapon'];
         $this->setAvatar($player['avatar']);
+        $this->setWins($player['wins']);
+        $this->setLosses($player['losses']);
 
         foreach ($player['skills'] as $skill) {
             $this->setSkill($skill->name, $skill->value);
@@ -369,5 +378,53 @@ class Hero
             }
         }
         return $unarmed;
+    }
+
+    public function canBlock(): bool
+    {
+        if (isset($this->shield) && $this->shield !== "None") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setWins(int $addWin): void
+    {
+        $this->wins += $addWin;
+    }
+
+    public function getWins(): int
+    {
+        return $this->wins;
+    }
+
+    public function setLosses(int $addLoss): void
+    {
+        $this->losses += $addLoss;
+    }
+
+    public function getLosses(): int
+    {
+        return $this->losses;
+    }
+
+    public function getTotalFights(): int
+    {
+        $totalFights = $this->getWins() + $this->getLosses();
+        return $totalFights;
+    }
+
+    public function getWinLossRatio(): string
+    {
+        $totalFights = $this->getWins() + $this->getLosses();
+
+        if ($totalFights <= 0) {
+            return 0;
+        }
+
+        $percentageWins = $this->getWins() / $totalFights * 100;
+        $format_percentageWins = number_format($percentageWins, 0);
+        return $format_percentageWins;
     }
 }

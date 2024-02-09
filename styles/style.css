@@ -215,6 +215,11 @@ main {
   height: fit-content;
   align-self: center;
 }
+
+/* playerHero Styling */
+.imageContainer {
+  width: fit-content;
+}
 /* Shop Styling */
 
 .weaponContainer h3 {
