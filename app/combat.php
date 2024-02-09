@@ -14,12 +14,17 @@ $player->loadHeroState($playerSaveState);
 levelUp($player);
 
 if (isset($_POST['fight'])) {
-    $stance = $_POST['combatStance'];
-    $retreat = (int) $_POST['retreatValue'];
-    $selectedMonsterID = $_POST['fight'];
-    $selectedMonster = $monsterLibrary->getMonster($selectedMonsterID);
-    $combatLog = doBattle($player, $selectedMonster, $retreat);
-    $_SESSION['player'] = $player->saveHeroState();
+    if ($player->getCurrentGrit() > 0) {
+        $stance = $_POST['combatStance'];
+        $retreat = (int) $_POST['retreatValue'];
+        $selectedMonsterID = $_POST['fight'];
+        $selectedMonster = $monsterLibrary->getMonster($selectedMonsterID);
+        $combatLog = doBattle($player, $selectedMonster, $retreat);
+        $_SESSION['player'] = $player->saveHeroState();
+    } else {
+        //FIX THIS! Nicer message needed.
+        echo "You're too tired to fight..";
+    }
 }
 
 if (isset($_POST['back'])) {
