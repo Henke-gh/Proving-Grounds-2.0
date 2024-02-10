@@ -48,6 +48,7 @@ if (isset($_POST['confirm']) && $_SESSION['levelUp'] === true) {
         }
         $player->updateDerivedStats();
         getNextLevelXp($player, $levels);
+        increaseFame($player, $fameLevels);
         $_SESSION['player'] = $player->saveHeroState();
         unset($_SESSION['levelUp']);
         header('Location: /../app/playerHero.php');

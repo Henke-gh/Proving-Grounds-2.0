@@ -31,3 +31,24 @@ function getNextLevelXp(Hero $player, array $levels): void
         $levelIndex++;
     }
 }
+
+//increases player Fame rating by 5 each level. If player reached breakpoint for next level, adds +1 fame level
+//and sets corresponding fame title + fame amount to reach next level.
+function increaseFame(Hero $player, array $fameLevels): void
+{
+    $addedFame = $player->getFameScore() + 5;
+    $player->setFameScore($addedFame);
+
+    if ($player->getFameScore() >= $player->getFameToNext()) {
+        $player->setFameLevel($player->getFameLevel() + 1);
+        $fameIndex = 0;
+
+        foreach ($fameLevels as $fameLevel) {
+            if ($player->getFameLevel() === $fameIndex) {
+                $player->setFameTitle($fameLevel['title']);
+                $player->setFameToNext($fameLevel['fame']);
+            }
+            $fameIndex++;
+        }
+    }
+}

@@ -12,7 +12,10 @@
 </head>
 
 <body>
-    <header>
+    <header class="mainHeader">
         <h1>The New Proving Grounds</h1>
         <a href="/../index.php">Start / New Char</a>
+        <a href="#">Game Guide</a>
+        <a href="#">About</a>
+        <a href="#">Login/ Register New</a>
     </header>

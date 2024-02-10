@@ -15,7 +15,7 @@ $levels = [
     'level 10' => 2000
 ];
 
-$fameTitle = [
+$fameLevels = [
     [
         'fame' => 0,
         'title' => 'Novice'

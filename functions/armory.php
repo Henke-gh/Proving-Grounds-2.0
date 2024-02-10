@@ -62,8 +62,14 @@ $buckler->setDmgReduction(1);
 $buckler->setItemDescription("It\'s basically a platter.");
 $buckler->addToArmory($shields);
 
+$roundshield = new Shield("Round Shield", "Shield", 150, 30, 5);
+$roundshield->setDmgReduction(3);
+$roundshield->setItemDescription("A winged snake is coiled along the edge of the shield rim.");
+$roundshield->addToArmory($shields);
+
 //Armour
 $tunic = new Armour("Tunic", "Armour", 0, 0, 0);
+$tunic->setDmgReduction(0);
 $tunic->setItemDescription("The merchant said it\s a nice tunic. Looks more like rags to you.");
 
 $gladleather = new Armour("Gladiator Leathers", "Armour", 50, 0, 5);
@@ -71,6 +77,11 @@ $gladleather->setEvasionBonus(2);
 $gladleather->setDmgReduction(1);
 $gladleather->setItemDescription("A set of light leather plates and straps");
 $gladleather->addToArmory($armours);
+
+$ringmail = new Armour("Ring Mail", "Armour", 300, 0, 15);
+$ringmail->setDmgReduction(3);
+$ringmail->setItemDescription("Fits you like a glove.");
+$ringmail->addToArmory($armours);
 
 //Trinkets
 $zehirStone = new Trinket("Stone of Zehir", "Trinket", 450, 0, 0);

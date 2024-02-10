@@ -13,34 +13,44 @@ class Hero
     private int $strength = 0;
     private int $speed = 0;
     private int $vitality = 0;
+    private int $grit = 115;
+    private int $gold = 0;
     //base derived stats
+    private int $currentGrit = 0;
     private int $hitpoints = 0;
     private int $currentHitpoints = 0;
-    private int $grit = 115;
-    private int $currentGrit = 0;
     //fatigue is the number of combat turns the player hero can fight before giving up (due to fatigue)
     private int $fatigue = 0;
+    //fame and xp values, used to calculate when (and what) to level up player hero
     private int $level = 1;
     private int $xp = 0;
-    private int $xpToNextLvl = 200;
-    private int $gold = 0;
+    private int $xpToNextLvl = 125;
+    private int $fameLevel = 0;
+    private int $fameScore = 0;
+    private int $nextFameLvl = 10;
+    private string $fameTitle = "Novice";
+    //keeps track of player win-rate
     private int $wins = 0;
     private int $losses = 0;
+    //items
     public Weapon $weapon;
     public Shield $shield;
     public Armour $armour;
     public Trinket $trinketSlot1;
     public Trinket $trinketSlot2;
     public Trinket $trinketSlot3;
+    //currently not in use. Dmg Red values are read directly from items that contribute to the total.
     private int $damageReduction = 0;
     //array containing player skills and their values.
     private array $skills = [];
+    //player bought items not currently equipped are kept here
     private array $inventory = [
         'weapons' => [],
         'shields' => [],
         'armours' => [],
         'trinkets' => []
     ];
+    //is set during hero creation
     private string $avatarURL = "none";
 
     //Construct and initialize a new player hero with some base values.
@@ -147,6 +157,8 @@ class Hero
         return $this->gold;
     }
 
+    /* Level Up */
+    //xp
     public function getLevel(): int
     {
         return $this->level;
@@ -177,6 +189,49 @@ class Hero
         $this->xpToNextLvl = $xpReq;
     }
 
+    //fame
+    public function setFameLevel(int $fameLevel): void
+    {
+        $this->fameLevel = $fameLevel;
+    }
+
+    public function getFameLevel(): int
+    {
+        return $this->fameLevel;
+    }
+
+    public function setFameScore(int $fameScore): void
+    {
+        $this->fameScore = $fameScore;
+    }
+
+    public function getFameScore(): int
+    {
+        return $this->fameScore;
+    }
+
+    public function setFameToNext(int $fameToNext): void
+    {
+        $this->nextFameLvl = $fameToNext;
+    }
+
+    public function getFameToNext(): int
+    {
+        return $this->nextFameLvl;
+    }
+
+    public function setFameTitle(string $fameTitle): void
+    {
+        $this->fameTitle = $fameTitle;
+    }
+
+    public function getFameTitle(): string
+    {
+        return $this->fameTitle;
+    }
+
+    /* Handling of player skills */
+
     public function addSkill(Skill $skill): void
     {
         $this->skills[] = $skill;
@@ -195,6 +250,8 @@ class Hero
             }
         }
     }
+
+    /* Inventory and Item management */
 
     public function getInventory(): array
     {
@@ -233,6 +290,8 @@ class Hero
         $weight = $this->weapon->weight + $this->armour->weight + $this->shield->weight;
         return $weight;
     }
+
+    /* Stats and modified skill values. Always use get functions for Eva, ini and block */
 
     public function getEvasion(): int
     {
@@ -311,6 +370,8 @@ class Hero
         $this->vitality += $value;
     }
 
+    //set + get dmgRed is currently not used. Values gotten directly from Item object(s)
+
     public function setDmgReduction(int $value): void
     {
         $this->damageReduction = $value;
@@ -349,7 +410,11 @@ class Hero
             'inventory' => $this->getInventory(),
             'avatar' => $this->getAvatar(),
             'wins' => $this->getWins(),
-            'losses' => $this->getLosses()
+            'losses' => $this->getLosses(),
+            'fameTitle' => $this->getFameTitle(),
+            'fameScore' => $this->getFameScore(),
+            'fameLevel' => $this->getFameLevel(),
+            'fameToNext' => $this->getFameToNext()
         ];
 
         if (isset($this->trinketSlot1)) {
@@ -392,6 +457,10 @@ class Hero
         $this->setAvatar($player['avatar']);
         $this->setWins($player['wins']);
         $this->setLosses($player['losses']);
+        $this->setFameLevel($player['fameLevel']);
+        $this->setFameScore($player['fameScore']);
+        $this->setFameTitle($player['fameTitle']);
+        $this->setFameToNext($player['fameToNext']);
 
         foreach ($player['skills'] as $skill) {
             $this->setSkill($skill->name, $skill->value);
@@ -476,6 +545,8 @@ class Hero
             return false;
         }
     }
+
+    /* Used to update player combat statistics and win-rate */
 
     public function setWins(int $addWin): void
     {
