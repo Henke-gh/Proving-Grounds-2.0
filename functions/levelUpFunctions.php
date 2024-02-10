@@ -3,21 +3,17 @@
 declare(strict_types=1);
 
 require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/../functions/levelArrays.php";
 
 use App\Hero;
 
-$levels = [
-    'level 1' => 200,
-    'level 2' => 350,
-    'level 3' => 450,
-    'level 4' => 550,
-    'level 5' => 700
-];
 
 function levelUp(Hero $player): void
 {
     if ($player->getXP() >= $player->getXPtoNext()) {
         $_SESSION['levelUp'] = true;
+    } else {
+        unset($_SESSION['levelUp']);
     }
 }
 

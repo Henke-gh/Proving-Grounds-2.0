@@ -29,7 +29,9 @@ class Hero
     public Weapon $weapon;
     public Shield $shield;
     public Armour $armour;
-    public Trinket $trinket;
+    public Trinket $trinketSlot1;
+    public Trinket $trinketSlot2;
+    public Trinket $trinketSlot3;
     private int $damageReduction = 0;
     //array containing player skills and their values.
     private array $skills = [];
@@ -61,6 +63,7 @@ class Hero
         $this->shield = new Shield("None", "Shield", 0, 100, 0);
         $this->shield->setItemDescription("It's really not ideal but you could probably deflect a blow or two with your elbow.");
         $this->armour = new Armour("Tunic", "Armour", 0, 0, 0);
+        $this->armour->setDmgReduction(0);
         $this->armour->setItemDescription("The merchant said it\s a nice tunic. Looks more like rags to you.");
     }
 
@@ -225,11 +228,20 @@ class Hero
         }
     }
 
+    public function getTotalWeight(): int
+    {
+        $weight = $this->weapon->weight + $this->armour->weight + $this->shield->weight;
+        return $weight;
+    }
+
     public function getEvasion(): int
     {
         foreach ($this->skills as $skill) {
             if ($skill->name === "Evasion") {
-                $evasion = $skill->value + $this->speedBonus();
+                $evasion = (int) floor($skill->value + $this->speedBonus() - $this->getTotalWeight() / 2);
+                if ($evasion < 0) {
+                    $evasion = 0;
+                }
             }
         }
         return $evasion;
@@ -239,7 +251,10 @@ class Hero
     {
         foreach ($this->skills as $skill) {
             if ($skill->name === "Initiative") {
-                $initiative = $skill->value + $this->speedBonus();
+                $initiative = (int) floor($skill->value + $this->speedBonus() - $this->getTotalWeight() / 2);
+                if ($initiative < 0) {
+                    $initiative = 0;
+                }
             }
         }
         return $initiative;
@@ -249,7 +264,10 @@ class Hero
     {
         foreach ($this->skills as $skill) {
             if ($skill->name === "Block") {
-                $block = $skill->value + $this->speedBonus();
+                $block = (int) floor($skill->value + $this->speedBonus() - $this->getTotalWeight() / 2);
+                if ($block < 0) {
+                    $block = 0;
+                }
             }
         }
         return $block;
@@ -334,6 +352,22 @@ class Hero
             'losses' => $this->getLosses()
         ];
 
+        if (isset($this->trinketSlot1)) {
+            $heroSaveState = [
+                'trinket1' => $this->trinketSlot1
+            ];
+        }
+        if (isset($this->trinketSlot2)) {
+            $heroSaveState = [
+                'trinket2' => $this->trinketSlot2
+            ];
+        }
+        if (isset($this->trinketSlot3)) {
+            $heroSaveState = [
+                'trinket3' => $this->trinketSlot3
+            ];
+        }
+
         return $heroSaveState;
     }
 
@@ -381,6 +415,16 @@ class Hero
                         break;
                 }
             }
+        }
+
+        if (array_key_exists('trinket1', $player)) {
+            $this->trinketSlot1 = $player['trinket1'];
+        }
+        if (array_key_exists('trinket2', $player)) {
+            $this->trinketSlot2 = $player['trinket2'];
+        }
+        if (array_key_exists('trinket3', $player)) {
+            $this->trinketSlot3 = $player['trinket3'];
         }
     }
 

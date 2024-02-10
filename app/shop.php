@@ -84,7 +84,8 @@ require __DIR__ . "/../nav/header.php";
                     '<?= $weapon->minDamage; ?>',
                     '<?= $weapon->maxDamage; ?>',
                     '<?= $weapon->getItemDescription(); ?>',
-                    '<?= $weaponType; ?>')">
+                    '<?= $weaponType; ?>',
+                    '<?= $weapon->weight; ?>')">
                             <h5 class="underlineHover">[<?= $weapon->name; ?>]</h5>
                         </div>
                     <?php
@@ -102,7 +103,8 @@ require __DIR__ . "/../nav/header.php";
                 '<?= $armour->getDmgReduction(); ?>',
                 '<?= $armour->getEvasionBonus(); ?>',
                 '<?= $armour->getItemDescription(); ?>',
-                '<?= $armour->type; ?>')">
+                '<?= $armour->type; ?>',
+                '<?= $armour->weight; ?>')">
                     <h5 class="underlineHover">[<?= $armour->name; ?>]</h5>
                 </div>
             <?php
@@ -118,7 +120,8 @@ require __DIR__ . "/../nav/header.php";
                 '<?= $shield->getDmgReduction(); ?>',
                 '<?= $shield->skillRequirement; ?>',
                 '<?= $shield->getItemDescription(); ?>',
-                '<?= $shield->type; ?>')">
+                '<?= $shield->type; ?>',
+                '<?= $shield->weight; ?>')">
                     <h5 class="underlineHover">[<?= $shield->name; ?>]</h5>
                 </div>
             <?php endforeach; ?>

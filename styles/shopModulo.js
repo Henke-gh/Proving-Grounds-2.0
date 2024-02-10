@@ -1,4 +1,14 @@
-function showWeaponDetails(itemID, itemName, cost, skillReq, minDmg, maxDmg, itemDescription, itemType) {
+function showWeaponDetails(
+  itemID,
+  itemName,
+  cost,
+  skillReq,
+  minDmg,
+  maxDmg,
+  itemDescription,
+  itemType,
+  wepWeight
+) {
   var overlay = document.getElementById("overlay");
   var details = document.getElementById("details");
   details.innerHTML =
@@ -13,7 +23,9 @@ function showWeaponDetails(itemID, itemName, cost, skillReq, minDmg, maxDmg, ite
     skillReq +
     ") in " +
     itemType +
-    ".</p><p>Cost: " +
+    ".</p><p>Weight: " +
+    wepWeight +
+    "</p><p>Cost: " +
     cost +
     " gold</p>" +
     "<p class=cursive>" +
@@ -28,7 +40,16 @@ get the correct weapon/item information when processing the item bought. */
   overlay.style.display = "block";
 }
 
-function showShield(shieldID, shieldName, shieldCost, dmgRed, skillReq, shieldDescription, type) {
+function showShield(
+  shieldID,
+  shieldName,
+  shieldCost,
+  dmgRed,
+  skillReq,
+  shieldDescription,
+  type,
+  shieldWeight
+) {
   var overlay = document.getElementById("overlay");
   var details = document.getElementById("details");
   details.innerHTML =
@@ -38,7 +59,9 @@ function showShield(shieldID, shieldName, shieldCost, dmgRed, skillReq, shieldDe
     dmgRed +
     "</p><p>Requires: (" +
     skillReq +
-    ") in Block.</p><p>Cost: " +
+    ") in Block.</p><p>Weight: " +
+    shieldWeight +
+    "</p><p>Cost: " +
     shieldCost +
     " gold</p><p class=cursive>" +
     shieldDescription +
@@ -51,7 +74,16 @@ function showShield(shieldID, shieldName, shieldCost, dmgRed, skillReq, shieldDe
   overlay.style.display = "block";
 }
 
-function showArmour(armourID, armourName, armourCost, dmgRed, EvasionBonus, itemDescription, type) {
+function showArmour(
+  armourID,
+  armourName,
+  armourCost,
+  dmgRed,
+  EvasionBonus,
+  itemDescription,
+  type,
+  armourWeight
+) {
   var overlay = document.getElementById("overlay");
   var details = document.getElementById("details");
   details.innerHTML =
@@ -61,6 +93,8 @@ function showArmour(armourID, armourName, armourCost, dmgRed, EvasionBonus, item
     dmgRed +
     "</p><p>Evasion Bonus: " +
     EvasionBonus +
+    "</p><p>Weight: " +
+    armourWeight +
     "</p><p>Cost: " +
     armourCost +
     " gold.</p><p class=cursive>" +

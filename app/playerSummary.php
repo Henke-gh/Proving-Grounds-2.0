@@ -14,6 +14,7 @@
             <h5 class="bold">Weapon: <?= $player->weapon->name; ?></h5>
             <h5 class="bold">Shield: <?= $player->shield->name; ?></h5>
             <h5 class="bold">Armour: <?= $player->armour->name; ?></h5>
+            <h5 class="bold">Total Weight: <?= $player->getTotalWeight(); ?></h5>
             <h4>Inventory</h4>
             <?php if (count($player->getInventory()) > 0) : ?>
                 <?php foreach ($player->getInventory() as $category => $items) :
