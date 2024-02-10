@@ -12,16 +12,15 @@ $player->loadHeroState($playerSaveState);
 
 //relates to playerSummary.php - should probably be required via a separate file.
 if (isset($_POST['equip'])) {
-    $itemID = $_POST['equip'];
+    $itemID = $_POST['itemIndex'];
     $itemCategory = $_POST['category'];
-    //die(var_dump($player->getInventory()['weapons']));
     switch ($itemCategory) {
         case 'shields':
             $player->shield = $player->getInventory()['shields'][$itemID];
             $_SESSION['player'] = $player->saveHeroState();
             break;
         case 'armours':
-            # code...
+            $player->armour = $player->getInventory()['armours'][$itemID];
             $_SESSION['player'] = $player->saveHeroState();
             break;
         case 'trinkets':
@@ -71,13 +70,13 @@ require __DIR__ . "/../nav/header.php";
         </div>
         <div class="weaponContainer hidden shopDisplay" id="weaponContainer">
             <h3>Weapons</h3>
-            <?php $weaponID = 0;
+            <?php
             foreach ($weapons as $weaponType => $weaponGroup) : ?>
                 <div class="weaponCategory">
                     <h4><?= $weaponType; ?></h4>
-                    <?php $weaponIndex = 0;
+                    <?php
                     //Here we include all relevant Weapon-properties to be show in the Shop-modulo
-                    foreach ($weaponGroup as $weapon) : ?>
+                    foreach ($weaponGroup as $weaponID => $weapon) : ?>
                         <div class="shopItem pointer shopWeapon" onclick="showWeaponDetails(<?= $weaponID; ?>, 
                     '<?= $weapon->name; ?>', 
                     '<?= $weapon->cost; ?>',
@@ -85,31 +84,35 @@ require __DIR__ . "/../nav/header.php";
                     '<?= $weapon->minDamage; ?>',
                     '<?= $weapon->maxDamage; ?>',
                     '<?= $weapon->getItemDescription(); ?>',
-                    '<?= $weaponType; ?>',
-                    '<?= $weaponIndex; ?>')">
+                    '<?= $weaponType; ?>')">
                             <h5 class="underlineHover">[<?= $weapon->name; ?>]</h5>
                         </div>
                     <?php
-                        $weaponID++;
-                        $weaponIndex++;
                     endforeach; ?>
                 </div>
             <?php endforeach; ?>
         </div>
         <div class="armourContainer hidden shopDisplay" id="armourContainer">
             <h3>Armour</h3>
-            <?php foreach ($armours as $armour) : ?>
-                <div class="shopItem pointer">
+            <?php
+            foreach ($armours as $armourID => $armour) : ?>
+                <div class="shopItem pointer shopArmour" onclick="showArmour('<?= $armourID; ?>',
+                '<?= $armour->name; ?>',
+                '<?= $armour->cost; ?>',
+                '<?= $armour->getDmgReduction(); ?>',
+                '<?= $armour->getEvasionBonus(); ?>',
+                '<?= $armour->getItemDescription(); ?>',
+                '<?= $armour->type; ?>')">
                     <h5 class="underlineHover">[<?= $armour->name; ?>]</h5>
                 </div>
-            <?php endforeach ?>
+            <?php
+            endforeach ?>
         </div>
         <div class="shieldContainer hidden shopDisplay" id="shieldContainer">
             <h3>Shields</h3>
             <?php
-            $shieldID = 0;
-            foreach ($shields as $shield) : ?>
-                <div class="shopItem pointer shopShield" onclick="showShield('<?= $shieldID ?>',
+            foreach ($shields as $shieldID => $shield) : ?>
+                <div class="shopItem pointer shopShield" onclick="showShield('<?= $shieldID; ?>',
                 '<?= $shield->name; ?>',
                 '<?= $shield->cost; ?>',
                 '<?= $shield->getDmgReduction(); ?>',
@@ -118,14 +121,19 @@ require __DIR__ . "/../nav/header.php";
                 '<?= $shield->type; ?>')">
                     <h5 class="underlineHover">[<?= $shield->name; ?>]</h5>
                 </div>
-            <?php
-                $shieldID++;
-            endforeach; ?>
+            <?php endforeach; ?>
         </div>
         <div class="trinketContainer hidden shopDisplay" id="trinketContainer">
             <h3>Trinkets</h3>
-            <?php foreach ($trinkets as $trinket) : ?>
-                <div class="shopItem pointer">
+            <?php foreach ($trinkets as $trinketID => $trinket) : ?>
+                <div class="shopItem pointer shopTrinket" onclick="showTrinket('<?= $trinketID; ?>',
+                '<?= $trinket->name; ?>',
+                '<?= $trinket->cost; ?>',
+                '<?= $trinket->getItemDescription(); ?>',
+                '<?= $trinket->getInitiativeBonus(); ?>',
+                '<?= $trinket->getEvasionBonus(); ?>',
+                '<?= $trinket->getBlockBonus(); ?>',
+                '<?= $trinket->type; ?>')">
                     <h5 class="underlineHover">[<?= $trinket->name; ?>]</h5>
                 </div>
             <?php endforeach ?>
@@ -146,5 +154,4 @@ require __DIR__ . "/../nav/header.php";
 </main>
 <script src="/styles/shopDisplay.js"></script>
 <script src="/styles/shopModulo.js"></script>
-<script src="/styles/shieldShop.js"></script>
 <?php require __DIR__ . "/../nav/footer.html";

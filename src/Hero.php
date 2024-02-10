@@ -16,7 +16,7 @@ class Hero
     //base derived stats
     private int $hitpoints = 0;
     private int $currentHitpoints = 0;
-    private int $grit = 100;
+    private int $grit = 115;
     private int $currentGrit = 0;
     //fatigue is the number of combat turns the player hero can fight before giving up (due to fatigue)
     private int $fatigue = 0;
@@ -109,8 +109,8 @@ class Hero
     {
         $this->currentGrit = $value;
 
-        if ($this->currentGrit > 100) {
-            $this->currentGrit = 100;
+        if ($this->currentGrit > 115) {
+            $this->currentGrit = 115;
         }
     }
 
@@ -206,6 +206,16 @@ class Hero
     public function addInventoryShield(Shield $item): void
     {
         $this->inventory['shields'][] = $item;
+    }
+
+    public function addInventoryArmour(Armour $item): void
+    {
+        $this->inventory['armours'][] = $item;
+    }
+
+    public function addInventoryTrinket(Trinket $item): void
+    {
+        $this->inventory['trinkets'][] = $item;
     }
 
     public function removeInventoryWeapon(Weapon $item): void
@@ -360,7 +370,7 @@ class Hero
                         $this->addInventoryShield($item);
                         break;
                     case 'Armour':
-                        # code...
+                        $this->addInventoryArmour($item);
                         break;
                     case 'Trinket':
                         # code...

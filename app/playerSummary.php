@@ -16,20 +16,18 @@
             <h5 class="bold">Armour: <?= $player->armour->name; ?></h5>
             <h4>Inventory</h4>
             <?php if (count($player->getInventory()) > 0) : ?>
-                <form method="post" action="">
-                    <?php
-                    foreach ($player->getInventory() as $category => $items) :
-                        $itemIndex = 0; ?>
-                        <?php foreach ($items as $item) : ?>
-                            <div class="inventoryItem">
-                                <h5 class="bold"><?= $item->name; ?></h5>
-                                <input type="hidden" name="category" value="<?= $category ?>">
-                                <button type="submit" name="equip" value="<?= $itemIndex; ?>">Equip</button>
-                            </div>
-                    <?php
-                        endforeach;
-                    endforeach; ?>
-                </form>
+                <?php foreach ($player->getInventory() as $category => $items) :
+                    foreach ($items as $itemIndex => $item) : ?>
+                        <div class="inventoryItem">
+                            <h5 class="bold"><?= $item->name; ?></h5>
+                            <form method="post" action="">
+                                <input type="hidden" name="category" value="<?= $category; ?>">
+                                <input type="hidden" name="itemIndex" value="<?= $itemIndex; ?>">
+                                <button type="submit" name="equip">Equip</button>
+                            </form>
+                        </div>
+                <?php endforeach;
+                endforeach; ?>
             <?php endif; ?>
         </div>
     </div>

@@ -106,7 +106,7 @@ function playerAttack(Hero $player, Monster $monster): array
     if (critChance($player->toHitChance()) === true) {
         $damage = critDamage($player->doDamage());
         array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
-        array_push($log, $player->name . " strikes a <span class=bold>furious</span> blow to " . $monster->name . " for " . $monster->sufferDamage($damage)) . " damage!";
+        array_push($log, $player->name . " strikes a <span class=bold>furious</span> blow to " . $monster->name . " for " . $monster->sufferDamage($damage) . " damage!");
     } else {
         $damage = determineDamage($player->doDamage(), $monster->getDmgReduction());
         if (chanceToHit($player->toHitChance(), $player->weapon->skillRequirement, $monster->toHitChance()) === false) {
@@ -118,7 +118,7 @@ function playerAttack(Hero $player, Monster $monster): array
             if ($monster->canBlock() && tryBlock($player->toHitChance(), $player->weapon->skillRequirement, $monster->getBlock(), $monster->shield->skillRequirement)) {
                 array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
                 array_push($log, $monster->name . " deftly blocks with " . $monster->shield->name . ".");
-                $damage -= $monster->shield->getDmgReduction();
+                $damage = determineDamage($damage, $monster->shield->getDmgReduction());
                 array_push($log, $monster->name . " gets hit for " . $monster->sufferDamage($damage) . " damage.");
             } else {
                 array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
@@ -136,9 +136,9 @@ function monsterAttack(Monster $monster, Hero $player): array
     if (critChance($monster->toHitChance()) === true) {
         $damage = critDamage($monster->doDamage());
         array_push($log, $monster->name . " winds up a deadly attack with " . $monster->weapon->name . ".. ");
-        array_push($log, $monster->name . " strikes a <span class=bold>murderous</span> blow to " . $player->name . " for " . $player->sufferDamage($damage)) . " damage!";
+        array_push($log, $monster->name . " strikes a <span class=bold>murderous</span> blow to " . $player->name . " for " . $player->sufferDamage($damage) . " damage!");
     } else {
-        $damage = determineDamage($monster->doDamage(), $player->getDmgReduction());
+        $damage = determineDamage($monster->doDamage(), $player->armour->getDmgReduction());
         if (chanceToHit($monster->toHitChance(), $monster->weapon->skillRequirement, $player->getEvasion()) === false) {
             array_push($log, $monster->name . " attempts to strike with " . $monster->weapon->name . ".. ");
             array_push($log, $monster->name . " misses..");
@@ -149,11 +149,11 @@ function monsterAttack(Monster $monster, Hero $player): array
             if ($player->canBlock() && tryBlock($monster->toHitChance(), $monster->weapon->skillRequirement, $player->getBlock(), $player->shield->skillRequirement)) {
                 array_push($log, $monster->name . " swings " . $monster->weapon->name . ".. ");
                 array_push($log, $player->name . " deftly blocks with " . $player->shield->name . ".");
-                $damage -= $player->shield->getDmgReduction();
+                $damage = determineDamage($damage, $player->shield->getDmgReduction());
                 array_push($log, $player->name . " gets hit for " . $player->sufferDamage($damage) . " damage.");
             } else {
                 array_push($log, $monster->name . " delivers a confident blow with " . $monster->weapon->name . ".. ");
-                array_push($log, $player->name . " gets hit for " . $player->sufferDamage($damage)) . " damage.";
+                array_push($log, $player->name . " gets hit for " . $player->sufferDamage($damage) . " damage.");
             }
         }
     }
@@ -192,7 +192,7 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
 
             if ($monster->getCurrentHP() <= 0) {
                 array_push($combatLog, $monster->name . " is defeated!");
-                array_push($combatLog, "You gain <span class=bold>" . $xpReward . " xp</span> and <span class=bold>" . $goldDrop . " gold.</span>");
+                array_push($combatLog, $player->name . " gains <span class=bold>" . $xpReward . " xp</span> and <span class=bold>" . $goldDrop . " gold.</span>");
                 fightReward($player, $goldDrop, $xpReward);
                 $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
                 break;
@@ -230,7 +230,7 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
 
             if ($monster->getCurrentHP() <= 0) {
                 array_push($combatLog, $monster->name . " is defeated!");
-                array_push($combatLog, "You gain <span class=bold>" . $xpReward . " xp</span> and <span class=bold>" . $goldDrop . " gold.</span>");
+                array_push($combatLog, $player->name . " gains <span class=bold>" . $xpReward . " xp</span> and <span class=bold>" . $goldDrop . " gold.</span>");
                 fightReward($player, $goldDrop, $xpReward);
                 $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
                 break;
