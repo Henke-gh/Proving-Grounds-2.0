@@ -257,7 +257,7 @@ class Hero
     {
         return $this->inventory;
     }
-
+    //Rework these to one general addInv function!!
     public function addInventoryWeapon(Weapon $item): void
     {
         $this->inventory['weapons'][] = $item;
@@ -278,11 +278,33 @@ class Hero
         $this->inventory['trinkets'][] = $item;
     }
 
-    public function removeInventoryWeapon(Weapon $item): void
+    /* public function removeInventoryWeapon(Weapon $item): void
     {
-        if (in_array($item, $this->getInventory())) {
-            unset($item);
+        $inventory = $this->getInventory();
+        $weaponToRemove = array_search($item, $inventory['weapons']);
+        if ($weaponToRemove !== false) {
+            unset($inventory['weapons'][$weaponToRemove]);
         }
+
+        $this->setInventory($inventory);
+    } */
+
+    public function removeInventoryItem(Item $item, string $itemType): void
+    {
+        $inventory = $this->getInventory();
+        $itemToRemove = array_search($item, $inventory[$itemType]);
+
+        if ($itemToRemove !== false) {
+            unset($inventory[$itemType][$itemToRemove]);
+        }
+
+        $this->setInventory($inventory);
+    }
+
+
+    public function setInventory(array $inventory): void
+    {
+        $this->inventory = $inventory;
     }
 
     public function getTotalWeight(): int
@@ -461,12 +483,13 @@ class Hero
         $this->setFameScore($player['fameScore']);
         $this->setFameTitle($player['fameTitle']);
         $this->setFameToNext($player['fameToNext']);
+        $this->setInventory($player['inventory']);
 
         foreach ($player['skills'] as $skill) {
             $this->setSkill($skill->name, $skill->value);
         }
 
-        foreach ($player['inventory'] as $category => $items) {
+        /* foreach ($player['inventory'] as $category => $items) {
             foreach ($items as $item) {
                 switch ($item->type) {
                     case 'Shield':
@@ -484,7 +507,7 @@ class Hero
                         break;
                 }
             }
-        }
+        } */
 
         if (array_key_exists('trinket1', $player)) {
             $this->trinketSlot1 = $player['trinket1'];

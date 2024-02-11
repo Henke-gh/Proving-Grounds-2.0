@@ -1,3 +1,8 @@
+//Shop overlay and item details Currently solved with onClick functions and some inline JS code.
+//Haven't found a simple and solid solution for how to handle it with eventListeners. Having trouble passing that many PHP
+//variables in a nice way.
+//Could maybe be solved by adding a bunch of hidden input fields and reading their values but seems a roundabout way of doing it.
+
 function showWeaponDetails(
   itemID,
   itemName,

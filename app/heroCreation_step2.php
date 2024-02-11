@@ -45,20 +45,25 @@ require __DIR__ . "/../nav/header.php";
     </div>
     <form method="post" action="/../app/heroCreation_finalize.php" class="heroStatForm">
         <h4>Spend <?= $skillPoints; ?> points on Attributes and Skills</h4>
+        <div>
+            <!-- Using the hidden input field to make skillpoint value readable by skillCounter.js -->
+            <input id=maxPoints type="hidden" value="<?= $skillPoints; ?>">
+            <p id="skillPointCounter">Points remaining: <?= $skillPoints; ?></p>
+        </div>
         <div class="statContainer">
             <div class="baseStats">
                 <h3>Base Attributes</h3>
                 <div class="stat">
                     <label for="strength">Strength:</label>
-                    <input type="number" name="strength" id="strength">
+                    <input type="number" name="strength" id="strength" class="attribute" min="0" max="50">
                 </div>
                 <div class="stat">
                     <label for="speed">Speed:</label>
-                    <input type="number" name="speed" id="speed">
+                    <input type="number" name="speed" id="speed" class="attribute" min="0" max="50">
                 </div>
                 <div class="stat">
                     <label for="vitality">Vitality:</label>
-                    <input type="number" name="vitality" id="vitality">
+                    <input type="number" name="vitality" id="vitality" class="attribute" min="0" max="50">
                 </div>
             </div>
             <div class="skills">
@@ -66,7 +71,7 @@ require __DIR__ . "/../nav/header.php";
                 <?php foreach ($player->getSkills() as $skill) : ?>
                     <div class="stat">
                         <label for="<?= $skill->name; ?>"><?= ucfirst($skill->name) . ":"; ?></label>
-                        <input type="number" name="<?= $skill->name; ?>" id="<?= $skill->name; ?>">
+                        <input type="number" name="<?= $skill->name; ?>" id="<?= $skill->name; ?>" class="skill" min="0" max="50">
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -74,6 +79,6 @@ require __DIR__ . "/../nav/header.php";
         <button type="submit" name="create">Create Hero</button>
     </form>
 </main>
-
+<script src="/styles/skillCounter.js"></script>
 <?php
 require __DIR__ . "/../nav/footer.html";

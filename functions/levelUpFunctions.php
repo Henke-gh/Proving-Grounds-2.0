@@ -41,14 +41,7 @@ function increaseFame(Hero $player, array $fameLevels): void
 
     if ($player->getFameScore() >= $player->getFameToNext()) {
         $player->setFameLevel($player->getFameLevel() + 1);
-        $fameIndex = 0;
-
-        foreach ($fameLevels as $fameLevel) {
-            if ($player->getFameLevel() === $fameIndex) {
-                $player->setFameTitle($fameLevel['title']);
-                $player->setFameToNext($fameLevel['fame']);
-            }
-            $fameIndex++;
-        }
+        $player->setFameToNext($fameLevels[$player->getFameLevel() + 1]['fame']);
+        $player->setFameTitle($fameLevels[$player->getFameLevel()]['title']);
     }
 }

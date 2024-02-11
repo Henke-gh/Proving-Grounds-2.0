@@ -12,17 +12,17 @@ require __DIR__ . "/../functions/armory.php";
 
 $monsterLibrary = new MonsterCollection;
 
-$goblin = new Monster("Goblin", 1, 15, 20, new Weapon("Crooked Blade", "Accuracy", 0, 5, 1, 4, 0));
-$goblin->setSkill("Accuracy", 15);
-$goblin->setSkill("Evasion", 5);
-$goblin->setDescription("The foul smelling little shits are everywhere..");
-$monsterLibrary->addMonster($goblin);
-
 $cowardlyCultist = new Monster("Cowardly Cultist", 1, 12, 20, new Weapon("Iron Cane", "Accuracy", 0, 5, 2, 3, 0));
 $cowardlyCultist->setSkill("Accuracy", 12);
 $cowardlyCultist->setSkill("Evasion", 8);
 $cowardlyCultist->setDescription("He won\'t even look you in the eyes.");
 $monsterLibrary->addMonster($cowardlyCultist);
+
+$goblin = new Monster("Goblin", 1, 15, 20, new Weapon("Crooked Blade", "Accuracy", 0, 5, 1, 4, 0));
+$goblin->setSkill("Accuracy", 15);
+$goblin->setSkill("Evasion", 5);
+$goblin->setDescription("The foul smelling little shits are everywhere..");
+$monsterLibrary->addMonster($goblin);
 
 $bandit = new Monster("Bandit", 2, 20, 25, new Weapon("Short Sword", "Accuracy", 0, 15, 2, 6, 0));
 $bandit->setSkill("Accuracy", 15);
@@ -41,3 +41,9 @@ $angvarBull->setSkill("Accuracy", 40);
 $angvarBull->setSkill("Initiative", 25);
 $angvarBull->setDescription("A ferocious bull from the southern plains.");
 $monsterLibrary->addMonster($angvarBull);
+
+//Only for testing
+$giftborn = new Monster("Gift-Born", 100, 1, 500, new Weapon("Palm", "Accuracy", 0, 0, 0, 0, 0));
+$giftborn->setSkill("Accuracy", 5);
+$giftborn->setDescription("Press \'E\' to gain Experience..");
+$monsterLibrary->addMonster($giftborn);
