@@ -14,6 +14,7 @@ $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
 $player->regenerateHPnGrit();
 
+//require __DIR__ . "/../app/playerEquips.php";
 require_once __DIR__ . "/../nav/header.php";
 ?>
 <main>

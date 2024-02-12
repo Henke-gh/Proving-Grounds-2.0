@@ -16,6 +16,8 @@ $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
 
+require __DIR__ . "/../app/playerEquips.php";
+
 levelUp($player);
 
 if (isset($_POST['fight'])) {

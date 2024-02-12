@@ -39,17 +39,33 @@ $shortspear = new Weapon("Short Spear", "Spears", 50, 10, 1, 6, 5);
 $shortspear->setItemDescription("Stick with pointy end.");
 $shortspear->addToArmory($weapons['Spears']);
 
-$boarlance = new Weapon("Boar Lance", "Spears", 300, 50, 5, 20, 10);
+$huntingspear = new Weapon("Hunting Spear", "Spears", 140, 30, 2, 8, 6);
+$huntingspear->setItemDescription("A long spear, used for game hunting.");
+$huntingspear->addToArmory($weapons['Spears']);
+
+$boarlance = new Weapon("Boar Lance", "Spears", 400, 65, 5, 20, 10);
 $boarlance->setItemDescription("Popular in the Royal Huntsmen\'s Guild");
 $boarlance->addToArmory($weapons['Spears']);
 //Axes
 $handaxe = new Weapon("Hand Axe", "Axes", 50, 10, 2, 5, 5);
 $handaxe->setItemDescription("Chop, chop..");
 $handaxe->addToArmory($weapons['Axes']);
+
+$waraxe = new Weapon("War Axe", "Axes", 150, 35, 3, 8, 8);
+$waraxe->setItemDescription("It\'s seen battle but is as deadly as any other.");
+$waraxe->addToArmory($weapons['Axes']);
 //Hammers
 $club = new Weapon("Wooden Club", "Hammers", 50, 10, 1, 7, 5);
 $club->setItemDescription("Let\'s be real, it\'s a large stick.");
 $club->addToArmory($weapons['Hammers']);
+
+$mace = new Weapon("Mace", "Hammers", 150, 30, 3, 7, 8);
+$mace->setItemDescription("A steel mace with a flanged head.");
+$mace->addToArmory($weapons['Hammers']);
+
+$flail = new Weapon("Flail", "Hammers", 350, 50, 1, 14, 10);
+$flail->setItemDescription("The ball at the end of the chain is covered in spikes.");
+$flail->addToArmory($weapons['Hammers']);
 //Daggers
 $dagger = new Weapon("Dagger", "Daggers", 35, 10, 1, 4, 0);
 $dagger->setItemDescription("Good for carving steaks.");
@@ -72,6 +88,11 @@ $roundshield = new Shield("Round Shield", "Shield", 150, 30, 5);
 $roundshield->setDmgReduction(3);
 $roundshield->setItemDescription("A winged snake is coiled along the edge of the shield rim.");
 $roundshield->addToArmory($shields);
+
+$kiteshield = new Shield("Kite Shield", "Shield", 300, 50, 10);
+$kiteshield->setDmgReduction(5);
+$kiteshield->setItemDescription("A Knight\'s Shield. Emblazoned with a golden griffon.");
+$kiteshield->addToArmory($shields);
 
 //Armour
 $tunic = new Armour("Tunic", "Armour", 0, 0, 0);

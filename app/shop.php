@@ -16,55 +16,7 @@ $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
 $player->regenerateHPnGrit();
 
-//relates to playerSummary.php - should probably be required via a separate file.
-if (isset($_POST['equip'])) {
-    $itemID = $_POST['itemIndex'];
-    $itemCategory = $_POST['category'];
-    switch ($itemCategory) {
-        case 'shields':
-            $player->addInventoryShield($player->shield);
-            $player->shield = $player->getInventory()['shields'][$itemID];
-            $player->removeInventoryItem($player->shield, 'shields');
-            $_SESSION['player'] = $player->saveHeroState();
-            break;
-        case 'armours':
-            $player->addInventoryArmour($player->armour);
-            $player->armour = $player->getInventory()['armours'][$itemID];
-            $player->removeInventoryItem($player->armour, 'armours');
-            $_SESSION['player'] = $player->saveHeroState();
-            break;
-        case 'trinkets':
-            # code...
-            $_SESSION['player'] = $player->saveHeroState();
-            break;
-
-        default:
-            $player->addInventoryWeapon($player->weapon);
-            $player->weapon = $player->getInventory()['weapons'][$itemID];
-            $player->removeInventoryItem($player->weapon, 'weapons');
-            $_SESSION['player'] = $player->saveHeroState();
-            break;
-    }
-}
-
-if (isset($_POST['unequip'])) {
-    $unequip = $_POST['unequip'];
-    switch ($unequip) {
-        case 'weapon':
-            $player->addInventoryWeapon($player->weapon);
-            $player->weapon = $defaultItems['weapon'];
-            break;
-        case 'shield':
-            $player->addInventoryShield($player->shield);
-            $player->shield = $defaultItems['shield'];
-            break;
-        case 'armour':
-            $player->addInventoryArmour($player->armour);
-            $player->armour = $defaultItems['armour'];
-            break;
-    }
-}
-
+require __DIR__ . "/../app/playerEquips.php";
 require __DIR__ . "/../nav/header.php";
 ?>
 <main>
