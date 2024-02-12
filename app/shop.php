@@ -6,9 +6,15 @@ session_start();
 use App\Hero;
 use App\Skill;
 
+if (!isset($_SESSION['player'])) {
+    header('Location: /../app/heroCreation_step1.php');
+    exit();
+}
+
 $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
+$player->regenerateHPnGrit();
 
 //relates to playerSummary.php - should probably be required via a separate file.
 if (isset($_POST['equip'])) {

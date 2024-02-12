@@ -19,6 +19,10 @@ class Hero
     private int $currentGrit = 0;
     private int $hitpoints = 0;
     private int $currentHitpoints = 0;
+    //regeneration of HP and Grit
+    private int $regenRateHP = 0;
+    private int $regenRateGrit = 3;
+    private int $lastRegeneration = 0;
     //fatigue is the number of combat turns the player hero can fight before giving up (due to fatigue)
     private int $fatigue = 0;
     //fame and xp values, used to calculate when (and what) to level up player hero
@@ -58,6 +62,8 @@ class Hero
     {
         $this->setCurrentHP($this->getHP());
         $this->setCurrentGrit($this->getGrit());
+        $this->setLastRegen(time());
+        $this->setRegenHP();
         $this->setFatigue();
         $this->setGold(125);
         $this->addSkill(new Skill("Swords", 0));
@@ -135,6 +141,54 @@ class Hero
             $this->currentGrit -= $gritSpent;
         }
         return $this->currentGrit;
+    }
+
+    /* Hp and Grit regeneration */
+
+    public function setLastRegen(int $time): void
+    {
+        $this->lastRegeneration = $time;
+    }
+
+    public function getLastRegen(): int
+    {
+        return $this->lastRegeneration;
+    }
+
+    public function setRegenHP(): void
+    {
+        $value = (int) floor($this->getHP() / 12);
+        $this->regenRateHP = $value;
+    }
+
+    public function getRegenHP(): int
+    {
+        return $this->regenRateHP;
+    }
+
+    public function setRegenGrit(int $value): void
+    {
+        $this->regenRateGrit = $value;
+    }
+
+    public function getRegenGrit(): int
+    {
+        return $this->regenRateGrit;
+    }
+
+    public function regenerateHPnGrit(): void
+    {
+        $currentTime = time();
+        $lastRegen = $this->getLastRegen();
+        $elapsedTime = $currentTime - $lastRegen;
+        $hpAmount = (int) floor($elapsedTime / 60) * $this->getRegenHP();
+        $gritAmount = (int) floor($elapsedTime / 60) * $this->getRegenGrit();
+        //if 180 or more seconds since last hp and grit update, do update
+        if ($elapsedTime >= 180) {
+            $this->setCurrentHP($this->getCurrentHP() + $hpAmount);
+            $this->setCurrentGrit($this->getCurrentGrit() + $gritAmount);
+            $this->setLastRegen($currentTime);
+        }
     }
 
     public function setFatigue(): void
@@ -418,6 +472,8 @@ class Hero
             'currentHitpoints' => $this->getCurrentHP(),
             'grit' => $this->getGrit(),
             'currentGrit' => $this->getCurrentGrit(),
+            'lastRegen' => $this->getLastRegen(),
+            'gritRegenRate' => $this->getRegenGrit(),
             'fatigue' => $this->getFatigue(),
             'gold' => $this->getGold(),
             'xp' => $this->getXP(),
@@ -466,6 +522,9 @@ class Hero
         $this->setVitality($player['vitality']);
         $this->getHP();
         $this->getGrit();
+        $this->setLastRegen($player['lastRegen']);
+        $this->setRegenGrit($player['gritRegenRate']);
+        $this->setRegenHP();
         $this->setFatigue();
         $this->setCurrentHP($player['currentHitpoints']);
         $this->setCurrentGrit($player['currentGrit']);
@@ -567,6 +626,15 @@ class Hero
         } else {
             return false;
         }
+    }
+
+    public function isDead(): bool
+    {
+        if ($this->currentHitpoints <= 0) {
+            return true;
+        }
+
+        return false;
     }
 
     /* Used to update player combat statistics and win-rate */

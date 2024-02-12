@@ -5,6 +5,11 @@ require __DIR__ . "/../functions/levelUpFunctions.php";
 require __DIR__ . "/../functions/armory.php";
 session_start();
 
+if (!isset($_SESSION['player'])) {
+    header('Location: /../app/heroCreation_step1.php');
+    exit();
+}
+
 if (!isset($_SESSION['levelUp']) || !$_SESSION['levelUp'] === true) {
     header('Location /../app/playerHero.php');
     exit();

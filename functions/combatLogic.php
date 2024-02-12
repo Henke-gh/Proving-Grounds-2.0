@@ -180,6 +180,7 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
     $goldDrop = $monster->dropGold();
     $xpReward = $monster->xpReward;
 
+    array_push($combatLog, "<h3>" . $player->name . " vs " . $monster->name . "</h3>");
     while ($player->getCurrentHP() > $retreatValue) {
         array_push($combatLog, "<span class=bold>Turn: " . $turn . "</span>");
         //if returns true, player goes first else monster goes first.
@@ -244,6 +245,10 @@ function doBattle(Hero $player, Monster $monster, int $retreatValue): array
             $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
             break;
         }
+    }
+    if ($player->isDead()) {
+        array_push($combatLog, "<span class=bold>" . $player->name . " was slain by " . $monster->name . "!</span>");
+        $_SESSION['playerDeath'] = $combatLog;
     }
     $_SESSION['player'] = $player->saveHeroState();
     return $combatLog;

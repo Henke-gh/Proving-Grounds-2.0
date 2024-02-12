@@ -7,6 +7,11 @@ session_start();
 
 use App\Hero;
 
+if (!isset($_SESSION['player'])) {
+    header('Location: /../app/heroCreation_step1.php');
+    exit();
+}
+
 $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
@@ -21,17 +26,24 @@ if (isset($_POST['fight'])) {
         $selectedMonster = $monsterLibrary->getMonster($selectedMonsterID);
         $combatLog = doBattle($player, $selectedMonster, $retreat);
         $_SESSION['player'] = $player->saveHeroState();
+        //if the player dies during combat, user is sent directly to death screen.
+        if ($player->isDead()) {
+            header('Location: /../app/death.php');
+            exit();
+        }
     } else {
         //FIX THIS! Nicer message needed.
         echo "You're too tired to fight..";
     }
 }
 
+$player->regenerateHPnGrit();
+
+
 if (isset($_POST['back'])) {
     levelUp($player);
     unset($_POST['fight']);
 }
-
 require __DIR__ . "/../nav/header.php";
 ?>
 
@@ -69,11 +81,8 @@ require __DIR__ . "/../nav/header.php";
 
     <?php elseif (isset($_POST['fight'])) : ?>
         <div class="combatlog">
-            <p><?= $selectedMonster->name . " vs " . $player->name; ?></p>
-            <p><?= "Stance: " . ucfirst($stance); ?></p>
-            <p><?= "Retreat value: " . $retreat . "% HP"; ?></p>
             <?php foreach ($combatLog as $line) : ?>
-                <p class="cursive"><?= $line; ?></p>
+                <p class="cursive logLine"><?= $line; ?></p>
             <?php endforeach; ?>
             <form method="post">
                 <button type="submit" name="back">Back</button>
