@@ -1,6 +1,4 @@
 <?php
-
-declare(strict_types=1);
 //relates to playerSummary.php - Require this on all pages that present the playerSummary.
 if (isset($_POST['equip'])) {
     $itemID = $_POST['itemIndex'];

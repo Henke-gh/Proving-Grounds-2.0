@@ -290,7 +290,7 @@ main {
 }
 
 .details {
-  background-color: white;
+  background-color: var(--paleYellow);
   padding: 20px;
   margin-bottom: 20px;
 }
