@@ -169,18 +169,23 @@ function fightReward(Hero $player, int $gold, int $xpReward): void
     $player->setWins(1);
 }
 
-function doBattle(Hero $player, Monster $monster, int $retreatValue): array
+function doBattle(Hero $player, Monster $monster, int $retreat): array
 {
     $combatLog = [];
     $turn = 1;
     //calculate player HP value at which player gives up and combat ends.
-    $retreatValue = (int) floor($retreatValue / 100 * $player->getHP());
+    $retreatValue = (int) floor($retreat / 100 * $player->getHP());
 
     //since monster gold drop is a random value it has to be set prior as the variable is used twice.
     $goldDrop = $monster->dropGold();
     $xpReward = $monster->xpReward;
 
-    array_push($combatLog, "<h3>" . $player->name . " vs " . $monster->name . "</h3>");
+    if ($player->getCurrentHP() < $retreatValue) {
+        array_push($combatLog, "Your wounds are too severe to fight.");
+    } else {
+        array_push($combatLog, "<h3>" . $player->name . " vs " . $monster->name . "</h3>");
+    }
+
     while ($player->getCurrentHP() > $retreatValue) {
         array_push($combatLog, "<span class=bold>Turn: " . $turn . "</span>");
         //if returns true, player goes first else monster goes first.

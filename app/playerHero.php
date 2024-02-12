@@ -15,6 +15,8 @@ $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
 $player->regenerateHPnGrit();
 
+require __DIR__ . "/../app/playerEquips.php";
+
 if (isset($_POST['equip'])) {
     $itemToEquip = $_POST['equip'];
 

@@ -21,10 +21,12 @@ require __DIR__ . "/../app/playerEquips.php";
 levelUp($player);
 
 if (isset($_POST['fight'])) {
+    $stance = $_POST['combatStance'];
+    $retreat = (int) $_POST['retreatValue'];
+    unset($_POST['combatStance']);
+    unset($_POST['retreatValue']);
+    $selectedMonsterID = $_POST['fight'];
     if ($player->getCurrentGrit() > 0) {
-        $stance = $_POST['combatStance'];
-        $retreat = (int) $_POST['retreatValue'];
-        $selectedMonsterID = $_POST['fight'];
         $selectedMonster = $monsterLibrary->getMonster($selectedMonsterID);
         $combatLog = doBattle($player, $selectedMonster, $retreat);
         $_SESSION['player'] = $player->saveHeroState();
@@ -34,7 +36,7 @@ if (isset($_POST['fight'])) {
             exit();
         }
     } else {
-        //FIX THIS! Nicer message needed.
+        unset($_POST['fight']);
         echo "You're too tired to fight..";
     }
 }
