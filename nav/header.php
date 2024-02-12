@@ -14,8 +14,10 @@
 <body>
     <header class="mainHeader">
         <h1>The New Proving Grounds</h1>
-        <a href="/../index.php">Start / New Char</a>
-        <a href="#">Game Guide</a>
-        <a href="#">About</a>
-        <a href="#">Login/ Register New</a>
+        <nav>
+            <a href="/../index.php">Start</a>
+            <a href="#">Game Guide</a>
+            <a href="#">About</a>
+            <a href="#">Register</a>
+        </nav>
     </header>

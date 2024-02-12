@@ -11,23 +11,42 @@
         </div>
         <div class="heroGear">
             <h4>Equipped Items</h4>
-            <h5 class="bold">Weapon: <?= $player->weapon->name; ?></h5>
-            <h5 class="bold">Shield: <?= $player->shield->name; ?></h5>
-            <h5 class="bold">Armour: <?= $player->armour->name; ?></h5>
+            <form method="post" action="">
+                <div class="equippedItem">
+                    <h5 class="bold">Weapon: <?= $player->weapon->name; ?></h5>
+                    <?php if ($player->weapon->name !== "Fists") : ?>
+                        <button type="submit" name="unequip" value="weapon">Unequip</button>
+                    <?php endif; ?>
+                </div>
+                <div class="equippedItem">
+                    <h5 class="bold">Shield: <?= $player->shield->name; ?></h5>
+                    <?php if ($player->shield->name !== "None") : ?>
+                        <button type="submit" name="unequip" value="shield">Unequip</button>
+                    <?php endif; ?>
+                </div>
+                <div class="equippedItem">
+                    <h5 class="bold">Armour: <?= $player->armour->name; ?></h5>
+                    <?php if ($player->armour->name !== "Tunic") : ?>
+                        <button type="submit" name="unequip" value="armour">Unequip</button>
+                    <?php endif; ?>
+                </div>
+            </form>
             <h5 class="bold">Total Weight: <?= $player->getTotalWeight(); ?></h5>
             <h4>Inventory</h4>
             <?php if (count($player->getInventory()) > 0) : ?>
                 <?php foreach ($player->getInventory() as $category => $items) :
-                    foreach ($items as $itemIndex => $item) : ?>
-                        <div class="inventoryItem">
-                            <h5 class="bold"><?= $item->name; ?></h5>
-                            <form method="post" action="">
-                                <input type="hidden" name="category" value="<?= $category; ?>">
-                                <input type="hidden" name="itemIndex" value="<?= $itemIndex; ?>">
-                                <button type="submit" name="equip">Equip</button>
-                            </form>
-                        </div>
-                <?php endforeach;
+                    foreach ($items as $itemIndex => $item) :
+                        if ($item->name !== "Fists" && $item->name !== "None" && $item->name !== "Tunic") : ?>
+                            <div class="inventoryItem">
+                                <h5 class="bold"><?= $item->name; ?></h5>
+                                <form method="post" action="">
+                                    <input type="hidden" name="category" value="<?= $category; ?>">
+                                    <input type="hidden" name="itemIndex" value="<?= $itemIndex; ?>">
+                                    <button type="submit" name="equip">Equip</button>
+                                </form>
+                            </div>
+                <?php endif;
+                    endforeach;
                 endforeach; ?>
             <?php endif; ?>
         </div>

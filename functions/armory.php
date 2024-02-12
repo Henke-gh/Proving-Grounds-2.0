@@ -23,6 +23,9 @@ $armours = [];
 $trinkets = [];
 
 //Weapons by Weapon Type
+//Default (unarmed)
+$fists = new Weapon("Fists", "Unarmed", 0, 0, 1, 2, 0);
+$fists->setItemDescription("They're your flesh mittens, champ. Might wanna invest in something for them to swing.");
 //Swords
 $shortsword = new Weapon("Short Sword", "Swords", 50, 10, 2, 4, 5);
 $shortsword->setItemDescription("Lil\' pointy");
@@ -57,6 +60,9 @@ $twisteddagger->setItemDescription("A wicked little thing.");
 $twisteddagger->addToArmory($weapons['Daggers']);
 
 //Shields
+$none = new Shield("None", "Shield", 0, 100, 0);
+$none->setItemDescription("It's really not ideal but you could probably deflect a blow or two with your elbow.");
+
 $buckler = new Shield("Buckler", "Shield", 35, 5, 0);
 $buckler->setDmgReduction(1);
 $buckler->setItemDescription("It\'s basically a platter.");
@@ -88,3 +94,11 @@ $zehirStone = new Trinket("Stone of Zehir", "Trinket", 450, 0, 0);
 $zehirStone->setInitiativeBonus(10);
 $zehirStone->setItemDescription("Time slows down..");
 $zehirStone->addToArmory($trinkets);
+
+
+//default items, if unequipped
+$defaultItems = [
+    'weapon' => $fists,
+    'armour' => $tunic,
+    'shield' => $none
+];

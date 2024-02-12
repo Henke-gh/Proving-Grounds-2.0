@@ -47,6 +47,24 @@ if (isset($_POST['equip'])) {
     }
 }
 
+if (isset($_POST['unequip'])) {
+    $unequip = $_POST['unequip'];
+    switch ($unequip) {
+        case 'weapon':
+            $player->addInventoryWeapon($player->weapon);
+            $player->weapon = $defaultItems['weapon'];
+            break;
+        case 'shield':
+            $player->addInventoryShield($player->shield);
+            $player->shield = $defaultItems['shield'];
+            break;
+        case 'armour':
+            $player->addInventoryArmour($player->armour);
+            $player->armour = $defaultItems['armour'];
+            break;
+    }
+}
+
 require __DIR__ . "/../nav/header.php";
 ?>
 <main>
