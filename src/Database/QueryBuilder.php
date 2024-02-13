@@ -28,6 +28,15 @@ class QueryBuilder
         return $success;
     }
 
+    public function getUsernames(): array
+    {
+        $this->query = "SELECT Username FROM Users";
+        $statement = $this->database->query($this->query);
+
+        $usernames = $statement->fetchAll(PDO::FETCH_COLUMN);
+
+        return $usernames;
+    }
 
     public function getAllFromTable(string $table): array
     {

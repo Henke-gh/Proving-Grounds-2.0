@@ -8,8 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     unset($_POST['username']);
     unset($_POST['password']);
     unset($_POST['passwordRepeat']);
-    //add check for if username is available
-    if ($newPassword !== $newPasswordRepeat) {
+    $usernames = $database->getUsernames();
+    if (in_array($newUsername, $usernames)) {
+        echo "Sorry, " . $newUsername . " is not available.";
+    } elseif ($newPassword !== $newPasswordRepeat) {
         echo "Passwords don't match. Try again.";
     } else {
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);

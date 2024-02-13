@@ -1,12 +1,15 @@
 <?php
 
-require __DIR__ . "/vendor/autoload.php";
+require __DIR__ . "/bootstrap.php";
 require __DIR__ . "/functions/armory.php";
-
-echo '<pre>';
-var_dump($weapons);
-echo '</pre>';
-
-
-
-echo time();
+$users = $database->getUsernames();
+var_dump($users);
+require __DIR__ . "/nav/header.php";
+?>
+<main>
+    <ul>
+        <?php foreach ($users as $user) : ?>
+            <li><?= $user; ?></li>
+        <?php endforeach; ?>
+    </ul>
+</main>
