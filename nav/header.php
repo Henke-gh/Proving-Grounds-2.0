@@ -18,6 +18,6 @@
             <a href="/../index.php">Start</a>
             <a href="#">Game Guide</a>
             <a href="#">About</a>
-            <a href="#">Register</a>
+            <a href="/../app/register.php">Register</a>
         </nav>
     </header>

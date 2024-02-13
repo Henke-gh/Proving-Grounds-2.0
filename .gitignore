@@ -1,3 +1,5 @@
 vendor
 game.txt
 assets/images
+.env
+table_creates.txt
