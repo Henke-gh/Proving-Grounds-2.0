@@ -62,8 +62,17 @@ class QueryBuilder
         return $success;
     }
 
-    public function updateHero()
+    public function updateHero(int $userID, string $heroData): bool
     {
+        $this->query = "UPDATE heroes SET heroData = :heroData, heroVersion = heroVersion + 1 WHERE User_ID = :userID";
+        $statement = $this->database->prepare($this->query);
+
+        $statement->bindParam(':heroData', $heroData, PDO::PARAM_STR);
+        $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+
+        $success = $statement->execute();
+
+        return $success;
     }
 
     public function getHero(int $userID): array
