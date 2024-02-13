@@ -13,8 +13,10 @@ if (isset($_POST['createHero'])) {
     $avatarURL = $avatars[$avatarID]['url'];
     $player = new Hero($name, $gender);
     $player->setAvatar($avatarURL);
+    $player->setLastRegen(time());
 
     $_SESSION['player'] = $player->saveHeroState();
+    //Re-instances the hero if user spent too many or too few skill points. Try again.
 } elseif (isset($_SESSION['heroCreation'])) {
     $playerSaveState = $_SESSION['player'];
     $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);

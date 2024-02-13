@@ -62,7 +62,6 @@ class Hero
     {
         $this->setCurrentHP($this->getHP());
         $this->setCurrentGrit($this->getGrit());
-        $this->setLastRegen(time());
         $this->setRegenHP();
         $this->setFatigue();
         $this->setGold(125);
