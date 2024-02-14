@@ -1,6 +1,6 @@
 <?php
 //_step3 finalizes hero creation and verifies the player has spent the correct number of skill points.
-require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/../bootstrap.php";
 session_start();
 
 use App\Hero;
@@ -50,6 +50,8 @@ if (isset($_POST['create'])) {
         }
         $player->updateDerivedStats();
         $_SESSION['player'] = $player->saveHeroState();
+        $heroJSON = json_encode($_SESSION['player']);
+        $database->addHero($_SESSION['playerID'], $heroJSON, 1);
         header('Location: /../app/playerHero.php');
         exit();
     }

@@ -83,7 +83,7 @@ class QueryBuilder
         $heroData = $statement->fetchColumn();
 
         if ($heroData === false) {
-            return null; //If no data is saved/ found.
+            return $hero = []; //If no data is saved/ found.
         }
 
         $hero = json_decode($heroData, true);

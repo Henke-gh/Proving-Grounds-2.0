@@ -14,15 +14,17 @@ $testHero = [
 ];
 $heroJSON = json_encode($testHero);
 //$database->addHero(1, $heroJSON, 1); Writes to DB, ok.
-$hero = $database->getHero(1);
+//$hero = $database->getHero(1);
 //$database->updateHero(1, $heroJSON); Updates DB, ok.
-var_dump($hero);
+$users = $database->getAllFromTable('Users');
+echo '<pre>';
+var_dump($users);
 require __DIR__ . "/nav/header.php";
 ?>
 <main>
     <ul>
         <?php foreach ($users as $user) : ?>
-            <li><?= $user; ?></li>
+            <li><?= $user['Username']; ?></li>
         <?php endforeach; ?>
     </ul>
 </main>
