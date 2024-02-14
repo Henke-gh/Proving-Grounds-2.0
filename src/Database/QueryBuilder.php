@@ -86,7 +86,7 @@ class QueryBuilder
             return $hero = []; //If no data is saved/ found.
         }
 
-        $hero = json_decode($heroData, true);
+        $hero = unserialize($heroData);
         return $hero;
     }
 }

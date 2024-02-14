@@ -38,4 +38,4 @@ require __DIR__ . "/../nav/header.php";
 <script src="/styles/avatarSelection.js"></script>
 
 <?php
-require __DIR__ . "/../nav/footer.html";
+require __DIR__ . "/../nav/footer.php";

@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/../bootstrap.php";
 require __DIR__ . "/../app/monsterLibrary.php";
 require __DIR__ . "/../functions/combatLogic.php";
 require __DIR__ . "/../functions/levelUpFunctions.php";
@@ -12,9 +12,17 @@ if (!isset($_SESSION['player'])) {
     exit();
 }
 
+$_SESSION['player'] = $database->getHero($_SESSION['playerID']);
+
 $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
+
+$player->regenerateHPnGrit();
+$_SESSION['player'] = $player->saveHeroState();
+$saveHero = serialize($_SESSION['player']);
+
+$database->updateHero($_SESSION['playerID'], $saveHero);
 
 require __DIR__ . "/../app/playerEquips.php";
 
@@ -30,6 +38,8 @@ if (isset($_POST['fight'])) {
         $selectedMonster = $monsterLibrary->getMonster($selectedMonsterID);
         $combatLog = doBattle($player, $selectedMonster, $retreat);
         $_SESSION['player'] = $player->saveHeroState();
+        $saveHero = serialize($_SESSION['player']);
+        $database->updateHero($_SESSION['playerID'], $saveHero);
         //if the player dies during combat, user is sent directly to death screen.
         if ($player->isDead()) {
             header('Location: /../app/death.php');
@@ -41,8 +51,8 @@ if (isset($_POST['fight'])) {
     }
 }
 
-$player->regenerateHPnGrit();
-$_SESSION['player'] = $player->saveHeroState();
+/* $player->regenerateHPnGrit();
+$_SESSION['player'] = $player->saveHeroState(); */
 
 if (isset($_POST['back'])) {
     levelUp($player);
@@ -95,4 +105,4 @@ require __DIR__ . "/../nav/header.php";
     <?php endif; ?>
 </main>
 <?php
-require __DIR__ . "/../nav/footer.html";
+require __DIR__ . "/../nav/footer.php";

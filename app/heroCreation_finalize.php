@@ -50,7 +50,7 @@ if (isset($_POST['create'])) {
         }
         $player->updateDerivedStats();
         $_SESSION['player'] = $player->saveHeroState();
-        $heroJSON = json_encode($_SESSION['player']);
+        $heroJSON = serialize($_SESSION['player']);
         $database->addHero($_SESSION['playerID'], $heroJSON, 1);
         header('Location: /../app/playerHero.php');
         exit();

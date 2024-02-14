@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/../bootstrap.php";
 require __DIR__ . "/../functions/levelUpFunctions.php";
 require __DIR__ . "/../functions/armory.php";
 session_start();
@@ -17,9 +17,17 @@ if (!isset($_SESSION['levelUp']) || !$_SESSION['levelUp'] === true) {
 
 use App\Hero;
 
+$_SESSION['player'] = $database->getHero($_SESSION['playerID']);
+
 $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
+
+$player->regenerateHPnGrit();
+$_SESSION['player'] = $player->saveHeroState();
+$saveHero = serialize($_SESSION['player']);
+
+$database->updateHero($_SESSION['playerID'], $saveHero);
 
 $skillPoints = 20;
 
@@ -98,4 +106,4 @@ require __DIR__ . "/../nav/header.php";
 </main>
 <script src="/styles/skillCounter.js"></script>
 <?php
-require __DIR__ . "/../nav/footer.html";
+require __DIR__ . "/../nav/footer.php";

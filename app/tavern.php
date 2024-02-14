@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . "/../bootstrap.php";
 session_start();
 
 use App\Hero;
@@ -9,12 +9,17 @@ if (!isset($_SESSION['player'])) {
     exit();
 }
 
+$_SESSION['player'] = $database->getHero($_SESSION['playerID']);
+
 $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
+
 $player->regenerateHPnGrit();
 $_SESSION['player'] = $player->saveHeroState();
+$saveHero = serialize($_SESSION['player']);
 
+$database->updateHero($_SESSION['playerID'], $saveHero);
 
 //require __DIR__ . "/../app/playerEquips.php";
 require_once __DIR__ . "/../nav/header.php";
@@ -58,4 +63,4 @@ require_once __DIR__ . "/../nav/header.php";
 </main>
 
 <?php
-require_once __DIR__ . "/../nav/footer.html";
+require_once __DIR__ . "/../nav/footer.php";

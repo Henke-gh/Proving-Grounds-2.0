@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/../bootstrap.php";
 session_start();
 
 use App\Hero;
@@ -34,4 +34,4 @@ require_once __DIR__ . "/../nav/header.php";
 </main>
 
 <?php
-require_once __DIR__ . "/../nav/footer.html";
+require_once __DIR__ . "/../nav/footer.php";

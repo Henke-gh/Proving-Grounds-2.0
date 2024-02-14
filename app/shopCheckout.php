@@ -1,16 +1,24 @@
 <?php
 
 declare(strict_types=1);
-require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/../bootstrap.php";
 require __DIR__ . "/../functions/armory.php";
 
 use App\Hero;
 
 session_start();
 
+$_SESSION['player'] = $database->getHero($_SESSION['playerID']);
+
 $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
+
+$player->regenerateHPnGrit();
+$_SESSION['player'] = $player->saveHeroState();
+$saveHero = serialize($_SESSION['player']);
+
+$database->updateHero($_SESSION['playerID'], $saveHero);
 
 if (isset($_POST['purchaseWeapon'])) {
     $weaponType = $_POST['item'][0];
@@ -24,6 +32,8 @@ if (isset($_POST['purchaseWeapon'])) {
         $player->setGold($playergold);
         $player->addInventoryWeapon($weapon);
         $_SESSION['player'] = $player->saveHeroState();
+        $saveHero = serialize($_SESSION['player']);
+        $database->updateHero($_SESSION['playerID'], $saveHero);
         $_SESSION['itemBought'] = "You bought a " . $weapon->name . ".";
         header('Location: /../app/shop.php');
         exit();
@@ -44,6 +54,8 @@ if (isset($_POST['purchaseShield'])) {
         $player->setGold($playerGold);
         $player->addInventoryShield($shieldToBuy);
         $_SESSION['player'] = $player->saveHeroState();
+        $saveHero = serialize($_SESSION['player']);
+        $database->updateHero($_SESSION['playerID'], $saveHero);
         $_SESSION['itemBought'] = "You bought a " . $shieldToBuy->name . ".";
         header('Location: /../app/shop.php');
         exit();
@@ -63,6 +75,8 @@ if (isset($_POST['purchaseArmour'])) {
         $player->setGold($playerGold);
         $player->addInventoryArmour($armourToBuy);
         $_SESSION['player'] = $player->saveHeroState();
+        $saveHero = serialize($_SESSION['player']);
+        $database->updateHero($_SESSION['playerID'], $saveHero);
         $_SESSION['itemBought'] = "You bought " . $armourToBuy->name . ".";
         header('Location: /../app/shop.php');
         exit();

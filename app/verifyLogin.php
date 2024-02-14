@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                 if (!empty($_SESSION['player'])) {
                     $_SESSION['playerID'] = $user['ID'];
                     header('Location: /../app/playerHero.php');
+                    exit();
                 }
 
                 $_SESSION['playerID'] = $user['ID'];

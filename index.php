@@ -36,4 +36,4 @@ require __DIR__ . "/nav/header.php";
     </div>
 </main>
 <?php
-require __DIR__ . "/nav/footer.html";
+require __DIR__ . "/nav/footer.php";

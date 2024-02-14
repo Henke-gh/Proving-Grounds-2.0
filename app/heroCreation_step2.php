@@ -83,4 +83,4 @@ require __DIR__ . "/../nav/header.php";
 </main>
 <script src="/styles/skillCounter.js"></script>
 <?php
-require __DIR__ . "/../nav/footer.html";
+require __DIR__ . "/../nav/footer.php";

@@ -12,7 +12,7 @@ $testHero = [
         'shield' => 'buckler'
     ]
 ];
-$heroJSON = json_encode($testHero);
+$heroJSON = serialize($testHero);
 //$database->addHero(1, $heroJSON, 1); Writes to DB, ok.
 //$hero = $database->getHero(1);
 //$database->updateHero(1, $heroJSON); Updates DB, ok.

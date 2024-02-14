@@ -9,16 +9,22 @@ if (isset($_POST['equip'])) {
             $player->shield = $player->getInventory()['shields'][$itemID];
             $player->removeInventoryItem($player->shield, 'shields');
             $_SESSION['player'] = $player->saveHeroState();
+            $saveHero = serialize($_SESSION['player']);
+            $database->updateHero($_SESSION['playerID'], $saveHero);
             break;
         case 'armours':
             $player->addInventoryArmour($player->armour);
             $player->armour = $player->getInventory()['armours'][$itemID];
             $player->removeInventoryItem($player->armour, 'armours');
             $_SESSION['player'] = $player->saveHeroState();
+            $saveHero = serialize($_SESSION['player']);
+            $database->updateHero($_SESSION['playerID'], $saveHero);
             break;
         case 'trinkets':
             # code...
             $_SESSION['player'] = $player->saveHeroState();
+            $saveHero = serialize($_SESSION['player']);
+            $database->updateHero($_SESSION['playerID'], $saveHero);
             break;
 
         default:
@@ -26,6 +32,8 @@ if (isset($_POST['equip'])) {
             $player->weapon = $player->getInventory()['weapons'][$itemID];
             $player->removeInventoryItem($player->weapon, 'weapons');
             $_SESSION['player'] = $player->saveHeroState();
+            $saveHero = serialize($_SESSION['player']);
+            $database->updateHero($_SESSION['playerID'], $saveHero);
             break;
     }
 }
