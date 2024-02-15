@@ -132,6 +132,14 @@ function playerAttack(Hero $player, Monster $monster): array
 
 function monsterAttack(Monster $monster, Hero $player): array
 {
+    $playerEvasion = $player->getEvasion() - $player->getWeightModifier();
+    if ($playerEvasion < 0) {
+        $playerEvasion = 0;
+    }
+    $playerBlock = $player->getBlock() - $player->getWeightModifier();
+    if ($playerBlock < 0) {
+        $playerBlock = 0;
+    }
     $log = [];
     if (critChance($monster->toHitChance()) === true) {
         $damage = critDamage($monster->doDamage());
@@ -139,14 +147,14 @@ function monsterAttack(Monster $monster, Hero $player): array
         array_push($log, $monster->name . " strikes a <span class=bold>murderous</span> blow to " . $player->name . " for " . $player->sufferDamage($damage) . " damage!");
     } else {
         $damage = determineDamage($monster->doDamage(), $player->armour->getDmgReduction());
-        if (chanceToHit($monster->toHitChance(), $monster->weapon->skillRequirement, $player->getEvasion()) === false) {
+        if (chanceToHit($monster->toHitChance(), $monster->weapon->skillRequirement, $playerEvasion) === false) {
             array_push($log, $monster->name . " attempts to strike with " . $monster->weapon->name . ".. ");
             array_push($log, $monster->name . " misses..");
-        } elseif (tryEvasion($monster->toHitChance(), $monster->weapon->skillRequirement, $player->getEvasion())) {
+        } elseif (tryEvasion($monster->toHitChance(), $monster->weapon->skillRequirement, $playerEvasion)) {
             array_push($log, $monster->name . " moves to strike with " . $monster->weapon->name . ".. ");
             array_push($log, $player->name . " dodges away at the last moment!");
         } else {
-            if ($player->canBlock() && tryBlock($monster->toHitChance(), $monster->weapon->skillRequirement, $player->getBlock(), $player->shield->skillRequirement)) {
+            if ($player->canBlock() && tryBlock($monster->toHitChance(), $monster->weapon->skillRequirement, $playerBlock, $player->shield->skillRequirement)) {
                 array_push($log, $monster->name . " swings " . $monster->weapon->name . ".. ");
                 array_push($log, $player->name . " deftly blocks with " . $player->shield->name . ".");
                 $damage = determineDamage($damage, $player->shield->getDmgReduction());
@@ -176,6 +184,11 @@ function doBattle(Hero $player, Monster $monster, int $retreat): array
     //calculate player HP value at which player gives up and combat ends.
     $retreatValue = (int) floor($retreat / 100 * $player->getHP());
 
+    $playerInitiative = $player->getInitiative() - $player->getWeightModifier();
+    if ($playerInitiative < 0) {
+        $playerInitiative = 0;
+    }
+
     //since monster gold drop is a random value it has to be set prior as the variable is used twice.
     $goldDrop = $monster->dropGold();
     $xpReward = $monster->xpReward;
@@ -189,7 +202,7 @@ function doBattle(Hero $player, Monster $monster, int $retreat): array
     while ($player->getCurrentHP() > $retreatValue) {
         array_push($combatLog, "<span class=bold>Turn: " . $turn . "</span>");
         //if returns true, player goes first else monster goes first.
-        if (determineInitiative($player->getInitiative(), $monster->getInitiative())) {
+        if (determineInitiative($playerInitiative, $monster->getInitiative())) {
             array_push($combatLog, $player->name . " charges, quick as lightning!");
             $lines = playerAttack($player, $monster);
             foreach ($lines as $line) {

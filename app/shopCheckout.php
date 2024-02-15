@@ -86,3 +86,25 @@ if (isset($_POST['purchaseArmour'])) {
         exit();
     }
 }
+if (isset($_POST['purchaseTrinket'])) {
+    $itemType = $_POST['item'][0];
+    $trinketIndex = $_POST['item'][1];
+
+    $trinketToBuy = $trinkets[$trinketIndex];
+    if ($player->getGold() >= $trinketToBuy->cost) {
+        $playerGold = $player->getGold() - $trinketToBuy->cost;
+        $player->setGold($playerGold);
+        //more work needeed here
+        $player->addInventoryTrinket($trinketToBuy);
+        $_SESSION['player'] = $player->saveHeroState();
+        $saveHero = serialize($_SESSION['player']);
+        $database->updateHero($_SESSION['playerID'], $saveHero);
+        $_SESSION['itemBought'] = "You bought " . $trinketToBuy->name . ".";
+        header('Location: /../app/shop.php');
+        exit();
+    } else {
+        $_SESSION['error'] = "Not enough funds.";
+        header('Location: /../app/shop.php');
+        exit();
+    }
+}

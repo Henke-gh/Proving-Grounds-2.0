@@ -331,17 +331,6 @@ class Hero
         $this->inventory['trinkets'][] = $item;
     }
 
-    /* public function removeInventoryWeapon(Weapon $item): void
-    {
-        $inventory = $this->getInventory();
-        $weaponToRemove = array_search($item, $inventory['weapons']);
-        if ($weaponToRemove !== false) {
-            unset($inventory['weapons'][$weaponToRemove]);
-        }
-
-        $this->setInventory($inventory);
-    } */
-
     public function removeInventoryItem(Item $item, string $itemType): void
     {
         $inventory = $this->getInventory();
@@ -366,13 +355,21 @@ class Hero
         return $weight;
     }
 
+    //added to Evasion, Ini and Block totals in Combat Logic.php
+    public function getWeightModifier(): int
+    {
+        $modifier = (int) floor($this->getTotalWeight() / 2);
+
+        return $modifier;
+    }
+
     /* Stats and modified skill values. Always use get functions for Eva, ini and block */
 
     public function getEvasion(): int
     {
         foreach ($this->skills as $skill) {
             if ($skill->name === "Evasion") {
-                $evasion = (int) floor($skill->value + $this->speedBonus() - $this->getTotalWeight() / 2);
+                $evasion = $skill->value + $this->speedBonus();
                 if ($evasion < 0) {
                     $evasion = 0;
                 }
@@ -385,7 +382,7 @@ class Hero
     {
         foreach ($this->skills as $skill) {
             if ($skill->name === "Initiative") {
-                $initiative = (int) floor($skill->value + $this->speedBonus() - $this->getTotalWeight() / 2);
+                $initiative = $skill->value + $this->speedBonus();
                 if ($initiative < 0) {
                     $initiative = 0;
                 }
@@ -398,7 +395,7 @@ class Hero
     {
         foreach ($this->skills as $skill) {
             if ($skill->name === "Block") {
-                $block = (int) floor($skill->value + $this->speedBonus() - $this->getTotalWeight() / 2);
+                $block = $skill->value + $this->speedBonus();
                 if ($block < 0) {
                     $block = 0;
                 }
@@ -546,26 +543,6 @@ class Hero
         foreach ($player['skills'] as $skill) {
             $this->setSkill($skill->name, $skill->value);
         }
-
-        /* foreach ($player['inventory'] as $category => $items) {
-            foreach ($items as $item) {
-                switch ($item->type) {
-                    case 'Shield':
-                        $this->addInventoryShield($item);
-                        break;
-                    case 'Armour':
-                        $this->addInventoryArmour($item);
-                        break;
-                    case 'Trinket':
-                        # code...
-                        break;
-
-                    default:
-                        $this->addInventoryWeapon($item);
-                        break;
-                }
-            }
-        } */
 
         if (array_key_exists('trinket1', $player)) {
             $this->trinketSlot1 = $player['trinket1'];
