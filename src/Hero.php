@@ -40,7 +40,11 @@ class Hero
     public Weapon $weapon;
     public Shield $shield;
     public Armour $armour;
-    private array $trinkets = [];
+    private array $trinkets = [
+        'slot1' => [],
+        'slot2' => [],
+        'slot3' => []
+    ];
     //currently not in use. Dmg Red values are read directly from items that contribute to the total.
     private int $damageReduction = 0;
     //array containing player skills and their values.
@@ -329,9 +333,9 @@ class Hero
         $this->setTrinkets($trinkets);
     }
 
-    public function addTrinket(Trinket $item): void
+    public function addTrinket(Trinket $item, string $slot): void
     {
-        $this->trinkets[] = $item;
+        $this->trinkets[$slot][] = $item;
     }
 
     public function getInventory(): array
@@ -559,7 +563,7 @@ class Hero
 
         if (!empty($player['trinkets'])) {
             foreach ($player['trinkets'] as $trinket) {
-                $this->addTrinket($trinket);
+                $this->addTrinket($trinket, 'slot1');
             }
         }
     }
