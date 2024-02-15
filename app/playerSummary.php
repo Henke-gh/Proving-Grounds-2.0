@@ -37,7 +37,7 @@
                     <form method="post" action="">
                         <div class="equippedItem">
                             <h5 class="bold"><?= $trinket->name; ?></h5>
-                            <button type="submit" name="unequipTrinket" value="<?= $index; ?>">Unequip</button>
+                            <button type="submit" name="unequipTrinket" value="<?= $trinket->name; ?>">Unequip</button>
                         </div>
                     </form>
             <?php endforeach;

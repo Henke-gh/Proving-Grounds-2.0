@@ -314,16 +314,17 @@ class Hero
         $this->trinkets = $trinkets;
     }
 
-    public function getSpecificTrinket(int $trinketID): Trinket
+    public function getSpecificTrinket(string $trinketName): Trinket
     {
-        return $this->trinkets[$trinketID];
+        $trinket = $this->trinkets[$trinketName];
+        return $trinket;
     }
 
-    public function removeTrinket(int $trinketID): void
+    public function removeTrinket(int $trinketName): void
     {
         $trinkets = $this->getTrinkets();
 
-        unset($trinkets[$trinketID]);
+        unset($trinkets[$trinketName]);
 
         $this->setTrinkets($trinkets);
     }

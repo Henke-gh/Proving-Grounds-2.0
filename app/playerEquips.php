@@ -3,6 +3,7 @@
 if (isset($_POST['equip'])) {
     $itemID = $_POST['itemIndex'];
     $itemCategory = $_POST['category'];
+    $itemName = $_POST['itemName'];
     switch ($itemCategory) {
         case 'shields':
             if ($player->shield->name !== "None") {
@@ -27,7 +28,7 @@ if (isset($_POST['equip'])) {
         case 'trinkets':
             if (count($player->getTrinkets()) < 3) {
                 $player->addTrinket($player->getInventory()['trinkets'][$itemID]);
-                $player->removeInventoryItem($player->getSpecificTrinket($itemID), 'trinkets');
+                $player->removeInventoryItem($player->getSpecificTrinket($itemName), 'trinkets');
             }
             $_SESSION['player'] = $player->saveHeroState();
             $saveHero = serialize($_SESSION['player']);
@@ -74,9 +75,9 @@ if (isset($_POST['unequip'])) {
     }
 }
 if (isset($_POST['unequipTrinket'])) {
-    $trinketIndex = $_POST['unequipTrinket'];
-    $player->addInventoryTrinket($player->getSpecificTrinket($trinketIndex));
-    $player->removeTrinket($trinketIndex);
+    $trinketName = $_POST['unequipTrinket'];
+    $player->addInventoryTrinket($player->getSpecificTrinket($trinketName));
+    $player->removeTrinket($trinketName);
     $_SESSION['player'] = $player->saveHeroState();
     $saveHero = serialize($_SESSION['player']);
     $database->updateHero($_SESSION['playerID'], $saveHero);
