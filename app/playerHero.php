@@ -40,29 +40,27 @@ require __DIR__ . "/../nav/header.php";
         <div class="heroSkills">
             <h3>Skills</h3>
             <?php foreach ($player->getSkills() as $skill) :
-                if ($skill->value > 0) :
-                    switch ($skill->name):
-                        case 'Evasion': ?>
-                            <p><?= ucfirst($skill->name) . ": " . $player->getEvasion(); ?></p>
+                switch ($skill->name):
+                    case 'Evasion': ?>
+                        <p><?= ucfirst($skill->name) . ": " . $player->getEvasion(); ?></p>
+                    <?php
+                        break;
+                    case 'Initiative': ?>
+                        <p><?= ucfirst($skill->name) . ": " . $player->getInitiative(); ?></p>
+                    <?php
+                        break;
+                    case 'Block': ?>
+                        <p><?= ucfirst($skill->name) . ": " . $player->getBlock(); ?></p>
                         <?php
-                            break;
-                        case 'Initiative': ?>
-                            <p><?= ucfirst($skill->name) . ": " . $player->getInitiative(); ?></p>
-                        <?php
-                            break;
-                        case 'Block': ?>
-                            <p><?= ucfirst($skill->name) . ": " . $player->getBlock(); ?></p>
-                            <?php
-                            break;
+                        break;
 
-                        default:
-                            if ($skill->name !== 'Evasion' && $skill->name !== 'Initiative') : ?>
-                                <p><?= ucfirst($skill->name) . ": " . $skill->value; ?></p>
-                    <?php endif;
-                            break;
-                    endswitch; ?>
-
-            <?php endif;
+                    default:
+                        if ($skill->value > 0) : ?>
+                            <p><?= ucfirst($skill->name) . ": " . $skill->value; ?></p>
+                <?php endif;
+                        break;
+                endswitch; ?>
+            <?php
             endforeach; ?>
         </div>
         <div class="imageContainer">
