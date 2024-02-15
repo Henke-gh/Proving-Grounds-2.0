@@ -2,6 +2,8 @@
 require __DIR__ . "/../bootstrap.php";
 session_start();
 
+$date = date("Y-m-d");
+
 use App\Hero;
 
 $playerSaveState = $_SESSION['player'];

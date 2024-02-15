@@ -89,4 +89,20 @@ class QueryBuilder
         $hero = unserialize($heroData);
         return $hero;
     }
+
+    //Add hero to tombstone
+    public function writeOnTombstone(int $userID, string $heroName, string $heroLevel, string $date): bool
+    {
+        $this->query = "INSERT INTO tombstone (User_ID, heroName, heroLevel, date) VALUES (:User_ID, :heroName, :heroLevel, :date)";
+        $statement = $this->database->prepare($this->query);
+
+        $statement->bindParam(':User_ID', $userID, PDO::PARAM_INT);
+        $statement->bindParam(':heroName', $heroName, PDO::PARAM_STR);
+        $statement->bindParam(':heroLevel', $heroLevel, PDO::PARAM_INT);
+        $statement->bindParam(':date', $date, PDO::PARAM_STR);
+
+        $success = $statement->execute();
+
+        return $success;
+    }
 }

@@ -19,6 +19,10 @@ $heroJSON = serialize($testHero);
 $users = $database->getAllFromTable('Users');
 echo '<pre>';
 var_dump($users);
+$date = date("Y-m-d");
+
+//$database->writeOnTombstone(1, 'Fabio', 5, $date);
+echo $date;
 require __DIR__ . "/nav/header.php";
 ?>
 <main>
