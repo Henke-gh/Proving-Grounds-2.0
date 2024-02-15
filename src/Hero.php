@@ -40,11 +40,7 @@ class Hero
     public Weapon $weapon;
     public Shield $shield;
     public Armour $armour;
-    private array $trinkets = [
-        'slot1' => [],
-        'slot2' => [],
-        'slot3' => []
-    ];
+    private array $trinkets = [];
     //currently not in use. Dmg Red values are read directly from items that contribute to the total.
     private int $damageReduction = 0;
     //array containing player skills and their values.
@@ -318,24 +314,20 @@ class Hero
         $this->trinkets = $trinkets;
     }
 
-    public function getSpecificTrinket(string $trinketName): Trinket
+    public function addTrinket(Trinket $item): void
     {
-        $trinket = $this->trinkets[$trinketName];
-        return $trinket;
+        $this->trinkets[] = $item;
     }
 
-    public function removeTrinket(int $trinketName): void
+    public function removeTrinket(Trinket $item): void
     {
-        $trinkets = $this->getTrinkets();
+        // Search for the index of the trinket in the array
+        $index = array_search($item, $this->trinkets, true);
 
-        unset($trinkets[$trinketName]);
-
-        $this->setTrinkets($trinkets);
-    }
-
-    public function addTrinket(Trinket $item, string $slot): void
-    {
-        $this->trinkets[$slot][] = $item;
+        // Check if the trinket was found
+        if ($index !== false) {
+            unset($this->trinkets[$index]);
+        }
     }
 
     public function getInventory(): array
@@ -563,7 +555,7 @@ class Hero
 
         if (!empty($player['trinkets'])) {
             foreach ($player['trinkets'] as $trinket) {
-                $this->addTrinket($trinket, 'slot1');
+                $this->addTrinket($trinket);
             }
         }
     }

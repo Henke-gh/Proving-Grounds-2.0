@@ -6,8 +6,8 @@ namespace App;
 
 class Trinket extends Item
 {
-    private int $damageReduction;
-    private int $maxHP;
+    private int $damageReduction = 0;
+    private int $maxHP = 0;
 
     public function __construct(
         string $name,

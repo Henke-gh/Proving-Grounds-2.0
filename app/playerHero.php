@@ -20,9 +20,6 @@ $_SESSION['player'] = $player->saveHeroState();
 $saveHero = serialize($_SESSION['player']);
 
 $database->updateHero($_SESSION['playerID'], $saveHero);
-/* echo '<pre>';
-die(var_dump($player->getInventory()));
-echo '</pre>'; */
 require __DIR__ . "/../app/playerEquips.php";
 require __DIR__ . "/../nav/header.php";
 ?>
