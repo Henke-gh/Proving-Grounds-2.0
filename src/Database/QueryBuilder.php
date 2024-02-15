@@ -43,9 +43,9 @@ class QueryBuilder
         $this->query = "SELECT * FROM $table";
         $statement = $this->database->query($this->query);
 
-        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $table = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        return $users;
+        return $table;
     }
 
     public function addHero(int $userID, string $heroJSON, int $version): bool
@@ -69,6 +69,16 @@ class QueryBuilder
 
         $statement->bindParam(':heroData', $heroData, PDO::PARAM_STR);
         $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+
+        $success = $statement->execute();
+
+        return $success;
+    }
+
+    public function deleteHero(int $userID): bool
+    {
+        $this->query = "DELETE FROM heroes WHERE User_ID = $userID";
+        $statement = $this->database->query($this->query);
 
         $success = $statement->execute();
 
@@ -104,5 +114,19 @@ class QueryBuilder
         $success = $statement->execute();
 
         return $success;
+    }
+
+    public function readTombstone(): array
+    {
+        $this->query = "SELECT * FROM tombstone ORDER BY heroLevel DESC LIMIT 50";
+        $statement = $this->database->query($this->query);
+
+        $tombstone = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($tombstone === false) {
+            return $tombstone = [];
+        }
+
+        return $tombstone;
     }
 }

@@ -20,15 +20,15 @@ $users = $database->getAllFromTable('Users');
 echo '<pre>';
 var_dump($users);
 $date = date("Y-m-d");
-
-//$database->writeOnTombstone(1, 'Fabio', 5, $date);
+$tombstone = $database->getAllFromTable('tombstone');
+//$database->writeOnTombstone(3, 'Tern', 10, $date);
 echo $date;
 require __DIR__ . "/nav/header.php";
 ?>
 <main>
     <ul>
-        <?php foreach ($users as $user) : ?>
-            <li><?= $user['Username']; ?></li>
+        <?php foreach ($tombstone as $death) : ?>
+            <li><?= $death['heroName'] . " - " . $death['heroLevel'] . ", " . $death['date']; ?></li>
         <?php endforeach; ?>
     </ul>
 </main>

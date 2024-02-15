@@ -1,5 +1,3 @@
-<?php
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,9 +13,18 @@
     <header class="mainHeader">
         <h1>The New Proving Grounds</h1>
         <nav>
-            <a href="/../index.php">Start</a>
+            <?php if (isset($_SESSION['playerID'])) : ?>
+                <a href="/../app/playerHero.php">Hero</a>
+            <?php else : ?>
+                <a href="/../index.php">Start</a>
+            <?php endif; ?>
             <a href="#">Game Guide</a>
             <a href="#">About</a>
-            <a href="/../app/register.php">Register</a>
+            <?php if (isset($_SESSION['playerID'])) : ?>
+                <a href="/../app/tombstone.php">Tombstone</a>
+                <a href="/../app/register.php">My Account</a>
+            <?php else : ?>
+                <a href="/../app/register.php">Register</a>
+            <?php endif; ?>
         </nav>
     </header>

@@ -6,13 +6,15 @@ $date = date("Y-m-d");
 
 use App\Hero;
 
+$_SESSION['player'] = $database->getHero($_SESSION['playerID']);
 $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
 
 if ($player->isDead()) {
+    $database->writeOnTombstone($_SESSION['playerID'], $player->name, $player->getLevel(), $date);
+    $database->deleteHero($_SESSION['playerID']);
     unset($_SESSION['player']);
-    //deletePlayerData();
 }
 
 $combatLog = $_SESSION['playerDeath'];

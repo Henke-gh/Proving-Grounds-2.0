@@ -22,21 +22,6 @@ $saveHero = serialize($_SESSION['player']);
 $database->updateHero($_SESSION['playerID'], $saveHero);
 
 require __DIR__ . "/../app/playerEquips.php";
-/* 
-if (isset($_POST['equip'])) {
-    $itemToEquip = $_POST['equip'];
-
-    foreach ($weapons as $weaponType => $weaponGroup) {
-        foreach ($weaponGroup as $weapon) {
-            if ($weapon->name === $itemToEquip) {
-                $player->weapon = $weapon;
-
-                $_SESSION['player'] = $player->saveHeroState();
-            }
-        }
-    }
-}
- */
 require __DIR__ . "/../nav/header.php";
 ?>
 <main>
