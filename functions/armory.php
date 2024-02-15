@@ -76,6 +76,7 @@ $twisteddagger->setItemDescription("A wicked little thing.");
 $twisteddagger->addToArmory($weapons['Daggers']);
 
 //Shields
+//Added to default array
 $none = new Shield("None", "Shield", 0, 100, 0);
 $none->setItemDescription("It's really not ideal but you could probably deflect a blow or two with your elbow.");
 
@@ -95,6 +96,7 @@ $kiteshield->setItemDescription("A Knight\'s Shield. Emblazoned with a golden gr
 $kiteshield->addToArmory($shields);
 
 //Armour
+//Added to default array
 $tunic = new Armour("Tunic", "Armour", 0, 0, 0);
 $tunic->setDmgReduction(0);
 $tunic->setItemDescription("The merchant said it\s a nice tunic. Looks more like rags to you.");
@@ -115,6 +117,11 @@ $zehirStone = new Trinket("Stone of Zehir", "Trinket", 450, 0, 0);
 $zehirStone->setInitiativeBonus(10);
 $zehirStone->setItemDescription("Time slows down..");
 $zehirStone->addToArmory($trinkets);
+
+$bloodybrick = new Trinket("Bloody Brick", "Trinket", 340, 0, 0);
+$bloodybrick->setMaxHP(10);
+$bloodybrick->setItemDescription("It\'s dripping..");
+$bloodybrick->addToArmory($trinkets);
 
 
 //default items, if unequipped

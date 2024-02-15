@@ -40,9 +40,7 @@ class Hero
     public Weapon $weapon;
     public Shield $shield;
     public Armour $armour;
-    public Trinket $trinketSlot1;
-    public Trinket $trinketSlot2;
-    public Trinket $trinketSlot3;
+    private array $trinkets = [];
     //currently not in use. Dmg Red values are read directly from items that contribute to the total.
     private int $damageReduction = 0;
     //array containing player skills and their values.
@@ -64,7 +62,7 @@ class Hero
         $this->setCurrentGrit($this->getGrit());
         $this->setRegenHP();
         $this->setFatigue();
-        $this->setGold(125);
+        $this->setGold(12500);
         $this->addSkill(new Skill("Swords", 0));
         $this->addSkill(new Skill("Axes", 0));
         $this->addSkill(new Skill("Spears", 0));
@@ -306,6 +304,35 @@ class Hero
 
     /* Inventory and Item management */
 
+    public function getTrinkets(): array
+    {
+        return $this->trinkets;
+    }
+
+    public function setTrinkets(array $trinkets): void
+    {
+        $this->trinkets = $trinkets;
+    }
+
+    public function getSpecificTrinket(int $trinketID): Trinket
+    {
+        return $this->trinkets[$trinketID];
+    }
+
+    public function removeTrinket(int $trinketID): void
+    {
+        $trinkets = $this->getTrinkets();
+
+        unset($trinkets[$trinketID]);
+
+        $this->setTrinkets($trinkets);
+    }
+
+    public function addTrinket(Trinket $item): void
+    {
+        $this->trinkets[] = $item;
+    }
+
     public function getInventory(): array
     {
         return $this->inventory;
@@ -480,6 +507,7 @@ class Hero
             'weapon' => $this->weapon,
             'shield' => $this->shield,
             'armour' => $this->armour,
+            'trinkets' => $this->getTrinkets(),
             'skills' => $this->getSkills(),
             'inventory' => $this->getInventory(),
             'avatar' => $this->getAvatar(),
@@ -490,22 +518,6 @@ class Hero
             'fameLevel' => $this->getFameLevel(),
             'fameToNext' => $this->getFameToNext()
         ];
-
-        if (isset($this->trinketSlot1)) {
-            $heroSaveState = [
-                'trinket1' => $this->trinketSlot1
-            ];
-        }
-        if (isset($this->trinketSlot2)) {
-            $heroSaveState = [
-                'trinket2' => $this->trinketSlot2
-            ];
-        }
-        if (isset($this->trinketSlot3)) {
-            $heroSaveState = [
-                'trinket3' => $this->trinketSlot3
-            ];
-        }
 
         return $heroSaveState;
     }
@@ -544,14 +556,10 @@ class Hero
             $this->setSkill($skill->name, $skill->value);
         }
 
-        if (array_key_exists('trinket1', $player)) {
-            $this->trinketSlot1 = $player['trinket1'];
-        }
-        if (array_key_exists('trinket2', $player)) {
-            $this->trinketSlot2 = $player['trinket2'];
-        }
-        if (array_key_exists('trinket3', $player)) {
-            $this->trinketSlot3 = $player['trinket3'];
+        if (!empty($player['trinkets'])) {
+            foreach ($player['trinkets'] as $trinket) {
+                $this->addTrinket($trinket);
+            }
         }
     }
 

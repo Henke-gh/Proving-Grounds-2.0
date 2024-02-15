@@ -31,6 +31,17 @@
                     <?php endif; ?>
                 </div>
             </form>
+            <?php if (count($player->getTrinkets()) > 0) : ?>
+                <h5 class="bold">- Trinkets -</h5>
+                <?php foreach ($player->getTrinkets() as $index => $trinket) : ?>
+                    <form method="post" action="">
+                        <div class="equippedItem">
+                            <h5 class="bold"><?= $trinket->name; ?></h5>
+                            <button type="submit" name="unequipTrinket" value="<?= $index; ?>">Unequip</button>
+                        </div>
+                    </form>
+            <?php endforeach;
+            endif; ?>
             <h5 class="bold">Total Weight: <?= $player->getTotalWeight(); ?></h5>
             <h4>Inventory</h4>
             <?php if (count($player->getInventory()) > 0) : ?>
