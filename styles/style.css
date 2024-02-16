@@ -111,6 +111,12 @@ header a:hover {
 }
 /* Footer Styling */
 
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 /* Hero Creation - step 1 */
 main {
   display: flex;
