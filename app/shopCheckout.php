@@ -91,10 +91,14 @@ if (isset($_POST['purchaseTrinket'])) {
     $trinketIndex = $_POST['item'][1];
 
     $trinketToBuy = $trinkets[$trinketIndex];
+    if (in_array($trinketToBuy, $player->getInventory()['trinkets']) || in_array($trinketToBuy, $player->getTrinkets())) {
+        $_SESSION['error'] = "You can only have one of those.";
+        header('Location: /../app/shop.php');
+        exit();
+    }
     if ($player->getGold() >= $trinketToBuy->cost) {
         $playerGold = $player->getGold() - $trinketToBuy->cost;
         $player->setGold($playerGold);
-        //more work needeed here
         $player->addInventoryTrinket($trinketToBuy);
         $_SESSION['player'] = $player->saveHeroState();
         $saveHero = serialize($_SESSION['player']);

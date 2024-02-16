@@ -121,6 +121,8 @@ function showTrinket(
   iniBonus,
   evaBonus,
   blockBonus,
+  hpBonus,
+  dmgRed,
   type
 ) {
   var overlay = document.getElementById("overlay");
@@ -136,6 +138,12 @@ function showTrinket(
 
   if (blockBonus > 0) {
     inputHTML += "<p>Block: +" + blockBonus + "</p>";
+  }
+  if (hpBonus > 0) {
+    inputHTML += "<p>Max HP: +" + hpBonus + "</p>";
+  }
+  if (dmgRed > 0) {
+    inputHTML += "<p>Damage Reduction: +" + dmgRed + "</p>";
   }
 
   inputHTML +=

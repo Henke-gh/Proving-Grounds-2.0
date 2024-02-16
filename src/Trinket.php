@@ -6,9 +6,6 @@ namespace App;
 
 class Trinket extends Item
 {
-    private int $damageReduction = 0;
-    private int $maxHP = 0;
-
     public function __construct(
         string $name,
         string $type,
@@ -17,25 +14,5 @@ class Trinket extends Item
         int $weight
     ) {
         parent::__construct($name, $type, $cost, $skillRequirement, $weight);
-    }
-
-    public function setDmgReduction(int $DRvalue): void
-    {
-        $this->damageReduction = $DRvalue;
-    }
-
-    public function getDmgReduction(): int
-    {
-        return $this->damageReduction;
-    }
-
-    public function setMaxHP(int $incMaxHP): void
-    {
-        $this->maxHP = $incMaxHP;
-    }
-
-    public function getMaxHP(): int
-    {
-        return $this->maxHP;
     }
 }

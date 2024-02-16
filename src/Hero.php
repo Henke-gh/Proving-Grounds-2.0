@@ -19,6 +19,7 @@ class Hero
     private int $currentGrit = 0;
     private int $hitpoints = 0;
     private int $currentHitpoints = 0;
+    private int $bonusMaxHP = 0;
     //regeneration of HP and Grit
     private int $regenRateHP = 0;
     private int $regenRateGrit = 3;
@@ -90,10 +91,20 @@ class Hero
         return $this->avatarURL;
     }
 
+    public function setBonusMaxHP(int $value): void
+    {
+        $this->bonusMaxHP += $value;
+    }
+
+    public function getBonusMaxHP(): int
+    {
+        return $this->bonusMaxHP;
+    }
+
     //get player Max Hitpoints
     public function getHP(): int
     {
-        $this->hitpoints = (int) floor(($this->vitality * 1.5) + ($this->strength * 0.5));
+        $this->hitpoints = (int) floor(($this->vitality * 1.5) + ($this->strength * 0.5)) + $this->getBonusMaxHP();
         return $this->hitpoints;
     }
 
@@ -488,6 +499,7 @@ class Hero
             'name' => $this->name,
             'gender' => $this->gender,
             'level' => $this->getLevel(),
+            'bonusMaxHP' => $this->getBonusMaxHP(),
             'hitpoints' => $this->getHP(),
             'currentHitpoints' => $this->getCurrentHP(),
             'grit' => $this->getGrit(),
@@ -525,6 +537,7 @@ class Hero
         $this->setStrength($player['strength']);
         $this->setSpeed($player['speed']);
         $this->setVitality($player['vitality']);
+        $this->setBonusMaxHP($player['bonusMaxHP']);
         $this->getHP();
         $this->getGrit();
         $this->setLastRegen($player['lastRegen']);

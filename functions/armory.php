@@ -115,12 +115,12 @@ $ringmail->addToArmory($armours);
 //Trinkets
 $zehirStone = new Trinket("Stone of Zehir", "Trinket", 450, 0, 0);
 $zehirStone->setInitiativeBonus(10);
-$zehirStone->setItemDescription("Time slows down..");
+$zehirStone->setItemDescription("Time slows down.. (Max: 1)");
 $zehirStone->addToArmory($trinkets);
 
 $bloodybrick = new Trinket("Bloody Brick", "Trinket", 340, 0, 0);
 $bloodybrick->setMaxHP(10);
-$bloodybrick->setItemDescription("It\'s dripping..");
+$bloodybrick->setItemDescription("It\'s dripping.. (Max: 1)");
 $bloodybrick->addToArmory($trinkets);
 
 

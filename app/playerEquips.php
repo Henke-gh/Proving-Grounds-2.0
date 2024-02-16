@@ -26,8 +26,9 @@ if (isset($_POST['equip'])) {
             break;
         case 'trinkets':
             $trinket = $player->getInventory()['trinkets'][$itemID];
-            if (count($player->getTrinkets()) < 3) {
+            if (count($player->getTrinkets()) < 5) {
                 $player->addTrinket($trinket);
+                $trinket->applyBonuses($player);
                 $player->removeInventoryItem($trinket, 'trinkets');
             } else {
                 echo "Too many trinkets..";
@@ -77,11 +78,17 @@ if (isset($_POST['unequip'])) {
     }
 }
 if (isset($_POST['unequipTrinket'])) {
-    $itemID = $_POST['unequipTrinket'];
-    $trinket = $player->getTrinkets()[$itemID];
-    $player->addInventoryTrinket($trinket);
-    $player->removeTrinket($trinket);
-    $_SESSION['player'] = $player->saveHeroState();
-    $saveHero = serialize($_SESSION['player']);
-    $database->updateHero($_SESSION['playerID'], $saveHero);
+    $trinketName = $_POST['unequipTrinket'];
+    $trinkets = $player->getTrinkets();
+    foreach ($trinkets as $trinket) {
+        if ($trinket->name === $trinketName) {
+            $player->addInventoryTrinket($trinket);
+            $trinket->removeBonuses($player);
+            $player->removeTrinket($trinket);
+            $_SESSION['player'] = $player->saveHeroState();
+            $saveHero = serialize($_SESSION['player']);
+            $database->updateHero($_SESSION['playerID'], $saveHero);
+            break;
+        }
+    }
 }

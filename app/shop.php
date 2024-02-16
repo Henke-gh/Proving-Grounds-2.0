@@ -125,6 +125,8 @@ require __DIR__ . "/../nav/header.php";
                 '<?= $trinket->getInitiativeBonus(); ?>',
                 '<?= $trinket->getEvasionBonus(); ?>',
                 '<?= $trinket->getBlockBonus(); ?>',
+                '<?= $trinket->getMaxHP(); ?>',
+                '<?= $trinket->getDmgReduction(); ?>',
                 '<?= $trinket->type; ?>')">
                     <h5 class="underlineHover">[<?= $trinket->name; ?>]</h5>
                 </div>

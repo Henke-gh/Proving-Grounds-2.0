@@ -2,6 +2,15 @@
 
 require __DIR__ . "/bootstrap.php";
 require __DIR__ . "/functions/armory.php";
+
+use App\Hero;
+use App\Skill;
+
+$heroman = new Hero("Glenn", "Male");
+$heroman->setSkill("Swords", 10);
+$heroman->setSkill("Swords", 5);
+$heroman->setSkill("Swords", -5);
+var_dump($heroman->getSkills());
 $users = $database->getUsernames();
 $testHero = [
     'name' => 'Bob',
@@ -16,13 +25,13 @@ $heroJSON = serialize($testHero);
 //$database->addHero(1, $heroJSON, 1); Writes to DB, ok.
 //$hero = $database->getHero(1);
 //$database->updateHero(1, $heroJSON); Updates DB, ok.
-$users = $database->getAllFromTable('Users');
+/* $users = $database->getAllFromTable('Users');
 echo '<pre>';
 var_dump($users);
 $date = date("Y-m-d");
-$tombstone = $database->getAllFromTable('tombstone');
+$tombstone = $database->getAllFromTable('tombstone'); */
 //$database->writeOnTombstone(3, 'Tern', 10, $date);
-echo $date;
+//echo $date;
 require __DIR__ . "/nav/header.php";
 ?>
 <main>
