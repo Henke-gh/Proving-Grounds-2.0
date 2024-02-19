@@ -34,7 +34,7 @@ require_once __DIR__ . "/../nav/header.php";
             </div>
         <?php endif;
         unset($_SESSION['barComplete']) ?>
-        <img src="/../assets/images/tavernkeeper.png">
+        <img src="/../assets/images/tavernkeeper.png" class="tavernImage">
         <article>
             <p>The place has seen better days, most places have. Most places
                 probably don't even come close to this level of misery.</p>

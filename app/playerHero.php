@@ -28,7 +28,6 @@ require __DIR__ . "/../nav/header.php";
     require __DIR__ . "/../nav/ingameNavbar.php";
     require __DIR__ . "/../app/playerSummary.php";
     ?>
-
     <div class="heroStats">
         <div class="heroBaseAttributes">
             <h3>Base Attributes</h3>

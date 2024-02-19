@@ -75,7 +75,7 @@ require __DIR__ . "/../nav/header.php";
                     '<?= $weapon->getItemDescription(); ?>',
                     '<?= $weaponType; ?>',
                     '<?= $weapon->weight; ?>')">
-                            <h5 class="underlineHover">[<?= $weapon->name; ?>]</h5>
+                            <h4 class="underlineHover">[<?= $weapon->name; ?>] Dmg: <?= $weapon->minDamage . "-" . $weapon->maxDamage; ?>, Gold Cost: <?= $weapon->cost; ?></h4>
                         </div>
                     <?php
                     endforeach; ?>
@@ -94,7 +94,7 @@ require __DIR__ . "/../nav/header.php";
                 '<?= $armour->getItemDescription(); ?>',
                 '<?= $armour->type; ?>',
                 '<?= $armour->weight; ?>')">
-                    <h5 class="underlineHover">[<?= $armour->name; ?>]</h5>
+                    <h4 class="underlineHover">[<?= $armour->name; ?>] Gold Cost: <?= $armour->cost; ?></h4>
                 </div>
             <?php
             endforeach ?>
@@ -111,7 +111,7 @@ require __DIR__ . "/../nav/header.php";
                 '<?= $shield->getItemDescription(); ?>',
                 '<?= $shield->type; ?>',
                 '<?= $shield->weight; ?>')">
-                    <h5 class="underlineHover">[<?= $shield->name; ?>]</h5>
+                    <h4 class="underlineHover">[<?= $shield->name; ?>] Gold Cost: <?= $shield->cost; ?></h4>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -128,7 +128,7 @@ require __DIR__ . "/../nav/header.php";
                 '<?= $trinket->getMaxHP(); ?>',
                 '<?= $trinket->getDmgReduction(); ?>',
                 '<?= $trinket->type; ?>')">
-                    <h5 class="underlineHover">[<?= $trinket->name; ?>]</h5>
+                    <h4 class="underlineHover">[<?= $trinket->name; ?>] Gold Cost: <?= $trinket->cost; ?></h4>
                 </div>
             <?php endforeach ?>
         </div>

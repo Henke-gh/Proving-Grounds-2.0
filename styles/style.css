@@ -1,4 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Milonga&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=Rokkitt:ital,wght@0,200;0,400;0,600;0,800;1,200;1,600;1,800&display=swap");
+
 :root {
+  --header: "Milonga", serif;
+  --subHeader: "Archivo", serif;
+  --paragraph: "Rokkitt", sans-serif;
   --bloodrise: #eb4036;
   --gore: #863935;
   --orange: #eb8c4b;
@@ -14,13 +20,27 @@
 
 body {
   margin: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Rokkitt", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--sandstone);
   color: var(--warmNight);
 }
 
+h1 {
+  font-family: var(--header);
+}
+
 main {
   padding: 2%;
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 90%;
+  background-color: var(--paleYellow);
+}
+
+@media only screen and (max-width: 600px) {
+  main {
+    margin-top: 56px;
+  }
 }
 
 .container {
@@ -67,10 +87,14 @@ main {
 
 /* Header Styling */
 header {
+  position: fixed;
+  top: 0;
+  width: 100%;
   padding-top: 5px;
   padding-bottom: 10px;
   text-align: center;
   background-color: var(--lightBrown);
+  z-index: 1000;
 }
 
 header nav {
@@ -79,6 +103,7 @@ header nav {
   justify-content: space-evenly;
 }
 
+header .navLink,
 header a {
   text-decoration: none;
   font-family: Arial, Helvetica, sans-serif;
@@ -86,8 +111,24 @@ header a {
   color: var(--warmGrey);
 }
 
-header a:hover {
+header .navLink:hover {
   text-decoration: underline;
+}
+
+@media only screen and (max-width: 600px) {
+  .mobileMenu {
+    position: fixed;
+    top: 56px;
+    background-color: #819d83;
+    z-index: 999;
+  }
+
+  .mobileMenu nav {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    gap: 10px;
+  }
 }
 
 /* Mobile view */
@@ -107,7 +148,7 @@ header a:hover {
 
   .burgerIcon {
     display: block;
-    margin-right: 10px;
+    margin-right: 20px;
   }
 }
 
@@ -121,24 +162,13 @@ header a:hover {
   font-weight: bold;
   text-decoration: none;
   color: var(--warmNight);
-  background-color: var(--paleYellow);
-  padding: 10px;
-  border: 2px solid var(--lightBrown);
-  border-radius: 5px;
 }
 
 .gameNav a:hover {
-  background-color: var(--paleYellowHover);
+  text-decoration: underline;
 }
 /* Mobile view */
 @media only screen and (max-width: 600px) {
-  .gameNav {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 5px;
-  }
 }
 /* Footer Styling */
 
@@ -285,7 +315,8 @@ main {
 .heroStats {
   display: flex;
   flex-direction: row;
-  padding-top: 2%;
+  width: 80%;
+  padding: 2%;
   gap: 25px;
 }
 
@@ -346,11 +377,6 @@ main {
     width: 7rem;
     height: 7rem;
   }
-
-  .heroGear {
-    display: flex;
-    flex-direction: row;
-  }
 }
 
 /* playerHero Styling */
@@ -361,11 +387,18 @@ main {
 .combatStatistics {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.combatStatistics h4,
+.combatStatistics p {
+  margin-bottom: 0;
 }
 
 .combatStatValues {
   display: flex;
   flex-direction: row;
+  gap: 20px;
 }
 @media only screen and (max-width: 600px) {
   .combatStatsImage {
@@ -374,7 +407,6 @@ main {
   }
 }
 /* Shop Styling */
-
 .weaponContainer h3 {
   margin-bottom: 0;
 }
@@ -396,8 +428,15 @@ main {
 
 .shopContainer {
   display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.categorySelector {
+  display: flex;
   flex-direction: row;
-  gap: 25px;
+  justify-content: center;
+  gap: 5px;
 }
 
 /* Shop Item Display Modulo */
@@ -442,4 +481,13 @@ main {
 
 .details form button {
   margin-top: 15px;
+}
+
+/* Tavern */
+.tavernContainer {
+  width: 90%;
+}
+
+.tavernImage {
+  width: 100%;
 }
