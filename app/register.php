@@ -40,3 +40,5 @@ require __DIR__ . "/../nav/header.php";
         </div>
     </form>
 </main>
+<?php
+require_once __DIR__ . "/../nav/footer.php";

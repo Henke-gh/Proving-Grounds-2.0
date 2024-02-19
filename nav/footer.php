@@ -7,6 +7,7 @@
             <button type="submit" name="deleteHero">Delete Hero</button>
         </form>
     <?php endif; ?>
+    <p>Henrik Andersen 2024 - The Proving Grounds</p>
 </footer>
 <script src="/../styles/script.js"></script>
 </body>

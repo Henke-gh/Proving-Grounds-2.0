@@ -176,6 +176,9 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  background-color: #819d83;
+  margin-top: 15%;
+  padding-bottom: 5px;
 }
 
 /* Index, news & login form */
@@ -203,6 +206,10 @@ main {
   align-items: center;
 }
 
+.characterCreation {
+  width: 100%;
+}
+
 .characterCreate {
   display: flex;
   flex-direction: column;
@@ -213,7 +220,10 @@ main {
 .characterCreate button {
   font-size: 1.5rem;
   font-weight: bold;
-  background-color: var(--gold);
+  background-color: var(--lightBrown);
+  font-family: var(--paragraph);
+  border: 0;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -234,7 +244,6 @@ main {
   .avatar {
     box-sizing: border-box;
     padding: 5px;
-    max-width: 80%;
     margin: 0 auto;
   }
 }
