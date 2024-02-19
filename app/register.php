@@ -24,19 +24,19 @@ require __DIR__ . "/../nav/header.php";
     <h2>Welcome to the Proving Grounds</h2>
     <form method="post" action="">
         <div class="loginForm">
-            <div class="loginItem"></div>
-            <label for="username">Username:</label>
-            <input type="text" required id="username" name="username">
-        </div>
-        <div class="loginItem">
-            <label for="password">Password:</label>
-            <input type="password" required id="password" name="password">
-        </div>
-        <div class="loginItem">
-            <label for="passwordRepeat">Repeat Password:</label>
-            <input type="password" required id="passwordRepeat" name="passwordRepeat">
-        </div>
-        <button type="submit" name="register">Login</button>
+            <div class="loginItem">
+                <label for="username">Username:</label>
+                <input type="text" required id="username" name="username">
+            </div>
+            <div class="loginItem">
+                <label for="password">Password:</label>
+                <input type="password" required id="password" name="password">
+            </div>
+            <div class="loginItem">
+                <label for="passwordRepeat">Repeat Password:</label>
+                <input type="password" required id="passwordRepeat" name="passwordRepeat">
+            </div>
+            <button type="submit" name="register">Register</button>
         </div>
     </form>
 </main>

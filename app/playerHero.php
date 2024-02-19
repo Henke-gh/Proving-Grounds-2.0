@@ -62,18 +62,18 @@ require __DIR__ . "/../nav/header.php";
             <?php
             endforeach; ?>
         </div>
-        <div class="imageContainer">
-            <img src="/assets/images/crossing_swords.png" title="swords">
+    </div>
+    <div class="imageContainer">
+        <img src="/assets/images/crossing_swords.png" title="swords" class="combatStatsImage">
+    </div>
+    <div class="combatStatistics">
+        <h4>Combat Stats</h4>
+        <div class="combatStatValues">
+            <p>Wins: <?= $player->getWins(); ?></p>
+            <p>Losses: <?= $player->getLosses(); ?></p>
+            <p>Total: <?= $player->getTotalFights(); ?></p>
         </div>
-        <div class="combatStatistics">
-            <h4>Combat Stats</h4>
-            <div class="combatStatValues">
-                <p>Wins: <?= $player->getWins(); ?></p>
-                <p>Losses: <?= $player->getLosses(); ?></p>
-                <p>Total: <?= $player->getTotalFights(); ?></p>
-                <p>Win Ratio: <?= $player->getWinLossRatio(); ?>%</p>
-            </div>
-        </div>
+        <p>Win Ratio: <?= $player->getWinLossRatio(); ?>%</p>
     </div>
 </main>
 <?php

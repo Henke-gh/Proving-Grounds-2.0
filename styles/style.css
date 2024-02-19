@@ -90,6 +90,27 @@ header a:hover {
   text-decoration: underline;
 }
 
+/* Mobile view */
+@media only screen and (max-width: 600px) {
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 10px;
+  }
+  header h1 {
+    font-size: 1em;
+  }
+  header nav {
+    display: none;
+  }
+
+  .burgerIcon {
+    display: block;
+    margin-right: 10px;
+  }
+}
+
 /* Game Nav Styling */
 .gameNav {
   margin-bottom: 15px;
@@ -109,12 +130,40 @@ header a:hover {
 .gameNav a:hover {
   background-color: var(--paleYellowHover);
 }
+/* Mobile view */
+@media only screen and (max-width: 600px) {
+  .gameNav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+}
 /* Footer Styling */
 
 footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+/* Index, news & login form */
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.loginForm button {
+  width: fit-content;
+}
+
+.loginItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 /* Hero Creation - step 1 */
@@ -143,6 +192,21 @@ main {
 .characterCreate select,
 .characterCreate option {
   width: fit-content;
+}
+
+/* Mobile view */
+@media only screen and (max-width: 600px) {
+  .avatarSelect {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .avatar {
+    box-sizing: border-box;
+    padding: 5px;
+    max-width: 80%;
+    margin: 0 auto;
+  }
 }
 
 /* Hero Creation - step 2 */
@@ -193,6 +257,11 @@ main {
   padding: 2%;
 }
 
+.heroCard {
+  display: flex;
+  flex-direction: row;
+}
+
 .heroGeneralContainer {
   display: flex;
   flex-direction: row;
@@ -210,6 +279,7 @@ main {
 .playerAvatar {
   width: 12rem;
   height: 12rem;
+  margin-right: 15px;
 }
 
 .heroStats {
@@ -241,10 +311,67 @@ main {
   height: fit-content;
   align-self: center;
 }
+/* Mobile View */
+@media only screen and (max-width: 600px) {
+  .summaryContainer {
+    width: 95%;
+  }
+  .heroGeneralContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 2%;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .heroGeneralStats {
+    border: none;
+  }
+
+  .heroGeneralStats p {
+    margin: 0;
+  }
+
+  .heroStats p {
+    margin: 0;
+  }
+
+  .heroCard,
+  .heroBaseAttributes {
+    padding-right: 5%;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .playerAvatar {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .heroGear {
+    display: flex;
+    flex-direction: row;
+  }
+}
 
 /* playerHero Styling */
 .imageContainer {
   width: fit-content;
+}
+
+.combatStatistics {
+  display: flex;
+  flex-direction: column;
+}
+
+.combatStatValues {
+  display: flex;
+  flex-direction: row;
+}
+@media only screen and (max-width: 600px) {
+  .combatStatsImage {
+    width: 5rem;
+    height: 5rem;
+  }
 }
 /* Shop Styling */
 
