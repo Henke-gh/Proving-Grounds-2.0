@@ -5,6 +5,7 @@ require __DIR__ . "/nav/header.php";
 ?>
 <main>
     <h2>Welcome to the Proving Grounds</h2>
+    <img src="/assets/images/crossing_swords.png">
     <?php if (isset($_SESSION['loginFailed'])) : ?>
         <p><?= $_SESSION['loginFailed']; ?></p>
     <?php
@@ -25,8 +26,9 @@ require __DIR__ . "/nav/header.php";
         </div>
     </form>
     <div class="newsMessage">
-        <h3>Latest changes</h3>
-        <p>Things have happened</p>
+        <h3>News/ Latest changes 19/2-24</h3>
+        <p>Much left to do, esp regarding responsiveness.</p>
+        <p>All basic gameplay elements in place.</p>
     </div>
 </main>
 <?php
