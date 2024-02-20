@@ -104,7 +104,7 @@ class Hero
     //get player Max Hitpoints
     public function getHP(): int
     {
-        $this->hitpoints = (int) floor(($this->vitality * 1.5) + ($this->strength * 0.5)) + $this->getBonusMaxHP();
+        $this->hitpoints = (int) floor(($this->vitality * 1.2) + ($this->strength * 0.5)) + $this->getBonusMaxHP();
         return $this->hitpoints;
     }
 

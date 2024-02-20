@@ -42,6 +42,26 @@ $angvarBull->setSkill("Initiative", 25);
 $angvarBull->setDescription("A ferocious bull from the southern plains.");
 $monsterLibrary->addMonster($angvarBull);
 
+$legionnairescout = new Monster("Legionnaire Scout", 6, 40, 35, new Weapon("Scimitar", "Accuracy", 0, 30, 3, 9, 0));
+$legionnairescout->setSkill("Accuracy", 50);
+$legionnairescout->setSkill("Evasion", 35);
+$legionnairescout->setDescription("Forward scout of the Red Legion");
+$monsterLibrary->addMonster($legionnairescout);
+
+$yountroll = new Monster("Young Troll", 8, 55, 35, new Weapon("Heavy Club", "Accuracy", 0, 20, 4, 10, 0));
+$yountroll->setSkill("Accuracy", 40);
+$yountroll->setDmgReduction(1);
+$yountroll->setDescription("The offspring of something much larger..");
+$monsterLibrary->addMonster($yountroll);
+
+$commander = new Monster("Legionnaire Commander", 10, 70, 40, new Weapon("Long Sword", "Accuracy", 0, 40, 5, 12, 0));
+$commander->setSkill("Accuracy", 60);
+$commander->setSkill("Evasion", 20);
+$commander->setSkill("Initiative", 10);
+$commander->setDmgReduction(1);
+$commander->setDescription("Acknowledge only victory.");
+$monsterLibrary->addMonster($commander);
+
 //Only for testing
 $giftborn = new Monster("Gift-Born", 100, 1, 500, new Weapon("Palm", "Accuracy", 0, 0, 0, 0, 0));
 $giftborn->setSkill("Accuracy", 5);

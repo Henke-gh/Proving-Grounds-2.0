@@ -37,9 +37,6 @@ if (isset($_POST['fight'])) {
     }
 }
 
-/* $player->regenerateHPnGrit();
-$_SESSION['player'] = $player->saveHeroState(); */
-
 if (isset($_POST['back'])) {
     levelUp($player);
     unset($_POST['fight']);

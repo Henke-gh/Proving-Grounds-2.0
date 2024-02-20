@@ -1,5 +1,7 @@
 <?php
 //_step3 finalizes hero creation and verifies the player has spent the correct number of skill points.
+//weird bug that requires autoload even though it's included in bootstrap, fails to import hero weapon otherwise
+require __DIR__ . "/../vendor/autoload.php";
 require __DIR__ . "/../bootstrap.php";
 
 use App\Hero;

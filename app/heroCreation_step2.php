@@ -14,7 +14,6 @@ if (isset($_POST['createHero'])) {
     $player = new Hero($name, $gender);
     $player->setAvatar($avatarURL);
     $player->setLastRegen(time());
-
     $_SESSION['player'] = $player->saveHeroState();
     //Re-instances the hero if user spent too many or too few skill points. Try again.
 } elseif (isset($_SESSION['heroCreation'])) {
@@ -33,7 +32,12 @@ require __DIR__ . "/../nav/header.php";
 ?>
 
 <main>
-    <?php if (isset($_SESSION['error'])) : ?>
+    <?php
+    echo '<pre>';
+    var_dump($_SESSION['player']);
+    echo '</pre>';
+
+    if (isset($_SESSION['error'])) : ?>
         <div class="errorMsg">
             <h3><?= $_SESSION['error']; ?></h3>
         </div>
