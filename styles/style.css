@@ -119,15 +119,44 @@ header .navLink:hover {
   .mobileMenu {
     position: fixed;
     top: 56px;
+    width: 50vw;
     background-color: #819d83;
+    border-bottom-left-radius: 10px;
     z-index: 999;
+    right: 0;
+  }
+
+  .mobileMenu h3 {
+    text-decoration: underline;
   }
 
   .mobileMenu nav {
     display: flex;
     flex-direction: column;
     padding: 5px;
+    margin-left: 10px;
     gap: 10px;
+  }
+
+  .gameMenuSmall {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .gameMenuSmall form {
+    margin: 15px 0;
+  }
+
+  .navLink {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--warmGrey);
+    cursor: pointer;
+  }
+
+  .navLink:hover {
+    text-decoration: underline;
   }
 }
 
@@ -169,6 +198,9 @@ header .navLink:hover {
 }
 /* Mobile view */
 @media only screen and (max-width: 600px) {
+  .gameNav {
+    display: none;
+  }
 }
 /* Footer Styling */
 
@@ -287,7 +319,14 @@ main {
 /* Level Up Message Box */
 .levelUpMsg {
   background-color: var(--gold);
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
   margin-bottom: 2%;
+  border-bottom: 10px solid var(--lightBrown);
+}
+.levelUpMsg h4 {
+  margin: 5px 0;
 }
 /* playerHero Summary Page */
 .summaryContainer {

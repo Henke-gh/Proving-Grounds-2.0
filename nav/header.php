@@ -37,20 +37,34 @@
         </nav>
         <img src="/../assets/images/menu.svg" class="hidden burgerIcon">
     </header>
+
     <div class="mobileMenu hidden">
         <nav>
             <?php if (isset($_SESSION['playerID'])) : ?>
-                <a href="/../app/playerHero.php" class="navLink">Hero</a>
+                <div class="gameMenuSmall">
+                    <h3>Game</h3>
+                    <a href="/../app/playerHero.php" class="navLink gameLink">Hero</a>
+                    <a href="/../app/combat.php" class="navLink gameLink">Combat</a>
+                    <a href="/../app/shop.php" class="navLink gameLink">Shop</a>
+                    <a href="/../app/hospital.php" class="navLink gameLink">Healing</a>
+                    <a href="/../app/tavern.php" class="navLink gameLink">Tavern</a>
+                </div>
             <?php else : ?>
                 <a href="/../index.php" class="navLink">Start</a>
             <?php endif; ?>
-            <a href="#" class="navLink">About</a>
-            <a href="#" class="navLink">Game Guide</a>
-            <?php if (isset($_SESSION['playerID'])) : ?>
-                <a href="/../app/tombstone.php" class="navLink">Tombstone</a>
-                <a href="/../app/register.php" class="navLink">My Account</a>
-            <?php else : ?>
-                <a href="/../app/register.php" class="navLink">Register</a>
-            <?php endif; ?>
+            <h3>Site Nav</h3>
+            <div class="gameMenuSmall">
+                <a href="#" class="navLink">About</a>
+                <a href="#" class="navLink">Game Guide</a>
+                <?php if (isset($_SESSION['playerID'])) : ?>
+                    <a href="/../app/tombstone.php" class="navLink">Tombstone</a>
+                    <a href="/../app/register.php" class="navLink">My Account</a>
+                    <form method="post" action="/../app/logout.php">
+                        <button type="submit" name="logout">Log Out</button>
+                    </form>
+                <?php else : ?>
+                    <a href="/../app/register.php" class="navLink">Register</a>
+                <?php endif; ?>
+            </div>
         </nav>
     </div>

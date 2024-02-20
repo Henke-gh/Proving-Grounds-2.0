@@ -34,6 +34,9 @@ if (isset($_POST['getHeal'])) {
             $player->setCurrentHP($player->getCurrentHP() + $item['value']);
             $player->setGold($player->getGold() - $item['cost']);
             $_SESSION['player'] = $player->saveHeroState();
+            $saveHero = serialize($_SESSION['player']);
+
+            $database->updateHero($_SESSION['playerID'], $saveHero);
             echo "You bought " . $item['name'];
             break;
         } elseif ($item['name'] === $boughtItem && $player->getGold() < $item['cost']) {
@@ -47,6 +50,9 @@ if (isset($_POST['heal'])) {
     $player->setCurrentHP($player->getHP());
     $player->setCurrentGrit($player->getGrit());
     $_SESSION['player'] = $player->saveHeroState();
+    $saveHero = serialize($_SESSION['player']);
+
+    $database->updateHero($_SESSION['playerID'], $saveHero);
 }
 
 require __DIR__ . "/../nav/header.php";

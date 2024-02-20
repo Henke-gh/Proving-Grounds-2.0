@@ -99,7 +99,7 @@ require __DIR__ . "/../nav/header.php";
                 <p class="cursive logLine"><?= $line; ?></p>
             <?php endforeach; ?>
             <form method="post">
-                <button type="submit" name="back">Back</button>
+                <button type="submit" name="back">Continue</button>
             </form>
         </div>
     <?php endif; ?>

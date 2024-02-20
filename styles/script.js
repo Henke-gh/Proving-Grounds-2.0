@@ -12,4 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
       mobileMenu.style.display = "none";
     }
   });
+  //closes mobile menu if user clicks outside the menu element.
+  document.body.addEventListener("click", function (event) {
+    if (!mobileMenu.contains(event.target) && event.target !== menuToggle) {
+      mobileMenu.style.display = "none";
+    }
+  });
 });
