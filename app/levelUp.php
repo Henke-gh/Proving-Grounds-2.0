@@ -1,9 +1,9 @@
 <?php
 
 require __DIR__ . "/../bootstrap.php";
+require __DIR__ . "/../functions/heroFunctions.php";
 require __DIR__ . "/../functions/levelUpFunctions.php";
 require __DIR__ . "/../functions/armory.php";
-session_start();
 
 if (!isset($_SESSION['player'])) {
     header('Location: /../app/heroCreation_step1.php');
@@ -15,19 +15,8 @@ if (!isset($_SESSION['levelUp']) || !$_SESSION['levelUp'] === true) {
     exit();
 }
 
-use App\Hero;
-
-$_SESSION['player'] = $database->getHero($_SESSION['playerID']);
-
-$playerSaveState = $_SESSION['player'];
-$player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
-$player->loadHeroState($playerSaveState);
-
-$player->regenerateHPnGrit();
-$_SESSION['player'] = $player->saveHeroState();
-$saveHero = serialize($_SESSION['player']);
-
-$database->updateHero($_SESSION['playerID'], $saveHero);
+$player = loadHero($database);
+saveHero($player, $database);
 
 $skillPoints = 20;
 

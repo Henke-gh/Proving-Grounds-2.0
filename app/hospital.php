@@ -1,28 +1,17 @@
 <?php
 
 require __DIR__ . "/../bootstrap.php";
+require __DIR__ . "/../functions/heroFunctions.php";
 require __DIR__ . "/../functions/armory.php";
 require __DIR__ . "/../functions/healingItems.php";
-session_start();
-
-use App\Hero;
 
 if (!isset($_SESSION['player'])) {
     header('Location: /../app/heroCreation_step1.php');
     exit();
 }
 
-$_SESSION['player'] = $database->getHero($_SESSION['playerID']);
-
-$playerSaveState = $_SESSION['player'];
-$player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
-$player->loadHeroState($playerSaveState);
-
-$player->regenerateHPnGrit();
-$_SESSION['player'] = $player->saveHeroState();
-$saveHero = serialize($_SESSION['player']);
-
-$database->updateHero($_SESSION['playerID'], $saveHero);
+$player = loadHero($database);
+saveHero($player, $database);
 
 require __DIR__ . "/../app/playerEquips.php";
 
@@ -33,10 +22,7 @@ if (isset($_POST['getHeal'])) {
         if ($item['name'] === $boughtItem && $player->getGold() >= $item['cost']) {
             $player->setCurrentHP($player->getCurrentHP() + $item['value']);
             $player->setGold($player->getGold() - $item['cost']);
-            $_SESSION['player'] = $player->saveHeroState();
-            $saveHero = serialize($_SESSION['player']);
-
-            $database->updateHero($_SESSION['playerID'], $saveHero);
+            saveHero($player, $database);
             echo "You bought " . $item['name'];
             break;
         } elseif ($item['name'] === $boughtItem && $player->getGold() < $item['cost']) {
@@ -49,10 +35,7 @@ if (isset($_POST['getHeal'])) {
 if (isset($_POST['heal'])) {
     $player->setCurrentHP($player->getHP());
     $player->setCurrentGrit($player->getGrit());
-    $_SESSION['player'] = $player->saveHeroState();
-    $saveHero = serialize($_SESSION['player']);
-
-    $database->updateHero($_SESSION['playerID'], $saveHero);
+    saveHero($player, $database);
 }
 
 require __DIR__ . "/../nav/header.php";

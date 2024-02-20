@@ -10,9 +10,7 @@ if (isset($_POST['equip'])) {
             }
             $player->shield = $player->getInventory()['shields'][$itemID];
             $player->removeInventoryItem($player->shield, 'shields');
-            $_SESSION['player'] = $player->saveHeroState();
-            $saveHero = serialize($_SESSION['player']);
-            $database->updateHero($_SESSION['playerID'], $saveHero);
+            saveHero($player, $database);
             break;
         case 'armours':
             if ($player->armour->name !== "Tunic") {
@@ -20,9 +18,7 @@ if (isset($_POST['equip'])) {
             }
             $player->armour = $player->getInventory()['armours'][$itemID];
             $player->removeInventoryItem($player->armour, 'armours');
-            $_SESSION['player'] = $player->saveHeroState();
-            $saveHero = serialize($_SESSION['player']);
-            $database->updateHero($_SESSION['playerID'], $saveHero);
+            saveHero($player, $database);
             break;
         case 'trinkets':
             $trinket = $player->getInventory()['trinkets'][$itemID];
@@ -33,9 +29,7 @@ if (isset($_POST['equip'])) {
             } else {
                 echo "Too many trinkets..";
             }
-            $_SESSION['player'] = $player->saveHeroState();
-            $saveHero = serialize($_SESSION['player']);
-            $database->updateHero($_SESSION['playerID'], $saveHero);
+            saveHero($player, $database);
             break;
 
         default:
@@ -44,9 +38,7 @@ if (isset($_POST['equip'])) {
             }
             $player->weapon = $player->getInventory()['weapons'][$itemID];
             $player->removeInventoryItem($player->weapon, 'weapons');
-            $_SESSION['player'] = $player->saveHeroState();
-            $saveHero = serialize($_SESSION['player']);
-            $database->updateHero($_SESSION['playerID'], $saveHero);
+            saveHero($player, $database);
             break;
     }
 }
@@ -57,23 +49,17 @@ if (isset($_POST['unequip'])) {
         case 'weapon':
             $player->addInventoryWeapon($player->weapon);
             $player->weapon = $defaultItems['weapon'];
-            $_SESSION['player'] = $player->saveHeroState();
-            $saveHero = serialize($_SESSION['player']);
-            $database->updateHero($_SESSION['playerID'], $saveHero);
+            saveHero($player, $database);
             break;
         case 'shield':
             $player->addInventoryShield($player->shield);
             $player->shield = $defaultItems['shield'];
-            $_SESSION['player'] = $player->saveHeroState();
-            $saveHero = serialize($_SESSION['player']);
-            $database->updateHero($_SESSION['playerID'], $saveHero);
+            saveHero($player, $database);
             break;
         case 'armour':
             $player->addInventoryArmour($player->armour);
             $player->armour = $defaultItems['armour'];
-            $_SESSION['player'] = $player->saveHeroState();
-            $saveHero = serialize($_SESSION['player']);
-            $database->updateHero($_SESSION['playerID'], $saveHero);
+            saveHero($player, $database);
             break;
     }
 }
@@ -85,9 +71,7 @@ if (isset($_POST['unequipTrinket'])) {
             $player->addInventoryTrinket($trinket);
             $trinket->removeBonuses($player);
             $player->removeTrinket($trinket);
-            $_SESSION['player'] = $player->saveHeroState();
-            $saveHero = serialize($_SESSION['player']);
-            $database->updateHero($_SESSION['playerID'], $saveHero);
+            saveHero($player, $database);
             break;
         }
     }

@@ -30,16 +30,21 @@ h1 {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 2%;
   margin: 0 auto;
   margin-top: 100px;
-  width: 90%;
+  padding-bottom: 5%;
+  width: 70%;
   background-color: var(--paleYellow);
 }
 
 @media only screen and (max-width: 600px) {
   main {
     margin-top: 56px;
+    width: 90%;
   }
 }
 
@@ -155,6 +160,11 @@ header .navLink:hover {
     cursor: pointer;
   }
 
+  .gameLink {
+    background-color: #8fc695;
+    padding: 4px;
+  }
+
   .navLink:hover {
     text-decoration: underline;
   }
@@ -209,7 +219,6 @@ footer {
   flex-direction: row;
   justify-content: space-between;
   background-color: #819d83;
-  margin-top: 15%;
   padding-bottom: 5px;
 }
 
@@ -232,12 +241,6 @@ footer {
 }
 
 /* Hero Creation - step 1 */
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .characterCreation {
   width: 100%;
 }
@@ -323,7 +326,7 @@ main {
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 2%;
-  border-bottom: 10px solid var(--lightBrown);
+  border-bottom: 5px solid rgb(207, 151, 60);
 }
 .levelUpMsg h4 {
   margin: 5px 0;
@@ -538,4 +541,11 @@ main {
 
 .tavernImage {
   width: 100%;
+}
+
+/* Combat Page & Log */
+.combatlog form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

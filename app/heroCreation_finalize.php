@@ -1,7 +1,6 @@
 <?php
 //_step3 finalizes hero creation and verifies the player has spent the correct number of skill points.
 require __DIR__ . "/../bootstrap.php";
-session_start();
 
 use App\Hero;
 

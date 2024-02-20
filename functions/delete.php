@@ -1,8 +1,9 @@
 <?php
 
 declare(strict_types=1);
-session_start();
+
 require __DIR__ . "/../bootstrap.php";
+
 if (isset($_SESSION['playerID'])) {
 
     if (isset($_POST['deleteHero'])) {

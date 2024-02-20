@@ -1,28 +1,16 @@
 <?php
 require __DIR__ . "/../bootstrap.php";
+require __DIR__ . "/../functions/heroFunctions.php";
 require __DIR__ . "/../app/monsterLibrary.php";
 require __DIR__ . "/../functions/combatLogic.php";
 require __DIR__ . "/../functions/levelUpFunctions.php";
-session_start();
-
-use App\Hero;
 
 if (!isset($_SESSION['player'])) {
     header('Location: /../app/heroCreation_step1.php');
     exit();
 }
-
-$_SESSION['player'] = $database->getHero($_SESSION['playerID']);
-
-$playerSaveState = $_SESSION['player'];
-$player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
-$player->loadHeroState($playerSaveState);
-
-$player->regenerateHPnGrit();
-$_SESSION['player'] = $player->saveHeroState();
-$saveHero = serialize($_SESSION['player']);
-
-$database->updateHero($_SESSION['playerID'], $saveHero);
+$player = loadHero($database);
+saveHero($player, $database);
 
 require __DIR__ . "/../app/playerEquips.php";
 
@@ -37,9 +25,7 @@ if (isset($_POST['fight'])) {
     if ($player->getCurrentGrit() > 0) {
         $selectedMonster = $monsterLibrary->getMonster($selectedMonsterID);
         $combatLog = doBattle($player, $selectedMonster, $retreat);
-        $_SESSION['player'] = $player->saveHeroState();
-        $saveHero = serialize($_SESSION['player']);
-        $database->updateHero($_SESSION['playerID'], $saveHero);
+        saveHero($player, $database);
         //if the player dies during combat, user is sent directly to death screen.
         if ($player->isDead()) {
             header('Location: /../app/death.php');
@@ -62,8 +48,7 @@ require __DIR__ . "/../nav/header.php";
 ?>
 
 <main>
-    <?php require __DIR__ . "/../app/levelUpMessage.php";
-    if (!isset($_POST['fight'])) :
+    <?php if (!isset($_POST['fight'])) :
         require __DIR__ . "/../nav/ingameNavbar.php";
         require __DIR__ . "/../app/playerSummary.php";
     ?>
