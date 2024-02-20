@@ -33,10 +33,6 @@ require __DIR__ . "/../nav/header.php";
 
 <main>
     <?php
-    echo '<pre>';
-    var_dump($_SESSION['player']);
-    echo '</pre>';
-
     if (isset($_SESSION['error'])) : ?>
         <div class="errorMsg">
             <h3><?= $_SESSION['error']; ?></h3>
