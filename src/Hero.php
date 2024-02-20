@@ -29,7 +29,7 @@ class Hero
     //fame and xp values, used to calculate when (and what) to level up player hero
     private int $level = 1;
     private int $xp = 0;
-    private int $xpToNextLvl = 125;
+    private int $xpToNextLvl = 100;
     private int $fameLevel = 0;
     private int $fameScore = 0;
     private int $nextFameLvl = 10;
@@ -63,7 +63,7 @@ class Hero
         $this->setCurrentGrit($this->getGrit());
         $this->setRegenHP();
         $this->setFatigue();
-        $this->setGold(12500);
+        $this->setGold(125);
         $this->addSkill(new Skill("Swords", 0));
         $this->addSkill(new Skill("Axes", 0));
         $this->addSkill(new Skill("Spears", 0));

@@ -30,7 +30,7 @@
             <a href="#" class="navLink">Game Guide</a>
             <?php if (isset($_SESSION['playerID'])) : ?>
                 <a href="/../app/tombstone.php" class="navLink">Tombstone</a>
-                <a href="/../app/register.php" class="navLink">My Account</a>
+                <a href="#" class="navLink">My Account</a>
             <?php else : ?>
                 <a href="/../app/register.php" class="navLink">Register</a>
             <?php endif; ?>

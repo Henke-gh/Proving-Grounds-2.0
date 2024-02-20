@@ -111,7 +111,7 @@ header nav {
 header .navLink,
 header a {
   text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--paragraph);
   font-weight: bold;
   color: var(--warmGrey);
 }
@@ -217,9 +217,22 @@ header .navLink:hover {
 footer {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   background-color: #819d83;
   padding-bottom: 5px;
+}
+
+.logoutContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 25px;
+}
+
+@media only screen and (max-width: 600px) {
+  .logoutContainer {
+    display: none;
+  }
 }
 
 /* Index, news & login form */
@@ -334,7 +347,7 @@ footer {
 /* playerHero Summary Page */
 .summaryContainer {
   background-color: var(--paleYellow);
-  width: 80%;
+  width: 100%;
   padding: 2%;
 }
 
@@ -421,12 +434,17 @@ footer {
   .heroCard,
   .heroBaseAttributes {
     padding-right: 5%;
-    border-bottom: 2px solid var(--gold);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--gold);
   }
 
   .playerAvatar {
     width: 7rem;
     height: 7rem;
+  }
+
+  .heroGear {
+    width: 80%;
   }
 }
 

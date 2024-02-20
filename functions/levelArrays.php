@@ -3,16 +3,26 @@
 declare(strict_types=1);
 
 $levels = [
-    'level 1' => 125,
-    'level 2' => 250,
-    'level 3' => 375,
-    'level 4' => 525,
-    'level 5' => 700,
+    'level 1' => 100,
+    'level 2' => 225,
+    'level 3' => 350,
+    'level 4' => 500,
+    'level 5' => 675,
     'level 6' => 900,
     'level 7' => 1125,
     'level 8' => 1350,
     'level 9' => 1700,
-    'level 10' => 2000
+    'level 10' => 2000,
+    'level 11' => 2300,
+    'level 12' => 2600,
+    'level 13' => 2950,
+    'level 14' => 3300,
+    'level 15' => 3700,
+    'level 16' => 4100,
+    'level 17' => 4500,
+    'level 18' => 4900,
+    'level 19' => 5300,
+    'level 20' => 6000
 ];
 
 $fameLevels = [
@@ -26,18 +36,30 @@ $fameLevels = [
     ],
     [
         'fame' => 25,
-        'title' => 'Gladiator'
-    ],
-    [
-        'fame' => 50,
         'title' => 'Ferocious Fighter'
     ],
     [
+        'fame' => 50,
+        'title' => 'Gladiator'
+    ],
+    [
         'fame' => 75,
-        'title' => 'Champion'
+        'title' => 'Seasoned Veteran'
     ],
     [
         'fame' => 100,
-        'title' => 'Anointed War-Bringer'
+        'title' => 'Champion'
+    ],
+    [
+        'fame' => 130,
+        'title' => 'Hero of the People'
+    ],
+    [
+        'fame' => 160,
+        'title' => 'Mythical Duelist'
+    ],
+    [
+        'fame' => 200,
+        'title' => 'Fabled Legend'
     ],
 ];
