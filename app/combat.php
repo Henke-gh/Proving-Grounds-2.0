@@ -56,10 +56,10 @@ require __DIR__ . "/../nav/header.php";
             foreach ($monsterLibrary->getAllMonsters() as $monster) : ?>
                 <div class="monster pointer underlineHover" onclick="showDetails(<?= $monsterID++; ?>,
                 '<?= $monster->name; ?>',
-                '<?= $monster->level; ?>',
+                '<?= $monster->getLevel(); ?>',
                 '<?= $monster->weapon->name; ?>',
                 '<?= $monster->getDescription(); ?>')">
-                    <p>Level: <?= $monster->level; ?> [<?= $monster->name; ?>]</p>
+                    <p>Level: <?= $monster->getLevel(); ?> [<?= $monster->name; ?>]</p>
                 </div>
             <?php endforeach; ?>
         </div>
