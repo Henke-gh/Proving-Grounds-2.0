@@ -30,7 +30,6 @@ class Creature
     //Construct and initialize a new player hero with some base values.
     public function __construct(public string $name)
     {
-        $this->setCurrentHP($this->getHP());
         $this->addSkill(new Skill("Swords", 0));
         $this->addSkill(new Skill("Axes", 0));
         $this->addSkill(new Skill("Spears", 0));
@@ -218,5 +217,52 @@ class Creature
     public function getDmgReduction(): int
     {
         return $this->damageReduction;
+    }
+
+    //+++ Combat +++
+
+    //initial damage calculation
+    public function doDamage(): int
+    {
+        $strengthBonus = (int) floor($this->getStrength() / 10);
+        $weaponDamage = rand($this->weapon->minDamage, $this->weapon->maxDamage);
+        $damage = $weaponDamage + $strengthBonus;
+        return $damage;
+    }
+
+    public function sufferDamage(int $damage): int
+    {
+        $this->currentHitpoints -= $damage;
+        return $damage;
+    }
+
+    //Gets the skill value that matches equipped Weapon type. Otherwise uses Strength + Speed value instead of weapon skill.
+    public function toHitChance(): int
+    {
+        $unarmed = $this->getStrength() + $this->getSpeed();
+        foreach ($this->skills as $skill) {
+            if ($skill->name === $this->weapon->type) {
+                return $skill->value;
+            }
+        }
+        return $unarmed;
+    }
+
+    public function canBlock(): bool
+    {
+        if (isset($this->shield) && $this->shield !== "None") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isDead(): bool
+    {
+        if ($this->currentHitpoints <= 0) {
+            return true;
+        }
+
+        return false;
     }
 }
