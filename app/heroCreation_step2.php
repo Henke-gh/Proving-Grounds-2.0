@@ -2,6 +2,7 @@
 //_step2 of character creation initializes the Hero-class instance and handles distribution of starting stats.
 require __DIR__ . "/../vendor/autoload.php";
 require __DIR__ . "/../functions/avatarArray.php";
+require __DIR__ . "/../functions/armory.php";
 session_start();
 
 use App\Hero;
@@ -12,6 +13,9 @@ if (isset($_POST['createHero'])) {
     $avatarID = $_POST['heroAvatar'];
     $avatarURL = $avatars[$avatarID]['url'];
     $player = new Hero($name, $gender);
+    $player->weapon = $defaultItems['weapon'];
+    $player->shield = $defaultItems['shield'];
+    $player->armour = $defaultItems['armour'];
     $player->setAvatar($avatarURL);
     $player->setLastRegen(time());
     $_SESSION['player'] = $player->saveHeroState();
