@@ -92,3 +92,18 @@ if (isset($_POST['purchaseTrinket'])) {
         exit();
     }
 }
+
+if (isset($_POST['sellItem'])) {
+    $itemSellValue = $_POST['itemSell'][0];
+    $itemID = $_POST['itemSell'][1];
+    $itemType = $_POST['itemSell'][2];
+    $inventory = $player->getInventory();
+    $itemToSell = $inventory[$itemType][$itemID];
+    $playerGold = $player->getGold() + $itemSellValue;
+    $player->setGold($playerGold);
+    $player->removeInventoryItem($itemToSell, $itemType);
+    saveHero($player, $database);
+    $_SESSION['itemBought'] = "You sold " . $itemToSell->name . ".";
+    header('Location: /../app/shop.php');
+    exit();
+}

@@ -164,3 +164,27 @@ function showTrinket(
 document.getElementById("overlay").onclick = function () {
   this.style.display = "none";
 };
+
+function showSellItem(itemID, itemName, itemSellValue, itemType) {
+  var overlay = document.getElementById("overlay");
+  var details = document.getElementById("details");
+  var inputHTML =
+    "<form method=post action=/../app/shopCheckout.php><h3>Sell Item?</h3><h4>[" +
+    itemName +
+    "]</h4><p>Vendor's offer " +
+    itemSellValue +
+    " gold.</p><input type=hidden name=itemSell[] value=" +
+    itemSellValue +
+    "><input type=hidden name=itemSell[] value=" +
+    itemID +
+    "><input type=hidden name=itemSell[] value=" +
+    itemType +
+    "><button type=submit name=sellItem>Sell Item</button></form>";
+
+  details.innerHTML = inputHTML;
+  overlay.style.display = "block";
+}
+
+document.getElementById("overlay").onclick = function () {
+  this.style.display = "none";
+};

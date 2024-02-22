@@ -17,7 +17,6 @@ require __DIR__ . "/../nav/header.php";
 <main>
     <?php
     require __DIR__ . "/../app/playerSummary.php";
-
     if (isset($_SESSION['error'])) : ?>
         <div class="errorMsg">
             <h3><?= $_SESSION['error']; ?></h3>
@@ -40,6 +39,7 @@ require __DIR__ . "/../nav/header.php";
             <button class="shopSelector armour" id="armourBtn">Armour</button>
             <button class="shopSelector shields" id="shieldBtn">Shields</button>
             <button class="shopSelector trinkets" id="trinketBtn">Trinkets</button>
+            <button class="shopSelector sell" id="sellBtn">Sell Items</button>
         </div>
         <div class="shopDefault" id="shopDefault">
             <p>Welcome to the Shop, please choose a category to browse.</p>
@@ -117,7 +117,25 @@ require __DIR__ . "/../nav/header.php";
                 '<?= $trinket->type; ?>')">
                     <h4 class="underlineHover">[<?= $trinket->name; ?>] Gold Cost: <?= $trinket->cost; ?></h4>
                 </div>
-            <?php endforeach ?>
+            <?php endforeach; ?>
+        </div>
+        <div class="sellContainer hidden shopDisplay" id="sellContainer">
+            <h3><?= $player->name ?>'s Items</h3>
+            <?php if (emptyBags($player)) : ?>
+                <h4>You have no items to sell.</h4>
+                <?php else :
+                foreach ($player->getInventory() as $category => $items) :
+                    foreach ($items as $itemID => $item) :
+                        $sellValue = (int) floor($item->cost * 0.4); ?>
+                        <div class="shopItem pointer shopTrinket" onclick="showSellItem('<?= $itemID; ?>',
+                '<?= $item->name; ?>',
+                '<?= $sellValue; ?>',
+                '<?= $category; ?>')">
+                            <h4 class="underlineHover">[<?= $item->name; ?>] Sell Value: <?= $sellValue; ?> gold</h4>
+                        </div>
+            <?php endforeach;
+                endforeach;
+            endif; ?>
         </div>
     </div>
 
