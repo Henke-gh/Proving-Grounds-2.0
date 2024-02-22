@@ -46,7 +46,6 @@ require __DIR__ . "/../nav/header.php";
 
 <main>
     <?php if (!isset($_POST['fight'])) :
-        require __DIR__ . "/../nav/ingameNavbar.php";
         require __DIR__ . "/../app/playerSummary.php";
 
         if (isset($_SESSION['error'])) : ?>

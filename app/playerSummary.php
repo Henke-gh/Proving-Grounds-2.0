@@ -1,4 +1,5 @@
-<?php require __DIR__ . "/../app/levelUpMessage.php"; ?>
+<?php require __DIR__ . "/../nav/ingameNavbar.php";
+require __DIR__ . "/../app/levelUpMessage.php"; ?>
 <div class="summaryContainer">
     <div class="heroGeneralContainer">
         <div class="heroCard">

@@ -42,7 +42,6 @@ require __DIR__ . "/../nav/header.php";
 ?>
 <main>
     <?php
-    require __DIR__ . "/../nav/ingameNavbar.php";
     require __DIR__ . "/../app/playerSummary.php";
     ?>
     <!-- Test version - Heals full HP and Grit -->

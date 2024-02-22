@@ -43,11 +43,11 @@
             <?php if (isset($_SESSION['playerID'])) : ?>
                 <div class="gameMenuSmall">
                     <h3>Game</h3>
-                    <a href="/../app/playerHero.php" class="navLink gameLink">Hero</a>
-                    <a href="/../app/combat.php" class="navLink gameLink">Combat</a>
-                    <a href="/../app/shop.php" class="navLink gameLink">Shop</a>
-                    <a href="/../app/hospital.php" class="navLink gameLink">Healing</a>
-                    <a href="/../app/tavern.php" class="navLink gameLink">Tavern</a>
+                    <a href="/../app/playerHero.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameHero.svg" alt="Hero" />Hero</a>
+                    <a href="/../app/combat.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameCombat.svg" alt="Combat" />Combat</a>
+                    <a href="/../app/shop.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameShop.svg" alt="Shop" />Shop</a>
+                    <a href="/../app/hospital.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameHealing.svg" alt="Healing" />Healing</a>
+                    <a href="/../app/tavern.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameTavern.svg" alt="Tavern" />Tavern</a>
                 </div>
             <?php else : ?>
                 <a href="/../index.php" class="navLink">Start</a>
