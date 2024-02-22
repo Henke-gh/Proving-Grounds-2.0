@@ -34,6 +34,9 @@ require __DIR__ . "/../nav/header.php";
     endif; ?>
 
     <div class="shopContainer">
+        <div class="shopTagline">
+            <h3>Gourflarbfth's Emporium</h3>
+        </div>
         <div class="categorySelector">
             <button class="shopSelector weapons" id="weaponBtn">Weapons</button>
             <button class="shopSelector armour" id="armourBtn">Armour</button>
@@ -42,7 +45,7 @@ require __DIR__ . "/../nav/header.php";
             <button class="shopSelector sell" id="sellBtn">Sell Items</button>
         </div>
         <div class="shopDefault" id="shopDefault">
-            <p>Welcome to the Shop, please choose a category to browse.</p>
+            <p>Please choose a category to browse.</p>
         </div>
         <div class="weaponContainer hidden shopDisplay" id="weaponContainer">
             <h3>Weapons</h3>

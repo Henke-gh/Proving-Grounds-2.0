@@ -43,11 +43,26 @@
             <?php if (isset($_SESSION['playerID'])) : ?>
                 <div class="gameMenuSmall">
                     <h3>Game</h3>
-                    <a href="/../app/playerHero.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameHero.svg" alt="Hero" />Hero</a>
-                    <a href="/../app/combat.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameCombat.svg" alt="Combat" />Combat</a>
-                    <a href="/../app/shop.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameShop.svg" alt="Shop" />Shop</a>
-                    <a href="/../app/hospital.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameHealing.svg" alt="Healing" />Healing</a>
-                    <a href="/../app/tavern.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameTavern.svg" alt="Tavern" />Tavern</a>
+                    <div class="gameMenuItem">
+                        <a href="/../app/playerHero.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameHero.svg" alt="Hero" /></a>
+                        <a href="/../app/playerHero.php" class="navLink gameLink">[Hero]</a>
+                    </div>
+                    <div class="gameMenuItem">
+                        <a href="/../app/combat.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameCombat.svg" alt="Combat" /></a>
+                        <a href="/../app/combat.php" class="navLink gameLink">[Combat]</a>
+                    </div>
+                    <div class="gameMenuItem">
+                        <a href="/../app/shop.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameShop.svg" alt="Shop" /></a>
+                        <a href="/../app/shop.php" class="navLink gameLink">[Shop]</a>
+                    </div>
+                    <div class="gameMenuItem">
+                        <a href="/../app/hospital.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameHealing.svg" alt="Healing" /></a>
+                        <a href="/../app/hospital.php" class="navLink gameLink">[Healing]</a>
+                    </div>
+                    <div class="gameMenuItem">
+                        <a href="/../app/tavern.php" class="navLink gameLink"><img src="/../assets/images/icons/IconFrameTavern.svg" alt="Tavern" /></a>
+                        <a href="/../app/tavern.php" class="navLink gameLink">[Tavern]</a>
+                    </div>
                 </div>
             <?php else : ?>
                 <a href="/../index.php" class="navLink">Start</a>

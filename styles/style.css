@@ -149,6 +149,14 @@ header .navLink:hover {
     gap: 5px;
   }
 
+  .gameMenuItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid black;
+  }
+
   .gameMenuSmall form {
     margin: 15px 0;
   }
@@ -160,10 +168,10 @@ header .navLink:hover {
     cursor: pointer;
   }
 
-  .gameLink {
+  /*   .gameLink {
     background-color: #8fc695;
     padding: 4px;
-  }
+  } */
 
   .navLink:hover {
     text-decoration: underline;
@@ -219,6 +227,25 @@ header .navLink:hover {
 
 .gameNav a:hover {
   text-decoration: underline;
+}
+
+/* Mobile view */
+@media only screen and (max-width: 600px) {
+  .gameNav {
+    display: none;
+  }
+
+  .gameNavMobile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 15px;
+    gap: 25px;
+    background-color: var(--lightBrown);
+    border-radius: 5px;
+  }
 }
 
 footer {
@@ -506,6 +533,11 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.shopDefault,
+.shopTagline {
+  margin: 0 auto;
 }
 
 .categorySelector {

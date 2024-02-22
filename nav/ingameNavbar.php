@@ -21,10 +21,10 @@
     </div>
 </nav>
 
-<!-- <nav class="gameNav gameNavMobile hidden">
+<nav class="gameNavMobile hidden">
     <a href="/../app/playerHero.php"><img src="/../assets/images/icons/heroIcon.svg" title="Hero" /></a>
     <a href="/../app/combat.php"><img src="/../assets/images/icons/IconFrameCombat.svg" title="Combat" /></a>
     <a href="/../app/shop.php"><img src="/../assets/images/icons/IconFrameShop.svg" title="Shop" /></a>
     <a href="/../app/hospital.php"><img src="/../assets/images/icons/IconFrameHealing.svg" title="Healing" /></a>
     <a href="/../app/tavern.php"><img src="/../assets/images/icons/IconFrameTavern.svg" title="Tavern" /></a>
-</nav> -->
+</nav>
