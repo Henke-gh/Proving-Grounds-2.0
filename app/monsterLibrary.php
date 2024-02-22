@@ -57,14 +57,14 @@ $goblinRaider = new Monster("Goblin Raider", 25);
 $goblinRaider->setLevel(4);
 $goblinRaider->setStrength(10);
 $goblinRaider->setSpeed(10);
-$goblinRaider->setVitality(10);
+$goblinRaider->setVitality(20);
 $goblinRaider->setSkill("Swords", 30);
-$goblinRaider->setSkill("Block", 20);
+$goblinRaider->setSkill("Block", 25);
 $goblinRaider->setFatigue();
 $goblinRaider->setCurrentHP($goblinRaider->getHP());
 $goblinRaider->weapon = new Weapon("Blackened Blade", "Swords", 0, 20, 2, 6, 5);
 $goblinRaider->shield = new Shield("Spiked Buckler", "Shield", 0, 15, 0);
-$goblinRaider->shield->setDmgReduction(1);
+$goblinRaider->shield->setDmgReduction(2);
 $goblinRaider->setDescription("They loot and pillage. It\'s all they know..");
 $monsterLibrary->addMonster($goblinRaider);
 
@@ -81,24 +81,51 @@ $angvarBull->weapon = new Weapon("Wicked Horns", "Unarmed", 0, 20, 3, 12, 0);
 $angvarBull->setDescription("A ferocious bull from the southern plains.");
 $monsterLibrary->addMonster($angvarBull);
 
-/* 
-$angvarBull = new Monster("Angvarian Bull", 6, 45, 35, new Weapon("Wicked Horns", "Accuracy", 0, 10, 4, 15, 0));
-$angvarBull->setSkill("Accuracy", 40);
-$angvarBull->setSkill("Initiative", 25);
-$angvarBull->setDescription("A ferocious bull from the southern plains.");
-$monsterLibrary->addMonster($angvarBull);
-
-$legionnairescout = new Monster("Legionnaire Scout", 6, 40, 35, new Weapon("Scimitar", "Accuracy", 0, 30, 3, 9, 0));
-$legionnairescout->setSkill("Accuracy", 50);
-$legionnairescout->setSkill("Evasion", 35);
+$legionnairescout = new Monster("Legionnaire Scout", 25);
+$legionnairescout->setLevel(6);
+$legionnairescout->setStrength(15);
+$legionnairescout->setSpeed(10);
+$legionnairescout->setVitality(20);
+$legionnairescout->setSkill("Swords", 40);
+$legionnairescout->setSkill("Evasion", 30);
+$legionnairescout->setFatigue();
+$legionnairescout->setCurrentHP($legionnairescout->getHP());
+$legionnairescout->weapon = $scimitar;
 $legionnairescout->setDescription("Forward scout of the Red Legion");
 $monsterLibrary->addMonster($legionnairescout);
 
-$yountroll = new Monster("Young Troll", 8, 55, 35, new Weapon("Heavy Club", "Accuracy", 0, 20, 4, 10, 0));
-$yountroll->setSkill("Accuracy", 40);
-$yountroll->setDmgReduction(1);
-$yountroll->setDescription("The offspring of something much larger..");
-$monsterLibrary->addMonster($yountroll);
+$youngtroll = new Monster("Young Troll", 25);
+$youngtroll->setLevel(8);
+$youngtroll->setStrength(30);
+$youngtroll->setSpeed(8);
+$youngtroll->setVitality(30);
+$youngtroll->setSkill("Hammers", 45);
+$youngtroll->setSkill("Evasion", 15);
+$youngtroll->setFatigue();
+$youngtroll->setCurrentHP($youngtroll->getHP());
+$youngtroll->weapon = new Weapon("Heavy Club", "Hammers", 0, 35, 4, 10, 10);
+$youngtroll->armour = new Armour("Thick Hide", "Armour", 0, 0, 0);
+$youngtroll->armour->setDmgReduction(1);
+$youngtroll->setDescription("The offspring of something much larger..");
+$monsterLibrary->addMonster($youngtroll);
+
+$commander = new Monster("Legionnaire Commander", 30);
+$commander->setLevel(10);
+$commander->setStrength(10);
+$commander->setSpeed(10);
+$commander->setVitality(10);
+$commander->setSkill("Swords", 60);
+$commander->setSkill("Initiative", 35);
+$commander->setFatigue();
+$commander->setCurrentHP($commander->getHP());
+$commander->weapon = $longsword;
+$commander->shield = $none;
+$commander->armour = new Armour("Legion Gambeson", "Armour", 0, 0, 5);
+$commander->armour->setEvasionBonus(10);
+$commander->setDescription("Acknowledge only victory.");
+$monsterLibrary->addMonster($commander);
+
+/* 
 
 $commander = new Monster("Legionnaire Commander", 10, 70, 40, new Weapon("Long Sword", "Accuracy", 0, 40, 5, 12, 0));
 $commander->setSkill("Accuracy", 60);

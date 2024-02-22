@@ -33,7 +33,7 @@ if (isset($_POST['fight'])) {
         }
     } else {
         unset($_POST['fight']);
-        echo "You're too tired to fight..";
+        $_SESSION['error'] = "You're too tired to fight..";
     }
 }
 
@@ -48,7 +48,15 @@ require __DIR__ . "/../nav/header.php";
     <?php if (!isset($_POST['fight'])) :
         require __DIR__ . "/../nav/ingameNavbar.php";
         require __DIR__ . "/../app/playerSummary.php";
-    ?>
+
+        if (isset($_SESSION['error'])) : ?>
+            <div class="errorMsg">
+                <h3><?= $_SESSION['error']; ?></h3>
+            </div>
+        <?php
+            unset($_SESSION['error']);
+        endif;
+        ?>
         <div class="monsterSelect">
             <h3>Monster Rooster</h3>
             <p class="cursive">(Click on a monster for more information)</p>

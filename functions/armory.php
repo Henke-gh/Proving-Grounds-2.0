@@ -31,9 +31,14 @@ $shortsword = new Weapon("Short Sword", "Swords", 50, 10, 2, 4, 5);
 $shortsword->setItemDescription("Lil\' pointy");
 $shortsword->addToArmory($weapons['Swords']);
 
-$scimitar = new Weapon("Scimitar", "Swords", 100, 25, 2, 7, 5);
+$scimitar = new Weapon("Scimitar", "Swords", 130, 30, 2, 7, 5);
 $scimitar->setItemDescription("A curved classic.");
 $scimitar->addToArmory($weapons['Swords']);
+
+$longsword = new Weapon("Long Sword", "Swords", 400, 50, 5, 12, 10);
+$longsword->setInitiativeBonus(5);
+$longsword->setItemDescription("Finely crafted with a keen edge.");
+$longsword->addToArmory($weapons['Swords']);
 //Spears
 $shortspear = new Weapon("Short Spear", "Spears", 50, 10, 1, 6, 5);
 $shortspear->setItemDescription("Stick with pointy end.");
@@ -63,7 +68,7 @@ $mace = new Weapon("Mace", "Hammers", 150, 30, 3, 7, 8);
 $mace->setItemDescription("A steel mace with a flanged head.");
 $mace->addToArmory($weapons['Hammers']);
 
-$flail = new Weapon("Flail", "Hammers", 350, 50, 1, 14, 10);
+$flail = new Weapon("Flail", "Hammers", 350, 50, 2, 15, 10);
 $flail->setItemDescription("The ball at the end of the chain is covered in spikes.");
 $flail->addToArmory($weapons['Hammers']);
 //Daggers
