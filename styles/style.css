@@ -21,7 +21,7 @@
 body {
   margin: 0;
   font-family: "Rokkitt", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--lightBrown);
+  background-color: var(--sandstone);
   color: var(--warmNight);
 }
 
@@ -229,7 +229,7 @@ header .navLink:hover {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  margin-bottom: 15px;
+  padding-bottom: 20px;
   gap: 20px;
   background-color: var(--lightBrown);
   border-radius: 5px;
@@ -423,7 +423,6 @@ footer {
 .summaryContainer {
   background-color: var(--paleYellow);
   width: 100%;
-  padding: 2%;
 }
 
 .heroCard {
@@ -451,19 +450,22 @@ footer {
 .heroGeneralContainer {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
   gap: 35px;
-  padding-bottom: 2%;
-  border-bottom: 2px solid var(--gold);
+  padding: 5px;
+  border: 1px solid var(--lightBrown);
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 .heroBaseAttributes {
   padding-right: 5%;
-  border-right: 2px solid var(--gold);
 }
 
 .playerAvatar {
   width: 12rem;
   height: 12rem;
+  border: 2px solid var(--gold);
   /* margin-right: 15px; */
   margin-bottom: 10px;
 }
@@ -476,6 +478,17 @@ footer {
   gap: 25px;
 }
 
+.heroGear {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 20px;
+  border: 1px solid var(--lightBrown);
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
 .heroGear h4 {
   margin-top: 16px;
 }
@@ -485,12 +498,23 @@ footer {
   margin-block-end: 0.5em;
 }
 
+.equippedItems,
+.heroInventory {
+  width: 40%;
+}
+
 .inventoryItem,
 .equippedItem {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   gap: 10px;
+}
+
+.inventoryItem p,
+.equippedItem p {
+  margin: 5px 0;
 }
 
 .inventoryItem button,
@@ -540,17 +564,32 @@ footer {
 }
 
 /* playerHero Styling */
-.imageContainer {
-  width: fit-content;
+.heroSheetHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inventoryImgContainer {
+  width: 10%;
+}
+
+.inventoryImage {
+  width: 100%;
 }
 
 .combatStatistics {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  background-color: #d0b38b;
 }
 
-.combatStatistics h4,
+.combatStatistics h3,
 .combatStatistics p {
   margin-bottom: 0;
 }

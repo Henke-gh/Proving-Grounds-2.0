@@ -128,7 +128,7 @@ require __DIR__ . "/../nav/header.php";
             <div class="sellContainer hidden shopDisplay" id="sellContainer">
                 <h3><?= $player->name ?>'s Items</h3>
                 <?php if (emptyBags($player)) : ?>
-                    <h4>You have no items to sell.</h4>
+                    <p>You have no items to sell.</p>
                     <?php else :
                     foreach ($player->getInventory() as $category => $items) :
                         foreach ($items as $itemID => $item) :
