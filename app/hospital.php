@@ -40,24 +40,30 @@ if (isset($_POST['heal'])) {
 
 require __DIR__ . "/../nav/header.php";
 ?>
-<main>
-    <?php
-    require __DIR__ . "/../app/playerSummary.php";
-    ?>
-    <!-- Test version - Heals full HP and Grit -->
-    <form method="post">
-        <button type="submit" name="heal">Heal All</button>
-    </form>
-
-    <div class="hospitalContainer">
-        <form method="post">
-            <?php foreach ($healingItems as $item) : ?>
-                <button type="submit" name="getHeal" value="<?= $item['name']; ?>"><?= $item['name']; ?></button>
-            <?php endforeach; ?>
-        </form>
+<div class="contentPosition">
+    <div class="gameNavPosition">
+        <?php require __DIR__ . "/../nav/ingameNavbar.php"; ?>
     </div>
+    <main>
+        <!-- Test version - Heals full HP and Grit -->
+        <form method="post">
+            <button type="submit" name="heal">Heal All</button>
+        </form>
 
-</main>
+        <div class="hospitalContainer">
+            <form method="post">
+                <?php foreach ($healingItems as $item) : ?>
+                    <button type="submit" name="getHeal" value="<?= $item['name']; ?>"><?= $item['name']; ?></button>
+                <?php endforeach; ?>
+            </form>
+        </div>
 
+    </main>
+    <div class="heroCardPosition">
+        <?php
+        require __DIR__ . "/../app/playerSummary.php";
+        ?>
+    </div>
+</div>
 <?php
 require __DIR__ . "/../nav/footer.php";

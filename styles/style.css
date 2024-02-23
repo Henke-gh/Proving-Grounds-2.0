@@ -29,15 +29,37 @@ h1 {
   font-family: var(--header);
 }
 
+.contentPosition {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.gameNavPosition,
+.heroCardPosition {
+  position: fixed;
+  top: 25%;
+}
+
+.gameNavPosition {
+  left: 0;
+}
+
+.heroCardPosition {
+  right: 0;
+}
+
 main {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2%;
   margin: 0 auto;
+  margin-left: 170px;
+  margin-right: 170px;
   margin-top: 100px;
-  padding-bottom: 5%;
-  width: 70%;
+  min-height: 70vh;
   background-color: var(--paleYellow);
 }
 
@@ -201,9 +223,6 @@ header .navLink:hover {
 
 /* Game Nav Styling */
 .gameNav {
-  position: fixed;
-  top: 150px;
-  left: 0;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -211,12 +230,12 @@ header .navLink:hover {
   gap: 20px;
   background-color: var(--lightBrown);
   border-radius: 5px;
-  z-index: 998;
+  width: 150px;
 }
 
 .navItem {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
@@ -256,6 +275,8 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
+  gap: 25px;
   background-color: #819d83;
   padding-bottom: 5px;
 }
@@ -383,6 +404,7 @@ footer {
   margin: 5px 0;
 }
 /* playerHero Summary Page */
+
 .summaryContainer {
   background-color: var(--paleYellow);
   width: 100%;
@@ -391,7 +413,24 @@ footer {
 
 .heroCard {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+}
+
+.heroShortSummary {
+  background-color: var(--lightBrown);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.heroShortSummary p {
+  margin: 2px;
+}
+
+.heroShortSummary img {
+  width: 7rem;
+  height: 7rem;
 }
 
 .heroGeneralContainer {
@@ -410,7 +449,8 @@ footer {
 .playerAvatar {
   width: 12rem;
   height: 12rem;
-  margin-right: 15px;
+  /* margin-right: 15px; */
+  margin-bottom: 10px;
 }
 
 .heroStats {
@@ -453,7 +493,6 @@ footer {
     flex-direction: column;
     gap: 5px;
     padding-bottom: 2%;
-    border-bottom: 2px solid var(--gold);
   }
 
   .heroGeneralStats {

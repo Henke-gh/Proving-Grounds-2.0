@@ -1,6 +1,6 @@
-<?php require __DIR__ . "/../nav/ingameNavbar.php";
+<?php
 require __DIR__ . "/../app/levelUpMessage.php"; ?>
-<div class="heroCard">
+<div class="heroCard heroShortSummary">
     <img src="<?= $player->getAvatar(); ?>" class="circularImg playerAvatar" title="avatar">
     <div class="heroGeneralStats">
         <p class="bold"><?= $player->name . " - Level: " . $player->getLevel(); ?></p>
