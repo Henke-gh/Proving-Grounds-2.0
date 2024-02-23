@@ -1,5 +1,3 @@
-<?php
-require __DIR__ . "/../app/levelUpMessage.php"; ?>
 <div class="heroCard heroShortSummary">
     <img src="<?= $player->getAvatar(); ?>" class="circularImg playerAvatar" title="avatar">
     <div class="heroGeneralStats">
@@ -10,4 +8,6 @@ require __DIR__ . "/../app/levelUpMessage.php"; ?>
         <p><span class="bold">XP: </span><?= $player->getXP() . "/" . $player->getXPtoNext(); ?></p>
         <p><span class="bold">Gold: </span><?= $player->getGold(); ?></p>
     </div>
+    <?php
+    require __DIR__ . "/../app/levelUpMessage.php"; ?>
 </div>

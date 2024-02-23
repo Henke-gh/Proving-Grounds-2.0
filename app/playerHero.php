@@ -19,9 +19,6 @@ require __DIR__ . "/../nav/header.php";
         <?php require __DIR__ . "/../nav/ingameNavbar.php"; ?>
     </div>
     <main>
-        <?php
-        require __DIR__ . "/../app/levelUpMessage.php"; ?>
-
         <div class="summaryContainer">
             <div class="heroGeneralContainer">
                 <div class="heroCard">
@@ -29,10 +26,10 @@ require __DIR__ . "/../nav/header.php";
                     <div class="heroGeneralStats">
                         <p class="bold"><?= $player->name . " - Level: " . $player->getLevel(); ?></p>
                         <p class="cursive"><?= $player->getFameTitle() . " (" . $player->getFameScore() . ")"; ?></p>
-                        <p><span class="bold">HP: </span><?= $player->getCurrentHP() . "/" . $player->getHP(); ?></p>
+                        <!-- <p><span class="bold">HP: </span><?= $player->getCurrentHP() . "/" . $player->getHP(); ?></p>
                         <p><span class="bold">Grit: </span><?= $player->getCurrentGrit() . "/" . $player->getGrit(); ?></p>
                         <p><span class="bold">XP: </span><?= $player->getXP() . "/" . $player->getXPtoNext(); ?></p>
-                        <p><span class="bold">Gold: </span><?= $player->getGold(); ?></p>
+                        <p><span class="bold">Gold: </span><?= $player->getGold(); ?></p> -->
                     </div>
                 </div>
                 <div class="heroGear">

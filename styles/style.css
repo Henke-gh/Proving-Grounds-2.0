@@ -21,7 +21,7 @@
 body {
   margin: 0;
   font-family: "Rokkitt", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--sandstone);
+  background-color: var(--lightBrown);
   color: var(--warmNight);
 }
 
@@ -39,6 +39,8 @@ h1 {
 .heroCardPosition {
   position: fixed;
   top: 25%;
+  border-top: 1px solid var(--warmGrey);
+  border-bottom: 1px solid var(--warmGrey);
 }
 
 .gameNavPosition {
@@ -58,7 +60,7 @@ main {
   margin: 0 auto;
   margin-left: 170px;
   margin-right: 170px;
-  margin-top: 100px;
+  margin-top: 97px;
   min-height: 70vh;
   background-color: var(--paleYellow);
 }
@@ -121,6 +123,7 @@ header {
   padding-bottom: 10px;
   text-align: center;
   background-color: var(--lightBrown);
+  border-bottom: 1px solid var(--warmGrey);
   z-index: 1000;
 }
 
@@ -273,12 +276,24 @@ header .navLink:hover {
 
 footer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 25px;
   background-color: #819d83;
-  padding-bottom: 5px;
+  padding: 5px 0;
+}
+
+.footerNav {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.footerText {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
 }
 
 .logoutContainer {
@@ -429,8 +444,8 @@ footer {
 }
 
 .heroShortSummary img {
-  width: 7rem;
-  height: 7rem;
+  width: 9rem;
+  height: 9rem;
 }
 
 .heroGeneralContainer {
@@ -664,4 +679,21 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+/* Tombstone */
+
+.tombstoneContainer {
+  width: 50%;
+}
+
+/* Hospital */
+.hospitalContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hospitalContainer img {
+  width: 50%;
+  height: fit-content;
 }

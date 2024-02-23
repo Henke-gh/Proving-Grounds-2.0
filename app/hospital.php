@@ -45,19 +45,16 @@ require __DIR__ . "/../nav/header.php";
         <?php require __DIR__ . "/../nav/ingameNavbar.php"; ?>
     </div>
     <main>
-        <!-- Test version - Heals full HP and Grit -->
-        <form method="post">
-            <button type="submit" name="heal">Heal All</button>
-        </form>
-
+        <h2>Schvitzhild's Remedies</h2>
         <div class="hospitalContainer">
+            <img src="/../assets/images/hospital.png" class="tavernImage">
+            <p>Schvitzhild will fix you right up. Most of the time.</p>
             <form method="post">
                 <?php foreach ($healingItems as $item) : ?>
                     <button type="submit" name="getHeal" value="<?= $item['name']; ?>"><?= $item['name']; ?></button>
                 <?php endforeach; ?>
             </form>
         </div>
-
     </main>
     <div class="heroCardPosition">
         <?php

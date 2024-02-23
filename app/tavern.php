@@ -18,7 +18,7 @@ require_once __DIR__ . "/../nav/header.php";
         <?php require __DIR__ . "/../nav/ingameNavbar.php"; ?>
     </div>
     <main>
-        <h1>Borkhorst's Lil' Down by the Docks Tavern</h1>
+        <h2>Borkhorst's Lil' Down by the Docks Tavern</h2>
         <div class="tavernContainer">
             <?php if (isset($_SESSION['barComplete'])) : ?>
                 <div class="tavernBarWork">
@@ -35,7 +35,7 @@ require_once __DIR__ . "/../nav/header.php";
                     and then your day gets ruined-kind of place.
                 </p>
                 <p>Anyway, you're not allowed to drink here. That's what Borkhorst told you the last time
-                    you were here, and he's an ugly bastard. Unfortunately for you he's also a man of his word.
+                    you were here, he's an ugly bastard like that. Unfortunately for you he's also a man of his word.
                     He does let you work though, if you're up for it. It ain't much and it's probably not too honest either.
                     But it is most definitely work.
                 </p>

@@ -20,21 +20,6 @@
                 <h1>The Proving Grounds</h1>
             </a>
         <?php endif; ?>
-        <nav>
-            <?php if (isset($_SESSION['playerID'])) : ?>
-                <a href="/../app/playerHero.php" class="navLink">Hero</a>
-            <?php else : ?>
-                <a href="/../index.php" class="navLink">Start</a>
-            <?php endif; ?>
-            <a href="#" class="navLink">About</a>
-            <a href="#" class="navLink">Game Guide</a>
-            <?php if (isset($_SESSION['playerID'])) : ?>
-                <a href="/../app/tombstone.php" class="navLink">Tombstone</a>
-                <a href="#" class="navLink">My Account</a>
-            <?php else : ?>
-                <a href="/../app/register.php" class="navLink">Register</a>
-            <?php endif; ?>
-        </nav>
         <img src="/../assets/images/menu.svg" class="hidden burgerIcon">
     </header>
 
