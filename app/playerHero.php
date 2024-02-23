@@ -50,7 +50,7 @@ require __DIR__ . "/../nav/header.php";
                         </div>
                     </form>
                     <?php if (count($player->getTrinkets()) > 0) : ?>
-                        <h4 class="bold">- Trinkets -</h4>
+                        <h4>- Trinkets -</h4>
                         <?php foreach ($player->getTrinkets() as $index => $trinket) : ?>
                             <form method="post" action="">
                                 <div class="equippedItem">

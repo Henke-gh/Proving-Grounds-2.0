@@ -55,7 +55,7 @@ require __DIR__ . "/../nav/header.php";
                 <?php
                 foreach ($weapons as $weaponType => $weaponGroup) : ?>
                     <div class="weaponCategory">
-                        <h4><?= $weaponType; ?></h4>
+                        <h4>- <?= $weaponType; ?> -</h4>
                         <?php
                         //Here we include all relevant Weapon-properties to be show in the Shop-modulo
                         foreach ($weaponGroup as $weaponID => $weapon) : ?>
@@ -68,7 +68,7 @@ require __DIR__ . "/../nav/header.php";
                     '<?= $weapon->getItemDescription(); ?>',
                     '<?= $weaponType; ?>',
                     '<?= $weapon->weight; ?>')">
-                                <h4 class="underlineHover">[<?= $weapon->name; ?>] Dmg: <?= $weapon->minDamage . "-" . $weapon->maxDamage; ?>, Gold Cost: <?= $weapon->cost; ?></h4>
+                                <p><span class="underlineHover bold">[<?= $weapon->name; ?>]</span> Dmg: <?= $weapon->minDamage . "-" . $weapon->maxDamage; ?>, Cost: <?= $weapon->cost; ?> gold</p>
                             </div>
                         <?php
                         endforeach; ?>
@@ -87,7 +87,7 @@ require __DIR__ . "/../nav/header.php";
                 '<?= $armour->getItemDescription(); ?>',
                 '<?= $armour->type; ?>',
                 '<?= $armour->weight; ?>')">
-                        <h4 class="underlineHover">[<?= $armour->name; ?>] Gold Cost: <?= $armour->cost; ?></h4>
+                        <p><span class="underlineHover bold">[<?= $armour->name; ?>]</span> Cost: <?= $armour->cost; ?> gold</p>
                     </div>
                 <?php
                 endforeach ?>
@@ -104,7 +104,7 @@ require __DIR__ . "/../nav/header.php";
                 '<?= $shield->getItemDescription(); ?>',
                 '<?= $shield->type; ?>',
                 '<?= $shield->weight; ?>')">
-                        <h4 class="underlineHover">[<?= $shield->name; ?>] Gold Cost: <?= $shield->cost; ?></h4>
+                        <p><span class="underlineHover bold">[<?= $shield->name; ?>]</span> Cost: <?= $shield->cost; ?> gold</p>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -121,7 +121,7 @@ require __DIR__ . "/../nav/header.php";
                 '<?= $trinket->getMaxHP(); ?>',
                 '<?= $trinket->getDmgReduction(); ?>',
                 '<?= $trinket->type; ?>')">
-                        <h4 class="underlineHover">[<?= $trinket->name; ?>] Gold Cost: <?= $trinket->cost; ?></h4>
+                        <p><span class="underlineHover bold">[<?= $trinket->name; ?>]</span> Cost: <?= $trinket->cost; ?> gold</p>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -137,7 +137,7 @@ require __DIR__ . "/../nav/header.php";
                 '<?= $item->name; ?>',
                 '<?= $sellValue; ?>',
                 '<?= $category; ?>')">
-                                <h4 class="underlineHover">[<?= $item->name; ?>] Sell Value: <?= $sellValue; ?> gold</h4>
+                                <p><span class="underlineHover bold">[<?= $item->name; ?>]</span> Sell Value: <?= $sellValue; ?> gold</p>
                             </div>
                 <?php endforeach;
                     endforeach;

@@ -503,6 +503,10 @@ footer {
   width: 40%;
 }
 
+.equippedItems h4 {
+  margin-bottom: 5px;
+}
+
 .inventoryItem,
 .equippedItem {
   display: flex;
@@ -618,9 +622,10 @@ footer {
 
 .weaponCategory h4 {
   margin-bottom: 0px;
+  font-size: 1.1rem;
 }
 
-.shopItem h5 {
+.shopItem p {
   margin-top: 0;
   margin-bottom: 5px;
 }
