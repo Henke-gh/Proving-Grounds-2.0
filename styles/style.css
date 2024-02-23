@@ -201,13 +201,17 @@ header .navLink:hover {
 
 /* Game Nav Styling */
 .gameNav {
+  position: fixed;
+  top: 150px;
+  left: 0;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 10px;
   margin-bottom: 15px;
   gap: 20px;
   background-color: var(--lightBrown);
   border-radius: 5px;
+  z-index: 998;
 }
 
 .navItem {
@@ -398,7 +402,6 @@ footer {
   border-bottom: 2px solid var(--gold);
 }
 
-.heroGeneralStats,
 .heroBaseAttributes {
   padding-right: 5%;
   border-right: 2px solid var(--gold);
