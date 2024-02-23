@@ -24,7 +24,7 @@ if (isset($_POST['fight'])) {
     $selectedMonsterID = $_POST['fight'];
     if ($player->getCurrentGrit() > 0) {
         $selectedMonster = $monsterLibrary->getMonster($selectedMonsterID);
-        $combatLog = doBattle($player, $selectedMonster, $retreat);
+        $combatLog = doBattle($player, $selectedMonster, $retreat, $stance);
         saveHero($player, $database);
         //if the player dies during combat, user is sent directly to death screen.
         if ($player->isDead()) {
