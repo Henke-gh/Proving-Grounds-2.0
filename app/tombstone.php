@@ -6,8 +6,8 @@ require __DIR__ . "/../nav/header.php";
 ?>
 <main>
     <h2>The Tombstone</h2>
-    <div>
-        <img src="/../assets/images/player_death_small.png" class="tavernImage">
+    <div class="tombstoneContainer">
+        <img src="/../assets/images/tombstone.png" class="tavernImage">
     </div>
     <p class="cursive">Top 50 highest level hero deaths.</p>
     <ol>

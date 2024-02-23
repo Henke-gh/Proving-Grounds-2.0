@@ -29,15 +29,39 @@ h1 {
   font-family: var(--header);
 }
 
+.contentPosition {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.gameNavPosition,
+.heroCardPosition {
+  position: fixed;
+  top: 25%;
+  border-top: 1px solid var(--warmGrey);
+  border-bottom: 1px solid var(--warmGrey);
+}
+
+.gameNavPosition {
+  left: 0;
+}
+
+.heroCardPosition {
+  right: 0;
+}
+
 main {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2%;
   margin: 0 auto;
-  margin-top: 100px;
-  padding-bottom: 5%;
-  width: 70%;
+  margin-left: 170px;
+  margin-right: 170px;
+  margin-top: 97px;
+  min-height: 70vh;
   background-color: var(--paleYellow);
 }
 
@@ -99,6 +123,7 @@ header {
   padding-bottom: 10px;
   text-align: center;
   background-color: var(--lightBrown);
+  border-bottom: 1px solid var(--warmGrey);
   z-index: 1000;
 }
 
@@ -202,17 +227,18 @@ header .navLink:hover {
 /* Game Nav Styling */
 .gameNav {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 10px;
-  margin-bottom: 15px;
+  padding-bottom: 20px;
   gap: 20px;
   background-color: var(--lightBrown);
   border-radius: 5px;
+  width: 150px;
 }
 
 .navItem {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
@@ -250,10 +276,24 @@ header .navLink:hover {
 
 footer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   background-color: #819d83;
-  padding-bottom: 5px;
+  padding: 5px 0;
+}
+
+.footerNav {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.footerText {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
 }
 
 .logoutContainer {
@@ -379,35 +419,55 @@ footer {
   margin: 5px 0;
 }
 /* playerHero Summary Page */
+
 .summaryContainer {
   background-color: var(--paleYellow);
   width: 100%;
-  padding: 2%;
 }
 
 .heroCard {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+}
+
+.heroShortSummary {
+  background-color: var(--lightBrown);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.heroShortSummary p {
+  margin: 2px;
+}
+
+.heroShortSummary img {
+  width: 9rem;
+  height: 9rem;
 }
 
 .heroGeneralContainer {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
   gap: 35px;
-  padding-bottom: 2%;
-  border-bottom: 2px solid var(--gold);
+  padding: 5px;
+  border: 1px solid var(--lightBrown);
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
-.heroGeneralStats,
 .heroBaseAttributes {
   padding-right: 5%;
-  border-right: 2px solid var(--gold);
 }
 
 .playerAvatar {
   width: 12rem;
   height: 12rem;
-  margin-right: 15px;
+  border: 2px solid var(--gold);
+  /* margin-right: 15px; */
+  margin-bottom: 10px;
 }
 
 .heroStats {
@@ -416,6 +476,17 @@ footer {
   width: 80%;
   padding: 2%;
   gap: 25px;
+}
+
+.heroGear {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 20px;
+  border: 1px solid var(--lightBrown);
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
 .heroGear h4 {
@@ -427,12 +498,27 @@ footer {
   margin-block-end: 0.5em;
 }
 
+.equippedItems,
+.heroInventory {
+  width: 40%;
+}
+
+.equippedItems h4 {
+  margin-bottom: 5px;
+}
+
 .inventoryItem,
 .equippedItem {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   gap: 10px;
+}
+
+.inventoryItem p,
+.equippedItem p {
+  margin: 5px 0;
 }
 
 .inventoryItem button,
@@ -450,7 +536,6 @@ footer {
     flex-direction: column;
     gap: 5px;
     padding-bottom: 2%;
-    border-bottom: 2px solid var(--gold);
   }
 
   .heroGeneralStats {
@@ -483,17 +568,32 @@ footer {
 }
 
 /* playerHero Styling */
-.imageContainer {
-  width: fit-content;
+.heroSheetHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inventoryImgContainer {
+  width: 10%;
+}
+
+.inventoryImage {
+  width: 100%;
 }
 
 .combatStatistics {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  background-color: #d0b38b;
 }
 
-.combatStatistics h4,
+.combatStatistics h3,
 .combatStatistics p {
   margin-bottom: 0;
 }
@@ -522,9 +622,10 @@ footer {
 
 .weaponCategory h4 {
   margin-bottom: 0px;
+  font-size: 1.1rem;
 }
 
-.shopItem h5 {
+.shopItem p {
   margin-top: 0;
   margin-bottom: 5px;
 }
@@ -622,4 +723,21 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+/* Tombstone */
+
+.tombstoneContainer {
+  width: 50%;
+}
+
+/* Hospital */
+.hospitalContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hospitalContainer img {
+  width: 50%;
+  height: fit-content;
 }
