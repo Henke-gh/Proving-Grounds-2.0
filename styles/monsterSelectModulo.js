@@ -1,3 +1,4 @@
+//Deprecated - No longer used
 function showDetails(monsterID, monsterName, monsterLevel, weapon, description) {
   var overlay = document.getElementById("overlay");
   var details = document.getElementById("details");

@@ -186,17 +186,6 @@ require __DIR__ . "/../nav/header.php";
                 endif; ?>
             </div>
         </div>
-
-        <!-- Trying out the modulo game, item information goes here -->
-        <div class="overlay" id="overlay">
-            <div class="overlayContent" id="overlayContent">
-                <div class="details" id="details">
-                    <!-- JS puts item deets here. See div "shopItem" for information about what gets sent here.
-        Form field and Buy-button is also added through JS, along with two hidden input elements containing
-    weaponType (eg "Swords") and weaponIndex-->
-                </div>
-            </div>
-        </div>
     </main>
     <div class="heroCardPosition">
         <?php
@@ -205,6 +194,5 @@ require __DIR__ . "/../nav/header.php";
     </div>
 </div>
 <script src="/styles/shopDisplay.js"></script>
-<!-- <script src="/styles/shopModulo.js"></script> -->
 <script src="/styles/shopItems.js"></script>
 <?php require __DIR__ . "/../nav/footer.php";

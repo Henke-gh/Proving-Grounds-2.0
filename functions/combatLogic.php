@@ -239,7 +239,7 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
             }
 
             if ($monster->getCurrentHP() <= 0) {
-                array_push($combatLog, $monster->name . " is defeated!");
+                array_push($combatLog, "<span class=bold>" . $monster->name . " is defeated!</span>");
                 array_push($combatLog, $player->name . " gains <span class=bold>" . $xpReward . " xp</span> and <span class=bold>" . $goldDrop . " gold.</span>");
                 fightReward($player, $goldDrop, $xpReward);
                 $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
@@ -252,7 +252,7 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
             }
 
             if ($player->getCurrentHP() <= $retreatValue) {
-                array_push($combatLog, $player->name . " is defeated!");
+                array_push($combatLog, "<span class=bold>" . $player->name . " is defeated!</span>");
                 $player->setLosses(1);
                 $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
                 break;
@@ -265,7 +265,7 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
             }
 
             if ($player->getCurrentHP() <= $retreatValue) {
-                array_push($combatLog, $player->name . " is defeated!");
+                array_push($combatLog, "<span class=bold>" . $player->name . " is defeated!</span>");
                 $player->setLosses(1);
                 $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
                 break;
@@ -277,7 +277,7 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
             }
 
             if ($monster->getCurrentHP() <= 0) {
-                array_push($combatLog, $monster->name . " is defeated!");
+                array_push($combatLog, "<span class=bold>" . $monster->name . " is defeated!</span>");
                 array_push($combatLog, $player->name . " gains <span class=bold>" . $xpReward . " xp</span> and <span class=bold>" . $goldDrop . " gold.</span>");
                 fightReward($player, $goldDrop, $xpReward);
                 $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
