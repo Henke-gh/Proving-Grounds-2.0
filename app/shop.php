@@ -57,18 +57,23 @@ require __DIR__ . "/../nav/header.php";
                     <div class="weaponCategory">
                         <h4>- <?= $weaponType; ?> -</h4>
                         <?php
-                        //Here we include all relevant Weapon-properties to be show in the Shop-modulo
                         foreach ($weaponGroup as $weaponID => $weapon) : ?>
-                            <div class="shopItem pointer shopWeapon" onclick="showWeaponDetails(<?= $weaponID; ?>, 
-                    '<?= $weapon->name; ?>', 
-                    '<?= $weapon->cost; ?>',
-                    '<?= $weapon->skillRequirement; ?>',
-                    '<?= $weapon->minDamage; ?>',
-                    '<?= $weapon->maxDamage; ?>',
-                    '<?= $weapon->getItemDescription(); ?>',
-                    '<?= $weaponType; ?>',
-                    '<?= $weapon->weight; ?>')">
-                                <p><span class="underlineHover bold">[<?= $weapon->name; ?>]</span> Dmg: <?= $weapon->minDamage . "-" . $weapon->maxDamage; ?>, Cost: <?= $weapon->cost; ?> gold</p>
+                            <div class="shopItem shopWeapon">
+                                <div class="itemSelect">
+                                    <p><span class="bold">[<?= $weapon->name; ?>] - </span>Cost: <?= $weapon->cost; ?> gold</p>
+                                    <button class="showItem">Show</button>
+                                </div>
+                                <div class="itemDetails hidden">
+                                    <form method="post" action="/../app/shopCheckout.php">
+                                        <p><span class="bold">Damage:</span> <?= $weapon->minDamage . "-" . $weapon->maxDamage; ?></p>
+                                        <p><span class="bold">Skill req:</span> <?= $weapon->skillRequirement . " " .  $weaponType; ?></p>
+                                        <p><span class="bold">Weight:</span> <?= $weapon->weight; ?></p>
+                                        <p><?= $weapon->getItemDescription(); ?></p>
+                                        <input type="hidden" name="item[]" value="<?= $weaponType; ?>">
+                                        <input type="hidden" name="item[]" value="<?= $weaponID; ?>">
+                                        <button type="submit" name="purchaseWeapon">Purchase</button>
+                                    </form>
+                                </div>
                             </div>
                         <?php
                         endforeach; ?>
@@ -79,15 +84,22 @@ require __DIR__ . "/../nav/header.php";
                 <h3>Armour</h3>
                 <?php
                 foreach ($armours as $armourID => $armour) : ?>
-                    <div class="shopItem pointer shopArmour" onclick="showArmour('<?= $armourID; ?>',
-                '<?= $armour->name; ?>',
-                '<?= $armour->cost; ?>',
-                '<?= $armour->getDmgReduction(); ?>',
-                '<?= $armour->getEvasionBonus(); ?>',
-                '<?= $armour->getItemDescription(); ?>',
-                '<?= $armour->type; ?>',
-                '<?= $armour->weight; ?>')">
-                        <p><span class="underlineHover bold">[<?= $armour->name; ?>]</span> Cost: <?= $armour->cost; ?> gold</p>
+                    <div class="shopItem shopArmour">
+                        <div class="itemSelect">
+                            <p><span class="bold">[<?= $armour->name; ?>] - </span>Cost: <?= $armour->cost; ?> gold</p>
+                            <button class="showItem">Show</button>
+                        </div>
+                        <div class="itemDetails hidden">
+                            <form method="post" action="/../app/shopCheckout.php">
+                                <p><span class="bold">Dmg Reduction:</span> <?= $armour->getDmgReduction(); ?></p>
+                                <p><span class="bold">Evasion:</span> <?= $armour->getEvasionBonus(); ?></p>
+                                <p><span class="bold">Weight:</span> <?= $armour->weight; ?></p>
+                                <p><?= $armour->getItemDescription(); ?></p>
+                                <input type="hidden" name="item[]" value="<?= $armour->type; ?>">
+                                <input type="hidden" name="item[]" value="<?= $armourID; ?>">
+                                <button type="submit" name="purchaseArmour">Purchase</button>
+                            </form>
+                        </div>
                     </div>
                 <?php
                 endforeach ?>
@@ -96,32 +108,53 @@ require __DIR__ . "/../nav/header.php";
                 <h3>Shields</h3>
                 <?php
                 foreach ($shields as $shieldID => $shield) : ?>
-                    <div class="shopItem pointer shopShield" onclick="showShield('<?= $shieldID; ?>',
-                '<?= $shield->name; ?>',
-                '<?= $shield->cost; ?>',
-                '<?= $shield->getDmgReduction(); ?>',
-                '<?= $shield->skillRequirement; ?>',
-                '<?= $shield->getItemDescription(); ?>',
-                '<?= $shield->type; ?>',
-                '<?= $shield->weight; ?>')">
-                        <p><span class="underlineHover bold">[<?= $shield->name; ?>]</span> Cost: <?= $shield->cost; ?> gold</p>
+                    <div class="shopItem shopShield">
+                        <div class="itemSelect">
+                            <p><span class="bold">[<?= $shield->name; ?>] - </span>Cost: <?= $shield->cost; ?> gold</p>
+                            <button class="showItem">Show</button>
+                        </div>
+                        <div class="itemDetails hidden">
+                            <form method="post" action="/../app/shopCheckout.php">
+                                <p><span class="bold">Dmg Reduction:</span> <?= $shield->getDmgReduction(); ?></p>
+                                <p><span class="bold">Skill req:</span> <?= $shield->skillRequirement; ?></p>
+                                <p><span class="bold">Weight:</span> <?= $shield->weight; ?></p>
+                                <p><?= $shield->getItemDescription(); ?></p>
+                                <input type="hidden" name="item[]" value="<?= $shield->type; ?>">
+                                <input type="hidden" name="item[]" value="<?= $shieldID; ?>">
+                                <button type="submit" name="purchaseShield">Purchase</button>
+                            </form>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
             <div class="trinketContainer hidden shopDisplay" id="trinketContainer">
                 <h3>Trinkets</h3>
                 <?php foreach ($trinkets as $trinketID => $trinket) : ?>
-                    <div class="shopItem pointer shopTrinket" onclick="showTrinket('<?= $trinketID; ?>',
-                '<?= $trinket->name; ?>',
-                '<?= $trinket->cost; ?>',
-                '<?= $trinket->getItemDescription(); ?>',
-                '<?= $trinket->getInitiativeBonus(); ?>',
-                '<?= $trinket->getEvasionBonus(); ?>',
-                '<?= $trinket->getBlockBonus(); ?>',
-                '<?= $trinket->getMaxHP(); ?>',
-                '<?= $trinket->getDmgReduction(); ?>',
-                '<?= $trinket->type; ?>')">
-                        <p><span class="underlineHover bold">[<?= $trinket->name; ?>]</span> Cost: <?= $trinket->cost; ?> gold</p>
+                    <div class="shopItem shopTrinket">
+                        <div class="itemSelect">
+                            <p><span class="bold">[<?= $trinket->name; ?>] - </span>Cost: <?= $trinket->cost; ?> gold</p>
+                            <button class="showItem">Show</button>
+                        </div>
+                        <div class="itemDetails hidden">
+                            <form method="post" action="/../app/shopCheckout.php">
+                                <?php if ($trinket->getInitiativeBonus() > 0) : ?>
+                                    <p><span class="bold">Initiative:</span> +<?= $trinket->getInitiativeBonus(); ?></p>
+                                <?php endif; ?>
+                                <?php if ($trinket->getEvasionBonus() > 0) : ?>
+                                    <p><span class="bold">Evasion:</span> +<?= $trinket->getEvasionBonus(); ?></p>
+                                <?php endif; ?>
+                                <?php if ($trinket->getBlockBonus() > 0) : ?>
+                                    <p><span class="bold">Block:</span> +<?= $trinket->getBlockBonus(); ?></p>
+                                <?php endif; ?>
+                                <?php if ($trinket->getMaxHP() > 0) : ?>
+                                    <p><span class="bold">Max HP:</span> +<?= $trinket->getMaxHP(); ?></p>
+                                <?php endif; ?>
+                                <p><?= $trinket->getItemDescription(); ?></p>
+                                <input type="hidden" name="item[]" value="<?= $trinket->type; ?>">
+                                <input type="hidden" name="item[]" value="<?= $trinketID; ?>">
+                                <button type="submit" name="purchaseTrinket">Purchase</button>
+                            </form>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -133,11 +166,20 @@ require __DIR__ . "/../nav/header.php";
                     foreach ($player->getInventory() as $category => $items) :
                         foreach ($items as $itemID => $item) :
                             $sellValue = (int) floor($item->cost * 0.4); ?>
-                            <div class="shopItem pointer shopTrinket" onclick="showSellItem('<?= $itemID; ?>',
-                '<?= $item->name; ?>',
-                '<?= $sellValue; ?>',
-                '<?= $category; ?>')">
-                                <p><span class="underlineHover bold">[<?= $item->name; ?>]</span> Sell Value: <?= $sellValue; ?> gold</p>
+                            <div class="shopItem shopTrinket">
+                                <div class="itemSelect">
+                                    <p><span class="bold">[<?= $item->name; ?>] - </span>Sell Value: <?= $sellValue; ?> gold</p>
+                                    <button class="showItem">Show</button>
+                                </div>
+                                <div class="itemDetails hidden">
+                                    <form method="post" action="/../app/shopCheckout.php">
+                                        <p>Do you want to sell <?= $item->name; ?>?</p>
+                                        <input type="hidden" name="itemSell[]" value="<?= $sellValue; ?>">
+                                        <input type="hidden" name="itemSell[]" value="<?= $itemID; ?>">
+                                        <input type="hidden" name="itemSell[]" value="<?= $category; ?>">
+                                        <button type="submit" name="sellItem">Sell Item</button>
+                                    </form>
+                                </div>
                             </div>
                 <?php endforeach;
                     endforeach;
@@ -163,5 +205,6 @@ require __DIR__ . "/../nav/header.php";
     </div>
 </div>
 <script src="/styles/shopDisplay.js"></script>
-<script src="/styles/shopModulo.js"></script>
+<!-- <script src="/styles/shopModulo.js"></script> -->
+<script src="/styles/shopItems.js"></script>
 <?php require __DIR__ . "/../nav/footer.php";

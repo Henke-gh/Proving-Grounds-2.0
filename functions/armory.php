@@ -28,7 +28,7 @@ $fists = new Weapon("Fists", "Unarmed", 0, 0, 1, 2, 0);
 $fists->setItemDescription("They're your flesh mittens, champ. Might wanna invest in something for them to swing.");
 //Swords
 $shortsword = new Weapon("Short Sword", "Swords", 50, 10, 2, 4, 5);
-$shortsword->setItemDescription("Lil\' pointy");
+$shortsword->setItemDescription("Lil' pointy");
 $shortsword->addToArmory($weapons['Swords']);
 
 $scimitar = new Weapon("Scimitar", "Swords", 130, 30, 2, 7, 5);
@@ -49,7 +49,7 @@ $huntingspear->setItemDescription("A long spear, used for game hunting.");
 $huntingspear->addToArmory($weapons['Spears']);
 
 $boarlance = new Weapon("Boar Lance", "Spears", 400, 65, 5, 20, 10);
-$boarlance->setItemDescription("Popular in the Royal Huntsmen\'s Guild");
+$boarlance->setItemDescription("Popular in the Royal Huntsmen's Guild");
 $boarlance->addToArmory($weapons['Spears']);
 //Axes
 $handaxe = new Weapon("Hand Axe", "Axes", 50, 10, 2, 5, 5);
@@ -57,11 +57,11 @@ $handaxe->setItemDescription("Chop, chop..");
 $handaxe->addToArmory($weapons['Axes']);
 
 $waraxe = new Weapon("War Axe", "Axes", 150, 35, 3, 8, 8);
-$waraxe->setItemDescription("It\'s seen battle but is as deadly as any other.");
+$waraxe->setItemDescription("It's seen battle but is as deadly as any other.");
 $waraxe->addToArmory($weapons['Axes']);
 //Hammers
 $club = new Weapon("Wooden Club", "Hammers", 50, 10, 1, 7, 5);
-$club->setItemDescription("Let\'s be real, it\'s a large stick.");
+$club->setItemDescription("Let's be real, it's a large stick.");
 $club->addToArmory($weapons['Hammers']);
 
 $mace = new Weapon("Mace", "Hammers", 150, 30, 3, 7, 8);
@@ -87,7 +87,7 @@ $none->setItemDescription("It's really not ideal but you could probably deflect 
 
 $buckler = new Shield("Buckler", "Shield", 35, 5, 0);
 $buckler->setDmgReduction(1);
-$buckler->setItemDescription("It\'s basically a platter.");
+$buckler->setItemDescription("It's basically a platter.");
 $buckler->addToArmory($shields);
 
 $roundshield = new Shield("Round Shield", "Shield", 150, 30, 5);
@@ -97,14 +97,14 @@ $roundshield->addToArmory($shields);
 
 $kiteshield = new Shield("Kite Shield", "Shield", 300, 50, 10);
 $kiteshield->setDmgReduction(5);
-$kiteshield->setItemDescription("A Knight\'s Shield. Emblazoned with a golden griffon.");
+$kiteshield->setItemDescription("A Knight's Shield. Emblazoned with a golden griffon.");
 $kiteshield->addToArmory($shields);
 
 //Armour
 //Added to default array
 $tunic = new Armour("Tunic", "Armour", 0, 0, 0);
 $tunic->setDmgReduction(0);
-$tunic->setItemDescription("The merchant said it\s a nice tunic. Looks more like rags to you.");
+$tunic->setItemDescription("The merchant said it's a nice tunic. Looks more like rags to you.");
 
 $gladleather = new Armour("Gladiator Leathers", "Armour", 50, 0, 5);
 $gladleather->setEvasionBonus(2);
@@ -125,7 +125,7 @@ $zehirStone->addToArmory($trinkets);
 
 $bloodybrick = new Trinket("Bloody Brick", "Trinket", 340, 0, 0);
 $bloodybrick->setMaxHP(10);
-$bloodybrick->setItemDescription("It\'s dripping.. (Max: 1)");
+$bloodybrick->setItemDescription("It's dripping.. (Max: 1)");
 $bloodybrick->addToArmory($trinkets);
 
 

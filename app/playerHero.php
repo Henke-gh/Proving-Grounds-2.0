@@ -31,7 +31,7 @@ require __DIR__ . "/../nav/header.php";
                     <h3>Equipped Items</h3>
                     <form method="post" action="">
                         <div class="equippedItem">
-                            <p><span class="bold">Weapon:</span> <?= $player->weapon->name; ?></p>
+                            <p><span class="bold">Weapon:</span> <?= $player->weapon->name; ?> (<?= $player->weapon->minDamage . "-" . $player->weapon->maxDamage; ?>)</p>
                             <?php if ($player->weapon->name !== "Fists") : ?>
                                 <button type="submit" name="unequip" value="weapon">Unequip</button>
                             <?php endif; ?>

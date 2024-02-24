@@ -617,7 +617,6 @@ footer {
 .weaponCategory {
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
 .weaponCategory h4 {
@@ -627,7 +626,7 @@ footer {
 
 .shopItem p {
   margin-top: 0;
-  margin-bottom: 5px;
+  margin-bottom: 0;
 }
 
 .shopContainer {
@@ -646,6 +645,29 @@ footer {
   flex-direction: row;
   justify-content: center;
   gap: 5px;
+}
+
+.itemSelect {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  margin-top: 5px;
+  gap: 10px;
+}
+
+.itemDetails form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.itemDetails button {
+  width: fit-content;
+  margin: 0 auto;
 }
 
 /* Shop Item Display Modulo */
