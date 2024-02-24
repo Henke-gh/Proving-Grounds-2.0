@@ -96,11 +96,13 @@ $buckler->addToArmory($shields);
 
 $roundshield = new Shield("Round Shield", "Shield", 150, 30, 5);
 $roundshield->setDmgReduction(3);
+$roundshield->setBlockBonus(5);
 $roundshield->setItemDescription("A winged snake is coiled along the edge of the shield rim.");
 $roundshield->addToArmory($shields);
 
-$kiteshield = new Shield("Kite Shield", "Shield", 300, 50, 10);
+$kiteshield = new Shield("Kite Shield", "Shield", 300, 50, 15);
 $kiteshield->setDmgReduction(5);
+$kiteshield->setBlockBonus(8);
 $kiteshield->setItemDescription("A Knight's Shield. Emblazoned with a golden griffon.");
 $kiteshield->addToArmory($shields);
 
@@ -111,12 +113,12 @@ $tunic->setDmgReduction(0);
 $tunic->setItemDescription("The merchant said it's a nice tunic. Looks more like rags to you.");
 
 $gladleather = new Armour("Gladiator Leathers", "Armour", 50, 0, 5);
-$gladleather->setEvasionBonus(2);
-$gladleather->setDmgReduction(1);
+$gladleather->setEvasionBonus(5);
+$gladleather->setDmgReduction(0);
 $gladleather->setItemDescription("A set of light leather plates and straps");
 $gladleather->addToArmory($armours);
 
-$ringmail = new Armour("Ring Mail", "Armour", 300, 0, 15);
+$ringmail = new Armour("Ring Mail", "Armour", 300, 0, 20);
 $ringmail->setDmgReduction(3);
 $ringmail->setItemDescription("Fits you like a glove.");
 $ringmail->addToArmory($armours);

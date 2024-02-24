@@ -183,38 +183,9 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
     $turn = 1;
     //calculate player HP value at which player gives up and combat ends.
     $retreatValue = (int) floor($retreat / 100 * $player->getHP());
-    //determine stance, apply modifiers accordingly
+    //determine stance, modifiers are applied further down in the acual combat-loop
     $heroStance = $stance;
     $stanceName = "Balanced";
-
-    if ($heroStance === "light") {
-        $playerInitiative = (int) floor($player->getInitiative() * 1.2);
-        $playerEvasion = (int) floor($player->getEvasion() * 1.2);
-        $playerDamage = (int) floor($player->doDamage() * 0.8);
-        $playerToHitChance = $player->toHitChance();
-        $playerBlock = $player->getBlock();
-        $stanceName = "Fast Attacks";
-    }
-    if ($heroStance === "defensive") {
-        $playerInitiative = (int) floor($player->getInitiative() * 0.5);
-        $playerEvasion = $player->getEvasion();
-        $playerToHitChance = (int) floor($player->toHitChance() * 0.8);
-        $playerBlock = (int) floor($player->getBlock() * 1.2);
-        $playerDamage = (int) floor($player->doDamage() * 1.2);
-        $stanceName = "Heavy Guard";
-    }
-    if ($heroStance === "balanced") {
-        $playerInitiative = $player->getInitiative();
-        $playerEvasion = $player->getEvasion();
-        $playerBlock = $player->getBlock();
-        $playerToHitChance = $player->toHitChance();
-        $playerDamage = $player->doDamage();
-    }
-
-    $playerInitiative -= $player->getWeightModifier();
-    if ($playerInitiative < 0) {
-        $playerInitiative = 0;
-    }
 
     //since monster gold drop is a random value it has to be set prior as the variable is used twice.
     $goldDrop = $monster->dropGold();
@@ -229,6 +200,36 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
     }
 
     while ($player->getCurrentHP() > $retreatValue) {
+
+        if ($heroStance === "light") {
+            $playerInitiative = (int) floor($player->getInitiative() * 1.2);
+            $playerEvasion = (int) floor($player->getEvasion() * 1.2);
+            $playerDamage = (int) floor($player->doDamage() * 0.8);
+            $playerToHitChance = $player->toHitChance();
+            $playerBlock = $player->getBlock();
+            $stanceName = "Fast Attacks";
+        }
+        if ($heroStance === "defensive") {
+            $playerInitiative = (int) floor($player->getInitiative() * 0.5);
+            $playerEvasion = $player->getEvasion();
+            $playerToHitChance = (int) floor($player->toHitChance() * 0.8);
+            $playerBlock = (int) floor($player->getBlock() * 1.2);
+            $playerDamage = (int) floor($player->doDamage() * 1.2);
+            $stanceName = "Heavy Guard";
+        }
+        if ($heroStance === "balanced") {
+            $playerInitiative = $player->getInitiative();
+            $playerEvasion = $player->getEvasion();
+            $playerBlock = $player->getBlock();
+            $playerToHitChance = $player->toHitChance();
+            $playerDamage = $player->doDamage();
+        }
+
+        $playerInitiative -= $player->getWeightModifier();
+        if ($playerInitiative < 0) {
+            $playerInitiative = 0;
+        }
+
         array_push($combatLog, "<span class=bold>Turn: " . $turn . "</span>");
         //if returns true, player goes first else monster goes first.
         if (determineInitiative($playerInitiative, $monster->getInitiative())) {

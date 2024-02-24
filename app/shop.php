@@ -66,6 +66,12 @@ require __DIR__ . "/../nav/header.php";
                                 <div class="itemDetails hidden">
                                     <form method="post" action="/../app/shopCheckout.php">
                                         <p><span class="bold">Damage:</span> <?= $weapon->minDamage . "-" . $weapon->maxDamage; ?></p>
+                                        <?php if ($weapon->getInitiativeBonus() > 0) : ?>
+                                            <p><span class="bold">Initiative:</span> +<?= $weapon->getInitiativeBonus(); ?></p>
+                                        <?php endif; ?>
+                                        <?php if ($weapon->getEvasionBonus() > 0) : ?>
+                                            <p><span class="bold">Evasion:</span> +<?= $weapon->getEvasionBonus(); ?></p>
+                                        <?php endif; ?>
                                         <p><span class="bold">Skill req:</span> <?= $weapon->skillRequirement . " " .  $weaponType; ?></p>
                                         <p><span class="bold">Weight:</span> <?= $weapon->weight; ?></p>
                                         <p><?= $weapon->getItemDescription(); ?></p>
@@ -91,8 +97,12 @@ require __DIR__ . "/../nav/header.php";
                         </div>
                         <div class="itemDetails hidden">
                             <form method="post" action="/../app/shopCheckout.php">
-                                <p><span class="bold">Dmg Reduction:</span> <?= $armour->getDmgReduction(); ?></p>
-                                <p><span class="bold">Evasion:</span> <?= $armour->getEvasionBonus(); ?></p>
+                                <?php if ($armour->getDmgReduction() > 0) : ?>
+                                    <p><span class="bold">Dmg Reduction:</span> <?= $armour->getDmgReduction(); ?></p>
+                                <?php endif;
+                                if ($armour->getEvasionBonus() > 0) : ?>
+                                    <p><span class="bold">Evasion:</span> <?= $armour->getEvasionBonus(); ?></p>
+                                <?php endif; ?>
                                 <p><span class="bold">Weight:</span> <?= $armour->weight; ?></p>
                                 <p><?= $armour->getItemDescription(); ?></p>
                                 <input type="hidden" name="item[]" value="<?= $armour->type; ?>">
@@ -116,6 +126,9 @@ require __DIR__ . "/../nav/header.php";
                         <div class="itemDetails hidden">
                             <form method="post" action="/../app/shopCheckout.php">
                                 <p><span class="bold">Dmg Reduction:</span> <?= $shield->getDmgReduction(); ?></p>
+                                <?php if ($shield->getBlockBonus() > 0) : ?>
+                                    <p><span class="bold">Block:</span> +<?= $shield->getBlockBonus(); ?></p>
+                                <?php endif; ?>
                                 <p><span class="bold">Skill req:</span> <?= $shield->skillRequirement; ?></p>
                                 <p><span class="bold">Weight:</span> <?= $shield->weight; ?></p>
                                 <p><?= $shield->getItemDescription(); ?></p>
