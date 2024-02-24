@@ -13,4 +13,9 @@ $healingItems = [
         'value' => 10,
         'cost' => 15
     ],
+    [
+        'name' => 'Schvitzhild Special',
+        'value' => 25,
+        'cost' => 35
+    ],
 ];

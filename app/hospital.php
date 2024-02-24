@@ -16,28 +16,18 @@ saveHero($player, $database);
 require __DIR__ . "/../app/playerEquips.php";
 
 if (isset($_POST['getHeal'])) {
-    $boughtItem = $_POST['getHeal'];
+    $itemIndex = $_POST['healingItems'];
+    $item = $healingItems[$itemIndex];
 
-    foreach ($healingItems as $item) {
-        if ($item['name'] === $boughtItem && $player->getGold() >= $item['cost']) {
-            $player->setCurrentHP($player->getCurrentHP() + $item['value']);
-            $player->setGold($player->getGold() - $item['cost']);
-            saveHero($player, $database);
-            echo "You bought " . $item['name'];
-            break;
-        } elseif ($item['name'] === $boughtItem && $player->getGold() < $item['cost']) {
-            echo "You can't afford that.";
-        }
+    if ($player->getGold() >= $item['cost']) {
+        $player->setCurrentHP($player->getCurrentHP() + $item['value']);
+        $player->setGold($player->getGold() - $item['cost']);
+        saveHero($player, $database);
+        $_SESSION['itemBought'] = $player->name . " was healed for " . $item['value'] . " HP.";
+    } elseif ($player->getGold() < $item['cost']) {
+        $_SESSION['itemBought'] = "Come back when you have a bit more gold, child.";
     }
 }
-
-//Only for testing. Sets both HP and Grit to Max.
-if (isset($_POST['heal'])) {
-    $player->setCurrentHP($player->getHP());
-    $player->setCurrentGrit($player->getGrit());
-    saveHero($player, $database);
-}
-
 require __DIR__ . "/../nav/header.php";
 ?>
 <div class="contentPosition">
@@ -46,14 +36,38 @@ require __DIR__ . "/../nav/header.php";
     </div>
     <main>
         <h2>Schvitzhild's Remedies</h2>
+        <?php if (isset($_SESSION['itemBought'])) : ?>
+            <div class="successMsg">
+                <h3><?= $_SESSION['itemBought']; ?></h3>
+            </div>
+        <?php
+            unset($_SESSION['itemBought']);
+        endif; ?>
         <div class="hospitalContainer">
             <img src="/../assets/images/hospital.png" class="tavernImage">
             <p>Schvitzhild will fix you right up. Most of the time.</p>
-            <form method="post">
-                <?php foreach ($healingItems as $item) : ?>
-                    <button type="submit" name="getHeal" value="<?= $item['name']; ?>"><?= $item['name']; ?></button>
-                <?php endforeach; ?>
-            </form>
+            <div class="hospitalServices">
+                <div>
+                    <h3>- Available remedies -</h3>
+                    <?php foreach ($healingItems as $item) : ?>
+                        <div class="healingItem">
+                            <p><span class="bold"><?= $item['name'] ?></span> +<?= $item['value']; ?> HP</p>
+                            <p><span class="bold">Cost:</span> <?= $item['cost'] ?> gold</p>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <form method="post">
+                    <label for="healingItems">
+                        <h3>- Select Remedy -</h3>
+                    </label>
+                    <select name="healingItems">
+                        <?php foreach ($healingItems as $index => $item) : ?>
+                            <option value="<?= $index; ?>"><?= $item['name']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <button type="submit" name="getHeal">Buy Remedy</button>
+                </form>
+            </div>
         </div>
     </main>
     <div class="heroCardPosition">

@@ -200,7 +200,7 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
     }
 
     while ($player->getCurrentHP() > $retreatValue) {
-
+        //stance modifiers are handled here because some values are random and I want them to randomize each turn.
         if ($heroStance === "light") {
             $playerInitiative = (int) floor($player->getInitiative() * 1.2);
             $playerEvasion = (int) floor($player->getEvasion() * 1.2);
