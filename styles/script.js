@@ -1,3 +1,24 @@
+//Dynamically adjusts the main elements marginTop-value based on present Nav-menu configuration. This was rough.
+let heroSummary = document.getElementById("heroSum");
+let mainElement = document.querySelector("main");
+let topAdjustment;
+
+if (heroSummary && window.getComputedStyle(heroSummary).flexDirection !== "column") {
+  var heroSumHeight = heroSummary.offsetHeight;
+  if (window.innerWidth >= 768) {
+    topAdjustment = heroSumHeight + 0; // Adjustments for desktop
+  } else {
+    topAdjustment = heroSumHeight + 50; // Adjustments for mobile
+  }
+  mainElement.style.marginTop = topAdjustment + "px";
+} else {
+  if (window.innerWidth >= 768) {
+    mainElement.style.marginTop = 98 + "px"; // Default adjustments for desktop
+  } else {
+    mainElement.style.marginTop = 50 + "px"; // Default adjustments for mobile
+  }
+}
+
 //Hide/ Show site nav for mobile
 document.addEventListener("DOMContentLoaded", function () {
   let menuToggle = document.querySelector(".burgerIcon");

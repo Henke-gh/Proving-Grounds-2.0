@@ -39,8 +39,6 @@ h1 {
 .heroCardPosition {
   position: fixed;
   top: 25%;
-  border-top: 1px solid var(--warmGrey);
-  border-bottom: 1px solid var(--warmGrey);
 }
 
 .gameNavPosition {
@@ -60,16 +58,9 @@ main {
   margin: 0 auto;
   margin-left: 170px;
   margin-right: 170px;
-  margin-top: 97px;
+  /* margin-top: 97px; */
   min-height: 70vh;
   background-color: var(--paleYellow);
-}
-
-@media only screen and (max-width: 600px) {
-  main {
-    margin-top: 56px;
-    width: 90%;
-  }
 }
 
 .container {
@@ -123,7 +114,6 @@ header {
   padding-bottom: 10px;
   text-align: center;
   background-color: var(--lightBrown);
-  border-bottom: 1px solid var(--warmGrey);
   z-index: 1000;
 }
 
@@ -203,27 +193,6 @@ header .navLink:hover {
   }
 }
 
-/* Mobile view */
-@media only screen and (max-width: 600px) {
-  header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-left: 10px;
-  }
-  header h1 {
-    font-size: 1em;
-  }
-  header nav {
-    display: none;
-  }
-
-  .burgerIcon {
-    display: block;
-    margin-right: 20px;
-  }
-}
-
 /* Game Nav Styling */
 .gameNav {
   display: flex;
@@ -253,25 +222,6 @@ header .navLink:hover {
 
 .gameNav a:hover {
   text-decoration: underline;
-}
-
-/* Mobile view */
-@media only screen and (max-width: 600px) {
-  .gameNav {
-    display: none;
-  }
-
-  .gameNavMobile {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 15px;
-    gap: 25px;
-    background-color: var(--lightBrown);
-    border-radius: 5px;
-  }
 }
 
 footer {
@@ -356,20 +306,6 @@ footer {
   width: fit-content;
 }
 
-/* Mobile view */
-@media only screen and (max-width: 600px) {
-  .avatarSelect {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .avatar {
-    box-sizing: border-box;
-    padding: 5px;
-    margin: 0 auto;
-  }
-}
-
 /* Hero Creation - step 2 */
 .heroStatForm {
   display: flex;
@@ -428,7 +364,7 @@ footer {
 .heroCard {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: baseline;
   width: 150px;
 }
 
@@ -525,46 +461,6 @@ footer {
 .equippedItem button {
   height: fit-content;
   align-self: center;
-}
-/* Mobile View */
-@media only screen and (max-width: 600px) {
-  .summaryContainer {
-    width: 95%;
-  }
-  .heroGeneralContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding-bottom: 2%;
-  }
-
-  .heroGeneralStats {
-    border: none;
-  }
-
-  .heroGeneralStats p {
-    margin: 0;
-  }
-
-  .heroStats p {
-    margin: 0;
-  }
-
-  .heroCard,
-  .heroBaseAttributes {
-    padding-right: 5%;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--gold);
-  }
-
-  .playerAvatar {
-    width: 7rem;
-    height: 7rem;
-  }
-
-  .heroGear {
-    width: 80%;
-  }
 }
 
 /* playerHero Styling */
@@ -796,4 +692,214 @@ footer {
 .gameGuide {
   width: 70%;
   font-size: 1.05rem;
+}
+
+/* Mobile View */
+
+@media only screen and (max-width: 600px) {
+  /* General Styling Mobile */
+  .contentPosition {
+    display: flex;
+    flex-direction: column-reverse;
+    position: relative;
+  }
+
+  .gameNavPosition,
+  .heroCardPosition {
+    position: fixed;
+  }
+
+  .gameNavPosition {
+    top: 90%;
+  }
+
+  .heroCardPosition {
+    top: 50px;
+    right: 0;
+  }
+
+  .heroCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100vw;
+  }
+
+  .heroCard img {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+    margin: 0 auto;
+    margin-left: 5px;
+    margin-right: 5px;
+    min-height: 70vh;
+    background-color: var(--paleYellow);
+  }
+  /* Header */
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-left: 10px;
+  }
+  header h1 {
+    font-size: 1em;
+  }
+  header nav {
+    display: none;
+  }
+
+  .burgerIcon {
+    display: block;
+    margin-right: 20px;
+    width: 2rem;
+    height: auto;
+  }
+
+  .notLoggedIn {
+    display: flex;
+    background-color: var(--lightBrown);
+    width: 100%;
+  }
+  /* Footer */
+  footer {
+    padding-bottom: 60px;
+  }
+  .footerNav {
+    display: none;
+  }
+  /* GameNavMenu */
+  .gameNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 0;
+    gap: 12px;
+    border-radius: 0;
+    background-color: var(--lightBrown);
+    width: 100vw;
+  }
+
+  .navItem {
+    flex-direction: column;
+  }
+
+  .gameNavMobile {
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    padding: 5px;
+    gap: 20px;
+    background-color: var(--lightBrown);
+  }
+  /* Hero Creation - Step 1 */
+  .avatarSelect {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .avatar {
+    box-sizing: border-box;
+    padding: 5px;
+    margin: 0 auto;
+  }
+  /* Player Hero page */
+  .summaryContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .heroSheetHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  .heroSheetHeader img {
+    width: 5rem;
+    height: auto;
+  }
+
+  .heroGeneralContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    width: 100%;
+    gap: 5px;
+    padding-bottom: 2%;
+    border: none;
+  }
+
+  .heroGeneralStats:first-child {
+    grid-column: 1 / span 2;
+  }
+
+  .heroBaseAttributes:nth-child(2) {
+    grid-column: auto;
+    padding-right: 5%;
+    padding-bottom: 10px;
+  }
+
+  .heroSkills:nth-child(3) {
+    grid-column: auto;
+  }
+
+  .heroStats p {
+    margin: 0;
+  }
+
+  .heroGear {
+    flex-direction: column;
+    width: 100%;
+    border: none;
+    gap: 0;
+  }
+
+  .equippedItems {
+    width: 100%;
+  }
+
+  .heroInventory {
+    width: 100%;
+  }
+
+  .heroInventory h3 {
+    margin: 0;
+    margin-bottom: 15px;
+  }
+
+  .inventoryItem {
+    width: 90%;
+  }
+
+  .equippedItem {
+    width: 90%;
+  }
+
+  .combatStatValues {
+    gap: 10px;
+  }
+
+  /* Game Guide */
+  .gameGuide {
+    width: 90%;
+  }
+
+  /* Hospital */
+  .hospitalServices h3 {
+    font-size: 1.1rem;
+  }
 }

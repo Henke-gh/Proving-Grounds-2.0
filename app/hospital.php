@@ -60,7 +60,7 @@ require __DIR__ . "/../nav/header.php";
                     <label for="healingItems">
                         <h3>- Select Remedy -</h3>
                     </label>
-                    <select name="healingItems">
+                    <select name="healingItems" id="healingItems">
                         <?php foreach ($healingItems as $index => $item) : ?>
                             <option value="<?= $index; ?>"><?= $item['name']; ?></option>
                         <?php endforeach; ?>

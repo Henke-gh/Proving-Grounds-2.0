@@ -22,7 +22,6 @@
         <?php endif; ?>
         <img src="/../assets/images/menu.svg" class="hidden burgerIcon">
     </header>
-
     <div class="mobileMenu hidden">
         <nav>
             <?php if (isset($_SESSION['playerID'])) : ?>
@@ -54,10 +53,9 @@
             <?php endif; ?>
             <h3>Site Nav</h3>
             <div class="gameMenuSmall">
-                <a href="#" class="navLink">About</a>
-                <a href="#" class="navLink">Game Guide</a>
+                <a href="/../app/gameguide.php" class="navLink">Game Guide</a>
+                <a href="/../app/tombstone.php" class="navLink">Tombstone</a>
                 <?php if (isset($_SESSION['playerID'])) : ?>
-                    <a href="/../app/tombstone.php" class="navLink">Tombstone</a>
                     <a href="/../app/register.php" class="navLink">My Account</a>
                     <form method="post" action="/../app/logout.php">
                         <button type="submit" name="logout">Log Out</button>
@@ -65,6 +63,7 @@
                 <?php else : ?>
                     <a href="/../app/register.php" class="navLink">Register</a>
                 <?php endif; ?>
+                <a href="#" class="navLink">About</a>
             </div>
         </nav>
     </div>
