@@ -5,7 +5,7 @@ require __DIR__ . "/../functions/heroFunctions.php";
 $player = loadHero($database);
 saveHero($player, $database);
 
-if (isset($_POST['barWork']) && $player->getCurrentGrit() > 35) {
+if (isset($_POST['barWork']) && $player->getCurrentGrit() >= 35) {
     $player->setGold($player->getGold() + 15);
     $player->setCurrentGrit($player->getCurrentGrit() - 35);
     $_SESSION['barComplete'] = "What, you want applause? Take your gold and get out..";

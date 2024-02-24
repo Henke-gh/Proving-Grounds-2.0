@@ -60,7 +60,7 @@ require __DIR__ . "/../nav/header.php";
             endif;
             ?>
             <div class="monsterSelect">
-                <h2>Duke Rorfetch's Arena</h2>
+                <h2>Duke Barnackt's Arena</h2>
                 <div class="combatImgContainer">
                     <img src="/../assets/images/scout_sharp.png" />
                 </div>

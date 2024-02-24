@@ -48,7 +48,7 @@ require __DIR__ . "/../nav/header.php";
             <p>Schvitzhild will fix you right up. Most of the time.</p>
             <div class="hospitalServices">
                 <div>
-                    <h3>- Available remedies -</h3>
+                    <h3>- Available Remedies -</h3>
                     <?php foreach ($healingItems as $item) : ?>
                         <div class="healingItem">
                             <p><span class="bold"><?= $item['name'] ?></span> +<?= $item['value']; ?> HP</p>
