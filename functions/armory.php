@@ -46,9 +46,11 @@ $shortspear->addToArmory($weapons['Spears']);
 
 $huntingspear = new Weapon("Hunting Spear", "Spears", 140, 30, 2, 8, 6);
 $huntingspear->setItemDescription("A long spear, used for game hunting.");
+$huntingspear->setInitiativeBonus(5);
 $huntingspear->addToArmory($weapons['Spears']);
 
 $boarlance = new Weapon("Boar Lance", "Spears", 400, 65, 5, 20, 10);
+$boarlance->setInitiativeBonus(10);
 $boarlance->setItemDescription("Popular in the Royal Huntsmen's Guild");
 $boarlance->addToArmory($weapons['Spears']);
 //Axes
@@ -76,13 +78,15 @@ $dagger = new Weapon("Dagger", "Daggers", 35, 10, 1, 4, 0);
 $dagger->setItemDescription("Good for carving steaks.");
 $dagger->addToArmory($weapons['Daggers']);
 
-$twisteddagger = new Weapon("Twisted Dagger", "Daggers", 150, 35, 3, 7, 2);
+$twisteddagger = new Weapon("Twisted Dagger", "Daggers", 150, 35, 3, 6, 2);
+$twisteddagger->setEvasionBonus(10);
 $twisteddagger->setItemDescription("A wicked little thing.");
 $twisteddagger->addToArmory($weapons['Daggers']);
 
 //Shields
 //Added to default array
 $none = new Shield("None", "Shield", 0, 100, 0);
+$none->setDmgReduction(0);
 $none->setItemDescription("It's really not ideal but you could probably deflect a blow or two with your elbow.");
 
 $buckler = new Shield("Buckler", "Shield", 35, 5, 0);

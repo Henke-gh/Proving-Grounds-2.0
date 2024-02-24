@@ -60,7 +60,7 @@ require __DIR__ . "/../nav/header.php";
             endif;
             ?>
             <div class="monsterSelect">
-                <h3>Monster Rooster</h3>
+                <h3>Duke Rorfetch's Arena</h3>
                 <p class="cursive">(Click on a monster for more information)</p>
                 <?php $monsterID = 0;
                 foreach ($monsterLibrary->getAllMonsters() as $monster) : ?>
@@ -72,6 +72,9 @@ require __DIR__ . "/../nav/header.php";
                         <p>Level: <?= $monster->getLevel(); ?> [<?= $monster->name; ?>]</p>
                     </div>
                 <?php endforeach; ?>
+            </div>
+            <div class="combatImgContainer">
+                <img src="/../assets/images/goblin_fighter1.png" />
             </div>
 
             <!-- More modulo game, Monster info presents here -->

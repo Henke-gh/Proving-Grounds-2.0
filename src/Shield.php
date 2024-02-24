@@ -6,7 +6,7 @@ namespace App;
 
 class Shield extends Item
 {
-    private int $damageReduction;
+    private int $damageReduction = 0;
 
     public function __construct(
         string $name,
