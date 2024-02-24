@@ -18,7 +18,7 @@ class Hero extends Creature
     private int $lastRegeneration = 0;
     //fame and xp values, used to calculate when (and what) to level up player hero
     private int $xp = 0;
-    private int $xpToNextLvl = 100;
+    private int $xpToNextLvl = 75;
     private int $fameLevel = 0;
     private int $fameScore = 0;
     private int $nextFameLvl = 10;

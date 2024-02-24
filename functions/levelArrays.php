@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 $levels = [
-    'level 1' => 100,
-    'level 2' => 225,
-    'level 3' => 350,
-    'level 4' => 500,
-    'level 5' => 675,
-    'level 6' => 900,
-    'level 7' => 1125,
+    'level 1' => 75,
+    'level 2' => 200,
+    'level 3' => 325,
+    'level 4' => 475,
+    'level 5' => 650,
+    'level 6' => 875,
+    'level 7' => 1100,
     'level 8' => 1350,
     'level 9' => 1700,
     'level 10' => 2000,

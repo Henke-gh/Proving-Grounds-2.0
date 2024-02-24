@@ -23,7 +23,7 @@ $armours = [];
 $trinkets = [];
 
 //Weapons by Weapon Type
-//Default (unarmed)
+//Default (unarmed) added to the bottom of this file
 $fists = new Weapon("Fists", "Unarmed", 0, 0, 1, 2, 0);
 $fists->setItemDescription("They're your flesh mittens, champ. Might wanna invest in something for them to swing.");
 //Swords
@@ -84,7 +84,7 @@ $twisteddagger->setItemDescription("A wicked little thing.");
 $twisteddagger->addToArmory($weapons['Daggers']);
 
 //Shields
-//Added to default array
+//Added to default array at the bottom of this file
 $none = new Shield("None", "Shield", 0, 100, 0);
 $none->setDmgReduction(0);
 $none->setItemDescription("It's really not ideal but you could probably deflect a blow or two with your elbow.");
@@ -124,15 +124,33 @@ $ringmail->setItemDescription("Fits you like a glove.");
 $ringmail->addToArmory($armours);
 
 //Trinkets
-$zehirStone = new Trinket("Stone of Zehir", "Trinket", 450, 0, 0);
-$zehirStone->setInitiativeBonus(10);
-$zehirStone->setItemDescription("Time slows down.. (Max: 1)");
-$zehirStone->addToArmory($trinkets);
-
 $bloodybrick = new Trinket("Bloody Brick", "Trinket", 340, 0, 0);
 $bloodybrick->setMaxHP(10);
-$bloodybrick->setItemDescription("It's dripping.. (Max: 1)");
+$bloodybrick->setItemDescription("It's dripping..");
 $bloodybrick->addToArmory($trinkets);
+
+$zehirStone = new Trinket("Stone of Zehir", "Trinket", 450, 0, 0);
+$zehirStone->setInitiativeBonus(10);
+$zehirStone->setItemDescription("Time slows down.");
+$zehirStone->addToArmory($trinkets);
+
+$engravedmedal = new Trinket("Engraved Medal", "Trinket", 500, 0, 0);
+$engravedmedal->setBlockBonus(10);
+$engravedmedal->setItemDescription("It's a small ornate shield.");
+$engravedmedal->addToArmory($trinkets);
+
+$brokenfang = new Trinket("Szhlint's Fang", "Trinket", 500, 0, 0);
+$brokenfang->setEvasionBonus(10);
+$brokenfang->setItemDescription("Torn from hideous jaws.");
+$brokenfang->addToArmory($trinkets);
+
+$prism = new Trinket("Solohel Prism", "Trinket", 1000, 0, 0);
+$prism->setInitiativeBonus(5);
+$prism->setEvasionBonus(5);
+$prism->setBlockBonus(5);
+$prism->setMaxHP(5);
+$prism->setItemDescription("Looking through it one can see a bit of everything.");
+$prism->addToArmory($trinkets);
 
 
 //default items, if unequipped

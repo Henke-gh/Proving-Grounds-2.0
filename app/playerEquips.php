@@ -26,7 +26,7 @@ if (isset($_POST['equip'])) {
             break;
         case 'trinkets':
             $trinket = $player->getInventory()['trinkets'][$itemID];
-            if (count($player->getTrinkets()) < 5) {
+            if (count($player->getTrinkets()) < 3) {
                 $player->addTrinket($trinket);
                 $trinket->applyBonuses($player);
                 $player->removeInventoryItem($trinket, 'trinkets');

@@ -5,7 +5,7 @@ $tombstone = $database->readTombstone();
 require __DIR__ . "/../nav/header.php";
 ?>
 <main>
-    <h2>The Tombstone</h2>
+    <h2>The Graveyard</h2>
     <div class="tombstoneContainer">
         <img src="/../assets/images/tombstone.png" class="tavernImage">
     </div>

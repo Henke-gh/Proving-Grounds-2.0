@@ -292,7 +292,7 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
         $turn++;
 
         if ($player->getFatigue() < $turn) {
-            array_push($combatLog, $player->name . " collapses due to fatigue.");
+            array_push($combatLog, "<span class=bold>" . $player->name . " collapses due to fatigue.</span>");
             $player->setLosses(1);
             $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
             break;
