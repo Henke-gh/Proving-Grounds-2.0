@@ -10,6 +10,7 @@ $playerSaveState = $_SESSION['player'];
 $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
 $player->loadHeroState($playerSaveState);
 
+//If this value is updated, also update value at _step2!
 $skillPoints = 50;
 
 if (isset($_POST['create'])) {

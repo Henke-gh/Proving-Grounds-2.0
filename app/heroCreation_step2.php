@@ -29,7 +29,7 @@ if (isset($_POST['createHero'])) {
     header('Location: /../app/heroCreation_step1.php');
     exit();
 }
-
+//if this value is updated, also update value at _finalize!
 $skillPoints = 50;
 
 require __DIR__ . "/../nav/header.php";
