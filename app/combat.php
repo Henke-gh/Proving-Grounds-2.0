@@ -115,7 +115,7 @@ require __DIR__ . "/../nav/header.php";
                     endforeach; ?>
                 </div>
             </div>
-            <div class="combatImgContainer">
+            <div class="combatImgContainer bottomImgTopMargin">
                 <img src="/../assets/images/goblin_fighter_sharp.png" />
             </div>
             <script src="/styles/shopItems.js"></script>

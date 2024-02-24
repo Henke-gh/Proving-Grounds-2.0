@@ -732,6 +732,10 @@ footer {
   width: 100%;
 }
 
+.bottomImgTopMargin {
+  margin-top: 20px;
+}
+
 .combatlog form {
   display: flex;
   flex-direction: row;
