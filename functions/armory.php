@@ -35,7 +35,7 @@ $scimitar = new Weapon("Scimitar", "Swords", 130, 30, 2, 7, 5);
 $scimitar->setItemDescription("A curved classic.");
 $scimitar->addToArmory($weapons['Swords']);
 
-$longsword = new Weapon("Long Sword", "Swords", 400, 50, 5, 12, 10);
+$longsword = new Weapon("Long Sword", "Swords", 450, 50, 5, 12, 10);
 $longsword->setInitiativeBonus(5);
 $longsword->setItemDescription("Finely crafted with a keen edge.");
 $longsword->addToArmory($weapons['Swords']);
@@ -49,7 +49,7 @@ $huntingspear->setItemDescription("A long spear, used for game hunting.");
 $huntingspear->setInitiativeBonus(5);
 $huntingspear->addToArmory($weapons['Spears']);
 
-$boarlance = new Weapon("Boar Lance", "Spears", 400, 65, 5, 20, 10);
+$boarlance = new Weapon("Boar Lance", "Spears", 400, 65, 2, 14, 10);
 $boarlance->setInitiativeBonus(10);
 $boarlance->setItemDescription("Popular in the Royal Huntsmen's Guild");
 $boarlance->addToArmory($weapons['Spears']);
@@ -70,7 +70,7 @@ $mace = new Weapon("Mace", "Hammers", 150, 30, 3, 7, 8);
 $mace->setItemDescription("A steel mace with a flanged head.");
 $mace->addToArmory($weapons['Hammers']);
 
-$flail = new Weapon("Flail", "Hammers", 350, 50, 2, 15, 10);
+$flail = new Weapon("Flail", "Hammers", 400, 50, 2, 16, 15);
 $flail->setItemDescription("The ball at the end of the chain is covered in spikes.");
 $flail->addToArmory($weapons['Hammers']);
 //Daggers
@@ -112,7 +112,7 @@ $tunic = new Armour("Tunic", "Armour", 0, 0, 0);
 $tunic->setDmgReduction(0);
 $tunic->setItemDescription("The merchant said it's a nice tunic. Looks more like rags to you.");
 
-$gladleather = new Armour("Gladiator Leathers", "Armour", 50, 0, 5);
+$gladleather = new Armour("Gladiator Leathers", "Armour", 100, 0, 2);
 $gladleather->setEvasionBonus(5);
 $gladleather->setDmgReduction(0);
 $gladleather->setItemDescription("A set of light leather plates and straps");

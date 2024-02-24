@@ -110,7 +110,7 @@ $monsterLibrary->addMonster($youngtroll);
 $commander = new Monster("Legionnaire Commander", 30);
 $commander->setLevel(10);
 $commander->setStrength(25);
-$commander->setSpeed(10);
+$commander->setSpeed(15);
 $commander->setVitality(50);
 $commander->setSkill("Swords", 55);
 $commander->setSkill("Initiative", 30);
@@ -125,14 +125,6 @@ $commander->setDescription("Acknowledge only victory.");
 $monsterLibrary->addMonster($commander);
 
 /* 
-
-$commander = new Monster("Legionnaire Commander", 10, 70, 40, new Weapon("Long Sword", "Accuracy", 0, 40, 5, 12, 0));
-$commander->setSkill("Accuracy", 60);
-$commander->setSkill("Evasion", 20);
-$commander->setSkill("Initiative", 10);
-$commander->setDmgReduction(1);
-$commander->setDescription("Acknowledge only victory.");
-$monsterLibrary->addMonster($commander);
 
 //Only for testing
 $giftborn = new Monster("Gift-Born", 100, 1, 500, new Weapon("Palm", "Accuracy", 0, 0, 0, 0, 0));

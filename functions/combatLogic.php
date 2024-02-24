@@ -52,7 +52,7 @@ function critDamage($attackDamage): int
 function chanceToHit(int $attackerWeaponSkill, int $attackerWeaponReq, int $defenderEvasionSkill): bool
 {
     if ($attackerWeaponReq > $attackerWeaponSkill) {
-        $baseHitChance = (int) floor(($attackerWeaponSkill * 0.5) - $defenderEvasionSkill / 2);
+        $baseHitChance = (int) floor(($attackerWeaponSkill * 0.7) - $defenderEvasionSkill / 2);
     } else {
         $baseHitChance = $attackerWeaponSkill - $defenderEvasionSkill / 10;
     }
@@ -79,7 +79,7 @@ function tryEvasion(int $attackerWeaponSkill, int $attackerWeaponReq, int $defen
     }
 }
 //should only run if player/monster canBlock returns TRUE
-//returns true if block is successful - NOT IMPLEMENTED
+//returns true if block is successful
 function tryBlock(int $attackerWeaponSkill, int $attackerWeaponReq, int $defenderBlockSkill, int $defenderBlockReq): bool
 {
     $targetBlock = rand(0, $defenderBlockSkill) + $defenderBlockSkill / 5;
@@ -209,7 +209,7 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
             $playerInitiative = (int) floor($player->getInitiative() * 1.2);
             $playerEvasion = (int) floor($player->getEvasion() * 1.2);
             $playerDamage = (int) floor($player->doDamage() * 0.8);
-            $playerToHitChance = $player->toHitChance();
+            $playerToHitChance = (int) floor($player->toHitChance() * 1.2);
             $playerBlock = $player->getBlock();
             $stanceName = "Fast Attacks";
         }

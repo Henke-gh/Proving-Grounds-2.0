@@ -6,7 +6,7 @@
             <a href="/../index.php" class="navLink">Start</a>
         <?php endif; ?>
         <a href="#" class="navLink">About</a>
-        <a href="#" class="navLink">Game Guide</a>
+        <a href="/../app/gameguide.php" class="navLink">Game Guide</a>
         <?php if (isset($_SESSION['playerID'])) : ?>
             <a href="/../app/tombstone.php" class="navLink">Tombstone</a>
             <a href="#" class="navLink">My Account</a>

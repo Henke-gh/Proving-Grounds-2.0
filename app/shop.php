@@ -142,6 +142,8 @@ require __DIR__ . "/../nav/header.php";
             </div>
             <div class="trinketContainer hidden shopDisplay" id="trinketContainer">
                 <h3>Trinkets</h3>
+                <p>Trinkets are powerful curios. Your hero can only carry one of each.</p>
+                <p>Limited to a maximum of three equipped trinkets at a time.</p>
                 <?php foreach ($trinkets as $trinketID => $trinket) : ?>
                     <div class="shopItem shopTrinket">
                         <div class="itemSelect">

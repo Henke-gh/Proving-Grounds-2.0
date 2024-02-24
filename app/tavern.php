@@ -9,8 +9,6 @@ if (!isset($_SESSION['player'])) {
 
 $player = loadHero($database);
 saveHero($player, $database);
-
-//require __DIR__ . "/../app/playerEquips.php";
 require_once __DIR__ . "/../nav/header.php";
 ?>
 <div class="contentPosition">
@@ -41,9 +39,6 @@ require_once __DIR__ . "/../nav/header.php";
                 </p>
                 <p>Working for Borkhorst will gain you some gold, at the cost of Grit.</p>
             </article>
-            <div class="">
-                <!-- playerInfo here -->
-            </div>
             <div class="tavernBarWork">
                 <p>Spend 35 Grit to earn 15 gold?</p>
                 <form method="post" action="/../app/tavernWork.php">

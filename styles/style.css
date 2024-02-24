@@ -791,3 +791,9 @@ footer {
 .healingItem p {
   margin: 5px 0;
 }
+
+/* Game Guide */
+.gameGuide {
+  width: 70%;
+  font-size: 1.05rem;
+}
