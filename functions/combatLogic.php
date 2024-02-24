@@ -102,13 +102,17 @@ function tryBlock(int $attackerWeaponSkill, int $attackerWeaponReq, int $defende
 function playerAttack(Hero $player, Monster $monster, int $playerToHitChance, int $playerDmg): array
 {
     $log = [];
+    $monsterDmgReduction = 0;
+    if (isset($monster->armour)) {
+        $monsterDmgReduction = $monster->armour->getDmgReduction();
+    }
     //If critChance = true, deals Crit dmg and bypasses all other checks.
     if (critChance($playerToHitChance) === true) {
         $damage = critDamage($playerDmg);
         array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
         array_push($log, $player->name . " strikes a <span class=bold>furious</span> blow to " . $monster->name . " for " . $monster->sufferDamage($damage) . " damage!");
     } else {
-        $damage = determineDamage($playerDmg, $monster->getDmgReduction());
+        $damage = determineDamage($playerDmg, $monsterDmgReduction);
         if (chanceToHit($playerToHitChance, $player->weapon->skillRequirement, $monster->toHitChance()) === false) {
             array_push($log, $player->name . " misses..");
         } elseif (tryEvasion($playerToHitChance, $player->weapon->skillRequirement, $monster->getEvasion()) === true) {
