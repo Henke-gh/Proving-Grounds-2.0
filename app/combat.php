@@ -60,33 +60,65 @@ require __DIR__ . "/../nav/header.php";
             endif;
             ?>
             <div class="monsterSelect">
-                <h3>Duke Rorfetch's Arena</h3>
-                <p class="cursive">(Click on a monster for more information)</p>
-                <?php $monsterID = 0;
-                foreach ($monsterLibrary->getAllMonsters() as $monster) : ?>
-                    <div class="monster pointer underlineHover" onclick="showDetails(<?= $monsterID++; ?>,
-                '<?= $monster->name; ?>',
-                '<?= $monster->getLevel(); ?>',
-                '<?= $monster->weapon->name; ?>',
-                '<?= $monster->getDescription(); ?>')">
-                        <p>Level: <?= $monster->getLevel(); ?> [<?= $monster->name; ?>]</p>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-            <div class="combatImgContainer">
-                <img src="/../assets/images/goblin_fighter1.png" />
-            </div>
-
-            <!-- More modulo game, Monster info presents here -->
-            <div class="overlay" id="overlay">
-                <div class="overlayContent" id="overlayContent">
-                    <div class=" details" id="details">
-                        <!-- JS puts item deets here. Similar to shop.php but for monster selection-->
-                    </div>
-                    <button class="closeOverlay" id="closeOverlay">Close Overlay</button>
+                <h2>Duke Rorfetch's Arena</h2>
+                <div class="combatImgContainer">
+                    <img src="/../assets/images/scout_sharp.png" />
+                </div>
+                <p>Enter, if you dare, and claim your fame!</p>
+                <div class="monsterSelector">
+                    <?php $monsterID = 0;
+                    foreach ($monsterLibrary->getAllMonsters() as $monster) : ?>
+                        <!-- Reuses the shopItem.js solution for displaying monster info & combat options -->
+                        <div class="monster shopItem">
+                            <div class="itemSelect">
+                                <p>[Level: <?= $monster->getLevel(); ?>] - <span class="bold"><?= $monster->name; ?></span></p>
+                                <button class="showItem">Show</button>
+                            </div>
+                            <div class="itemDetails hidden">
+                                <div class="descriptionBox">
+                                    <p><span class="bold">Weapon:</span> <?= $monster->weapon->name; ?></p>
+                                    <?php if (isset($monster->shield)) : ?>
+                                        <p><span class="bold">Shield:</span> <?= $monster->shield->name; ?></p>
+                                    <?php endif; ?>
+                                    <?php if (isset($monster->armour)) : ?>
+                                        <p><span class="bold">Armour:</span> <?= $monster->armour->name; ?></p>
+                                    <?php endif; ?>
+                                    <p class="cursive">-<?= $monster->getDescription(); ?></p>
+                                </div>
+                                <form method="post" class="combatForm">
+                                    <label for="combatStance">Combat Stance</label>
+                                    <select name="combatStance" id="combatStance">
+                                        <option value="light">Fast Attacks</option>
+                                        <option value="balanced" selected>Balanced</option>
+                                        <option value="defensive">Heavy Guard</option>
+                                    </select>
+                                    <label for="hpSelect">Retreat at:</label>
+                                    <select name=retreatValue id=hpSelect>
+                                        <?php
+                                        $retreat = 100;
+                                        for ($i = 0; $i < 11; $i++) :
+                                            if ($retreat === 50) : ?>
+                                                <option selected><?= $retreat; ?>% HP</option>
+                                            <?php else : ?>
+                                                <option><?= $retreat; ?>% HP</option>
+                                        <?php
+                                            endif;
+                                            $retreat -= 10;
+                                        endfor; ?>
+                                    </select>
+                                    <button type="submit" name="fight" value="<?= $monsterID; ?>">Fight</button>
+                                </form>
+                            </div>
+                        </div>
+                    <?php
+                        $monsterID++;
+                    endforeach; ?>
                 </div>
             </div>
-            <script src="/styles/monsterSelectModulo.js"></script>
+            <div class="combatImgContainer">
+                <img src="/../assets/images/goblin_fighter_sharp.png" />
+            </div>
+            <script src="/styles/shopItems.js"></script>
 
         <?php elseif (isset($_POST['fight'])) : ?>
             <div class="combatlog">

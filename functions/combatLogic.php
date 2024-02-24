@@ -223,9 +223,9 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
     if ($player->getCurrentHP() < $retreatValue) {
         array_push($combatLog, "Your wounds are too severe to fight.");
     } else {
-        array_push($combatLog, "<h3>" . $player->name . " vs " . $monster->name . "</h3>");
-        array_push($combatLog, "<p><span class=bold>Stance:</span> " . $stanceName . "</p>");
-        array_push($combatLog, "<p><span class=bold>Retreating at:</span> " . $retreatValue . " hp</p>");
+        array_push($combatLog, "<p class=logLine><span class=bold>" . $player->name . " vs " . $monster->name . "</span></p>");
+        array_push($combatLog, "<p class=logLine><span class=bold>Stance:</span> " . $stanceName . "</p>");
+        array_push($combatLog, "<p class=logLine><span class=bold>Retreating at:</span> " . $retreatValue . " hp</p>");
     }
 
     while ($player->getCurrentHP() > $retreatValue) {

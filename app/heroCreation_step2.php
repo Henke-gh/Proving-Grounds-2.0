@@ -49,6 +49,9 @@ require __DIR__ . "/../nav/header.php";
         <h3>Name: <?= $player->name; ?></h3>
         <p>Gender: <?= $player->gender; ?></p>
     </div>
+    <div class="proTip">
+        <p>Tip: Put at least some points into your base attributes and 20 or so points into a Weapon skill of your choosing.</p>
+    </div>
     <form method="post" action="/../app/heroCreation_finalize.php" class="heroStatForm">
         <h4>Spend <?= $skillPoints; ?> points on Attributes and Skills</h4>
         <div>

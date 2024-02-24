@@ -20,9 +20,8 @@ $cowardlyCultist->setSkill("Spears", 15);
 $cowardlyCultist->setSkill("Evasion", 5);
 $cowardlyCultist->setFatigue();
 $cowardlyCultist->setCurrentHP($cowardlyCultist->getHP());
-$cowardlyCultist->weapon = new Weapon("Crooked Cane", "Spears", 0, 10, 1, 4, 5);
-$cowardlyCultist->shield = $none;
-$cowardlyCultist->setDescription("He won\'t even look you in the eyes");
+$cowardlyCultist->weapon = new Weapon("Crooked Cane", "Spears", 0, 10, 2, 4, 5);
+$cowardlyCultist->setDescription("He won't even look you in the eyes");
 $monsterLibrary->addMonster($cowardlyCultist);
 
 $goblin = new Monster("Goblin", 20);
@@ -34,7 +33,6 @@ $goblin->setSkill("Swords", 15);
 $goblin->setFatigue();
 $goblin->setCurrentHP($goblin->getHP());
 $goblin->weapon = new Weapon("Chipped Blade", "Swords", 0, 10, 2, 4, 5);
-$goblin->shield = $none;
 $goblin->setDescription("The foul smelling little shits are everywhere..");
 $monsterLibrary->addMonster($goblin);
 
@@ -50,7 +48,7 @@ $bandit->setFatigue();
 $bandit->setCurrentHP($bandit->getHP());
 $bandit->weapon = $shortsword;
 $bandit->shield = $buckler;
-$bandit->setDescription("Your gold.. or your life. Actually, I\'ll have both.");
+$bandit->setDescription("Your gold.. or your life. Actually, I'll have both.");
 $monsterLibrary->addMonster($bandit);
 
 $goblinRaider = new Monster("Goblin Raider", 25);
@@ -65,7 +63,7 @@ $goblinRaider->setCurrentHP($goblinRaider->getHP());
 $goblinRaider->weapon = new Weapon("Blackened Blade", "Swords", 0, 20, 2, 6, 5);
 $goblinRaider->shield = new Shield("Spiked Buckler", "Shield", 0, 15, 0);
 $goblinRaider->shield->setDmgReduction(2);
-$goblinRaider->setDescription("They loot and pillage. It\'s all they know..");
+$goblinRaider->setDescription("They loot and pillage. It's all they know..");
 $monsterLibrary->addMonster($goblinRaider);
 
 $angvarBull = new Monster("Angvarian Bull", 25);
@@ -111,17 +109,18 @@ $monsterLibrary->addMonster($youngtroll);
 
 $commander = new Monster("Legionnaire Commander", 30);
 $commander->setLevel(10);
-$commander->setStrength(10);
+$commander->setStrength(25);
 $commander->setSpeed(10);
-$commander->setVitality(10);
-$commander->setSkill("Swords", 60);
-$commander->setSkill("Initiative", 35);
+$commander->setVitality(50);
+$commander->setSkill("Swords", 55);
+$commander->setSkill("Initiative", 30);
+$commander->setSkill("Evasion", 20);
+$commander->setSkill("Block", 45);
 $commander->setFatigue();
 $commander->setCurrentHP($commander->getHP());
 $commander->weapon = $longsword;
-$commander->shield = $none;
+$commander->shield = $kiteshield;
 $commander->armour = new Armour("Legion Gambeson", "Armour", 0, 0, 5);
-$commander->armour->setEvasionBonus(10);
 $commander->setDescription("Acknowledge only victory.");
 $monsterLibrary->addMonster($commander);
 
