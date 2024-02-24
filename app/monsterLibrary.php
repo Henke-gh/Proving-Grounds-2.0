@@ -6,6 +6,7 @@ namespace App;
 
 use App\Monster;
 use App\MonsterCollection;
+use Shmop;
 
 require __DIR__ . "/../functions/armory.php";
 
@@ -123,6 +124,24 @@ $commander->shield = $kiteshield;
 $commander->armour = new Armour("Legion Gambeson", "Armour", 0, 0, 5);
 $commander->setDescription("Acknowledge only victory.");
 $monsterLibrary->addMonster($commander);
+
+$berserker = new Monster("Vorthun Berserker", 40);
+$berserker->setLevel(14);
+$berserker->setStrength(55);
+$berserker->setSpeed(25);
+$berserker->setVitality(80);
+$berserker->setSkill("Axes", 75);
+$berserker->setSkill("Initiative", 30);
+$berserker->setSkill("Block", 55);
+$berserker->setFatigue();
+$berserker->setCurrentHP($berserker->getHP());
+$berserker->weapon = new Weapon("Reaver's Ax", "Axes", 0, 55, 8, 20, 15);
+$berserker->shield = new Shield("Painted Round-shield", "Shield", 0, 35, 10);
+$berserker->shield->setDmgReduction(4);
+$berserker->armour = new Armour("Reaver's Garb", "Armour", 0, 0, 10);
+$berserker->armour->setDmgReduction(2);
+$berserker->setDescription("Frenzied and bloodthirsty. Fear him.");
+$monsterLibrary->addMonster($berserker);
 
 /* 
 

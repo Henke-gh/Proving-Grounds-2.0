@@ -26,9 +26,8 @@ require __DIR__ . "/nav/header.php";
         </div>
     </form>
     <div class="newsMessage">
-        <h3>News/ Latest changes 19/2-24</h3>
-        <p>Much left to do, esp regarding responsiveness.</p>
-        <p>All basic gameplay elements in place.</p>
+        <h3>News/ Latest changes 24/2-24</h3>
+        <p>There's a game guide now, sweet.</p>
     </div>
 </main>
 <?php
