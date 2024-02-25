@@ -70,7 +70,14 @@ main {
 }
 
 .errorMsg {
-  background-color: red;
+  background-color: var(--bloodrise);
+  color: var(--paleYellow);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.errorMsg h3 {
+  margin: 0;
 }
 
 .successsMsg {

@@ -10,9 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     unset($_POST['passwordRepeat']);
     $usernames = $database->getUsernames();
     if (in_array($newUsername, $usernames)) {
-        echo "Sorry, " . $newUsername . " is not available.";
+        $_SESSION['error'] = "Sorry, " . $newUsername . " is not available.";
     } elseif ($newPassword !== $newPasswordRepeat) {
-        echo "Passwords don't match. Try again.";
+        $_SESSION['error'] = "Passwords don't match. Try again.";
     } else {
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
         $database->addUser($newUsername, $hashedPassword);
@@ -22,6 +22,14 @@ require __DIR__ . "/../nav/header.php";
 ?>
 <main>
     <h2>Welcome to the Proving Grounds</h2>
+    <?php
+    if (isset($_SESSION['error'])) : ?>
+        <div class="errorMsg">
+            <h3><?= $_SESSION['error']; ?></h3>
+        </div>
+    <?php
+        unset($_SESSION['error']);
+    endif; ?>
     <form method="post" action="">
         <div class="loginForm">
             <div class="loginItem">

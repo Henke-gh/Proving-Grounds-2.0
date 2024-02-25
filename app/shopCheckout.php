@@ -23,7 +23,7 @@ if (isset($_POST['purchaseWeapon'])) {
         header('Location:' . $baseURL . '/app/shop.php');
         exit();
     } else {
-        $_SESSION['error'] = "Not enough funds.";
+        $_SESSION['error'] = "Not enough gold.";
         header('Location:' . $baseURL . '/app/shop.php');
         exit();
     }
@@ -43,7 +43,7 @@ if (isset($_POST['purchaseShield'])) {
         header('Location:' . $baseURL . '/app/shop.php');
         exit();
     } else {
-        $_SESSION['error'] = "Not enough funds.";
+        $_SESSION['error'] = "Not enough gold.";
         header('Location:' . $baseURL . '/app/shop.php');
         exit();
     }
@@ -62,7 +62,7 @@ if (isset($_POST['purchaseArmour'])) {
         header('Location:' . $baseURL . '/app/shop.php');
         exit();
     } else {
-        $_SESSION['error'] = "Not enough funds.";
+        $_SESSION['error'] = "Not enough gold.";
         header('Location:' . $baseURL . '/app/shop.php');
         exit();
     }
@@ -86,7 +86,7 @@ if (isset($_POST['purchaseTrinket'])) {
         header('Location:' . $baseURL . '/app/shop.php');
         exit();
     } else {
-        $_SESSION['error'] = "Not enough funds.";
+        $_SESSION['error'] = "Not enough gold.";
         header('Location:' . $baseURL . '/app/shop.php');
         exit();
     }

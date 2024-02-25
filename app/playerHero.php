@@ -26,6 +26,14 @@ require __DIR__ . "/../nav/header.php";
                     <img src="<?= $baseURL; ?>/assets/images/items.png" class="inventoryImage" />
                 </div>
             </section>
+            <?php
+            if (isset($_SESSION['error'])) : ?>
+                <div class="errorMsg">
+                    <h3><?= $_SESSION['error']; ?></h3>
+                </div>
+            <?php
+                unset($_SESSION['error']);
+            endif; ?>
             <div class="heroGear">
                 <div class="equippedItems">
                     <h3>Equipped Items</h3>

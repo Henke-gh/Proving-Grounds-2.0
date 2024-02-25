@@ -31,7 +31,7 @@ if (isset($_POST['equip'])) {
                 $trinket->applyBonuses($player);
                 $player->removeInventoryItem($trinket, 'trinkets');
             } else {
-                echo "Too many trinkets..";
+                $_SESSION['error'] = "Too many trinkets..";
             }
             saveHero($player, $database);
             break;
