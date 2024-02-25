@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . "/../bootstrap.php";
 require __DIR__ . "/../functions/heroFunctions.php";
+require __DIR__ . "/../functions/generalFunctions.php";
 require __DIR__ . "/../functions/levelUpFunctions.php";
 
 $player = loadHero($database);
