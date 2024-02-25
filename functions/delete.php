@@ -10,10 +10,10 @@ if (isset($_SESSION['playerID'])) {
         $id = $_SESSION['playerID'];
         $database->deleteHero($id);
         unset($_SESSION['player']);
-        header('Location: /../app/heroCreation_step1.php');
+        header('Location:' . $baseURL . '/app/heroCreation_step1.php');
         exit();
     }
 } else {
-    header('Location: /../index.php');
+    header('Location:' . $baseURL . '/index.php');
     exit();
 }

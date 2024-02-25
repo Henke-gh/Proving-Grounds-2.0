@@ -13,5 +13,5 @@ if (isset($_POST['logout'])) {
     }
     unset($_SESSION['playerID']);
 
-    header('Location: /../index.php');
+    header('Location:' . $baseURL . '/index.php');
 }

@@ -64,7 +64,7 @@ require_once __DIR__ . "/../nav/header.php";
         <p>Last updated: 24/2-24</p>
     </article>
     <div class="combatImgContainer bottomImgTopMargin">
-        <img src="/../assets/images/goblin_fighter_sharp.png" />
+        <img src="<?= $baseURL; ?>/assets/images/goblin_fighter_sharp.png" />
     </div>
 </main>
 <?php

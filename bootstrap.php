@@ -22,3 +22,8 @@ $database = new QueryBuilder(Connection::make(
     $config['database']['username'],
     $config['database']['password']
 ));
+
+//used during local dev
+$baseURL = "/..";
+//live url
+/* baseURL = "https://henkes-portfolio.se/betaGrounds" */

@@ -6,11 +6,10 @@ require __DIR__ . "/../functions/heroFunctions.php";
 require __DIR__ . "/../functions/armory.php";
 
 $player = loadHero($database);
-saveHero($player, $database);
 
 if (isset($_POST['purchaseWeapon'])) {
-    $weaponType = $_POST['item'][0];
-    $weaponIndex = $_POST['item'][1];
+    $weaponType = htmlspecialchars($_POST['item'][0], ENT_QUOTES);
+    $weaponIndex = htmlspecialchars($_POST['item'][1], ENT_QUOTES);
     //Get weapon from the weapons array
     $weapon = $weapons[$weaponType][$weaponIndex];
     if ($player->getGold() >= $weapon->cost) {
@@ -21,18 +20,18 @@ if (isset($_POST['purchaseWeapon'])) {
         $player->addInventoryWeapon($weapon);
         saveHero($player, $database);
         $_SESSION['itemBought'] = "You bought a " . $weapon->name . ".";
-        header('Location: /../app/shop.php');
+        header('Location:' . $baseURL . '/app/shop.php');
         exit();
     } else {
         $_SESSION['error'] = "Not enough funds.";
-        header('Location: /../app/shop.php');
+        header('Location:' . $baseURL . '/app/shop.php');
         exit();
     }
 }
 
 if (isset($_POST['purchaseShield'])) {
-    $itemType = $_POST['item'][0];
-    $shieldIndex = $_POST['item'][1];
+    $itemType = htmlspecialchars($_POST['item'][0], ENT_QUOTES);
+    $shieldIndex = htmlspecialchars($_POST['item'][1], ENT_QUOTES);
 
     $shieldToBuy = $shields[$shieldIndex];
     if ($player->getGold() >= $shieldToBuy->cost) {
@@ -41,17 +40,17 @@ if (isset($_POST['purchaseShield'])) {
         $player->addInventoryShield($shieldToBuy);
         saveHero($player, $database);
         $_SESSION['itemBought'] = "You bought a " . $shieldToBuy->name . ".";
-        header('Location: /../app/shop.php');
+        header('Location:' . $baseURL . '/app/shop.php');
         exit();
     } else {
         $_SESSION['error'] = "Not enough funds.";
-        header('Location: /../app/shop.php');
+        header('Location:' . $baseURL . '/app/shop.php');
         exit();
     }
 }
 if (isset($_POST['purchaseArmour'])) {
-    $itemType = $_POST['item'][0];
-    $armourIndex = $_POST['item'][1];
+    $itemType = htmlspecialchars($_POST['item'][0], ENT_QUOTES);
+    $armourIndex = htmlspecialchars($_POST['item'][1], ENT_QUOTES);
 
     $armourToBuy = $armours[$armourIndex];
     if ($player->getGold() >= $armourToBuy->cost) {
@@ -60,22 +59,22 @@ if (isset($_POST['purchaseArmour'])) {
         $player->addInventoryArmour($armourToBuy);
         saveHero($player, $database);
         $_SESSION['itemBought'] = "You bought " . $armourToBuy->name . ".";
-        header('Location: /../app/shop.php');
+        header('Location:' . $baseURL . '/app/shop.php');
         exit();
     } else {
         $_SESSION['error'] = "Not enough funds.";
-        header('Location: /../app/shop.php');
+        header('Location:' . $baseURL . '/app/shop.php');
         exit();
     }
 }
 if (isset($_POST['purchaseTrinket'])) {
-    $itemType = $_POST['item'][0];
-    $trinketIndex = $_POST['item'][1];
+    $itemType = htmlspecialchars($_POST['item'][0], ENT_QUOTES);
+    $trinketIndex = htmlspecialchars($_POST['item'][1], ENT_QUOTES);
 
     $trinketToBuy = $trinkets[$trinketIndex];
     if (in_array($trinketToBuy, $player->getInventory()['trinkets']) || in_array($trinketToBuy, $player->getTrinkets())) {
         $_SESSION['error'] = "You can only have one of those.";
-        header('Location: /../app/shop.php');
+        header('Location:' . $baseURL . '/app/shop.php');
         exit();
     }
     if ($player->getGold() >= $trinketToBuy->cost) {
@@ -84,19 +83,19 @@ if (isset($_POST['purchaseTrinket'])) {
         $player->addInventoryTrinket($trinketToBuy);
         saveHero($player, $database);
         $_SESSION['itemBought'] = "You bought " . $trinketToBuy->name . ".";
-        header('Location: /../app/shop.php');
+        header('Location:' . $baseURL . '/app/shop.php');
         exit();
     } else {
         $_SESSION['error'] = "Not enough funds.";
-        header('Location: /../app/shop.php');
+        header('Location:' . $baseURL . '/app/shop.php');
         exit();
     }
 }
 
 if (isset($_POST['sellItem'])) {
-    $itemSellValue = $_POST['itemSell'][0];
-    $itemID = $_POST['itemSell'][1];
-    $itemType = $_POST['itemSell'][2];
+    $itemSellValue = htmlspecialchars($_POST['itemSell'][0], ENT_QUOTES);
+    $itemID = htmlspecialchars($_POST['itemSell'][1], ENT_QUOTES);
+    $itemType = htmlspecialchars($_POST['itemSell'][2], ENT_QUOTES);
     $inventory = $player->getInventory();
     $itemToSell = $inventory[$itemType][$itemID];
     $playerGold = $player->getGold() + $itemSellValue;
@@ -104,6 +103,6 @@ if (isset($_POST['sellItem'])) {
     $player->removeInventoryItem($itemToSell, $itemType);
     saveHero($player, $database);
     $_SESSION['itemBought'] = "You sold " . $itemToSell->name . ".";
-    header('Location: /../app/shop.php');
+    header('Location:' . $baseURL . '/app/shop.php');
     exit();
 }

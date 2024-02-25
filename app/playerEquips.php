@@ -1,8 +1,8 @@
 <?php
 //relates to playerSummary.php - Require this on all pages that present the playerSummary.
 if (isset($_POST['equip'])) {
-    $itemID = $_POST['itemIndex'];
-    $itemCategory = $_POST['category'];
+    $itemID = htmlspecialchars($_POST['itemIndex'], ENT_QUOTES);
+    $itemCategory = htmlspecialchars($_POST['category'], ENT_QUOTES);
     switch ($itemCategory) {
         case 'shields':
             if ($player->shield->name !== "None") {
@@ -50,7 +50,7 @@ if (isset($_POST['equip'])) {
 }
 
 if (isset($_POST['unequip'])) {
-    $unequip = $_POST['unequip'];
+    $unequip = htmlspecialchars($_POST['unequip'], ENT_QUOTES);
     switch ($unequip) {
         case 'weapon':
             $player->weapon->removeBonuses($player);
@@ -73,7 +73,7 @@ if (isset($_POST['unequip'])) {
     }
 }
 if (isset($_POST['unequipTrinket'])) {
-    $trinketName = $_POST['unequipTrinket'];
+    $trinketName = htmlspecialchars($_POST['unequipTrinket'], ENT_QUOTES);
     $trinkets = $player->getTrinkets();
     foreach ($trinkets as $trinket) {
         if ($trinket->name === $trinketName) {

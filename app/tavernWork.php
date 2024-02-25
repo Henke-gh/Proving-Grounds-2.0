@@ -3,7 +3,6 @@ require_once __DIR__ . "/../bootstrap.php";
 require __DIR__ . "/../functions/heroFunctions.php";
 
 $player = loadHero($database);
-saveHero($player, $database);
 
 if (isset($_POST['barWork']) && $player->getCurrentGrit() >= 35) {
     $player->setGold($player->getGold() + 15);
@@ -14,5 +13,5 @@ if (isset($_POST['barWork']) && $player->getCurrentGrit() >= 35) {
 }
 saveHero($player, $database);
 
-header('Location: /../app/tavern.php');
+header('Location:' . $baseURL . '/app/tavern.php');
 exit();

@@ -6,7 +6,7 @@ require __DIR__ . "/../functions/combatLogic.php";
 require __DIR__ . "/../functions/levelUpFunctions.php";
 
 if (!isset($_SESSION['player'])) {
-    header('Location: /../app/heroCreation_step1.php');
+    header('Location:' . $baseURL . '/app/heroCreation_step1.php');
     exit();
 }
 $player = loadHero($database);
@@ -28,7 +28,7 @@ if (isset($_POST['fight'])) {
         saveHero($player, $database);
         //if the player dies during combat, user is sent directly to death screen.
         if ($player->isDead()) {
-            header('Location: /../app/death.php');
+            header('Location:' . $baseURL . '/app/death.php');
             exit();
         }
     } else {
@@ -62,7 +62,7 @@ require __DIR__ . "/../nav/header.php";
             <div class="monsterSelect">
                 <h2>Duke Barnackt's Arena</h2>
                 <div class="combatImgContainer">
-                    <img src="/../assets/images/scout_sharp.png" />
+                    <img src="<?= $baseURL; ?>/assets/images/scout_sharp.png" />
                 </div>
                 <p>Enter, if you dare, and claim your fame!</p>
                 <div class="monsterSelector">
@@ -116,9 +116,9 @@ require __DIR__ . "/../nav/header.php";
                 </div>
             </div>
             <div class="combatImgContainer bottomImgTopMargin">
-                <img src="/../assets/images/goblin_fighter_sharp.png" />
+                <img src="<?= $baseURL; ?>/assets/images/goblin_fighter_sharp.png" />
             </div>
-            <script src="/styles/shopItems.js"></script>
+            <script src="<?= $baseURL; ?>/styles/shopItems.js"></script>
 
         <?php elseif (isset($_POST['fight'])) : ?>
             <div class="combatlog">

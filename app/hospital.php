@@ -6,7 +6,7 @@ require __DIR__ . "/../functions/armory.php";
 require __DIR__ . "/../functions/healingItems.php";
 
 if (!isset($_SESSION['player'])) {
-    header('Location: /../app/heroCreation_step1.php');
+    header('Location:' . $baseURL . '/app/heroCreation_step1.php');
     exit();
 }
 
@@ -44,7 +44,7 @@ require __DIR__ . "/../nav/header.php";
             unset($_SESSION['itemBought']);
         endif; ?>
         <div class="hospitalContainer">
-            <img src="/../assets/images/hospital.png" class="tavernImage">
+            <img src="<?= $baseURL; ?>/assets/images/hospital.png" class="tavernImage">
             <p>Schvitzhild will fix you right up. Most of the time.</p>
             <div class="hospitalServices">
                 <div>

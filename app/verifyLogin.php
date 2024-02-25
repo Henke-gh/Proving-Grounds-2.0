@@ -15,25 +15,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
                 if (!empty($_SESSION['player'])) {
                     $_SESSION['playerID'] = $user['ID'];
-                    header('Location: /../app/playerHero.php');
+                    header('Location:' . $baseURL . '/app/playerHero.php');
                     exit();
                 }
 
                 $_SESSION['playerID'] = $user['ID'];
-                header('Location: /../app/heroCreation_step1.php');
+                header('Location:' . $baseURL . '/app/heroCreation_step1.php');
                 exit();
             } else {
                 $_SESSION['loginFailed'] = "Incorrect password.";
-                header('Location: /../index.php');
+                header('Location:' . $baseURL . '/index.php');
                 exit();
             }
         } else {
             $_SESSION['loginFailed'] = "No such Username.";
-            header('Location: /../index.php');
+            header('Location:' . $baseURL . '/index.php');
             exit();
         }
     }
 } else {
-    header('Location: /../index.php');
+    header('Location:' . $baseURL . '/index.php');
     exit();
 }

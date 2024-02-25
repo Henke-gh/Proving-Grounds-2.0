@@ -6,12 +6,12 @@ require __DIR__ . "/../functions/levelUpFunctions.php";
 require __DIR__ . "/../functions/armory.php";
 
 if (!isset($_SESSION['player'])) {
-    header('Location: /../app/heroCreation_step1.php');
+    header('Location:' . $baseURL . '/app/heroCreation_step1.php');
     exit();
 }
 
 if (!isset($_SESSION['levelUp']) || !$_SESSION['levelUp'] === true) {
-    header('Location /../app/playerHero.php');
+    header('Location:' . $baseURL . '/app/playerHero.php');
     exit();
 }
 
@@ -35,7 +35,7 @@ require __DIR__ . "/../nav/header.php";
         <h3><?= $player->name . " - Level: " . $player->getLevel() + 1; ?></h3>
         <p><span class="bold">HP: </span><?= $player->getHP() . "/" . $player->getHP(); ?></p>
     </div>
-    <form method="post" action="/../app/levelUp_finalize.php" class="heroStatForm">
+    <form method="post" action="<?= $baseURL; ?>/app/levelUp_finalize.php" class="heroStatForm">
         <h4>Spend <?= $skillPoints; ?> points on Attributes and Skills</h4>
         <div>
             <!-- Using the hidden input field to make skillpoint value readable by skillCounter.js -->
@@ -93,6 +93,6 @@ require __DIR__ . "/../nav/header.php";
         <button type="submit" name="confirm">Confirm</button>
     </form>
 </main>
-<script src="/styles/skillCounter.js"></script>
+<script src="<?= $baseURL; ?>/styles/skillCounter.js"></script>
 <?php
 require __DIR__ . "/../nav/footer.php";

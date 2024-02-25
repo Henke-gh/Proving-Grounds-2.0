@@ -1,18 +1,19 @@
 <?php
 require __DIR__ . "/vendor/autoload.php";
+require __DIR__ . "/bootstrap.php";
 session_start();
 require __DIR__ . "/nav/header.php";
 ?>
 <main>
     <h2>Welcome to the Proving Grounds</h2>
-    <img src="/assets/images/crossing_swords.png">
+    <img src="<?= $baseURL; ?>/assets/images/crossing_swords.png">
     <?php if (isset($_SESSION['loginFailed'])) : ?>
         <p><?= $_SESSION['loginFailed']; ?></p>
     <?php
         unset($_SESSION['loginFailed']);
     endif; ?>
     <h3>Log in</h3>
-    <form method="post" action="/app/verifyLogin.php">
+    <form method="post" action="<?= $baseURL; ?>/app/verifyLogin.php">
         <div class="loginForm">
             <div class="loginItem">
                 <label for="username">Username:</label>

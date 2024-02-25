@@ -4,7 +4,7 @@ require __DIR__ . "/../functions/heroFunctions.php";
 require __DIR__ . "/../functions/armory.php";
 
 if (!isset($_SESSION['player'])) {
-    header('Location: /../app/heroCreation_step1.php');
+    header('Location:' . $baseURL . '/app/heroCreation_step1.php');
     exit();
 }
 
@@ -64,7 +64,7 @@ require __DIR__ . "/../nav/header.php";
                                     <button class="showItem">Show</button>
                                 </div>
                                 <div class="itemDetails hidden">
-                                    <form method="post" action="/../app/shopCheckout.php">
+                                    <form method="post" action="<?= $baseURL; ?>/app/shopCheckout.php">
                                         <p><span class="bold">Damage:</span> <?= $weapon->minDamage . "-" . $weapon->maxDamage; ?></p>
                                         <?php if ($weapon->getInitiativeBonus() > 0) : ?>
                                             <p><span class="bold">Initiative:</span> +<?= $weapon->getInitiativeBonus(); ?></p>
@@ -96,7 +96,7 @@ require __DIR__ . "/../nav/header.php";
                             <button class="showItem">Show</button>
                         </div>
                         <div class="itemDetails hidden">
-                            <form method="post" action="/../app/shopCheckout.php">
+                            <form method="post" action="<?= $baseURL; ?>/app/shopCheckout.php">
                                 <?php if ($armour->getDmgReduction() > 0) : ?>
                                     <p><span class="bold">Dmg Reduction:</span> <?= $armour->getDmgReduction(); ?></p>
                                 <?php endif;
@@ -124,7 +124,7 @@ require __DIR__ . "/../nav/header.php";
                             <button class="showItem">Show</button>
                         </div>
                         <div class="itemDetails hidden">
-                            <form method="post" action="/../app/shopCheckout.php">
+                            <form method="post" action="<?= $baseURL; ?>/app/shopCheckout.php">
                                 <p><span class="bold">Dmg Reduction:</span> <?= $shield->getDmgReduction(); ?></p>
                                 <?php if ($shield->getBlockBonus() > 0) : ?>
                                     <p><span class="bold">Block:</span> +<?= $shield->getBlockBonus(); ?></p>
@@ -151,7 +151,7 @@ require __DIR__ . "/../nav/header.php";
                             <button class="showItem">Show</button>
                         </div>
                         <div class="itemDetails hidden">
-                            <form method="post" action="/../app/shopCheckout.php">
+                            <form method="post" action="<?= $baseURL; ?>/app/shopCheckout.php">
                                 <?php if ($trinket->getInitiativeBonus() > 0) : ?>
                                     <p><span class="bold">Initiative:</span> +<?= $trinket->getInitiativeBonus(); ?></p>
                                 <?php endif; ?>
@@ -187,7 +187,7 @@ require __DIR__ . "/../nav/header.php";
                                     <button class="showItem">Show</button>
                                 </div>
                                 <div class="itemDetails hidden">
-                                    <form method="post" action="/../app/shopCheckout.php">
+                                    <form method="post" action="<?= $baseURL; ?>/app/shopCheckout.php">
                                         <p>Do you want to sell <?= $item->name; ?>?</p>
                                         <input type="hidden" name="itemSell[]" value="<?= $sellValue; ?>">
                                         <input type="hidden" name="itemSell[]" value="<?= $itemID; ?>">
@@ -208,6 +208,6 @@ require __DIR__ . "/../nav/header.php";
         ?>
     </div>
 </div>
-<script src="/styles/shopDisplay.js"></script>
-<script src="/styles/shopItems.js"></script>
+<script src="<?= $baseURL; ?>/styles/shopDisplay.js"></script>
+<script src="<?= $baseURL; ?>/styles/shopItems.js"></script>
 <?php require __DIR__ . "/../nav/footer.php";

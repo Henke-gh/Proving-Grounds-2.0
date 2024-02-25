@@ -7,7 +7,7 @@ require __DIR__ . "/../nav/header.php";
 <main>
     <h2>The Graveyard</h2>
     <div class="tombstoneContainer">
-        <img src="/../assets/images/tombstone.png" class="tavernImage">
+        <img src="<?= $baseURL; ?>/assets/images/tombstone.png" class="tavernImage">
     </div>
     <p class="cursive">Top 50 highest level hero deaths.</p>
     <ol>

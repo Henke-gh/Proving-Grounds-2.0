@@ -3,7 +3,7 @@ require_once __DIR__ . "/../bootstrap.php";
 require __DIR__ . "/../functions/heroFunctions.php";
 
 if (!isset($_SESSION['player'])) {
-    header('Location: /../app/heroCreation_step1.php');
+    header('Location:' . $baseURL . '/app/heroCreation_step1.php');
     exit();
 }
 
@@ -24,7 +24,7 @@ require_once __DIR__ . "/../nav/header.php";
                 </div>
             <?php endif;
             unset($_SESSION['barComplete']) ?>
-            <img src="/../assets/images/tavernkeeper.png" class="tavernImage">
+            <img src="<?= $baseURL; ?>/assets/images/tavernkeeper.png" class="tavernImage">
             <article>
                 <p>The place has seen better days, most places have. Most places
                     probably don't even come close to this level of misery.</p>
@@ -41,10 +41,10 @@ require_once __DIR__ . "/../nav/header.php";
             </article>
             <div class="tavernBarWork">
                 <p>Spend 35 Grit to earn 15 gold?</p>
-                <form method="post" action="/../app/tavernWork.php">
+                <form method="post" action="<?= $baseURL; ?>/app/tavernWork.php">
                     <button type="submit" name="barWork">Take a shift</button>
                 </form>
-                <a href="/app/playerHero.php"><button type="submit" name="back">Back</button></a>
+                <a href="<?= $baseURL; ?>/app/playerHero.php"><button type="submit" name="back">Back</button></a>
             </div>
         </div>
     </main>

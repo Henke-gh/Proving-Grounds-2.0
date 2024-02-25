@@ -1,16 +1,16 @@
 <?php
 //_step2 of character creation initializes the Hero-class instance and handles distribution of starting stats.
 require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/../bootstrap.php";
 require __DIR__ . "/../functions/avatarArray.php";
 require __DIR__ . "/../functions/armory.php";
-session_start();
 
 use App\Hero;
 
 if (isset($_POST['createHero'])) {
     $name = trim(htmlspecialchars($_POST['heroName'], ENT_QUOTES));
     $gender = ucfirst($_POST['heroGender']);
-    $avatarID = $_POST['heroAvatar'];
+    $avatarID = htmlspecialchars($_POST['heroAvatar'], ENT_QUOTES);
     $avatarURL = $avatars[$avatarID]['url'];
     $player = new Hero($name, $gender);
     $player->weapon = $defaultItems['weapon'];
@@ -26,7 +26,7 @@ if (isset($_POST['createHero'])) {
 
     $_SESSION['player'] = $player->saveHeroState();
 } else {
-    header('Location: /../app/heroCreation_step1.php');
+    header('Location:' . $baseURL . '/app/heroCreation_step1.php');
     exit();
 }
 //if this value is updated, also update value at _finalize!
@@ -52,7 +52,7 @@ require __DIR__ . "/../nav/header.php";
     <div class="proTip">
         <p>Tip: Put at least some points into your base attributes and 20 or so points into a Weapon skill of your choosing.</p>
     </div>
-    <form method="post" action="/../app/heroCreation_finalize.php" class="heroStatForm">
+    <form method="post" action="<?= $baseURL; ?>/app/heroCreation_finalize.php" class="heroStatForm">
         <h4>Spend <?= $skillPoints; ?> points on Attributes and Skills</h4>
         <div>
             <!-- Using the hidden input field to make skillpoint value readable by skillCounter.js -->
@@ -88,6 +88,6 @@ require __DIR__ . "/../nav/header.php";
         <button type="submit" name="create">Create Hero</button>
     </form>
 </main>
-<script src="/styles/skillCounter.js"></script>
+<script src="<?= $baseURL; ?>/styles/skillCounter.js"></script>
 <?php
 require __DIR__ . "/../nav/footer.php";

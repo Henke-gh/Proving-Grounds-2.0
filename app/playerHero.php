@@ -4,7 +4,7 @@ require __DIR__ . "/../functions/heroFunctions.php";
 require __DIR__ . "/../functions/armory.php";
 
 if (!isset($_SESSION['player'])) {
-    header('Location: /../app/heroCreation_step1.php');
+    header('Location:' . $baseURL . '/app/heroCreation_step1.php');
     exit();
 }
 
@@ -23,7 +23,7 @@ require __DIR__ . "/../nav/header.php";
             <section class="heroSheetHeader">
                 <h2>Hero Sheet</h2>
                 <div class="inventoryImgContainer">
-                    <img src="/../assets/images/items.png" class="inventoryImage" />
+                    <img src="<?= $baseURL; ?>/assets/images/items.png" class="inventoryImage" />
                 </div>
             </section>
             <div class="heroGear">
@@ -85,9 +85,6 @@ require __DIR__ . "/../nav/header.php";
                 </div>
             </div>
             <div class="heroGeneralContainer">
-                <!-- <div class="heroGeneralAvatar">
-                    <img src="<?= $player->getAvatar(); ?>" class="circularImg playerAvatar" title="avatar">
-                </div> -->
                 <div class="heroGeneralStats">
                     <h3><?= $player->name . " - Level: " . $player->getLevel(); ?></h3>
                     <p class="cursive"><?= $player->getFameTitle() . " (" . $player->getFameScore() . ")"; ?></p>

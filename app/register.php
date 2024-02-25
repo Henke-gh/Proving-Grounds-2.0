@@ -3,8 +3,8 @@ require __DIR__ . "/../bootstrap.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     $newUsername = trim(htmlspecialchars($_POST['username'], ENT_QUOTES));
-    $newPassword = trim(htmlspecialchars($_POST['password']));
-    $newPasswordRepeat = trim(htmlspecialchars($_POST['passwordRepeat']));
+    $newPassword = trim(htmlspecialchars($_POST['password'], ENT_QUOTES));
+    $newPasswordRepeat = trim(htmlspecialchars($_POST['passwordRepeat'], ENT_QUOTES));
     unset($_POST['username']);
     unset($_POST['password']);
     unset($_POST['passwordRepeat']);
