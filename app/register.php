@@ -16,6 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     } else {
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
         $database->addUser($newUsername, $hashedPassword);
+        $_SESSION['loginFailed'] = "User created! Remember your password :)";
+        header('Location:' . $baseURL . '/index.php');
+        exit();
     }
 }
 require __DIR__ . "/../nav/header.php";

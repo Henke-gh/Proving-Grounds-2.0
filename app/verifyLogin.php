@@ -8,6 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $password = trim(htmlspecialchars($_POST['password'], ENT_QUOTES));
     unset($_POST['password']);
     $users = $database->getAllFromTable('Users');
+
+    $userFound = false; // Flag to track if the user is found
+
     foreach ($users as $user) {
         if ($user['Username'] === $username) {
             if (password_verify($password, $user['Password'])) {
@@ -24,16 +27,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                 exit();
             } else {
                 $_SESSION['loginFailed'] = "Incorrect password.";
-                header('Location:' . $baseURL . '/index.php');
-                exit();
             }
-        } else {
-            $_SESSION['loginFailed'] = "No such Username.";
-            header('Location:' . $baseURL . '/index.php');
-            exit();
+
+            $userFound = true; // Set the flag to true since the user is found
+            break; // Exit the loop once the user is found
         }
     }
-} else {
+
+    if (!$userFound) {
+        $_SESSION['loginFailed'] = "No such Username.";
+    }
+
     header('Location:' . $baseURL . '/index.php');
     exit();
 }
