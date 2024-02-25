@@ -717,7 +717,8 @@ footer {
   }
 
   .gameNavPosition {
-    top: 90%;
+    top: auto;
+    bottom: 0;
   }
 
   .heroCardPosition {
