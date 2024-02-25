@@ -550,9 +550,19 @@ footer {
   gap: 5px;
 }
 
-.shopDefault,
-.shopTagline {
+.shopDefault {
   margin: 0 auto;
+}
+
+.shopTagline {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.shopTagline h3 {
+  margin-bottom: 10px;
 }
 
 .categorySelector {
@@ -677,7 +687,7 @@ footer {
   align-items: center;
 }
 .hospitalContainer img {
-  width: 50%;
+  width: 70%;
   height: fit-content;
 }
 
@@ -921,5 +931,13 @@ footer {
   /* Hospital */
   .hospitalServices h3 {
     font-size: 1.1rem;
+  }
+
+  /* Combat Page */
+  .combatForm button {
+    margin-top: 20px;
+    font-weight: bold;
+    font-family: var(--paragraph);
+    font-size: 1.05rem;
   }
 }
