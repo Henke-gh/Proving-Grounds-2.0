@@ -6,6 +6,7 @@ require __DIR__ . "/nav/header.php";
 ?>
 <main>
     <h2>Welcome to the Proving Grounds</h2>
+    <p class="bold">(Beta version)</p>
     <img src="<?= $baseURL; ?>/assets/images/crossing_swords.png">
     <?php if (isset($_SESSION['loginFailed'])) : ?>
         <p><?= $_SESSION['loginFailed']; ?></p>

@@ -11,6 +11,6 @@
         <p><span class="bold">XP: </span><?= $player->getXP() . "/" . $player->getXPtoNext(); ?></p>
         <p><span class="bold">Gold: </span><?= $player->getGold(); ?></p>
     </div>
-    <?php
-    require __DIR__ . "/../app/levelUpMessage.php"; ?>
 </div>
+<?php
+require __DIR__ . "/../app/levelUpMessage.php"; ?>
