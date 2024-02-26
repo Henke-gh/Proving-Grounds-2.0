@@ -4,6 +4,11 @@
 require __DIR__ . "/../vendor/autoload.php";
 require __DIR__ . "/../bootstrap.php";
 
+if (!isset($_SESSION['playerID'])) {
+    header('Location:' . $baseURL . '/index.php');
+    exit();
+}
+
 use App\Hero;
 
 $playerSaveState = $_SESSION['player'];

@@ -1,3 +1,5 @@
+//No longer in use!
+
 //Shop overlay and item details Currently solved with onClick functions and some inline JS code.
 //Haven't found a simple and solid solution for how to handle it with eventListeners. Having trouble passing that many PHP
 //variables in a nice way.

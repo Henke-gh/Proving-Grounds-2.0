@@ -1,6 +1,15 @@
 <?php
 require __DIR__ . "/../bootstrap.php";
-session_start();
+
+if (!isset($_SESSION['playerID'])) {
+    header('Location:' . $baseURL . '/index.php');
+    exit();
+}
+
+if (!isset($_SESSION['player']['weapon'])) {
+    header('Location:' . $baseURL . '/app/heroCreation_step1.php');
+    exit();
+}
 
 $date = date("Y-m-d");
 
@@ -23,7 +32,7 @@ require_once __DIR__ . "/../nav/header.php";
 ?>
 
 <main>
-    <h1>You have perished..</h1>
+    <h2>You have perished..</h2>
     <img class="graveyardImg" src="<?= $baseURL; ?>/assets/images/player_death_small.png">
 
     <div class="combatlog">

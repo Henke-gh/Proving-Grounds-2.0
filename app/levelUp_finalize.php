@@ -4,6 +4,16 @@ require __DIR__ . "/../functions/heroFunctions.php";
 require __DIR__ . "/../functions/generalFunctions.php";
 require __DIR__ . "/../functions/levelUpFunctions.php";
 
+if (!isset($_SESSION['playerID'])) {
+    header('Location:' . $baseURL . '/index.php');
+    exit();
+}
+
+if (!isset($_SESSION['player']['weapon'])) {
+    header('Location:' . $baseURL . '/app/heroCreation_step1.php');
+    exit();
+}
+
 $player = loadHero($database);
 saveHero($player, $database);
 

@@ -1,5 +1,15 @@
 <?php
 //relates to playerSummary.php - Require this on all pages that present the playerSummary.
+if (!isset($_SESSION['playerID'])) {
+    header('Location:' . $baseURL . '/index.php');
+    exit();
+}
+
+if (!isset($_SESSION['player']['weapon'])) {
+    header('Location:' . $baseURL . '/app/heroCreation_step1.php');
+    exit();
+}
+
 if (isset($_POST['equip'])) {
     $itemID = htmlspecialchars($_POST['itemIndex'], ENT_QUOTES);
     $itemCategory = htmlspecialchars($_POST['category'], ENT_QUOTES);

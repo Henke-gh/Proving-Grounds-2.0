@@ -5,6 +5,11 @@ require __DIR__ . "/../bootstrap.php";
 require __DIR__ . "/../functions/avatarArray.php";
 require __DIR__ . "/../functions/armory.php";
 
+if (!isset($_SESSION['playerID'])) {
+    header('Location:' . $baseURL . '/index.php');
+    exit();
+}
+
 use App\Hero;
 
 if (isset($_POST['createHero'])) {

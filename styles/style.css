@@ -526,6 +526,11 @@ footer {
   gap: 5px;
 }
 
+.shopDisplay {
+  width: 60%;
+  margin: 0 auto;
+}
+
 .shopDefault {
   margin: 0 auto;
 }
@@ -988,5 +993,18 @@ footer {
     font-weight: bold;
     font-family: var(--paragraph);
     font-size: 1.05rem;
+  }
+
+  /* Shop Page */
+
+  .shopDisplay {
+    width: 100%;
+  }
+
+  /* Graveyard */
+
+  .graveyardImg {
+    width: 14rem;
+    height: auto;
   }
 }

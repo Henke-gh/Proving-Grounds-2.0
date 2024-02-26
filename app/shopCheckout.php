@@ -5,6 +5,16 @@ require __DIR__ . "/../bootstrap.php";
 require __DIR__ . "/../functions/heroFunctions.php";
 require __DIR__ . "/../functions/armory.php";
 
+if (!isset($_SESSION['playerID'])) {
+    header('Location:' . $baseURL . '/index.php');
+    exit();
+}
+
+if (!isset($_SESSION['player']['weapon'])) {
+    header('Location:' . $baseURL . '/app/heroCreation_step1.php');
+    exit();
+}
+
 $player = loadHero($database);
 
 if (isset($_POST['purchaseWeapon'])) {
@@ -106,3 +116,5 @@ if (isset($_POST['sellItem'])) {
     header('Location:' . $baseURL . '/app/shop.php');
     exit();
 }
+
+header('Location:' . $baseURL . '/app/shop.php');
