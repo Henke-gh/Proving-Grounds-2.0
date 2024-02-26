@@ -16,8 +16,8 @@ require_once __DIR__ . "/../nav/header.php";
         <?php require __DIR__ . "/../nav/ingameNavbar.php"; ?>
     </div>
     <main>
-        <h2>Borkhorst's Lil' Down by the Docks Tavern</h2>
         <div class="tavernContainer">
+            <h2>Borkhorst's Lil' Down by the Docks Tavern</h2>
             <?php if (isset($_SESSION['barComplete'])) : ?>
                 <div class="tavernBarWork">
                     <p><?= $_SESSION['barComplete']; ?></p>

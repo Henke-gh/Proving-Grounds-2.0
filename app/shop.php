@@ -38,7 +38,7 @@ require __DIR__ . "/../nav/header.php";
 
         <div class="shopContainer">
             <div class="shopTagline">
-                <h3>Gourflarbfth's Emporium</h3>
+                <h2>Gourflarbfth's Emporium</h2>
                 <img src="<?= $baseURL; ?>/assets/images/items.png" class="tavernImage">
             </div>
             <div class="categorySelector">

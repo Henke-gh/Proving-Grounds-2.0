@@ -9,6 +9,7 @@
   --gore: #863935;
   --orange: #eb8c4b;
   --lightBrown: #819d83;
+  --darkMoss: #6a816b;
   --gold: #eba543;
   --sandstone: #d0b38b;
   --paleYellow: #eddec9;
@@ -58,7 +59,6 @@ main {
   margin: 0 auto;
   margin-left: 170px;
   margin-right: 170px;
-  /* margin-top: 97px; */
   min-height: 70vh;
   background-color: var(--paleYellow);
 }
@@ -120,7 +120,8 @@ header {
   padding-top: 5px;
   padding-bottom: 10px;
   text-align: center;
-  background-color: var(--lightBrown);
+  background-color: var(--darkMoss);
+  border-bottom: 4px double var(--gold);
   z-index: 1000;
 }
 
@@ -140,64 +141,6 @@ header a {
 
 header .navLink:hover {
   text-decoration: underline;
-}
-
-@media only screen and (max-width: 600px) {
-  .mobileMenu {
-    position: fixed;
-    top: 56px;
-    width: 50vw;
-    background-color: #819d83;
-    border-bottom-left-radius: 10px;
-    z-index: 999;
-    right: 0;
-  }
-
-  .mobileMenu h3 {
-    text-decoration: underline;
-  }
-
-  .mobileMenu nav {
-    display: flex;
-    flex-direction: column;
-    padding: 5px;
-    margin-left: 10px;
-    gap: 10px;
-  }
-
-  .gameMenuSmall {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .gameMenuItem {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
-    border-bottom: 1px solid black;
-  }
-
-  .gameMenuSmall form {
-    margin: 15px 0;
-  }
-
-  .navLink {
-    text-decoration: none;
-    font-weight: 600;
-    color: var(--warmGrey);
-    cursor: pointer;
-  }
-
-  /*   .gameLink {
-    background-color: #8fc695;
-    padding: 4px;
-  } */
-
-  .navLink:hover {
-    text-decoration: underline;
-  }
 }
 
 /* Game Nav Styling */
@@ -236,8 +179,10 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #819d83;
+  background-color: var(--darkMoss);
   padding: 5px 0;
+  padding-bottom: 10px;
+  border-top: 2px solid var(--gold);
 }
 
 .footerNav {
@@ -267,6 +212,18 @@ footer {
 }
 
 /* Index, news & login form */
+.loginContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+
+.loginContainer img {
+  width: 8rem;
+  height: auto;
+}
+
 .loginForm {
   display: flex;
   flex-direction: column;
@@ -282,6 +239,34 @@ footer {
   flex-direction: row;
   justify-content: space-between;
   gap: 10px;
+}
+
+.loginOrRegister {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.indexInformation {
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+.about {
+  width: fit-content;
+}
+
+.about article {
+  width: 80%;
+}
+
+.about img {
+  margin-top: 25px;
+  width: 70%;
+  height: auto;
 }
 
 /* Hero Creation - step 1 */
@@ -384,22 +369,18 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  width: 150px;
-}
-
-.heroShortSummary {
   background-color: var(--lightBrown);
+  width: 150px;
   padding: 10px;
-  border-radius: 5px;
 }
 
-.heroShortSummary p {
+.heroCard p {
   margin: 2px;
 }
 
-.heroShortSummary img {
+.heroCard img {
   width: 9rem;
-  height: 9rem;
+  height: auto;
 }
 
 .heroGeneralContainer {
@@ -518,12 +499,6 @@ footer {
   flex-direction: row;
   gap: 20px;
 }
-@media only screen and (max-width: 600px) {
-  .combatStatsImage {
-    width: 5rem;
-    height: 5rem;
-  }
-}
 /* Shop Styling */
 .weaponContainer h3 {
   margin-bottom: 0;
@@ -547,6 +522,7 @@ footer {
 .shopContainer {
   display: flex;
   flex-direction: column;
+  width: 95%;
   gap: 5px;
 }
 
@@ -559,6 +535,12 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 15px;
+}
+
+.shopTagline img {
+  height: 12rem;
+  width: auto;
 }
 
 .shopTagline h3 {
@@ -568,6 +550,7 @@ footer {
 .categorySelector {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 5px;
 }
@@ -608,9 +591,14 @@ footer {
   flex-direction: column;
   align-items: center;
   background-color: var(--lightBrown);
-  padding: 10px;
+  padding: 5px;
   border: 2px solid var(--gold);
   border-radius: 5px;
+  margin-bottom: 25px;
+}
+
+.tavernBarWork p {
+  margin: 5px;
 }
 
 .tavernBarWork button {
@@ -744,7 +732,7 @@ footer {
   }
 
   .heroCardPosition {
-    top: 50px;
+    top: 52px;
     right: 0;
   }
 
@@ -755,6 +743,8 @@ footer {
     align-items: center;
     gap: 10px;
     width: 100vw;
+    padding: 0;
+    padding-top: 10px;
   }
 
   .heroCard img {
@@ -769,8 +759,8 @@ footer {
     align-items: center;
     padding: 2%;
     margin: 0 auto;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 0;
+    margin-right: 0;
     min-height: 70vh;
     background-color: var(--paleYellow);
   }
@@ -781,6 +771,7 @@ footer {
     justify-content: space-between;
     align-items: baseline;
     padding-left: 10px;
+    border: none;
   }
   header h1 {
     font-size: 1em;
@@ -803,11 +794,64 @@ footer {
   }
   /* Footer */
   footer {
-    padding-bottom: 60px;
+    padding-bottom: 70px;
+    border: none;
   }
   .footerNav {
     display: none;
   }
+  /* Mobile Menu */
+  .mobileMenu {
+    position: fixed;
+    top: 56px;
+    width: 50vw;
+    background-color: var(--darkMoss);
+    border-bottom-left-radius: 10px;
+    z-index: 999;
+    right: 0;
+  }
+
+  .mobileMenu h3 {
+    text-decoration: underline;
+  }
+
+  .mobileMenu nav {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin-left: 10px;
+    gap: 10px;
+  }
+
+  .gameMenuSmall {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .gameMenuItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid black;
+  }
+
+  .gameMenuSmall form {
+    margin: 15px 0;
+  }
+
+  .navLink {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--warmGrey);
+    cursor: pointer;
+  }
+
+  .navLink:hover {
+    text-decoration: underline;
+  }
+
   /* GameNavMenu */
   .gameNav {
     display: flex;
@@ -834,6 +878,11 @@ footer {
     gap: 20px;
     background-color: var(--lightBrown);
   }
+
+  /* Index - Start Page */
+  .loginContainer {
+    flex-direction: column;
+  }
   /* Hero Creation - Step 1 */
   .avatarSelect {
     display: grid;
@@ -850,7 +899,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 98%;
   }
 
   .heroSheetHeader {
