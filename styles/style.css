@@ -888,6 +888,21 @@ footer {
   .loginContainer {
     flex-direction: column;
   }
+
+  .indexInformation {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .about {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   /* Hero Creation - Step 1 */
   .avatarSelect {
     display: grid;

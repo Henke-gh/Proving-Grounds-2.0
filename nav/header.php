@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proving Grounds</title>
     <link rel="stylesheet" href="<?= $baseURL; ?>/styles/avatarSelectionStyle.css" />
-    <link rel="stylesheet" href="<?= $baseURL; ?>/styles/style.css" />
+    <link rel="stylesheet" href="<?= $baseURL; ?>/styles/style.css?v=2" />
+    <link rel="icon" type="image/x-icon" href="<?= $baseURL; ?>/assets/images/icons/favIcon.png" />
 </head>
 
 <body>
