@@ -58,9 +58,14 @@ $handaxe = new Weapon("Hand Axe", "Axes", 50, 10, 2, 5, 5);
 $handaxe->setItemDescription("Chop, chop..");
 $handaxe->addToArmory($weapons['Axes']);
 
-$waraxe = new Weapon("War Axe", "Axes", 150, 35, 3, 8, 8);
-$waraxe->setItemDescription("It's seen battle but is as deadly as any other.");
+$broadax = new Weapon("Broad Axe", "Axes", 150, 35, 3, 8, 8);
+$broadax->setItemDescription("Comes with a heavier, broader axe-head.");
+$broadax->addToArmory($weapons['Axes']);
+
+$waraxe = new Weapon("War Axe", "Axes", 380, 45, 5, 12, 12);
+$waraxe->setItemDescription("Balanced and deadly.");
 $waraxe->addToArmory($weapons['Axes']);
+
 //Hammers
 $club = new Weapon("Wooden Club", "Hammers", 50, 10, 1, 7, 5);
 $club->setItemDescription("Let's be real, it's a large stick.");
@@ -82,6 +87,11 @@ $twisteddagger = new Weapon("Twisted Dagger", "Daggers", 150, 35, 3, 6, 2);
 $twisteddagger->setEvasionBonus(10);
 $twisteddagger->setItemDescription("A wicked little thing.");
 $twisteddagger->addToArmory($weapons['Daggers']);
+
+$wristblade = new Weapon("Wrist Blade", "Dagger", 450, 55, 4, 11, 5);
+$wristblade->setEvasionBonus(10);
+$wristblade->setItemDescription("The handle runs perpendicular to the blade.");
+$wristblade->addToArmory($weapons['Daggers']);
 
 //Shields
 //Added to default array at the bottom of this file
@@ -106,6 +116,18 @@ $kiteshield->setBlockBonus(8);
 $kiteshield->setItemDescription("A Knight's Shield. Emblazoned with a golden griffon.");
 $kiteshield->addToArmory($shields);
 
+$parrydagger = new Shield("Parry Dagger", "Shield", 450, 10, 5);
+$parrydagger->setDmgReduction(1);
+$parrydagger->setEvasionBonus(10);
+$parrydagger->setItemDescription("A pronged dagger for catching blades.");
+$parrydagger->addToArmory($shields);
+
+$towershield = new Shield("Aegis", "Shield", 500, 70, 25);
+$towershield->setDmgReduction(7);
+$towershield->setBlockBonus(14);
+$towershield->setItemDescription("It's enormous. You could camp underneath this thing.");
+$towershield->addToArmory($shields);
+
 //Armour
 //Added to default array
 $tunic = new Armour("Tunic", "Armour", 0, 0, 0);
@@ -122,6 +144,18 @@ $ringmail = new Armour("Ring Mail", "Armour", 300, 0, 20);
 $ringmail->setDmgReduction(3);
 $ringmail->setItemDescription("Fits you like a glove.");
 $ringmail->addToArmory($armours);
+
+$roguegarb = new Armour("Rogue's Tunic", "Armour", 400, 0, 5);
+$roguegarb->setEvasionBonus(10);
+$roguegarb->setInitiativeBonus(5);
+$roguegarb->setDmgReduction(0);
+$roguegarb->setItemDescription("Move unhindered, black as night.");
+$roguegarb->addToArmory($armours);
+
+$scalemail = new Armour("Scale Mail", "Armour", 600, 0, 35);
+$scalemail->setDmgReduction(5);
+$scalemail->setItemDescription("Shimmering scales overlap each other.");
+$scalemail->addToArmory($armours);
 
 //Trinkets
 $bloodybrick = new Trinket("Bloody Brick", "Trinket", 340, 0, 0);

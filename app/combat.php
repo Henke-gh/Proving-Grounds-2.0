@@ -29,12 +29,17 @@ if (isset($_POST['fight'])) {
     $selectedMonsterID = $_POST['fight'];
     if ($player->getCurrentGrit() > 0) {
         $selectedMonster = $monsterLibrary->getMonster($selectedMonsterID);
-        $combatLog = doBattle($player, $selectedMonster, $retreat, $stance);
-        saveHero($player, $database);
-        //if the player dies during combat, user is sent directly to death screen.
-        if ($player->isDead()) {
-            header('Location:' . $baseURL . '/app/death.php');
-            exit();
+        if ($player->getLevel() > $selectedMonster->getLevel() + 5) {
+            unset($_POST['fight']);
+            $_SESSION['error'] = "The audience demands a greater challenge.";
+        } else {
+            $combatLog = doBattle($player, $selectedMonster, $retreat, $stance);
+            saveHero($player, $database);
+            //if the player dies during combat, user is sent directly to death screen.
+            if ($player->isDead()) {
+                header('Location:' . $baseURL . '/app/death.php');
+                exit();
+            }
         }
     } else {
         unset($_POST['fight']);
