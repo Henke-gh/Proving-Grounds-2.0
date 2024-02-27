@@ -14,7 +14,7 @@ class Hero extends Creature
     private int $currentGrit = 0;
     //regeneration of HP and Grit
     private int $regenRateHP = 0;
-    private int $regenRateGrit = 3;
+    private int $regenRateGrit = 9;
     private int $lastRegeneration = 0;
     //fame and xp values, used to calculate when (and what) to level up player hero
     private int $xp = 0;
@@ -102,7 +102,7 @@ class Hero extends Creature
 
     public function setRegenHP(): void
     {
-        $value = (int) floor($this->getHP() / 12);
+        $value = (int) floor($this->getHP() / 3);
         $this->regenRateHP = $value;
     }
 
@@ -126,8 +126,8 @@ class Hero extends Creature
         $currentTime = time();
         $lastRegen = $this->getLastRegen();
         $elapsedTime = $currentTime - $lastRegen;
-        $hpAmount = (int) floor($elapsedTime / 60) * $this->getRegenHP();
-        $gritAmount = (int) floor($elapsedTime / 60) * $this->getRegenGrit();
+        $hpAmount = (int) floor($elapsedTime / 180) * $this->getRegenHP();
+        $gritAmount = (int) floor($elapsedTime / 180) * $this->getRegenGrit();
         //if 180 or more seconds since last hp and grit update, do update
         if ($elapsedTime >= 180) {
             $this->setCurrentHP($this->getCurrentHP() + $hpAmount);
