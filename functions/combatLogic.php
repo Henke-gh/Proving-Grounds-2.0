@@ -173,13 +173,8 @@ function monsterAttack(Monster $monster, Hero $player, int $playerEvasion, int $
     return $log;
 }
 
-function fightReward(Hero $player, Monster $monster, int $gold, int $xpReward): void
+function fightReward(Hero $player, int $gold, int $xpReward): void
 {
-    if ($player->getLevel() > $monster->getLevel() + 2) {
-        $xpReward = (int) floor($xpReward * 0.5);
-        $gold = (int) floor($gold * 0.5);
-    }
-
     $player->setGold($player->getGold() + $gold);
     $xp = $xpReward;
     $player->setXP($player->getXP() + $xp);
@@ -199,6 +194,11 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
     //since monster gold drop is a random value it has to be set prior as the variable is used twice.
     $goldDrop = $monster->dropGold();
     $xpReward = $monster->xpReward;
+
+    if ($player->getLevel() > $monster->getLevel() + 3) {
+        $xpReward = (int) floor($xpReward * 0.5);
+        $goldDrop = (int) floor($goldDrop * 0.5);
+    }
 
     if ($player->getCurrentHP() < $retreatValue) {
         array_push($combatLog, "Your wounds are too severe to fight.");
@@ -251,7 +251,7 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
             if ($monster->getCurrentHP() <= 0) {
                 array_push($combatLog, "<span class=bold>" . $monster->name . " is defeated!</span>");
                 array_push($combatLog, $player->name . " gains <span class=bold>" . $xpReward . " xp</span> and <span class=bold>" . $goldDrop . " gold.</span>");
-                fightReward($player, $monster, $goldDrop, $xpReward);
+                fightReward($player, $goldDrop, $xpReward);
                 $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
                 break;
             }
@@ -289,7 +289,7 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
             if ($monster->getCurrentHP() <= 0) {
                 array_push($combatLog, "<span class=bold>" . $monster->name . " is defeated!</span>");
                 array_push($combatLog, $player->name . " gains <span class=bold>" . $xpReward . " xp</span> and <span class=bold>" . $goldDrop . " gold.</span>");
-                fightReward($player, $monster, $goldDrop, $xpReward);
+                fightReward($player, $goldDrop, $xpReward);
                 $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
                 break;
             }

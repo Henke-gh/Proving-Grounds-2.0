@@ -29,7 +29,7 @@ if (isset($_POST['fight'])) {
     $selectedMonsterID = $_POST['fight'];
     if ($player->getCurrentGrit() > 0) {
         $selectedMonster = $monsterLibrary->getMonster($selectedMonsterID);
-        if ($player->getLevel() > $selectedMonster->getLevel() + 5) {
+        if ($player->getLevel() > $selectedMonster->getLevel() + 6) {
             unset($_POST['fight']);
             $_SESSION['error'] = "The audience demands a greater challenge.";
         } else {
