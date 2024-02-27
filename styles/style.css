@@ -843,6 +843,7 @@ footer {
     top: 56px;
     width: 50vw;
     background-color: var(--darkMoss);
+    color: var(--paleYellow);
     border-bottom-left-radius: 10px;
     z-index: 999;
     right: 0;
@@ -858,6 +859,10 @@ footer {
     padding: 5px;
     margin-left: 10px;
     gap: 10px;
+  }
+
+  .mobileMenu a {
+    color: var(--paleYellow);
   }
 
   .gameMenuSmall {
