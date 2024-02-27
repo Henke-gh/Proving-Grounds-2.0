@@ -57,6 +57,7 @@ require __DIR__ . "/../nav/header.php";
     <div class="proTip">
         <p><span class="bold">Tip:</span> Try to invest a good amount of points into Vitality and 15 - 20 or so points into a Weapon skill of your choosing.</p>
         <p>As you level up and establish a good baseline you can grow your character as you see fit and invest more in other skills. Experiment!</p>
+        <p>Tip #2: Hitpoints and Grit regenerate naturally over time.</p>
     </div>
     <form method="post" action="<?= $baseURL; ?>/app/heroCreation_finalize.php" class="heroStatForm">
         <h3>Spend <?= $skillPoints; ?> points on Attributes and Skills</h3>
@@ -94,7 +95,7 @@ require __DIR__ . "/../nav/header.php";
         <button type="submit" name="create">Create Hero</button>
     </form>
     <div class="proTip">
-        <p><span class="bold">Tip:</span> Visit the shop! Once your Hero is created your first objective should be to get yourself a weapon.</p>
+        <p><span class="bold">Tip #3:</span> Visit the shop! Once your Hero is created your first objective should be to get yourself a weapon.</p>
         <p>Equipped with your new weapon you'll be ready to take on your first opponents!</p>
     </div>
 </main>
