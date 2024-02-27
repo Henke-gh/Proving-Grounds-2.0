@@ -150,6 +150,9 @@ require __DIR__ . "/../nav/header.php";
                 <p><span class="bold">Win Ratio:</span> <?= $player->getWinLossRatio(); ?>%</p>
             </div>
         </div>
+        <form method="post" action="<?= $baseURL; ?>/functions/delete.php" class="deleteHeroForm">
+            <button type="submit" name="deleteHero">Delete Hero</button>
+        </form>
     </main>
     <div class="heroCardPosition">
         <?php

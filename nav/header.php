@@ -29,7 +29,7 @@
                 <div class="gameMenuSmall">
                     <h3>Game</h3>
                     <div class="gameMenuItem">
-                        <a href="<?= $baseURL; ?>/app/playerHero.php" class="navLink gameLink"><img src="<?= $baseURL; ?>/assets/images/icons/IconFrameHero.svg" alt="Hero" /></a>
+                        <a href="<?= $baseURL; ?>/app/playerHero.php" class="navLink gameLink"><img src="<?= $baseURL; ?>/assets/images/icons/heroIcon.svg" alt="Hero" /></a>
                         <a href="<?= $baseURL; ?>/app/playerHero.php" class="navLink gameLink">[Hero]</a>
                     </div>
                     <div class="gameMenuItem">
