@@ -193,7 +193,7 @@ class Creature
     //The reason being to make sure it's not applied twice by mistake.
     public function speedBonus(): int
     {
-        $speedbonus = (int) floor($this->getSpeed() * 0.2);
+        $speedbonus = (int) floor($this->getSpeed() * 0.4);
         return $speedbonus;
     }
 

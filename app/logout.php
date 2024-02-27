@@ -10,7 +10,7 @@ if (!isset($_SESSION['playerID'])) {
 }
 
 if (isset($_POST['logout'])) {
-    if (!empty($_SESSION['player'])) {
+    if (!empty($_SESSION['player']) && !empty($database->getHero($_SESSION['playerID']))) {
         $player = loadHero($database);
         saveHero($player, $database);
 

@@ -219,6 +219,12 @@ footer {
   gap: 15px;
 }
 
+.loginContainer form {
+  border: 1px solid var(--lightBrown);
+  padding: 0 10px 10px 10px;
+  border-radius: 5px;
+}
+
 .loginContainer img {
   width: 8rem;
   height: auto;
@@ -241,6 +247,10 @@ footer {
   gap: 10px;
 }
 
+.register {
+  margin-bottom: 25px;
+}
+
 .loginOrRegister {
   display: flex;
   flex-direction: row;
@@ -253,6 +263,12 @@ footer {
   flex-direction: row;
   margin-top: 30px;
   gap: 20px;
+}
+
+.newsMessage {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
 }
 
 .about {
@@ -303,6 +319,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .heroStatForm button {
@@ -332,6 +349,14 @@ footer {
 
 .stat input {
   width: 2.5rem;
+}
+
+.proTip {
+  width: 60%;
+  border: 1px solid var(--lightBrown);
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 15px;
 }
 
 /* Level Up Message Box */
@@ -913,6 +938,11 @@ footer {
     box-sizing: border-box;
     padding: 5px;
     margin: 0 auto;
+  }
+
+  /* Hero Creation step2 */
+  .proTip {
+    width: 90%;
   }
   /* Player Hero page */
   .summaryContainer {

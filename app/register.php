@@ -34,23 +34,29 @@ require __DIR__ . "/../nav/header.php";
     <?php
         unset($_SESSION['error']);
     endif; ?>
-    <form method="post" action="">
-        <div class="loginForm">
-            <div class="loginItem">
-                <label for="username">Username:</label>
-                <input type="text" required id="username" name="username">
+    <div class="loginContainer register">
+        <form method="post" action="">
+            <h4>Register new user</h4>
+            <p>No email required. Pick a nice username.</p>
+            <div class="loginForm">
+                <div class="loginItem">
+                    <label for="username">Username:</label>
+                    <input type="text" required id="username" name="username">
+                </div>
+                <div class="loginItem">
+                    <label for="password">Password:</label>
+                    <input type="password" required id="password" name="password">
+                </div>
+                <div class="loginItem">
+                    <label for="passwordRepeat">Repeat Password:</label>
+                    <input type="password" required id="passwordRepeat" name="passwordRepeat">
+                </div>
+                <p>Take care to remember your password!</p>
+                <button type="submit" name="register">Register</button>
             </div>
-            <div class="loginItem">
-                <label for="password">Password:</label>
-                <input type="password" required id="password" name="password">
-            </div>
-            <div class="loginItem">
-                <label for="passwordRepeat">Repeat Password:</label>
-                <input type="password" required id="passwordRepeat" name="passwordRepeat">
-            </div>
-            <button type="submit" name="register">Register</button>
-        </div>
-    </form>
+        </form>
+        <img src="<?= $baseURL; ?>/assets/images/crossing_swords.png">
+    </div>
 </main>
 <?php
 require_once __DIR__ . "/../nav/footer.php";
