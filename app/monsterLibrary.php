@@ -138,6 +138,18 @@ $starvinglion->weapon = new Weapon("Claws", "Unarmed", 0, 0, 5, 10, 0);
 $starvinglion->setDescription("This might prove to be a bad idea..");
 $monsterLibrary->addMonster($starvinglion);
 
+$fatfred = new Monster("Corpulent Bandit", 30);
+$fatfred->setLevel(12);
+$fatfred->setStrength(30);
+$fatfred->setSpeed(20);
+$fatfred->setVitality(125);
+$fatfred->setSkill("Hammers", 50);
+$fatfred->setFatigue();
+$fatfred->setCurrentHP($fatfred->getHP());
+$fatfred->weapon = $flail;
+$fatfred->setDescription("A huge man with small evil eyes.");
+$monsterLibrary->addMonster($fatfred);
+
 $berserker = new Monster("Vorthun Berserker", 35);
 $berserker->setLevel(14);
 $berserker->setStrength(55);
