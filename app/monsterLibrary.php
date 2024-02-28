@@ -18,10 +18,9 @@ $cowardlyCultist->setStrength(5);
 $cowardlyCultist->setSpeed(10);
 $cowardlyCultist->setVitality(10);
 $cowardlyCultist->setSkill("Spears", 10);
-$cowardlyCultist->setSkill("Evasion", 5);
 $cowardlyCultist->setFatigue();
 $cowardlyCultist->setCurrentHP($cowardlyCultist->getHP());
-$cowardlyCultist->weapon = new Weapon("Crooked Cane", "Spears", 0, 10, 2, 4, 5);
+$cowardlyCultist->weapon = new Weapon("Crooked Cane", "Spears", 0, 10, 2, 3, 5);
 $cowardlyCultist->setDescription("He won't even look you in the eyes");
 $monsterLibrary->addMonster($cowardlyCultist);
 
@@ -30,10 +29,10 @@ $goblin->setLevel(1);
 $goblin->setStrength(10);
 $goblin->setSpeed(5);
 $goblin->setVitality(10);
-$goblin->setSkill("Swords", 15);
+$goblin->setSkill("Swords", 12);
 $goblin->setFatigue();
 $goblin->setCurrentHP($goblin->getHP());
-$goblin->weapon = new Weapon("Chipped Blade", "Swords", 0, 10, 2, 4, 5);
+$goblin->weapon = new Weapon("Chipped Blade", "Swords", 0, 10, 2, 3, 5);
 $goblin->setDescription("The foul smelling little shits are everywhere..");
 $monsterLibrary->addMonster($goblin);
 

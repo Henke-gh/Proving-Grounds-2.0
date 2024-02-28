@@ -33,9 +33,10 @@ require __DIR__ . "/nav/header.php";
     </div>
     <div class="indexInformation">
         <div class="newsMessage">
-            <h3>News/ Latest changes 26/2-24</h3>
+            <h3>News/ Latest changes 28/2-24</h3>
+            <p>Additional small adjustments to the level 1 enemies.</p>
+            <p class="bold">- Older News -</p>
             <p>Added new items and monsters. Small tweak to the Cultist.</p>
-            <p>- Older News -</p>
             <p>There's a game guide now, sweet.</p>
         </div>
         <div class="about">
