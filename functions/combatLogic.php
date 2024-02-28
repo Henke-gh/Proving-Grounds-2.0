@@ -195,7 +195,7 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
     $goldDrop = $monster->dropGold();
     $xpReward = $monster->xpReward;
 
-    if ($player->getLevel() > $monster->getLevel() + 3) {
+    if ($player->getLevel() >= $monster->getLevel() + 2) {
         $xpReward = (int) floor($xpReward * 0.5);
         $goldDrop = (int) floor($goldDrop * 0.5);
     }
