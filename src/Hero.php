@@ -14,7 +14,7 @@ class Hero extends Creature
     private int $currentGrit = 0;
     //regeneration of HP and Grit
     private int $regenRateHP = 0;
-    private int $regenRateGrit = 9;
+    private int $regenRateGrit = 12;
     private int $lastRegeneration = 0;
     //fame and xp values, used to calculate when (and what) to level up player hero
     private int $xp = 0;

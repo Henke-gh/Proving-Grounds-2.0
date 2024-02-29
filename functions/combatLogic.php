@@ -35,6 +35,10 @@ function determineDamage(int $attackerDamage, int $defenderArmour): int
 function critChance($weaponSkillLevel): bool
 {
     $critChance = 3 + $weaponSkillLevel / 10;
+    //cap max crit chance at 35
+    if ($critChance > 35) {
+        $critChance = 35;
+    }
     if ($critChance >= rand(0, 100)) {
         return true;
     } else {
@@ -109,14 +113,14 @@ function playerAttack(Hero $player, Monster $monster, int $playerToHitChance, in
     //If critChance = true, deals Crit dmg and bypasses all other checks.
     if (critChance($playerToHitChance) === true) {
         $damage = critDamage($playerDmg);
-        array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
+        array_push($log, $player->name . " catches " . $monster->name . " off guard..");
         array_push($log, $player->name . " strikes a <span class=bold>furious</span> blow to " . $monster->name . " for " . $monster->sufferDamage($damage) . " damage!");
     } else {
         $damage = determineDamage($playerDmg, $monsterDmgReduction);
         if (chanceToHit($playerToHitChance, $player->weapon->skillRequirement, $monster->toHitChance()) === false) {
             array_push($log, $player->name . " misses..");
         } elseif (tryEvasion($playerToHitChance, $player->weapon->skillRequirement, $monster->getEvasion()) === true) {
-            array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
+            array_push($log, $player->name . " moves to strike with " . $player->weapon->name . ".. ");
             array_push($log, $monster->name . " dodges the blow!");
         } else {
             if ($monster->canBlock() && tryBlock($playerToHitChance, $player->weapon->skillRequirement, $monster->getBlock(), $monster->shield->skillRequirement)) {
@@ -125,7 +129,7 @@ function playerAttack(Hero $player, Monster $monster, int $playerToHitChance, in
                 $damage = determineDamage($damage, $monster->shield->getDmgReduction());
                 array_push($log, $monster->name . " gets hit for " . $monster->sufferDamage($damage) . " damage.");
             } else {
-                array_push($log, $player->name . " swings " . $player->weapon->name . ".. ");
+                array_push($log, $player->name . " lands a clean blow with " . $player->weapon->name . ".");
                 array_push($log, $monster->name . " gets hit for " . $monster->sufferDamage($damage) . " damage.");
             }
         }

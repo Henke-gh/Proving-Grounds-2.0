@@ -107,7 +107,10 @@ require __DIR__ . "/../nav/header.php";
                                     <p><span class="bold">Dmg Reduction:</span> <?= $armour->getDmgReduction(); ?></p>
                                 <?php endif;
                                 if ($armour->getEvasionBonus() > 0) : ?>
-                                    <p><span class="bold">Evasion:</span> <?= $armour->getEvasionBonus(); ?></p>
+                                    <p><span class="bold">Evasion:</span> +<?= $armour->getEvasionBonus(); ?></p>
+                                <?php endif; ?>
+                                <?php if ($armour->getInitiativeBonus() > 0) : ?>
+                                    <p><span class="bold">Initiative:</span> +<?= $armour->getInitiativeBonus(); ?></p>
                                 <?php endif; ?>
                                 <p><span class="bold">Weight:</span> <?= $armour->weight; ?></p>
                                 <p><?= $armour->getItemDescription(); ?></p>
@@ -134,6 +137,9 @@ require __DIR__ . "/../nav/header.php";
                                 <p><span class="bold">Dmg Reduction:</span> <?= $shield->getDmgReduction(); ?></p>
                                 <?php if ($shield->getBlockBonus() > 0) : ?>
                                     <p><span class="bold">Block:</span> +<?= $shield->getBlockBonus(); ?></p>
+                                <?php endif; ?>
+                                <?php if ($shield->getEvasionBonus() > 0) : ?>
+                                    <p><span class="bold">Evasion:</span> +<?= $shield->getEvasionBonus(); ?></p>
                                 <?php endif; ?>
                                 <p><span class="bold">Skill req:</span> <?= $shield->skillRequirement; ?></p>
                                 <p><span class="bold">Weight:</span> <?= $shield->weight; ?></p>

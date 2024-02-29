@@ -22,7 +22,12 @@ $levels = [
     'level 17' => 4500,
     'level 18' => 4900,
     'level 19' => 5300,
-    'level 20' => 6000
+    'level 20' => 6000,
+    'level 21' => 6700,
+    'level 22' => 7400,
+    'level 23' => 8100,
+    'level 24' => 8800,
+    'level 25' => 9500,
 ];
 
 $fameLevels = [
