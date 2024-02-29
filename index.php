@@ -34,6 +34,7 @@ require __DIR__ . "/nav/header.php";
     <div class="indexInformation">
         <div class="newsMessage">
             <h3>News/ Latest changes 28/2-24</h3>
+            <p>Made some hidden item bonuses visible.</p>
             <p>Additional small adjustments to the level 1 enemies.</p>
             <p class="bold">- Older News -</p>
             <p>Added new items and monsters. Small tweak to the Cultist.</p>
