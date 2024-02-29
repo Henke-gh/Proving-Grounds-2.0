@@ -51,6 +51,19 @@ $bandit->shield = $buckler;
 $bandit->setDescription("Your gold.. or your life. Actually, I'll have both.");
 $monsterLibrary->addMonster($bandit);
 
+$greywolf = new Monster("Grey Wolf", 25);
+$greywolf->setLevel(2);
+$greywolf->setStrength(20);
+$greywolf->setSpeed(10);
+$greywolf->setVitality(10);
+$greywolf->setSkill("Initiative", 15);
+$greywolf->setSkill("Evasion", 5);
+$greywolf->setFatigue();
+$greywolf->setCurrentHP($greywolf->getHP());
+$greywolf->weapon = new Weapon("Sharp teeth", "Unarmed", 0, 0, 2, 3, 0);
+$greywolf->setDescription("A pair of yellow eyes stare back at you from the gloom.");
+$monsterLibrary->addMonster($greywolf);
+
 $goblinRaider = new Monster("Goblin Raider", 25);
 $goblinRaider->setLevel(4);
 $goblinRaider->setStrength(10);
@@ -148,6 +161,20 @@ $fatfred->setCurrentHP($fatfred->getHP());
 $fatfred->weapon = $flail;
 $fatfred->setDescription("A huge man with small evil eyes.");
 $monsterLibrary->addMonster($fatfred);
+
+$anointedCultist = new Monster("Anointed Cultist", 30);
+$anointedCultist->setLevel(12);
+$anointedCultist->setStrength(60);
+$anointedCultist->setSpeed(10);
+$anointedCultist->setVitality(35);
+$anointedCultist->setSkill("Initiative", 40);
+$anointedCultist->setSkill("Axes", 50);
+$anointedCultist->setFatigue();
+$anointedCultist->setCurrentHP($anointedCultist->getHP());
+$anointedCultist->weapon = new Weapon("Cleaver", "Axes", 0, 40, 5, 15, 0);
+$anointedCultist->armour = new Armour("Cultist Hooded Robes", "Armour", 0, 0, 0);
+$anointedCultist->setDescription("Assigned to deal with cult dissidents. Swiftly.");
+$monsterLibrary->addMonster($anointedCultist);
 
 $berserker = new Monster("Vorthun Berserker", 35);
 $berserker->setLevel(14);
