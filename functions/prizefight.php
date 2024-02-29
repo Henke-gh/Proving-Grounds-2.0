@@ -114,22 +114,33 @@ function prizeFight(Hero $player, Monster $monsterBoss, Monster $underlingOne, M
             $target = getTarget();
             switch ($target) {
                 case 1:
-                    $lines = playerAttack($player, $monsterBoss, $playerToHitChance, $playerDamage);
-                    foreach ($lines as $line) {
-                        array_push($combatLog, $line);
+                    if ($monsterBoss->getCurrentHP() > 0) {
+                        $lines = playerAttack($player, $monsterBoss, $playerToHitChance, $playerDamage);
+                        foreach ($lines as $line) {
+                            array_push($combatLog, $line);
+                        }
+                        $monsterBoss;
+                        break;
                     }
-                    if ($monsterBoss->getCurrentHP() <= 0) {
-                        //fight ends
-                    } else {
-                        //fight back
+                case 2:
+                    if ($underlingOne->getCurrentHP() > 0) {
+                        $lines = playerAttack($player, $underlingOne, $playerToHitChance, $playerDamage);
+                        foreach ($lines as $line) {
+                            array_push($combatLog, $line);
+                        }
+                        $underlingOne;
+                        break;
                     }
-                    break;
-
-                default:
-                    # code...
-                    break;
-            }
-            //$target = determineTarget($monsterBoss, $underlingOne, $underlingTwo);
+                case 3:
+                    if ($underlingTwo > 0) {
+                        $lines = playerAttack($player, $underlingTwo, $playerToHitChance, $playerDamage);
+                        foreach ($lines as $line) {
+                            array_push($combatLog, $line);
+                        }
+                        $underlingTwo;
+                        break;
+                    }
+            } //monsters retaliate
         } else {
             //monsterBoss goes first
         }

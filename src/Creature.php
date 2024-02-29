@@ -49,10 +49,10 @@ class Creature
 
     public function setCurrentHP(int $value): void
     {
-        if ($this->currentHitpoints + $value > $this->getHP()) {
+        $this->currentHitpoints = $value;
+
+        if ($this->currentHitpoints > $this->getHP()) {
             $this->currentHitpoints = $this->getHP();
-        } else {
-            $this->currentHitpoints = $value;
         }
     }
 

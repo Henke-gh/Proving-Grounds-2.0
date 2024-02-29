@@ -21,11 +21,14 @@ saveHero($player, $database);
 require __DIR__ . "/../app/playerEquips.php";
 
 if (isset($_POST['getHeal'])) {
-    $itemIndex = $_POST['healingItems'];
+    $itemIndex = htmlspecialchars($_POST['healingItems'], ENT_QUOTES);
     $item = $healingItems[$itemIndex];
 
     if ($player->getGold() >= $item['cost']) {
-        $player->setCurrentHP($player->getCurrentHP() + $item['value']);
+        $preheal = $player->getCurrentHP();
+        $valueHeal = $item['value'];
+        $currentHP = $preheal + $valueHeal;
+        $player->setCurrentHP($currentHP);
         $player->setGold($player->getGold() - $item['cost']);
         saveHero($player, $database);
         $_SESSION['itemBought'] = $player->name . " was healed for " . $item['value'] . " HP.";
