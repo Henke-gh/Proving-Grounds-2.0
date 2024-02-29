@@ -4,6 +4,7 @@ require __DIR__ . "/../vendor/autoload.php";
 require __DIR__ . "/../bootstrap.php";
 require __DIR__ . "/../functions/avatarArray.php";
 require __DIR__ . "/../functions/armory.php";
+require __DIR__ . "/../functions/generalFunctions.php";
 
 if (!isset($_SESSION['playerID'])) {
     header('Location:' . $baseURL . '/index.php');
@@ -14,6 +15,11 @@ use App\Hero;
 
 if (isset($_POST['createHero'])) {
     $name = trim(htmlspecialchars($_POST['heroName'], ENT_QUOTES));
+    if (profanityCheck($name)) {
+        $_SESSION['error'] = "Hero name not valid. Choose another name for your hero.";
+        header('Location:' . $baseURL . '/app/heroCreation_step1.php');
+        exit();
+    }
     $gender = ucfirst($_POST['heroGender']);
     $avatarID = htmlspecialchars($_POST['heroAvatar'], ENT_QUOTES);
     $avatarURL = $avatars[$avatarID]['url'];

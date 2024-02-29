@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . "/../bootstrap.php";
+require __DIR__ . "/../functions/generalFunctions.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     $newUsername = trim(htmlspecialchars($_POST['username'], ENT_QUOTES));
@@ -8,6 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     unset($_POST['username']);
     unset($_POST['password']);
     unset($_POST['passwordRepeat']);
+    if (profanityCheck($newUsername)) {
+        $_SESSION['error'] = "Username not valid, choose another.";
+        header('Location:' . $baseURL . '/app/register.php');
+        exit();
+    }
     $usernames = $database->getUsernames();
     if (in_array($newUsername, $usernames)) {
         $_SESSION['error'] = "Sorry, " . $newUsername . " is not available.";
@@ -25,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 require __DIR__ . "/../nav/header.php";
 ?>
 <main>
-    <h2>Welcome to the Proving Grounds</h2>
     <?php
     if (isset($_SESSION['error'])) : ?>
         <div class="errorMsg">
@@ -34,6 +39,7 @@ require __DIR__ . "/../nav/header.php";
     <?php
         unset($_SESSION['error']);
     endif; ?>
+    <h2>Welcome to the Proving Grounds</h2>
     <div class="loginContainer register">
         <form method="post" action="">
             <h4>Register new user</h4>

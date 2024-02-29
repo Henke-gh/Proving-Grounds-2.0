@@ -11,6 +11,14 @@ if (!isset($_SESSION['playerID'])) {
 ?>
 
 <main>
+    <?php
+    if (isset($_SESSION['error'])) : ?>
+        <div class="errorMsg">
+            <h3><?= $_SESSION['error']; ?></h3>
+        </div>
+    <?php
+        unset($_SESSION['error']);
+    endif; ?>
     <h2>Character Creation</h2>
     <div class="characterCreation">
         <form class="characterCreate" method="post" action="<?= $baseURL; ?>/app/heroCreation_step2.php">

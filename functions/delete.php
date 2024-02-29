@@ -10,6 +10,9 @@ if (isset($_SESSION['playerID'])) {
         $id = $_SESSION['playerID'];
         $database->deleteHero($id);
         unset($_SESSION['player']);
+        if (isset($_SESSION['levelUp'])) {
+            unset($_SESSION['levelUp']);
+        }
         header('Location:' . $baseURL . '/app/heroCreation_step1.php');
         exit();
     }

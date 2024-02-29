@@ -10,3 +10,17 @@ function sanitizePost($input)
 
     return $input;
 }
+
+function profanityCheck(string $name): bool
+{
+    $profanity = ['neger', 'nigger', 'jew', 'jude', 'kuk', 'fitta', 'cunt', 'cock', 'hitler', 'n1gger'];
+    $nameToLower = strtolower($name);
+
+    foreach ($profanity as $word) {
+        if (strpos($nameToLower, $word) !== false) {
+            return true;
+        }
+    }
+
+    return false;
+}
