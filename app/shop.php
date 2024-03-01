@@ -34,8 +34,9 @@ require __DIR__ . "/../nav/header.php";
         endif; ?>
 
         <?php if (isset($_SESSION['itemBought'])) : ?>
-            <div class="successMsg">
+            <div class="successMsg shop">
                 <h3><?= $_SESSION['itemBought']; ?></h3>
+                <p><a href="<?= $baseURL; ?>/app/playerHero.php"><span class="bold">Equip</span> your new item from the Hero Sheet.</a></p>
             </div>
         <?php
             unset($_SESSION['itemBought']);
