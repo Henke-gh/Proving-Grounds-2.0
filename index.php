@@ -34,6 +34,7 @@ require __DIR__ . "/nav/header.php";
     <div class="indexInformation">
         <div class="newsMessage">
             <h3>News/ Latest changes 29/2-24</h3>
+            <p>Fixed missing Game Guide link from start page</p>
             <p>Heal-bug gone, probably? Sorry everyone!</p>
             <p class="bold">- Older News -</p>
             <p>Made some hidden item bonuses visible.</p>
@@ -47,7 +48,7 @@ require __DIR__ . "/nav/header.php";
                 <p>The Proving Ground lets you create a hero and battle foes in arena combat. Level up and spend skill points to
                     improve your skills or learn new ones.</p>
                 <p>On your journey you will equip your hero with new items to further improve your character and prepare for the dangers that lie ahead.</p>
-                <p>If you want a head start and crash-course in the game mechanics have a look at the <a href="">Game Guide</a>.</p>
+                <p>If you want a head start and crash-course in the game mechanics have a look at the <a href="<?= $baseURL; ?>/app/gameguide.php">Game Guide</a>.</p>
                 <p>Create an account and join the fray! <a href="<?= $baseURL; ?>/app/register.php">Register User</a></p>
             </article>
             <img src="<?= $baseURL; ?>/assets/images/scout_sharp.png" />
