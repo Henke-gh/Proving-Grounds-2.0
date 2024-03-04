@@ -195,6 +195,13 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
     $heroStance = $stance;
     $stanceName = "Balanced";
 
+    if ($heroStance === "light") {
+        $stanceName = "Fast Attacks";
+    }
+    if ($heroStance === "defensive") {
+        $stanceName = "Heavy Guard";
+    }
+
     //since monster gold drop is a random value it has to be set prior as the variable is used twice.
     $goldDrop = $monster->dropGold();
     $xpReward = $monster->xpReward;
@@ -220,7 +227,6 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
             $playerDamage = (int) floor($player->doDamage() * 0.8);
             $playerToHitChance = (int) floor($player->toHitChance() * 1.2);
             $playerBlock = $player->getBlock();
-            $stanceName = "Fast Attacks";
         }
         if ($heroStance === "defensive") {
             $playerInitiative = (int) floor($player->getInitiative() * 0.5);
@@ -228,7 +234,6 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
             $playerToHitChance = (int) floor($player->toHitChance() * 0.8);
             $playerBlock = (int) floor($player->getBlock() * 1.2);
             $playerDamage = (int) floor($player->doDamage() * 1.2);
-            $stanceName = "Heavy Guard";
         }
         if ($heroStance === "balanced") {
             $playerInitiative = $player->getInitiative();
