@@ -25,6 +25,22 @@ require __DIR__ . "/../nav/header.php";
     </div>
     <main>
         <div class="summaryContainer">
+            <!-- WORK IN PROGRESS, NEEDS SOME STYLING -->
+            <?php if (isset($_POST['delete'])) : ?>
+                <div class="errorMsg deleteHero">
+                    <h3>Are you sure you want to delete <?= $player->name; ?>?</h3>
+                    <div>
+                        <form method="post" action="" class="deleteHeroForm">
+                            <button type="submit" name="noDelete">No Thanks!</button>
+                        </form>
+                        <form method="post" action="<?= $baseURL; ?>/functions/delete.php" class="deleteHeroForm">
+                            <button type="submit" name="deleteHero">Delete Hero</button>
+                        </form>
+                    </div>
+                </div>
+            <?php
+                unset($_POST['deleteHero']);
+            endif; ?>
             <section class="heroSheetHeader">
                 <h2>Hero Sheet</h2>
                 <div class="inventoryImgContainer">
@@ -150,8 +166,8 @@ require __DIR__ . "/../nav/header.php";
                 <p><span class="bold">Win Ratio:</span> <?= $player->getWinLossRatio(); ?>%</p>
             </div>
         </div>
-        <form method="post" action="<?= $baseURL; ?>/functions/delete.php" class="deleteHeroForm">
-            <button type="submit" name="deleteHero">Delete Hero</button>
+        <form method="post">
+            <button type="submit" name="delete">Delete Hero</button>
         </form>
     </main>
     <div class="heroCardPosition">

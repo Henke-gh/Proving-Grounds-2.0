@@ -398,6 +398,19 @@ footer a:hover {
   color: var(--warmGrey);
 }
 /* playerHero Summary Page */
+.deleteHero {
+  text-align: center;
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+
+.deleteHero div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 25px;
+}
 
 .summaryContainer {
   background-color: var(--paleYellow);
@@ -525,6 +538,7 @@ footer a:hover {
   width: 100%;
   padding-bottom: 10px;
   border-radius: 5px;
+  margin-bottom: 25px;
   background-color: #d0b38b;
 }
 
