@@ -40,3 +40,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+//Inspect item modal, playerHero.php
+const dialogs = document.querySelectorAll(".inspect");
+const buttons = document.querySelectorAll(".showInspect");
+const closeButtons = document.querySelectorAll(".closeInspect");
+
+// "Show the dialog" button opens the dialog modally
+buttons.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    dialogs[index].showModal();
+  });
+});
+
+// "Close" button closes the dialog
+closeButtons.forEach((closeButton, index) => {
+  closeButton.addEventListener("click", () => {
+    dialogs[index].close();
+  });
+});

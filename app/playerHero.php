@@ -25,7 +25,6 @@ require __DIR__ . "/../nav/header.php";
     </div>
     <main>
         <div class="summaryContainer">
-            <!-- WORK IN PROGRESS, NEEDS SOME STYLING -->
             <?php if (isset($_POST['delete'])) : ?>
                 <div class="errorMsg deleteHero">
                     <h3>Are you sure you want to delete <?= $player->name; ?>?</h3>
@@ -58,26 +57,56 @@ require __DIR__ . "/../nav/header.php";
             <div class="heroGear">
                 <div class="equippedItems">
                     <h3>Equipped Items</h3>
-                    <form method="post" action="">
-                        <div class="equippedItem">
+                    <div class="equippedItem">
+                        <dialog class="inspect">
+                            <p><span class="bold">Weapon:</span> <?= $player->weapon->name; ?></p>
+                            <p><span class="bold">Damage:</span> <?= $player->weapon->minDamage; ?> - <?= $player->weapon->maxDamage; ?></p>
+                            <p><span class="bold">Type:</span> <?= $player->weapon->type; ?></p>
+                            <p><span class="bold">Skill Req:</span> <?= $player->weapon->skillRequirement; ?></p>
+                            <p><span class="bold">Description:</span> <?= $player->weapon->getItemDescription(); ?></p>
+                            <button autofocus class="closeInspect">X</button>
+                        </dialog>
+                        <button class="showInspect">Inspect</button>
+                        <form method="post" action="">
                             <p><span class="bold">Weapon:</span> <?= $player->weapon->name; ?> (<?= $player->weapon->minDamage . "-" . $player->weapon->maxDamage; ?>)</p>
                             <?php if ($player->weapon->name !== "Fists") : ?>
                                 <button type="submit" name="unequip" value="weapon">Unequip</button>
                             <?php endif; ?>
-                        </div>
-                        <div class="equippedItem">
+                        </form>
+                    </div>
+                    <div class="equippedItem">
+                        <dialog class="inspect">
+                            <p><span class="bold">Shield:</span> <?= $player->shield->name; ?></p>
+                            <p><span class="bold">Damage Reduction:</span> <?= $player->shield->getDmgReduction(); ?></p>
+                            <p><span class="bold">Type:</span> <?= $player->shield->type; ?></p>
+                            <p><span class="bold">Skill Req:</span> <?= $player->shield->skillRequirement; ?></p>
+                            <p><span class="bold">Description:</span> <?= $player->shield->getItemDescription(); ?></p>
+                            <button autofocus class="closeInspect">X</button>
+                        </dialog>
+                        <button class="showInspect">Inspect</button>
+                        <form method="post" action="">
                             <p><span class="bold">Shield:</span> <?= $player->shield->name; ?></p>
                             <?php if ($player->shield->name !== "None") : ?>
                                 <button type="submit" name="unequip" value="shield">Unequip</button>
                             <?php endif; ?>
-                        </div>
-                        <div class="equippedItem">
+                        </form>
+                    </div>
+                    <div class="equippedItem">
+                        <dialog class="inspect">
+                            <p><span class="bold">Armour:</span> <?= $player->armour->name; ?></p>
+                            <p><span class="bold">Damage Reduction:</span> <?= $player->armour->getDmgReduction(); ?></p>
+                            <p><span class="bold">Type:</span> <?= $player->armour->type; ?></p>
+                            <p><span class="bold">Description:</span> <?= $player->armour->getItemDescription(); ?></p>
+                            <button autofocus class="closeInspect">X</button>
+                        </dialog>
+                        <button class="showInspect">Inspect</button>
+                        <form method="post" action="">
                             <p><span class="bold">Armour:</span> <?= $player->armour->name; ?></p>
                             <?php if ($player->armour->name !== "Tunic") : ?>
                                 <button type="submit" name="unequip" value="armour">Unequip</button>
                             <?php endif; ?>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                     <?php if (count($player->getTrinkets()) > 0) : ?>
                         <h4>- Trinkets -</h4>
                         <?php foreach ($player->getTrinkets() as $index => $trinket) : ?>

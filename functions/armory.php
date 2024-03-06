@@ -95,7 +95,7 @@ $wristblade->addToArmory($weapons['Daggers']);
 
 //Shields
 //Added to default array at the bottom of this file
-$none = new Shield("None", "Shield", 0, 100, 0);
+$none = new Shield("None", "Shield", 0, 0, 0);
 $none->setDmgReduction(0);
 $none->setItemDescription("It's really not ideal but you could probably deflect a blow or two with your elbow.");
 

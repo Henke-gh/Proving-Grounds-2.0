@@ -31,6 +31,7 @@ require __DIR__ . "/../nav/header.php";
         foreach ($opponents as $opponent) :
             $heroChamp = unserialize($opponent['heroData']); ?>
             <p><?= $heroChamp['name'] . " - [" . $heroChamp['level'] . "]"; ?></p>
+            <dialog>Testing</dialog>
         <?php endforeach; ?>
     </main>
     <div class="heroCardPosition">

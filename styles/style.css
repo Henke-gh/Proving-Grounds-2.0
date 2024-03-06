@@ -665,6 +665,10 @@ footer a:hover {
   align-items: center;
 }
 
+.tavernContainer article {
+  max-width: 70%;
+}
+
 .tavernBarWork {
   display: flex;
   flex-direction: column;
@@ -1097,6 +1101,12 @@ footer a:hover {
 
   .shopDisplay {
     width: 100%;
+  }
+
+  /* Tavern Page */
+
+  .tavernContainer article {
+    max-width: 100%;
   }
 
   /* Graveyard */
