@@ -173,7 +173,7 @@ $engravedmedal->setBlockBonus(10);
 $engravedmedal->setItemDescription("It's a small ornate shield.");
 $engravedmedal->addToArmory($trinkets);
 
-$brokenfang = new Trinket("Szhlint's Fang", "Trinket", 500, 0, 0);
+$brokenfang = new Trinket("Szhlint Fang", "Trinket", 500, 0, 0);
 $brokenfang->setEvasionBonus(10);
 $brokenfang->setItemDescription("Torn from hideous jaws.");
 $brokenfang->addToArmory($trinkets);
