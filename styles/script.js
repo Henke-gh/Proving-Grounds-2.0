@@ -59,3 +59,11 @@ closeButtons.forEach((closeButton, index) => {
     dialogs[index].close();
   });
 });
+
+dialogs.forEach((dialog) => {
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  });
+});
