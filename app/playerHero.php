@@ -58,8 +58,6 @@ require __DIR__ . "/../nav/header.php";
                 <div class="equippedItems">
                     <h3>Equipped Items</h3>
                     <div class="equippedItem">
-                        <!-- DOING DIALOG THINGS
-                    STYLE AND SET CORRECT VALUES  -->
                         <dialog class="inspect">
                             <div class="inspectContentContainer">
                                 <h3><?= $player->weapon->name; ?></h3>
@@ -164,7 +162,32 @@ require __DIR__ . "/../nav/header.php";
                             foreach ($items as $itemIndex => $item) :
                                 if ($item->name !== "Fists" && $item->name !== "None" && $item->name !== "Tunic") : ?>
                                     <div class="inventoryItem">
-                                        <p class="bold"><?= $item->name; ?></p>
+                                        <dialog class="inspect">
+                                            <div class="inspectContentContainer">
+                                                <h3><?= $item->name; ?></h3>
+                                                <p><span class="bold">Type:</span> <?= $item->type; ?></p>
+                                                <?php if ($item->type === "Trinket") : ?>
+                                                    <?php if ($item->getInitiativeBonus() > 0) : ?>
+                                                        <p><span class="bold">Initiative:</span> +<?= $item->getInitiativeBonus(); ?></p>
+                                                    <?php endif; ?>
+                                                    <?php if ($item->getEvasionBonus() > 0) : ?>
+                                                        <p><span class="bold">Evasion:</span> +<?= $item->getEvasionBonus(); ?></p>
+                                                    <?php endif; ?>
+                                                    <?php if ($item->getBlockBonus() > 0) : ?>
+                                                        <p><span class="bold">Block:</span> +<?= $item->getBlockBonus(); ?></p>
+                                                    <?php endif; ?>
+                                                    <?php if ($item->getMaxHP() > 0) : ?>
+                                                        <p><span class="bold">Max HP:</span> +<?= $item->getMaxHP(); ?></p>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+                                                <p><span class="bold">Description:</span> <?= $item->getItemDescription(); ?></p>
+                                                <button autofocus class="closeInspect">X</button>
+                                                <div class="inspectContentContainer">
+                                        </dialog>
+                                        <div class="itemBtnPgroup">
+                                            <button class="showInspect"><img src="<?= $baseURL; ?>/assets/images/icons/inspect.svg"></button>
+                                            <p class="bold"><?= $item->name; ?></p>
+                                        </div>
                                         <form method="post" action="">
                                             <input type="hidden" name="category" value="<?= $category; ?>">
                                             <input type="hidden" name="itemIndex" value="<?= $itemIndex; ?>">
