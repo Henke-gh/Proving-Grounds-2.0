@@ -75,6 +75,18 @@ button {
   cursor: pointer;
 }
 
+/* styles the inspect eye-button */
+.showInspect {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 6px 3px 6px;
+  background-color: var(--paleYellow);
+  box-shadow: none;
+  border: none;
+}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -484,6 +496,22 @@ footer a:hover {
 .heroGear h5 {
   margin-block-start: 0.5em;
   margin-block-end: 0.5em;
+}
+
+.inspect {
+  max-width: 70%;
+  border: solid 2px var(--darkMoss);
+  border-radius: 5px;
+  background-color: var(--paleYellow);
+}
+
+/* .inspectContentContainer {
+  max-width: 70%;
+} */
+
+.itemBtnPgroup {
+  display: flex;
+  flex-direction: row;
 }
 
 .equippedItems,
@@ -1056,7 +1084,7 @@ footer a:hover {
   }
 
   .equippedItems {
-    width: 100%;
+    width: 90%;
   }
 
   .heroInventory {
@@ -1073,7 +1101,7 @@ footer a:hover {
   }
 
   .equippedItem {
-    width: 90%;
+    width: 100%;
   }
 
   .combatStatValues {
