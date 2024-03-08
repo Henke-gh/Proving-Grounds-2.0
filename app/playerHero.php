@@ -63,7 +63,7 @@ require __DIR__ . "/../nav/header.php";
                                 <h3><?= $player->weapon->name; ?></h3>
                                 <p><span class="bold">Damage:</span> <?= $player->weapon->minDamage; ?> - <?= $player->weapon->maxDamage; ?></p>
                                 <p><span class="bold">Type:</span> <?= $player->weapon->type; ?></p>
-                                <p><span class="bold">Skill Req:</span> <?= $player->weapon->skillRequirement; ?></p>
+                                <p><span class="bold">Skill Req:</span> <?= $player->weapon->skillRequirement; ?> in <?= $player->weapon->type; ?></p>
                                 <p><span class="bold">Description:</span> <?= $player->weapon->getItemDescription(); ?></p>
                                 <button autofocus class="closeInspect">X</button>
                             </div>
@@ -84,7 +84,7 @@ require __DIR__ . "/../nav/header.php";
                                 <h3><?= $player->shield->name; ?></h3>
                                 <p><span class="bold">Damage Reduction:</span> <?= $player->shield->getDmgReduction(); ?></p>
                                 <p><span class="bold">Type:</span> <?= $player->shield->type; ?></p>
-                                <p><span class="bold">Skill Req:</span> <?= $player->shield->skillRequirement; ?></p>
+                                <p><span class="bold">Skill Req:</span> <?= $player->shield->skillRequirement; ?> in <?= $player->shield->type; ?></p>
                                 <p><span class="bold">Description:</span> <?= $player->shield->getItemDescription(); ?></p>
                                 <button autofocus class="closeInspect">X</button>
                             </div>
@@ -165,7 +165,7 @@ require __DIR__ . "/../nav/header.php";
                                         <dialog class="inspect">
                                             <div class="inspectContentContainer">
                                                 <h3><?= $item->name; ?></h3>
-                                                <p><span class="bold">Type:</span> <?= $item->type; ?></p>
+
                                                 <?php if ($item->type === "Trinket") : ?>
                                                     <?php if ($item->getInitiativeBonus() > 0) : ?>
                                                         <p><span class="bold">Initiative:</span> +<?= $item->getInitiativeBonus(); ?></p>
@@ -180,6 +180,35 @@ require __DIR__ . "/../nav/header.php";
                                                         <p><span class="bold">Max HP:</span> +<?= $item->getMaxHP(); ?></p>
                                                     <?php endif; ?>
                                                 <?php endif; ?>
+
+                                                <?php if ($item->type === "Armour") : ?>
+                                                    <?php if ($item->getEvasionBonus() > 0) : ?>
+                                                        <p><span class="bold">Evasion:</span> +<?= $item->getEvasionBonus(); ?></p>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+
+                                                <?php if ($item->type === "Shield") : ?>
+                                                    <?php if ($item->getDmgReduction() > 0) : ?>
+                                                        <p><span class="bold">Damage Reduction:</span> +<?= $item->getDmgReduction(); ?></p>
+                                                    <?php endif; ?>
+                                                    <?php if ($item->getEvasionBonus() > 0) : ?>
+                                                        <p><span class="bold">Evasion:</span> +<?= $item->getEvasionBonus(); ?></p>
+                                                    <?php endif; ?>
+                                                    <?php if ($item->getBlockBonus() > 0) : ?>
+                                                        <p><span class="bold">Block:</span> +<?= $item->getBlockBonus(); ?></p>
+                                                    <?php endif; ?>
+                                                    <p><span class="bold">Skill req: </span><?= $item->skillRequirement; ?> in <?= $item->type; ?></p>
+                                                    <p><span class="bold">Type: </span><?= $item->type; ?></p>
+                                                    <p><span class="bold">Weight: </span><?= $item->weight; ?></p>
+                                                <?php endif; ?>
+
+                                                <?php if ($category === "weapons") : ?>
+                                                    <p><span class="bold">Damage: </span><?= $item->minDamage; ?>-<?= $item->maxDamage; ?></p>
+                                                    <p><span class="bold">Skill req: </span><?= $item->skillRequirement; ?> in <?= $item->type; ?></p>
+                                                    <p><span class="bold">Type: </span><?= $item->type; ?></p>
+                                                    <p><span class="bold">Weight: </span><?= $item->weight; ?></p>
+                                                <?php endif; ?>
+
                                                 <p><span class="bold">Description:</span> <?= $item->getItemDescription(); ?></p>
                                                 <button autofocus class="closeInspect">X</button>
                                                 <div class="inspectContentContainer">
