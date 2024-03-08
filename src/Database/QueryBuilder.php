@@ -73,18 +73,17 @@ class QueryBuilder
         }
     }
 
-    public function addHero(int $userID, string $heroJSON, int $version): bool
+    public function addHero(int $userID, string $heroJSON): bool
     {
         //this is perhaps not THE way to do it, but it's what we got right now. baseURL is set in bootstrap.php
         global $baseURL;
 
         try {
-            $this->query = "INSERT INTO heroes (User_ID, heroData, heroVersion) VALUES (:userID, :heroData, :heroVersion)";
+            $this->query = "INSERT INTO heroes (User_ID, heroData) VALUES (:userID, :heroData)";
             $statement = $this->database->prepare($this->query);
 
             $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
             $statement->bindParam(':heroData', $heroJSON, PDO::PARAM_STR);
-            $statement->bindParam(':heroVersion', $version, PDO::PARAM_INT);
 
             $success = $statement->execute();
 
@@ -101,7 +100,7 @@ class QueryBuilder
         global $baseURL;
 
         try {
-            $this->query = "UPDATE heroes SET heroData = :heroData, heroVersion = heroVersion + 1 WHERE User_ID = :userID";
+            $this->query = "UPDATE heroes SET heroData = :heroData WHERE User_ID = :userID";
             $statement = $this->database->prepare($this->query);
 
             $statement->bindParam(':heroData', $heroData, PDO::PARAM_STR);
