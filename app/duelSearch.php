@@ -29,10 +29,11 @@ require __DIR__ . "/../nav/header.php";
         <h2>Duel</h2>
         <?php $opponents = $database->getAllFromTable('heroes');
         foreach ($opponents as $opponent) :
-            $heroChamp = unserialize($opponent['heroData']); ?>
-            <p><?= $heroChamp['name'] . " - [" . $heroChamp['level'] . "]"; ?></p>
-            <dialog>Testing</dialog>
-        <?php endforeach; ?>
+            $heroChamp = unserialize($opponent['heroData']);
+            if ($heroChamp['name'] !== $player->name) : ?>
+                <p>[ID: <?= $opponent['ID']; ?>] <?= $heroChamp['name'] . " - [" . $heroChamp['level'] . "]"; ?></p>
+        <?php endif;
+        endforeach; ?>
     </main>
     <div class="heroCardPosition">
         <?php
