@@ -185,6 +185,14 @@ require __DIR__ . "/../nav/header.php";
                                                     <?php if ($item->getEvasionBonus() > 0) : ?>
                                                         <p><span class="bold">Evasion:</span> +<?= $item->getEvasionBonus(); ?></p>
                                                     <?php endif; ?>
+                                                    <?php if ($item->getDmgReduction() > 0) : ?>
+                                                        <p><span class="bold">Damage Reduction:</span> +<?= $item->getDmgReduction(); ?></p>
+                                                    <?php endif; ?>
+                                                    <?php if ($item->getInitiativeBonus() > 0) : ?>
+                                                        <p><span class="bold">Initiative:</span> +<?= $item->getInitiativeBonus(); ?></p>
+                                                    <?php endif; ?>
+                                                    <p><span class="bold">Type: </span><?= $item->type; ?></p>
+                                                    <p><span class="bold">Weight: </span><?= $item->weight; ?></p>
                                                 <?php endif; ?>
 
                                                 <?php if ($item->type === "Shield") : ?>
@@ -204,6 +212,9 @@ require __DIR__ . "/../nav/header.php";
 
                                                 <?php if ($category === "weapons") : ?>
                                                     <p><span class="bold">Damage: </span><?= $item->minDamage; ?>-<?= $item->maxDamage; ?></p>
+                                                    <?php if ($item->getInitiativeBonus() > 0) : ?>
+                                                        <p><span class="bold">Initiative:</span> +<?= $item->getInitiativeBonus(); ?></p>
+                                                    <?php endif; ?>
                                                     <p><span class="bold">Skill req: </span><?= $item->skillRequirement; ?> in <?= $item->type; ?></p>
                                                     <p><span class="bold">Type: </span><?= $item->type; ?></p>
                                                     <p><span class="bold">Weight: </span><?= $item->weight; ?></p>
