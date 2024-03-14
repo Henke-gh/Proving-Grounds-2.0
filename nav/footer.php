@@ -25,7 +25,8 @@
         <p>Henrik Andersen 2024 - The Proving Grounds</p>
     </div>
 </footer>
-<script src="<?= $baseURL; ?>/styles/script.js"></script>
+<!-- update version number when making changes, script can get cached -->
+<script src="<?= $baseURL; ?>/styles/script.js?v=2"></script>
 </body>
 
 </html>
