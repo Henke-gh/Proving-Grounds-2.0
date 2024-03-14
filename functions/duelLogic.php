@@ -61,7 +61,7 @@ function doDuel(Hero $aggressor, Hero $defender, string $aggStance, int $aggRetr
     }
 
     if ($aggressor->getCurrentHP() < $aggRetreatValue) {
-        array_push($combatLog, "Opponents wounds are too severe to fight.");
+        array_push($combatLog, "Opponent's wounds are too severe to fight.");
         return $_SESSION['duelFailed'];
     }
 
@@ -70,7 +70,7 @@ function doDuel(Hero $aggressor, Hero $defender, string $aggStance, int $aggRetr
     /* Initiate Duel */
     while ($aggressor->getCurrentHP() > $aggRetreatValue && $defender->getCurrentHP() > $defRetreatValue) {
         //Handle both players stance modifiers here
-
+        //Handle initiative into attack-sequence
         array_push($combatLog, "<span class=bold>Turn: " . $turn . "</span>");
     }
 

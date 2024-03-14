@@ -33,10 +33,12 @@ require __DIR__ . "/nav/header.php";
     </div>
     <div class="indexInformation">
         <div class="newsMessage">
-            <h3>News/ Latest changes 29/2-24</h3>
+            <h3>News/ Latest changes 14/3-24</h3>
+            <p>Added an inspect item-feature.</p>
+            <p>Monsters can now surrender due to fatigue.</p>
+            <p class="bold">- Older News -</p>
             <p>Fixed missing Game Guide link from start page</p>
             <p>Heal-bug gone, probably? Sorry everyone!</p>
-            <p class="bold">- Older News -</p>
             <p>Made some hidden item bonuses visible.</p>
             <p>Additional small adjustments to the level 1 enemies.</p>
             <p>Added new items and monsters. Small tweak to the Cultist.</p>
