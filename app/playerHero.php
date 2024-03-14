@@ -62,6 +62,12 @@ require __DIR__ . "/../nav/header.php";
                             <div class="inspectContentContainer">
                                 <h3><?= $player->weapon->name; ?></h3>
                                 <p><span class="bold">Damage:</span> <?= $player->weapon->minDamage; ?> - <?= $player->weapon->maxDamage; ?></p>
+                                <?php if ($player->weapon->getInitiativeBonus() > 0) : ?>
+                                    <p><span class="bold">Initiative:</span> +<?= $player->weapon->getInitiativeBonus(); ?></p>
+                                <?php endif; ?>
+                                <?php if ($player->weapon->getEvasionBonus() > 0) : ?>
+                                    <p><span class="bold">Evasion:</span> +<?= $player->weapon->getEvasionBonus(); ?></p>
+                                <?php endif; ?>
                                 <p><span class="bold">Type:</span> <?= $player->weapon->type; ?></p>
                                 <p><span class="bold">Skill Req:</span> <?= $player->weapon->skillRequirement; ?> in <?= $player->weapon->type; ?></p>
                                 <p><span class="bold">Description:</span> <?= $player->weapon->getItemDescription(); ?></p>
@@ -83,6 +89,12 @@ require __DIR__ . "/../nav/header.php";
                             <div class="inspectContentContainer">
                                 <h3><?= $player->shield->name; ?></h3>
                                 <p><span class="bold">Damage Reduction:</span> <?= $player->shield->getDmgReduction(); ?></p>
+                                <?php if ($player->shield->getInitiativeBonus() > 0) : ?>
+                                    <p><span class="bold">Initiative:</span> +<?= $player->shield->getInitiativeBonus(); ?></p>
+                                <?php endif; ?>
+                                <?php if ($player->shield->getEvasionBonus() > 0) : ?>
+                                    <p><span class="bold">Evasion:</span> +<?= $player->shield->getEvasionBonus(); ?></p>
+                                <?php endif; ?>
                                 <p><span class="bold">Type:</span> <?= $player->shield->type; ?></p>
                                 <p><span class="bold">Skill Req:</span> <?= $player->shield->skillRequirement; ?> in <?= $player->shield->type; ?></p>
                                 <p><span class="bold">Description:</span> <?= $player->shield->getItemDescription(); ?></p>
@@ -104,6 +116,12 @@ require __DIR__ . "/../nav/header.php";
                             <div class="inspectContentContainer">
                                 <h3><?= $player->armour->name; ?></h3>
                                 <p><span class="bold">Damage Reduction:</span> <?= $player->armour->getDmgReduction(); ?></p>
+                                <?php if ($player->armour->getInitiativeBonus() > 0) : ?>
+                                    <p><span class="bold">Initiative:</span> +<?= $player->armour->getInitiativeBonus(); ?></p>
+                                <?php endif; ?>
+                                <?php if ($player->armour->getEvasionBonus() > 0) : ?>
+                                    <p><span class="bold">Evasion:</span> +<?= $player->armour->getEvasionBonus(); ?></p>
+                                <?php endif; ?>
                                 <p><span class="bold">Type:</span> <?= $player->armour->type; ?></p>
                                 <p><span class="bold">Description:</span> <?= $player->armour->getItemDescription(); ?></p>
                                 <button autofocus class="closeInspect">X</button>
