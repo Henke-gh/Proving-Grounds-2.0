@@ -314,6 +314,7 @@ function doBattle(Hero $player, Monster $monster, int $retreat, string $stance):
 
         if ($monster->getFatigue() < $turn) {
             array_push($combatLog, "<span class=bold>" . $monster->name . " collapses due to fatigue.</span>");
+            array_push($combatLog, $player->name . " gains <span class=bold>" . $xpReward . " xp</span> and <span class=bold>" . $goldDrop . " gold.</span>");
             fightReward($player, $goldDrop, $xpReward);
             $player->setCurrentGrit(($player->getCurrentGrit() - $turn));
             break;
