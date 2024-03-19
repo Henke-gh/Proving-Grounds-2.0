@@ -22,6 +22,23 @@ function saveHero(Hero $player, QueryBuilder $database): void
     $database->updateHero($_SESSION['playerID'], $saveHero);
 }
 
+function loadOpponent(QueryBuilder $database): Hero
+{
+    $_SESSION['opponent'] = $database->getHero($_SESSION['opponentID']);
+    $playerSaveState = $_SESSION['opponent'];
+    $player = new Hero($playerSaveState['name'], $playerSaveState['gender']);
+    $player->loadHeroState($playerSaveState);
+    $player->regenerateHPnGrit();
+    return $player;
+}
+
+function saveOpponent(Hero $player, QueryBuilder $database): void
+{
+    $_SESSION['opponent'] = $player->saveHeroState();
+    $saveHero = serialize($_SESSION['opponent']);
+    $database->updateHero($_SESSION['opponentID'], $saveHero);
+}
+
 //Just a small check for if player Inventory array is empty or not.
 //Adds 1 to count for each empty sub-array, if all 4 are empty returns true
 function emptyBags(Hero $player): bool

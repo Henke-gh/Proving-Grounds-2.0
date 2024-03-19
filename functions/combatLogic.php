@@ -177,6 +177,36 @@ function monsterAttack(Monster $monster, Hero $player, int $playerEvasion, int $
     return $log;
 }
 
+function initializeCombatAttributes($player, $heroStance): array
+{
+    $combatAttributes = [
+        'initiative' => $player->getInitiative(),
+        'evasion' => $player->getEvasion(),
+        'damage' => $player->doDamage(),
+        'toHitChance' => $player->toHitChance(),
+        'block' => $player->getBlock()
+    ];
+
+    switch ($heroStance) {
+        case 'light':
+            $combatAttributes['initiative'] = (int) floor($combatAttributes['initiative'] * 1.2);
+            $combatAttributes['evasion'] = (int) floor($combatAttributes['evasion'] * 1.2);
+            $combatAttributes['damage'] = (int) floor($combatAttributes['damage'] * 0.8);
+            $combatAttributes['toHitChance'] = (int) floor($combatAttributes['toHitChance'] * 1.2);
+            break;
+        case 'defensive':
+            $combatAttributes['initiative'] = (int) floor($combatAttributes['initiative'] * 0.5);
+            $combatAttributes['block'] = (int) floor($combatAttributes['block'] * 1.2);
+            $combatAttributes['damage'] = (int) floor($combatAttributes['damage'] * 1.2);
+            break;
+        case 'balanced':
+            // No changes needed for balanced stance
+            break;
+    }
+
+    return $combatAttributes;
+}
+
 function fightReward(Hero $player, int $gold, int $xpReward): void
 {
     $player->setGold($player->getGold() + $gold);
