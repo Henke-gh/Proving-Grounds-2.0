@@ -18,9 +18,8 @@ if (!isset($_SESSION['player']['weapon'])) {
 
 if (isset($_POST['select'])) {
     $_SESSION['opponentID'] = (int) htmlspecialchars($_POST['select'], ENT_QUOTES);
-    $_SESSION['opponent'] = $database->getHero($_SESSION['opponentID']);
-
-    //$opponent = loadOpponent($database);
+    $opponentPlayer = loadOpponent($database);
+    saveOpponent($opponentPlayer, $database);
 }
 
 $player = loadHero($database);
@@ -37,9 +36,12 @@ require __DIR__ . "/../nav/header.php";
     <main>
         <h2>Duel</h2>
 
-        <?php if (isset($POST['select'])) : ?>
-            <p><?= $POST['select']; ?></p>
-            <p><?= $opponent->name; ?> selected!</p>
+        <?php if (isset($_POST['select'])) : ?>
+            <h3>Selected Opponent</h3>
+            <p><?= $opponentPlayer->name; ?></p>
+            <p>Level: <?= $opponentPlayer->getLevel(); ?></p>
+            <p>Weapon: <?= $opponentPlayer->weapon->name; ?></p>
+
         <?php endif; ?>
 
         <?php $opponents = $database->getAllFromTable('heroes');
@@ -49,8 +51,7 @@ require __DIR__ . "/../nav/header.php";
                 <form method="post" action="">
                     <div class="selectHero">
                         <p>[ID: <?= $opponent['ID']; ?>] <?= $heroChamp['name'] . " - [" . $heroChamp['level'] . "]"; ?></p>
-                        <input type="hidden" value="<?= $opponent['ID']; ?>">
-                        <button type="submit" name="select">Select</button>
+                        <button type="submit" value="<?= $opponent['User_ID']; ?>" name="select">Select</button>
                     </div>
                 </form>
         <?php endif;
